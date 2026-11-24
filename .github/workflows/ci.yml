@@ -45,7 +45,8 @@ jobs:
       # Event values come in through env, never pasted into the script (injection-safe).
       # notes=true when EVERY changed file is a note (same list as images.yml, rule G-40): root
       # *.md, docs/**, workstreams/**, tasks/**, research/**, audits/**, _archive/**. Exception:
-      # docs/design/** is code here (the web build and tests read tokens.json, fonts and
+      # gate files (AGENTS.md, CLAUDE.md, REVIEW.md, docs/process/rules.md, audits/A-03*) and
+      # docs/design/** are code here (the web build and tests read tokens.json, fonts and
       # illustrations from it). Then only repo-checks and gate-guard run; the heavy jobs skip and
       # ci-ok stays green. Unknown base, empty diff or a manual run: notes=false (run everything).
       - id: data
@@ -65,16 +66,18 @@ jobs:
             if [ -f pipeline/pyproject.toml ]; then echo "data=true" >> "$GITHUB_OUTPUT"; else echo "data=false" >> "$GITHUB_OUTPUT"; fi
             exit 0
           fi
-          files=$(git diff --name-only "$base" HEAD)
+          files=$(git diff --name-only --no-renames "$base" HEAD)
           code=$(printf '%s\n' "$files" | grep -vE '^([^/]+\.md|docs/.+|workstreams/.+|tasks/.+|research/.+|audits/.+|_archive/.+)$' | grep . || true)
           design=$(printf '%s\n' "$files" | grep -E '^docs/design/' || true)
-          if [ -n "$files" ] && [ -z "$code" ] && [ -z "$design" ]; then
+          # Gate files (config/gate-files.yaml) never count as notes, even when they are .md.
+          gate=$(printf '%s\n' "$files" | grep -E '^(AGENTS\.md|CLAUDE\.md|REVIEW\.md|docs/process/rules\.md|audits/A-03.*)$' || true)
+          if [ -n "$files" ] && [ -z "$code" ] && [ -z "$design" ] && [ -z "$gate" ]; then
             echo "notes=true" >> "$GITHUB_OUTPUT"
             echo "Note-only change: heavy jobs skip (rule G-40)." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "notes=false" >> "$GITHUB_OUTPUT"
           fi
-          if [ -f pipeline/pyproject.toml ] && git diff --name-only "$base" HEAD -- data config pipeline | grep -q .; then
+          if [ -f pipeline/pyproject.toml ] && git diff --name-only --no-renames "$base" HEAD -- data config pipeline | grep -q .; then
             echo "data=true" >> "$GITHUB_OUTPUT"
           else
             echo "data=false" >> "$GITHUB_OUTPUT"
