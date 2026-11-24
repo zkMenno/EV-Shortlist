@@ -29,6 +29,7 @@ jobs:
       schema: ${{ steps.check.outputs.schema }}
       pipeline: ${{ steps.check.outputs.pipeline }}
       data: ${{ steps.data.outputs.data }}
+      notes: ${{ steps.data.outputs.notes }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -42,13 +43,17 @@ jobs:
       # T-057: data-qa runs when data/, pipeline/ or config/ changed (PR: vs the base commit;
       # push: vs the previous head). Manual runs, new branches and unknown bases always run it.
       # Event values come in through env, never pasted into the script (injection-safe).
+      # notes=true when EVERY changed file is a note (same list as images.yml, rule G-40): root
+      # *.md, docs/**, workstreams/**, tasks/**, research/**, audits/**, _archive/**. Exception:
+      # docs/design/** is code here (the web build and tests read tokens.json, fonts and
+      # illustrations from it). Then only repo-checks and gate-guard run; the heavy jobs skip and
+      # ci-ok stays green. Unknown base, empty diff or a manual run: notes=false (run everything).
       - id: data
         env:
           EVENT: ${{ github.event_name }}
           PR_BASE: ${{ github.event.pull_request.base.sha }}
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
-          if [ ! -f pipeline/pyproject.toml ]; then echo "data=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           base=""
           case "$EVENT" in
             pull_request) base="$PR_BASE" ;;
@@ -56,9 +61,20 @@ jobs:
           esac
           if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ] \
              || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
-            echo "data=true" >> "$GITHUB_OUTPUT"; exit 0
+            echo "notes=false" >> "$GITHUB_OUTPUT"
+            if [ -f pipeline/pyproject.toml ]; then echo "data=true" >> "$GITHUB_OUTPUT"; else echo "data=false" >> "$GITHUB_OUTPUT"; fi
+            exit 0
           fi
-          if git diff --name-only "$base" HEAD -- data config pipeline | grep -q .; then
+          files=$(git diff --name-only "$base" HEAD)
+          code=$(printf '%s\n' "$files" | grep -vE '^([^/]+\.md|docs/.+|workstreams/.+|tasks/.+|research/.+|audits/.+|_archive/.+)$' | grep . || true)
+          design=$(printf '%s\n' "$files" | grep -E '^docs/design/' || true)
+          if [ -n "$files" ] && [ -z "$code" ] && [ -z "$design" ]; then
+            echo "notes=true" >> "$GITHUB_OUTPUT"
+            echo "Note-only change: heavy jobs skip (rule G-40)." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "notes=false" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -f pipeline/pyproject.toml ] && git diff --name-only "$base" HEAD -- data config pipeline | grep -q .; then
             echo "data=true" >> "$GITHUB_OUTPUT"
           else
             echo "data=false" >> "$GITHUB_OUTPUT"
@@ -100,9 +116,12 @@ jobs:
           d=$(grep -oE '^## Decision [0-9]+' DECISIONS.md | sort | uniq -d)
           [ -z "$d" ] || { echo "::error::Duplicate decision numbers in DECISIONS.md: $d"; exit 1; }
 
+  # Unit checks, one production build, then the Playwright smoke + review tests on that same
+  # build (A-02 #1: the "no foreign request" guarantee must run in CI). e2e used to be its own
+  # job that repeated setup, install and the ~2 min build; one build now serves both.
   web:
     needs: detect
-    if: needs.detect.outputs.web == 'true'
+    if: needs.detect.outputs.web == 'true' && needs.detect.outputs.notes != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -131,31 +150,10 @@ jobs:
       # Perf budget (A-01): Explore first-load JS < 200 KB gzip, client catalogue < 300 KB gzip.
       - name: Perf budget
         run: node apps/web/scripts/budget.mjs
-
-  # Playwright smoke + review tests on a production build (A-02 #1: the "no foreign request"
-  # guarantee must run in CI). Uses the dev fixture, like local `pnpm e2e`.
-  e2e:
-    needs: detect
-    if: needs.detect.outputs.web == 'true'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: .nvmrc
-      - run: corepack enable
-      - name: Install (workspace root)
-        run: pnpm install --frozen-lockfile
       - name: Install Playwright Chromium (with system deps)
         run: pnpm --filter @ev/web exec playwright install --with-deps chromium
-      - run: pnpm --filter @ev/web build
-        env:
-          APP_URL: https://ev.example.com # Q-090
-      - run: pnpm --filter @ev/web e2e
+      - name: e2e (Playwright, on the build above)
+        run: pnpm --filter @ev/web e2e
         env:
           APP_URL: https://ev.example.com
       - name: Upload Playwright traces on failure
@@ -168,7 +166,7 @@ jobs:
 
   schema:
     needs: detect
-    if: needs.detect.outputs.schema == 'true'
+    if: needs.detect.outputs.schema == 'true' && needs.detect.outputs.notes != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -186,7 +184,7 @@ jobs:
 
   pipeline:
     needs: detect
-    if: needs.detect.outputs.pipeline == 'true'
+    if: needs.detect.outputs.pipeline == 'true' && needs.detect.outputs.notes != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -207,8 +205,29 @@ jobs:
         run: uv sync --locked --all-extras --dev
       # Release files live only on the GitHub Release (Decision 035, T-064): tests that read
       # data/releases/latest need them. Downloaded and sha256-checked by manifest, like data-qa.
+      # The ~650-file download took 75-165 s per run, so the files are cached per release
+      # number + manifest hash. The cache lives in its own folder and only fills files git
+      # doesn't have (never overwrites tracked ones); `ev release fetch` then re-checks every
+      # file's size + sha256 and re-downloads any that don't match, so a bad cache can't pass.
+      - id: rel
+        run: echo "n=$(cat ../data/releases/latest 2>/dev/null || echo none)" >> "$GITHUB_OUTPUT"
+      - id: relcache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ev-release
+          key: ev-release-${{ steps.rel.outputs.n }}-${{ hashFiles(format('data/releases/{0}/manifest.json', steps.rel.outputs.n)) }}
+      - name: Seed release files from the cache
+        if: steps.relcache.outputs.cache-hit == 'true'
+        env:
+          N: ${{ steps.rel.outputs.n }}
+        run: cp -r --update=none ~/.cache/ev-release/. "../data/releases/$N/"
       - name: Fetch the latest release
         run: uv run ev release fetch latest
+      - name: Keep the release files for the cache
+        if: steps.relcache.outputs.cache-hit != 'true'
+        env:
+          N: ${{ steps.rel.outputs.n }}
+        run: mkdir -p ~/.cache/ev-release && cp -r "../data/releases/$N/." ~/.cache/ev-release/
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run pytest
@@ -255,6 +274,7 @@ jobs:
   # advisory shows up as a yellow job without blocking merges. Not part of ci-ok.
   audit:
     needs: detect
+    if: needs.detect.outputs.notes != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -306,7 +326,7 @@ jobs:
   # One stable check name to require on main, whatever jobs ran.
   ci-ok:
     if: always()
-    needs: [repo-checks, gate-guard, web, e2e, schema, pipeline, data-qa]
+    needs: [detect, repo-checks, gate-guard, web, schema, pipeline, data-qa]
     runs-on: ubuntu-latest
     permissions: {}
     steps:
