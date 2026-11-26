@@ -63,6 +63,7 @@ def fact_from_parquet(row: dict[str, Any]) -> dict[str, Any]:
             "id": row.get("source_id"),
             "name": row.get("source_name"),
             "licence": row.get("source_licence"),
+            **({"url": row["source_url"]} if row.get("source_url") else {}),
         },
         "retrieved_at": row.get("retrieved_at"),
         "confidence": row.get("confidence"),

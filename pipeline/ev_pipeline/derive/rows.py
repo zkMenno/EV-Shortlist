@@ -177,7 +177,8 @@ def _curve_points(value: object) -> tuple[list[tuple[float, float]], str] | None
 
 
 def _charging(vid, values, pv, mv, drop) -> dict[str, Any]:
-    """Fill dc_* values in place. Returns row extras (dc_curve_status, dc_peak_kw_is_claim)."""
+    """Fill dc_* values in place. Returns row extras (dc_curve_status, dc_peak_kw_is_claim,
+    dc_speed_is_claim)."""
     extra: dict[str, Any] = {}
     net = values.get("battery_kwh_net")
     net_p = [pv["battery_kwh_net"]] if net else []
@@ -239,6 +240,9 @@ def _charging(vid, values, pv, mv, drop) -> dict[str, Any]:
             values["dc_avg_10_80_kw"] = avg
             pv["dc_avg_10_80_kw"] = derived_prov([pv["dc_minutes_10_80"], *net_p], MINUTES_NOTE)
             extra["_dc_from_minutes"] = True
+            mins_mg = mv.get("dc_minutes_10_80")
+            if mins_mg is not None:
+                extra["dc_speed_is_claim"] = mins_mg.claim
         else:
             drop(
                 vid,
@@ -664,6 +668,8 @@ def _finish_row(
         row["dc_curve_status"] = w.extra["dc_curve_status"]
     if "dc_peak_kw_is_claim" in w.extra and row.get("dc_peak_kw") is not None:
         row["dc_peak_kw_is_claim"] = bool(w.extra["dc_peak_kw_is_claim"])
+    if "dc_speed_is_claim" in w.extra and row.get("dc_avg_10_80_kw") is not None:
+        row["dc_speed_is_claim"] = bool(w.extra["dc_speed_is_claim"])
     for f in (
         "epa_range_km",
         "voltage_nominal_v",

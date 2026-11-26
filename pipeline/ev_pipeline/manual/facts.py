@@ -46,19 +46,18 @@ Folders whose name starts with `_` (e.g. `data/manual/_example/`) and files with
 
 from __future__ import annotations
 
-import fnmatch
 import re
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 from typing import Any
-from urllib.parse import unquote, urlparse
+from urllib.parse import urlparse
 
 import yaml
 
 from ev_pipeline.match.matcher import CURRENCIES, MatchedFact, MatchResult, Problem
 from ev_pipeline.match.seed import CANONICAL_UNITS, Seed
-from ev_pipeline.release.gate import CITED_FACTS, Registry
+from ev_pipeline.release.gate import CITED_FACTS, Registry, url_matches
 from ev_pipeline.release.validate import (
     _validator,
     in_range,
@@ -265,26 +264,6 @@ SHARED_HOSTS = frozenset(
         "cdn.uc.assets.prezly.com",
     }
 )
-
-
-def url_matches(pattern: str, url: str) -> bool:
-    """True when `url` is on `pattern`: a bare host (`www.audi.com`, `*.example.com`) matches
-    that host; `host/path/` matches URLs under that path, segment by segment, where a `*`
-    segment stands for exactly one path segment (`www.louwman.nl/uploads/*/Peugeot/`)."""
-    parts = urlparse(url.strip())
-    host = (parts.hostname or "").lower()
-    pat_host, _, pat_path = pattern.strip().partition("/")
-    if not fnmatch.fnmatchcase(host, pat_host.lower()):  # hosts ignore case; paths don't
-        return False
-    want = [seg for seg in pat_path.split("/") if seg]
-    have = [unquote(seg) for seg in parts.path.split("/") if seg]
-    if want and any(h in (".", "..") or "/" in h or "\\" in h for h in have):
-        return False  # a dot segment or encoded slash could step out of the allowed prefix
-    if len(have) < len(want):
-        return False
-    return all(
-        fnmatch.fnmatchcase(h, w) if w == "*" else h == w for h, w in zip(have, want, strict=False)
-    )
 
 
 def _source_claim_problems(registry: Registry | None, source_id: str, url: str) -> list[str]:

@@ -94,9 +94,9 @@ def test_repo_seed_has_no_cited_value_under_the_seed_source() -> None:
 
 def test_released_facts_hold_no_blocked_citation() -> None:
     """No fact from a source that isn't releasable ships, and every shipped fact keeps its source
-    URL column. Since Decision 068 the `manual` source (maker documents) is releasable, so the
-    check reads the registry instead of a fixed list (A-06 fix; held: maker-docs, autotijd,
-    cited-third-party)."""
+    URL column. Under Decisions 068 / 087 (`manual` and `maker-docs`, T-163), maker-hosted cited
+    facts are releasable while third-party URLs and blocked sources (`autotijd`,
+    `cited-third-party`) stay held."""
     from ev_pipeline.release.gate import load_registry
 
     registry = load_registry(REPO / "data" / "sources.yaml")
@@ -111,11 +111,13 @@ def test_released_facts_hold_no_blocked_citation() -> None:
         return
     table = pq.read_table(path)
     assert "source_url" in table.column_names
-    rows = table.select(["source_id", "source_record"]).to_pylist()
-    assert not [r for r in rows if not registry.releasable(r["source_id"])]
-    for held in ("maker-docs", "autotijd", "cited-third-party"):
+    rows = table.select(["source_id", "source_url", "source_record"]).to_pylist()
+    assert not [r for r in rows if registry.fact_blocked(r["source_id"], r["source_url"])]
+    for held in ("autotijd", "cited-third-party"):
         assert not registry.releasable(held)
-    assert not [r for r in rows if "#cited:" in (r["source_record"] or "")]
+    assert registry.releasable("maker-docs")
+    assert registry.fact_blocked("maker-docs", "https://xr793.com/brochure.pdf") is not None
+    assert registry.fact_blocked("maker-docs", "https://cdn.skoda-storyboard.com/x.pdf") is None
 
 
 # --- F3 knock-on: contradicted values are withheld -----------------------------------------

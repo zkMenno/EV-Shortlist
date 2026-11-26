@@ -371,8 +371,8 @@ def build_release(
     policies = load_policies(data_dir / "field_sources.yaml")
     gated: dict[str, dict[str, Any]] = {}
 
-    def gate(sid: str) -> bool:
-        why = registry.reason_blocked(sid)
+    def gate(sid: str, url: str | None = None) -> bool:
+        why = registry.fact_blocked(sid, url) if url is not None else registry.reason_blocked(sid)
         if why is not None:
             g = gated.setdefault(sid, {"reason": why, "records": 0})
             g["records"] += 1
@@ -381,9 +381,10 @@ def build_release(
 
     records = [r for r in records if gate(r.source.id.root)]
     manual = [mv for mv in manual if gate(mv.record.source.id.root)]
-    # P7: hand-entered facts (data/manual/), source `manual`; blocked until Q-008. Like seed
-    # `cited:` values (source maker-docs, A-06 F3) they are gated after matching below: a
-    # blocked citation never ships, but it is kept as evidence for guard_contradicted.
+    # P7: hand-entered facts (data/manual/) and seed `cited:` values (source maker-docs, A-06 F3).
+    # Gated per fact after matching below: maker-hosted cited facts ship under Decisions 068 / 087
+    # (`use: cited-facts` + `cited_hosts`); blocked sources and third-party / dealer copies never
+    # ship, and are kept as evidence for guard_contradicted.
     hand = load_manual_dir(data_dir, today, registry)
     problems += issue_problems(hand.issues)
     inputs += [{"path": str(data_dir / Path(p).relative_to("data"))} for p in hand.files]
@@ -397,12 +398,13 @@ def build_release(
     problems += hand_problems
     spec_facts, dropped = check_fact_ranges(result.spec_facts)
     problems += dropped
-    # A-06 F3: citations from a source that is not releasable (maker-docs, manual: Q-008) are
-    # evidence only, never values; anything else unreleasable here would be a bug: drop it.
+    # A-06 F3 / Decisions 068, 087: citations from a blocked source or a URL outside the source's
+    # `cited_hosts` are evidence only, never published values; anything else unreleasable here
+    # would be a bug: drop it.
     evidence: dict[str, list[MatchedFact]] = {}
     shipping: list[MatchedFact] = []
     for mf in spec_facts:
-        if gate(mf.source_id):
+        if gate(mf.source_id, mf.fact.source.url or ""):
             shipping.append(mf)
         elif has_citation(mf):
             evidence.setdefault(mf.fact.subject_id.root, []).append(mf)
