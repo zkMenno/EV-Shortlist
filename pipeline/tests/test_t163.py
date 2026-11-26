@@ -139,6 +139,9 @@ def test_repo_maker_docs_registry_enforces_cited_hosts() -> None:
     reg = load_registry(REPO / "data" / "sources.yaml")
     assert reg.releasable("maker-docs")
     assert reg.cited_facts("maker-docs")
+    for sid, src in reg.sources.items():
+        if src.use == "cited-facts":
+            assert src.cited_hosts, f"{sid} (use: cited-facts) must declare cited_hosts"
     entry = reg.sources["maker-docs"]
     assert entry.cited_hosts, "maker-docs must declare cited_hosts"
     whole = {h for h in entry.cited_hosts if "/" not in h}
@@ -462,6 +465,20 @@ def test_model_s_and_x_ties_resolve_via_tgk_variant_codes(code: str, year: int, 
         or year == 2022
     ):
         assert TGK_TIE in _place_one(rec, oe, table={})
+
+
+@pytest.mark.seed
+def test_model_s_raven_performance_excluded_from_long_range() -> None:
+    """PR #215 review should-fix: SA3 Performance (EPS15N, 593 km) must not land on
+    tesla-model-s-facelift-raven-long-range (EBS15N, 610 km)."""
+    from ev_pipeline.match.matcher import TGK_MISFIT
+
+    tgk, oe = _load_split_fixture()
+    lr = _tgk_rec(tgk, "|SA3|EBS15N|", 2020)
+    perf = _tgk_rec(tgk, "|SA3|EPS15N|", 2019)
+    assert _place_one(lr, oe) == "tesla-model-s-facelift-raven-long-range"
+    why = _place_one(perf, oe)
+    assert why.startswith("attach-only: " + TGK_MISFIT) and "type_codes" in why
 
 
 @pytest.mark.seed

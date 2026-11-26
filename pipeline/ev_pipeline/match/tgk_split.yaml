@@ -187,12 +187,12 @@ variants:
     basis: "rdw-tgk 2026-11-19: TAYCAN TURBO GT JR22 / JS22 versions (290 / 305 km/h), 2024-"
   # --- T-163 (batch: data T-163, 2026-11-26): Tesla Model S and Model X variant codes ---
   # RDW TGK (CC0), staging recorded 2026-11-26 (e4*2007/46*0667 and e4*2018/858*00086).
-  # Tesla Model S gen1 (2013-16): 60 / 60D / 60R = 60 kWh; 85 / 85R = RWD 85 kWh (200-225 km/h,
-  # NEDC 502 km); 85D / 90D = dual-motor AWD (240-250 km/h, NEDC 460-528 km). Unseeded 70D / 70R
-  # / 90R leave the ties for review.
+  # Tesla Model S gen1 (2013-16): 60 / 60R = RWD 60 kWh; 85 / 85R = RWD 85 kWh (200-225 km/h,
+  # NEDC 502 km); 85D / 90D = dual-motor AWD (240-250 km/h, NEDC 460-528 km). Unseeded 60D / 70D
+  # / 70R / 90R leave the ties for review.
   tesla-model-s-gen1-60:
-    type_codes: [60, 60D, 60R]
-    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 variants 60 / 60D / 60R, NEDC 390-414 km"
+    type_codes: [60, 60R]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 RWD variants 60 / 60R, NEDC 390-414 km"
   tesla-model-s-gen1-85:
     type_codes: [85, 85R]
     basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 RWD variants 85 / 85R, 200-225 km/h, NEDC 502 km"
@@ -203,7 +203,9 @@ variants:
   # SA1 = 2019 WLTP Standard Range AWD 75 kWh (WLTP 455 km, 225 km/h); rear-motor 75R (30-min
   # 90 kW, NEDC 480 km) is ruled out of the AWD 75D row (ready for a future 75 RWD row).
   # Regular 90D / 100D carry uitvoering B... (30-min 79 kW, NEDC 528-632 km); Performance P90D /
-  # P100D carry uitvoering P... (NEDC 491-613 km). SA3 = 2019-20 Raven (WLTP 593-610 km).
+  # P100D carry uitvoering P... (NEDC 491-613 km). SA3 splits the same way: Base/LR carry _B_
+  # (DBS15N NEDC 632 km, EBS15N/EBS25N WLTP 610 km, 2255-2290 kg); unseeded Raven Performance
+  # carries _P_ (DPS15N NEDC 613 km, EPS15N WLTP 593 km, 2307-2316 kg, 250-262 km/h).
   tesla-model-s-facelift-75d:
     type_codes: [75D, SA1]
     basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 AWD 75D (NEDC 490 km) and 2019 SA1 (WLTP 455 km); excludes RWD 75R and 60/70 packs"
@@ -214,8 +216,8 @@ variants:
     type_codes: [90D+P19B5, 90D+P19B5N, 90D+P21P5, 90D+P21P5N, 100D+P19B5N, 100D+P21P5N]
     basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 P90D / P100D Performance (uitvoering P..., NEDC 491-613 km)"
   tesla-model-s-facelift-raven-long-range:
-    type_codes: [SA3]
-    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 SA3 Raven versions (2019-20, WLTP 593-610 km, 250-262 km/h)"
+    type_codes: [SA3+DBS15N, SA3+EBS15N, SA3+EBS25N]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 SA3 Raven Long Range (uitvoering _B_: WLTP 610 km, NEDC 632 km, 250 km/h); excludes Performance _P_ (DPS15N / EPS15N, WLTP 593 km)"
   # Tesla Model S Palladium (2022-): SB1D = Dual Motor Long Range (240-250 km/h, WLTP 634-744 km),
   # SB1T (and 2022 *02 SB1+TB1T1S5M2C2) = Tri Motor Plaid (300 km/h, WLTP 600-611 km).
   tesla-model-s-palladium-long-range:

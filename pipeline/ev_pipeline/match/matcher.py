@@ -1631,7 +1631,10 @@ def tgk_pick(
         evidenced_unknown = [c for c in unknown if named[c.root] > 0 or c.root in coded]
         if fit and evidenced_unknown:
             # A-05 F12: battery evidence for some, name or type-code evidence for others.
-            return None, f"{TGK_TIE}: battery fits {ids(fit)}, name only {ids(evidenced_unknown)}"
+            return (
+                None,
+                f"{TGK_TIE}: battery fits {ids(fit)}, name/code only {ids(evidenced_unknown)}",
+            )
         if fit:
             pool = fit
         elif unknown:

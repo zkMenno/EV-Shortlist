@@ -1,6 +1,6 @@
 # T-163 TGK variant codes as split evidence, cited power / gross reach the release, DC claim flag
 Role: builder   Lane: pipeline/ (WS1)   Wave: launch
-Status: review (batch: data T-163, 2026-11-26)
+Status: done (batch: data T-163, 2026-11-26): gate PR #213 merged (d22f367), main PR #215
 
 ## Goal
 Tesla versions split by their type-approval variant code, cited maker power and gross values actually publish (Decision 068 / 087), and maker-claim DC figures are marked.
@@ -20,8 +20,8 @@ New seed rows (T-162), power citations (T-164), verify / merge tools (T-165).
 ## Handoff notes
 - **Part 1 — TGK variant codes as split evidence (`match/matcher.py`, `match/tgk_split.yaml`):**
   - `_has_type_code_match()` lets a positive `type_codes` match in `tgk_split.yaml` satisfy evidence in `tgk_pick()` even when a candidate variant has no pack kWh (so future T-162 Model X gen1 rows without pack kWh split cleanly by `60X`/`75X`/`90X`/`100X`/`XA1`/`XA3`; tested with real fixtures in `tests/test_t163.py`).
-  - Added Tesla Model S (`gen1`: `60`, `85`, `85d-90d`; `facelift`: `75d` [`75D`/`SA1` — `75R` ruled out until a 75 RWD row exists], `100d` [`90D`/`100D` + `B...`], `p100d` [`90D`/`100D` + `P...`], `raven-long-range` [`SA3`]; `palladium`: `long-range` [`SB1D`], `plaid` [`SB1T`, `SB1+TB1T1S5M2C2`]) and Model X `palladium` (`long-range` [`XB1D`, `XB1+DB1T2S6M1C4`, `XB1+DB1T2S7M1C4`], `plaid` [`XB1T`]), plus a documented comment block for Model X gen1 (`60X`/`75X`/`90X`/`100X`/`XA1`/`XA3`) ready for T-162 seed IDs. Fixed the stale Kia EV6 facelift `F5E12` ("not seeded") comment.
-  - **G-51 repro (2026-11-26 staging):** Model S/X groups `tie: 12 -> 0`, `several: 2 -> 0`, `have: 5 -> 22`, `no-fit: 0 -> 4` (`75R` 17/17 ruled out of `75d`; `75D` 20/20 kept). All-catalogue groups: `tie: 126 -> 114` (-12), `several: 34 -> 32` (-2), `have: 268 -> 285` (+17), `no-fit: 48 -> 52` (+4).
+  - Added Tesla Model S (`gen1`: `60` [`60`/`60R`], `85`, `85d-90d`; `facelift`: `75d` [`75D`/`SA1` — `75R` ruled out until a 75 RWD row exists], `100d` [`90D`/`100D` + `B...`], `p100d` [`90D`/`100D` + `P...`], `raven-long-range` [`SA3+DBS15N`/`EBS15N`/`EBS25N` — excludes Performance `DPS15N`/`EPS15N` -> WLTP 610 km, NEDC 632 km, 2290 kg]; `palladium`: `long-range` [`SB1D`], `plaid` [`SB1T`, `SB1+TB1T1S5M2C2`]) and Model X `palladium` (`long-range` [`XB1D`, `XB1+DB1T2S6M1C4`, `XB1+DB1T2S7M1C4`], `plaid` [`XB1T`]), plus a documented comment block for Model X gen1 (`60X`/`75X`/`90X`/`100X`/`XA1`/`XA3`) ready for T-162 seed IDs. Fixed the stale Kia EV6 facelift `F5E12` ("not seeded") comment.
+  - **G-51 repro (2026-11-26 staging):** Model S/X groups `tie: 12 -> 0`, `several: 2 -> 0`, `have: 5 -> 22`, `no-fit: 0 -> 4` (`75R` 17/17 ruled out of `75d`; `75D` 20/20 kept; `SA3` LR 18/18 -> `raven-long-range`, Performance 11/11 ruled out). All-catalogue groups: `tie: 126 -> 114` (-12), `several: 34 -> 32` (-2), `have: 268 -> 285` (+17), `no-fit: 48 -> 52` (+4).
 - **Part 2 — Cited maker facts publish with provenance (Decisions 068 / 087):**
   - Root cause: `data/sources.yaml` still held `maker-docs` at `status: blocked` ("until Q-008") and `data/field_sources.yaml` omitted `maker-docs` from `power_kw.fallbacks`.
   - Unblocked `maker-docs` (`status: active`, `use: cited-facts`, `decision: "068"`, explicit `cited_hosts` allowlist of verified OEM/press domains + path-scoped CUPRA Prezly prefix), added `maker-docs` to `power_kw.fallbacks`, moved `url_matches` to `release/gate.py` (`Registry.cited_url_problem`, `Registry.fact_blocked`), enforced `cited_hosts` in `release/build.py` and `qa/checks.py` (`check_licence_gate`, with `source_url` restored in `qa/check_release.py:fact_from_parquet`), and regenerated `apps/web/src/config/sources.generated.json` (cross-lane generated file required by CI `web`).
@@ -34,8 +34,9 @@ New seed rows (T-162), power citations (T-164), verify / merge tools (T-165).
   - Real rows marked `dc_speed_is_claim: true` today (3): `hyundai-ioniq-5-facelift-base`, `hyundai-ioniq-5-facelift-awd`, `ford-e-tourneo-courier-gen1-46kwh`.
 - **Gate PR & same-data rebuild (G-43 / G-54):**
   - Gate PR #213 (`config/approved_changes.yaml`, 8 `release: 4` score-band approvals across 4 release-3 rows: `cupra-born-gen1-58kwh`, `mg-mg4-gen1-standard`, `renault-megane-e-tech-gen1-ev40`, `renault-zoe-ph1-q90`) passed fresh review and merged (`d22f367`).
-  - Same-data rebuild (`origin/main` `d22f367` vs branch on 2026-11-26 staging): `402 -> 402` variants, `60,708 -> 61,993` facts (`+1,285`: `maker-docs +79`, `rdw-tgk +1,206`), `38` catalogue rows changed. Against published release 3 (`plain ev verify`): **0** T-163 blocking lines (`8` approved by PR #213; remaining `62` blocking lines are pre-existing `origin/main` staging drift on `mg-mg4-gen1-xpower` [61] and `skoda-enyaq-gen1-80x` [1]). Against `origin/main`: `95` blocking lines, all on 10 new-since-release-3 rows (`added` vs release 3: 94 shortlist moves on 9 rows + Twingo `ac_kw`).
+  - Same-data rebuild (`origin/main` `d22f367` vs branch on 2026-11-26 staging): `402 -> 402` variants, `60,708 -> 61,896` facts (`+1,188`: `maker-docs +79`, `rdw-tgk +1,109`), `38` catalogue rows changed. Against published release 3 (`plain ev verify`): **0** T-163 blocking lines (`8` approved by PR #213; remaining `62` blocking lines are pre-existing `origin/main` staging drift on `mg-mg4-gen1-xpower` [61] and `skoda-enyaq-gen1-80x` [1]). Against `origin/main`: `95` blocking lines, all on 10 new-since-release-3 rows (`added` vs release 3: 94 shortlist moves on 9 rows + Twingo `ac_kw`).
 
 ## Review
 - Gate PR #213 (`config/approved_changes.yaml`): Fresh PR #213 Reviewer, 2026-11-26, head `aa8ff76d`, `R0–R3: pass` (merged `d22f367`).
+- Code PR #215 round 1: Fresh PR #215 Reviewer, 2026-11-26, head `36564122`, `R0–R3, D1, D2, D4, D10, D13: pass` (1 should-fix: `SA3` Raven Performance `DPS15N`/`EPS15N` excluded from `raven-long-range`; 4 nits — all fixed in next commit).
 
