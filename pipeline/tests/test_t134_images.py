@@ -349,6 +349,7 @@ def test_refresh_fetch_step_never_raises(tmp_path: Path) -> None:
     assert out["outcome"] == "failed" and "reason" in out
 
 
+@pytest.mark.seed
 def test_refresh_fetch_step_fetches_listed_photos(tmp_path: Path, monkeypatch) -> None:
     from ev_pipeline.images import store
     from ev_pipeline.refresh import runner
@@ -373,6 +374,7 @@ def test_refresh_fetch_step_fetches_listed_photos(tmp_path: Path, monkeypatch) -
     assert out["outcome"] == "ok" and out["fetched"] == 1 and seen == [gid]
 
 
+@pytest.mark.seed
 def test_photos_pending_lets_a_photo_only_night_publish(tmp_path: Path) -> None:
     """#110 should-fix 3: a night with new photos but no data change used to be skipped."""
     from ev_pipeline.refresh.runner import photos_pending

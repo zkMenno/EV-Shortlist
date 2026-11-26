@@ -18,6 +18,8 @@ from ev_pipeline.match.matcher import TGK_MISFIT, TGK_TIE, match_records
 from ev_pipeline.match.seed import load_manual_variants, load_seed
 from ev_pipeline.records import SourceRecord
 
+pytestmark = pytest.mark.seed
+
 REPO = Path(__file__).resolve().parents[2]
 FIXTURE = Path(__file__).parent / "fixtures" / "rdw_tgk" / "split_t159.jsonl"
 RECS = [SourceRecord.model_validate(json.loads(x)) for x in FIXTURE.read_text().splitlines()]

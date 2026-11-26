@@ -10,6 +10,8 @@ from __future__ import annotations
 from datetime import date
 from pathlib import Path
 
+import pytest
+
 from ev_pipeline.derive.links import Links, load_links
 from ev_pipeline.match.matcher import MatchedFact, priority_of
 from ev_pipeline.merge.merge import merge_variant_facts
@@ -80,6 +82,7 @@ def test_ev6_facelift_usable_is_routed_to_conflicts_not_merged() -> None:
     assert c["fact_id"] == "kilowatt-openev:kia-ev6-gen1-77kwh-awd:2024:battery_kwh_net"
 
 
+@pytest.mark.seed
 def test_committed_ev6_links_point_at_the_pre_facelift_pack() -> None:
     links = load_links(REPO_DATA)
     gross = linked_gross_kwh(links, {EV6_AWD: EV6_GEN, "kia-ev6-gen1-gt": EV6_GEN})

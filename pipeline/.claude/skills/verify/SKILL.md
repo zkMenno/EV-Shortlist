@@ -35,6 +35,9 @@ Any change under `pipeline/ev_pipeline/{match,merge,derive,release,qa}/`, `*_par
    - Seed vs built (G-48): a seed variant built with another drivetrain, or a WLTP > 10 %
      off its own cited WLTP. New ones fail the run; ones the previous release already had
      are listed for the seed's owner (WS3).
+   - Derived flag changes from missing inputs (G-62): rows whose derived shortlist flags
+     changed solely because an input is missing (e.g. `power_kw` under Decision 088), with
+     the missing input named. Report only, so "unknown -> no flag" rules show their data cost.
    - Spot checks: EV6, Ioniq 5, MG4, Model Y LR vs Juniper, P7+. Bold cells moved. Look
      at every bold cell and every note ("real range > WLTP x 1.1", "no battery", "gone").
 4. **PR body.** Paste the report's Numbers block, then run

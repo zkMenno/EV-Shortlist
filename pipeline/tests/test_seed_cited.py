@@ -12,6 +12,7 @@ import importlib.util
 from datetime import date
 from pathlib import Path
 
+import pytest
 import yaml
 from test_tgk_attach import I3S_2017, VARIANTS, _placed, _reason, _run
 
@@ -144,6 +145,7 @@ def test_seed_validator_checks_cited_entries() -> None:
     assert v.validate_cited({"battery_kwh_gross": future}, {}, "x", today=date(2026, 11, 15))
 
 
+@pytest.mark.seed
 def test_repo_seed_cites_the_i3s_battery() -> None:
     data = yaml.safe_load((REPO / "data" / "seed" / "variants.yaml").read_text(encoding="utf-8"))
     [i3s] = [v for v in data["variants"] if v["id"] == "bmw-i3-i01-i3s"]
@@ -180,6 +182,7 @@ def test_cited_ac_kw_uses_the_zoe_q_motor_exception() -> None:
     assert errs and "outside plausible range" in errs[0]
 
 
+@pytest.mark.seed
 def test_repo_seed_cites_zoe_phase1_ac_power() -> None:
     data = yaml.safe_load((REPO / "data" / "seed" / "variants.yaml").read_text(encoding="utf-8"))
     by_id = {v["id"]: v for v in data["variants"]}
