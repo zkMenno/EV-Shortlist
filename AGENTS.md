@@ -2,7 +2,7 @@
 
 A free, independent finder for used (and new) electric cars: one canonical EV catalogue (Make → Model → Generation → Variant), our own real-world range and charging stats, and used prices per country. A finder, not a marketplace: we link out and never host listings.
 
-Read this file in full at the start of every session. Then read your task file. If something here conflicts with your task file, this file wins; tell WS0 in its INBOX.
+Read this file in full at the start of every session. Then read your task file. If something here conflicts with your task file, this file wins; tell WS0 in its INBOX. On Antigravity, also read [GEMINI.md](GEMINI.md), which translates the Claude-era mechanics in this repo's docs (Decision 089).
 
 ## Project identity
 
@@ -16,6 +16,8 @@ Read this file in full at the start of every session. Then read your task file. 
 ```
 AGENTS.md            this file: shared rules for every agent
 CLAUDE.md            thin wrapper for Claude hosts → points here
+GEMINI.md            Antigravity adapter: translates Claude-era mechanics (Decision 089)
+.agents/             Antigravity rules and workflows (/start-coordinator, /start-batch, /fresh-review, /merge-pr, /handoff)
 BOARD.md             Now / Next / Blocked / Done (coordinator only)
 QUESTIONS.md         only what Menno must answer; he answers inline
 DECISIONS.md         numbered decisions with context and reasons

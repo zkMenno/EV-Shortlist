@@ -4,7 +4,7 @@ One list of the product, data, market, architecture and business decisions, with
 
 Main spec: https://claude.ai/artifact/3HiNR86a22Fnm2kHxpfctx (tabs: "Master spec v2" = source of truth; "Research & notes"; "Data sources"; "Source matrix"; "Marketplaces"; "Battery & voltage guide"; "Charging buildout"; "Bidirectional & plugs"; "Trip fit"; "Variant finder"). Builders read the mirror in [docs/spec/](.) (repo copy wins). Launch scope: [launch-scope.md](launch-scope.md) (Decision 051).
 
-Brand and design: the claude.ai project doc `claude/brand-design-decisions.md` (owned by the UX chat; design system https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP; mirrored in [docs/design/](../design/)).
+Brand and design: [docs/design/brand-design-decisions.md](../design/brand-design-decisions.md) (owned by the UX chat; design system https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP; mirrored in [docs/design/](../design/)).
 
 ## Product
 - 2026-11-14 — One-liner: EV Database, but built for finding used EVs, across more markets, with the features it's missing. Lean; strict scope guard (Core = phases 0–2, Next = 3–5, Later = parked).

@@ -1,6 +1,6 @@
 # How we work
 
-The one process doc for every chat and agent on EV Finder. It replaced the old project docs, `workstreams/README.md` and the spec's Workflow tab on 17 Nov 2026. Engineering rules for code stay in [AGENTS.md](../../AGENTS.md); product decisions in [docs/spec/product-decisions.md](../spec/product-decisions.md); review checks in [REVIEW.md](../../REVIEW.md); the rule register in [rules.md](rules.md). Owner: WS0. Change it with a small edit plus a line in [rules.md](rules.md).
+The one process doc for every chat and agent on EV Finder. It replaced the old project docs, `workstreams/README.md` and the spec's Workflow tab on 17 Nov 2026. Engineering rules for code stay in [AGENTS.md](../../AGENTS.md); product decisions in [docs/spec/product-decisions.md](../spec/product-decisions.md); review checks in [REVIEW.md](../../REVIEW.md); the rule register in [rules.md](rules.md). On Antigravity, [GEMINI.md](../../GEMINI.md) translates the Claude-era mechanics below (Decision 089). Owner: WS0. Change it with a small edit plus a line in [rules.md](rules.md).
 
 Short version for Project Settings: [project-instructions.md](project-instructions.md) (WS0 updates it and tells Menno to re-paste).
 
@@ -48,7 +48,7 @@ One owner per path; others write to the coordinator's INBOX (`workstreams/WS0/IN
 
 | Path | Owner |
 |---|---|
-| `AGENTS.md`, `CLAUDE.md`, `BOARD.md`, `QUESTIONS.md`, `DECISIONS.md`, `ROADMAP.md`, `CHANGELOG.md`, `REVIEW.md`, `CHATS.md` rows (each chat its own) | WS0 |
+| `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/`, `BOARD.md`, `QUESTIONS.md`, `DECISIONS.md`, `ROADMAP.md`, `CHANGELOG.md`, `REVIEW.md`, `CHATS.md` rows (each chat its own) | WS0 |
 | `docs/process/`, `docs/spec/`, `packages/schema/`, `tasks/`, `research/` + `audits/` numbering, `workstreams/*/START.md` | WS0 |
 | `.github/` (except `workflows/image*.yml`), gate config | WS0 |
 | `pipeline/` (except Dockerfile), `data/sources.yaml`, `data/field_sources.yaml`, `data/SOURCES.md`, `data/releases/`, `data/review/` | WS1 |
@@ -56,7 +56,7 @@ One owner per path; others write to the coordinator's INBOX (`workstreams/WS0/IN
 | `data/seed/`, `data/manual/`, `data/taxonomy/`, `content/`, `config/` (no secrets, Decision 004) | WS3 |
 | `infra/`, Dockerfiles, `.github/workflows/image*.yml` | WS4 |
 | `docs/outreach/`, `docs/growth/`, `docs/brand/` (anything in Menno's name stays a draft until he approves) | WS5 |
-| `docs/design/` (brand decisions: project doc `claude/brand-design-decisions.md`) | UX |
+| `docs/design/` (brand decisions: `docs/design/brand-design-decisions.md`) | UX |
 | `audits/A-35…`, task `## Review` sections | QA |
 | `workstreams/WS0/HANDOFF.md` | coordinator |
 | `workstreams/WS0/INBOX.md` | append-only, everyone |

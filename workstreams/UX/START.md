@@ -1,10 +1,10 @@
 # UX lane brief: brand and design
 
-For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator). How chats work: [docs/process/README.md](../../docs/process/README.md) §3; rules: [rules.md](../../docs/process/rules.md). Brand decisions live in the project doc `claude/brand-design-decisions.md`; the design system is https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP, mirrored in `docs/design/` (start at [SOURCE.md](../../docs/design/SOURCE.md)). Design board: https://claude.ai/artifact/7oaYaK26i6xQBogFuuctMp. Keep system and board in sync.
+For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator). How chats work: [docs/process/README.md](../../docs/process/README.md) §3; rules: [rules.md](../../docs/process/rules.md). Brand decisions live in `docs/design/brand-design-decisions.md`; the design system is https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP, mirrored in `docs/design/` (start at [SOURCE.md](../../docs/design/SOURCE.md)). Design board: https://claude.ai/artifact/7oaYaK26i6xQBogFuuctMp. Keep system and board in sync.
 
 ## Start
 1. Attach the repo with push access (`add_repo zkMenno/EV-Shortlist`, access `push`); add your row to `CHATS.md`.
-2. Read `AGENTS.md`, `REVIEW.md` (from `origin/main`), `docs/process/README.md`, your task files, this brief, `claude/brand-design-decisions.md`.
+2. Read `AGENTS.md`, `REVIEW.md` (from `origin/main`), `docs/process/README.md`, your task files, this brief, `docs/design/brand-design-decisions.md`.
 3. Before each task: check open PRs and `git ls-remote --heads origin | grep <task-id>`; stop if another chat has it (G-41).
 
 ## What the lane owns

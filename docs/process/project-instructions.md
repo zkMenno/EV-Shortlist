@@ -11,7 +11,7 @@ EV Shortlist (repo github.com/zkMenno/EV-Shortlist): a used-EV finder, a better 
 
 START (every chat)
 1. Attach the repo with push access (add_repo zkMenno/EV-Shortlist, access push). Add your row to CHATS.md. You are either the coordinator (one named chat: read workstreams/WS0/HANDOFF.md + INBOX.md) or a throwaway batch chat (do the brief in your prompt; read the lane brief workstreams/<lane>/START.md for each lane you touch).
-2. Read docs/process/README.md (how we work) and AGENTS.md (engineering rules). Product: docs/spec/launch-scope.md first, then docs/spec/. UI work: also the project doc claude/brand-design-decisions.md.
+2. Read docs/process/README.md (how we work) and AGENTS.md (engineering rules). Product: docs/spec/launch-scope.md first, then docs/spec/. UI work: also docs/design/brand-design-decisions.md.
 
 ALWAYS
 - Decide, do, log. Ask Menno (popup, max 4, recommended option first) only for: money over €50/month or €200 one-off; legal or licence risk; public or irreversible steps; anything sent in his name; scope.

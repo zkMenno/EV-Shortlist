@@ -69,6 +69,7 @@ Find unverified work: `git log --grep="Verified: none" --oneline` (stamp lands w
 | G-61 | `data_qa.sh` runs the tests that pin seed state (`pytest -m seed`, marker registered in `pipeline/pyproject.toml`) | T-160 retro (19 Nov): a seed change broke `test_t153_split` / `test_t159_split`, found only in CI | `data_qa.sh` (T-165) | WS1 + WS3 | 2026-11-19 | — |
 | G-62 | `ev verify` lists rows whose derived flags change only because an input is missing, naming the input | T-161 retro (19 Nov): 22 rows lost a version flag only for missing `power_kw`; the reviewer found it | `ev verify` (T-165) | WS1 | 2026-11-19 | — |
 | G-63 | `merge_ready.sh` treats a check run with a `conclusion` and `completed_at` as completed, and says so | T-158 retro (19 Nov): a check run stuck at `in_progress` with `conclusion: success` blocked #195 | `merge_ready.sh` (T-165) | WS1 | 2026-11-19 | — |
+| G-64 | Antigravity sessions read `GEMINI.md` alongside `AGENTS.md` and `docs/process/README.md`; `GEMINI.md` translates Claude-era mechanics while `AGENTS.md` and `docs/` remain canonical (Decision 089) | Migration from Claude to Antigravity (26 Nov 2026): Claude-era mechanics and project docs needed a repo-tracked adapter | *prose* (`GEMINI.md`, `AGENTS.md`, `.agents/workflows/`) | WS0 | 2026-11-26 | — |
 
 **Old P-ids** (verification chat's seed list, 17 Nov) map here: P-07→G-04/G-05 · P-08→G-09 · P-09→G-03 · P-10→G-08 · P-11→G-15/G-16 · P-12→G-10 · P-14→G-07 · P-15→G-06 · P-20→G-17 · P-21 (CI budget)→G-33; the rest became G-21–G-31.
 
