@@ -38,6 +38,7 @@ def test_seed_pinned_modules_carry_the_seed_marker() -> None:
     import test_pack_guard
     import test_qa_top40
     import test_registrations
+    import test_scoped_aliases
     import test_seed_cited
     import test_seed_t051
     import test_shared_year_source_names
@@ -66,6 +67,9 @@ def test_seed_pinned_modules_carry_the_seed_marker() -> None:
         test_match.test_real_seed_guards,
         test_registrations.test_kba_names,
         test_registrations.test_dft_names,
+        test_scoped_aliases.test_real_seed_migration_is_complete,
+        test_scoped_aliases.test_real_seed_scoped,
+        test_scoped_aliases.test_real_seed_make_aliases,
         test_shared_year_source_names.test_shipped_seed_pins_ioniq5_my2024_base_and_awd_to_gen1,
         test_shared_year_source_names.test_retired_ioniq5_release1_ids_have_live_successors,
         test_seed_cited.test_repo_seed_cites_the_i3s_battery,
@@ -439,6 +443,8 @@ def test_verify_reports_missing_input_flag_changes_end_to_end(
         encoding="utf-8",
     )
     rep = verify(d, repo=tmp_path, skip_tests=True, tricky=[], now=NOW)
+    # Blocking release diff (ReleaseError) still carries res.shortlist for G-62.
+    assert rep.sections["rebuild"]["status"] == "fail"
     items = rep.sections["missing_input_flags"]["items"]
     assert rep.numbers["missing_input_flag_changes"] == len(items) == 2
     assert any(
@@ -457,3 +463,54 @@ def test_verify_reports_missing_input_flag_changes_end_to_end(
     assert "## Derived flag changes from missing inputs (G-62)" in md
     assert "| demo-ev-gen1-new | newest-version | lost | power_kw |" in md
     assert f"missing_input_flag_changes: {len(items)}" in md
+
+    # --base-release-from loads old_scores from base_dir/shortlist_scores.json directly.
+    from ev_pipeline.verify import run as vr
+
+    base_rel = tmp_path / "base_rel"
+    shutil.copytree(d / "releases" / "1", base_rel)
+    monkeypatch.setattr(
+        vr,
+        "build_base",
+        lambda *a, **kw: {"status": "pass", "ref": "HEAD", "sha": "0" * 40, "dir": str(base_rel)},
+    )
+    rep_base = verify(
+        d, repo=tmp_path, skip_tests=True, tricky=[], now=NOW, base_release_from="HEAD"
+    )
+    assert rep_base.numbers["missing_input_flag_changes"] == 2
+
+
+def test_too_big_does_not_blame_non_exceeding_dropped_field() -> None:
+    """PR #211 review nit 3: width_mm was <= 1950 in old; dropping width_mm while kerb_mass_kg
+    falls below 2300 must not blame width_mm."""
+    old_cat = _cat(_row("big-drop", width_mm=1850, kerb_mass_kg=2400))
+    new_cat = _cat(_row("big-drop", width_mm=None, kerb_mass_kg=2200))
+    old_sc = _scores(
+        **{"big-drop": {"road-tripper.rural": ("consider", ["penalty:too-big-for-b-roads"])}}
+    )
+    new_sc = _scores(**{"big-drop": {"road-tripper.rural": ("shortlist", [])}})
+    assert missing_input_flag_changes(new_cat, old_cat, new_sc, old_sc, gap=0.15) == []
+
+
+def test_superseded_newest_version_does_not_blame_unrelated_missing_peer() -> None:
+    """PR #211 review nit 2: a 2024 row superseded by a 2025 complete peer in the same trim line
+    must not blame an older peer missing power_kw."""
+    r20 = _row("m-20", year_start=2020, power_kw=None, dc_km_per_20min=150.0)
+    r24 = _row("m-24", year_start=2024, power_kw=200.0, dc_km_per_20min=220.0)
+    r25 = _row("m-25", year_start=2025, power_kw=200.0, dc_km_per_20min=260.0)
+    old_cat = _cat(r20, r24)
+    new_cat = _cat(r20, r24, r25)
+    old_sc = _scores(
+        **{
+            "m-20": {"road-tripper": ("fallback", [])},
+            "m-24": {"road-tripper": ("shortlist", ["bonus:newest-version"])},
+        }
+    )
+    new_sc = _scores(
+        **{
+            "m-20": {"road-tripper": ("fallback", [])},
+            "m-24": {"road-tripper": ("consider", ["penalty:older-version"])},
+            "m-25": {"road-tripper": ("shortlist", ["bonus:newest-version"])},
+        }
+    )
+    assert missing_input_flag_changes(new_cat, old_cat, new_sc, old_sc, gap=0.15) == []

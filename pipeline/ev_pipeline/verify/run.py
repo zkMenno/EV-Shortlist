@@ -452,7 +452,10 @@ def _peer_can_trigger_version_flag(
 ) -> bool:
     """True when `peer` could share a trim line with `row` (ignoring missing inputs) and trigger
     `flag` on `row`."""
-    rdt, pdt = row.get("drivetrain"), peer.get("drivetrain")
+    rdt = row.get("drivetrain")
+    pdt = peer.get("drivetrain")
+    if pdt not in drivetrains and old_peer is not None:
+        pdt = old_peer.get("drivetrain")
     if rdt in drivetrains and pdt in drivetrains and rdt != pdt:
         return False
     if not _power_compatible(row, peer, gap):
@@ -490,17 +493,24 @@ def missing_input_flag_changes(
         return []
     from ev_pipeline.derive import shortlist as sl
 
+    try:
+        params = sl.load_params()
+    except OSError:
+        params = {}
     if gap is None:
-        try:
-            gap = float(sl.load_params().get("trim_line_power_gap", sl.TRIM_LINE_POWER_GAP))
-        except OSError:
-            gap = sl.TRIM_LINE_POWER_GAP
+        gap = float(params.get("trim_line_power_gap", sl.TRIM_LINE_POWER_GAP))
     drivetrains = sl.DRIVETRAINS
+    lim = params.get("too_big") or {"width_mm": 1950, "kerb_mass_kg": 2300}
     old_rows = {str(r["variant_id"]): r for r in old_cat.get("rows") or [] if r.get("variant_id")}
     new_rows = {str(r["variant_id"]): r for r in new_cat.get("rows") or [] if r.get("variant_id")}
     by_model: dict[str, list[dict[str, Any]]] = {}
     for r in new_rows.values():
         by_model.setdefault(str(r.get("model_id") or ""), []).append(r)
+    line_max_year: dict[str, int] = {}
+    for line in sl.trim_lines(list(new_rows.values()), gap):
+        top = max(int(r["year_start"]) for r in line)
+        for r in line:
+            line_max_year[str(r["variant_id"])] = top
     old_fc, old_ok = _shortlist_flags(old_scores)
     new_fc, new_ok = _shortlist_flags(new_scores)
     out: list[dict[str, Any]] = []
@@ -528,6 +538,14 @@ def missing_input_flag_changes(
                             {"variant_id": vid, "flag": flag, "change": "lost", "missing": own}
                         )
                 else:
+                    # If a newer complete peer already sits in this row's trim line, the row lost
+                    # `newest-version` because it was superseded, not for an older peer's gap.
+                    if (
+                        flag == "newest-version"
+                        and vid in line_max_year
+                        and line_max_year[vid] > int(new_r["year_start"])
+                    ):
+                        continue
                     peer_miss: list[str] = []
                     for o in sorted(peers, key=lambda x: str(x["variant_id"])):
                         oid = str(o["variant_id"])
@@ -557,16 +575,19 @@ def missing_input_flag_changes(
                     )
             elif flag == "too-big-for-b-roads":
                 w_new, m_new = new_r.get("width_mm") is not None, _has_mass(new_r)
-                w_old, m_old = old_r.get("width_mm") is not None, _has_mass(old_r)
+                w_old = old_r.get("width_mm")
+                m_old = sl.kerb_mass(old_r, params) if params.get("mro_driver_kg") else None
+                if m_old is None and old_r.get("kerb_mass_kg") is not None:
+                    m_old = float(old_r["kerb_mass_kg"])
+                w_over = w_old is not None and float(w_old) > float(lim["width_mm"])
+                m_over = m_old is not None and m_old > float(lim["kerb_mass_kg"])
                 miss: list[str] = []
-                if not w_new and not m_new:
-                    miss = [f for f, had in (("width_mm", w_old), ("kerb_mass_kg", m_old)) if had]
-                    if not miss:
-                        miss = ["width_mm", "kerb_mass_kg"]
-                elif not w_new and w_old:
-                    miss = ["width_mm"]
-                elif not m_new and m_old:
-                    miss = ["kerb_mass_kg"]
+                if not w_new and w_over:
+                    miss.append("width_mm")
+                if not m_new and m_over:
+                    miss.append("kerb_mass_kg")
+                if not w_new and not m_new and not miss:
+                    miss = ["width_mm", "kerb_mass_kg"]
                 if miss:
                     out.append({"variant_id": vid, "flag": flag, "change": "lost", "missing": miss})
         # 2. Flags gained solely because a newer peer dropped out due to a missing input
