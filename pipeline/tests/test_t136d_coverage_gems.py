@@ -17,6 +17,8 @@ from ev_pipeline.records import SourceRecord
 from ev_pipeline.schema_models import Source
 from ev_pipeline.sources.eea.adapter import SOURCE as EEA
 
+pytestmark = pytest.mark.seed
+
 SEED = load_seed(Path(__file__).resolve().parents[2] / "data" / "seed" / "models.yaml")
 
 

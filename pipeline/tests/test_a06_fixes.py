@@ -9,6 +9,7 @@ from __future__ import annotations
 from datetime import date
 from pathlib import Path
 
+import pytest
 import yaml
 from test_a06_review import REPO_POLICIES, VID, _mf
 
@@ -82,6 +83,7 @@ def test_seed_cited_value_may_name_another_source_but_never_the_seed() -> None:
     assert mv.cited_records == [] and problems
 
 
+@pytest.mark.seed
 def test_repo_seed_has_no_cited_value_under_the_seed_source() -> None:
     doc = yaml.safe_load((REPO / "data" / "seed" / "variants.yaml").read_text(encoding="utf-8"))
     mvs, _ = parse_manual_variants(doc, date(2026, 11, 15))

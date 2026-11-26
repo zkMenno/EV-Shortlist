@@ -17,6 +17,9 @@ Steps (each one a section in verify-report.md):
 8. seed check (G-48, T-153): a seed variant built with another drivetrain than its seed, or
    with a WLTP more than 10 % off its own cited WLTP: listed; a mismatch the previous
    release did not have fails the run.
+9. missing-input flag changes (G-62, T-165): rows whose derived shortlist flags change solely
+   because an input is missing (e.g. `power_kw` under Decision 088), naming the missing input
+   (report only, so "unknown -> no flag" rules show their data cost).
 G-49 (T-153): while `ev refresh` holds data/staging (refresh/lock.py) verify refuses to run;
 a refresh that ran during the rebuild, even a short one that already finished, fails the run
 (T-158: the `.refresh.last` stamp changed).
@@ -234,10 +237,18 @@ def rebuild(data_dir: Path, scratch: Path, now: datetime) -> dict[str, Any]:
             "release": res.release if res else None,
             "qa": json.loads(qa.read_text(encoding="utf-8")) if qa.exists() else None,
             "catalogue": res.catalogue if res else None,
+            "shortlist": res.shortlist if res else None,
         }
     qa = json.loads((out / "qa.json").read_text(encoding="utf-8"))
     cat = json.loads((out / "catalogue.json").read_text(encoding="utf-8"))
-    return {"status": "pass", "release": res.release, "dir": str(out), "qa": qa, "catalogue": cat}
+    return {
+        "status": "pass",
+        "release": res.release,
+        "dir": str(out),
+        "qa": qa,
+        "catalogue": cat,
+        "shortlist": res.shortlist,
+    }
 
 
 def run_tests(pipeline_dir: Path) -> dict[str, Any]:
@@ -369,6 +380,255 @@ def seed_mismatch_items(
     return out
 
 
+FLAG_PREFIXES = ("bonus:", "penalty:")
+VERSION_FLAGS = ("newest-version", "older-version")
+
+
+def _positive_num(v: Any) -> float | None:
+    if isinstance(v, bool) or not isinstance(v, int | float) or v <= 0:
+        return None
+    return float(v)
+
+
+def _has_mass(row: dict[str, Any]) -> bool:
+    return row.get("kerb_mass_kg") is not None or row.get("mass_running_order_kg") is not None
+
+
+def _shortlist_flags(
+    doc: dict[str, Any] | None,
+) -> tuple[dict[str, dict[str, set[str]]], dict[str, set[str]]]:
+    """Per variant: ({flag_id -> combos where it fired}, set of non-ruled-out combos)."""
+    flags: dict[str, dict[str, set[str]]] = {}
+    ok_combos: dict[str, set[str]] = {}
+    for v in (doc or {}).get("variants") or []:
+        vid = str(v.get("variant_id") or "")
+        if not vid:
+            continue
+        fmap: dict[str, set[str]] = {}
+        ok: set[str] = set()
+        for combo, sc in (v.get("scores") or {}).items():
+            if not isinstance(sc, dict):
+                continue
+            if sc.get("band") != "ruled-out":
+                ok.add(str(combo))
+            for reason in sc.get("reasons") or []:
+                rs = str(reason)
+                for pref in FLAG_PREFIXES:
+                    if rs.startswith(pref):
+                        fmap.setdefault(rs[len(pref) :], set()).add(str(combo))
+        flags[vid] = fmap
+        ok_combos[vid] = ok
+    return flags, ok_combos
+
+
+def _version_own_missing(row: dict[str, Any], flag: str, drivetrains: tuple[str, ...]) -> list[str]:
+    miss: list[str] = []
+    if row.get("year_start") is None:
+        miss.append("year_start")
+    if row.get("drivetrain") not in drivetrains:
+        miss.append("drivetrain")
+    if _positive_num(row.get("power_kw")) is None:
+        miss.append("power_kw")
+    if flag == "older-version" and row.get("dc_km_per_20min") is None:
+        miss.append("dc_km_per_20min")
+    return miss
+
+
+def _power_compatible(a: dict[str, Any], b: dict[str, Any], gap: float) -> bool:
+    pa, pb = _positive_num(a.get("power_kw")), _positive_num(b.get("power_kw"))
+    if pa is None or pb is None:
+        return True
+    lo, hi = (pa, pb) if pa <= pb else (pb, pa)
+    return hi <= lo * (1 + gap)
+
+
+def _peer_can_trigger_version_flag(
+    row: dict[str, Any],
+    peer: dict[str, Any],
+    old_peer: dict[str, Any] | None,
+    flag: str,
+    drivetrains: tuple[str, ...],
+    gap: float,
+) -> bool:
+    """True when `peer` could share a trim line with `row` (ignoring missing inputs) and trigger
+    `flag` on `row`."""
+    rdt = row.get("drivetrain")
+    pdt = peer.get("drivetrain")
+    if pdt not in drivetrains and old_peer is not None:
+        pdt = old_peer.get("drivetrain")
+    if rdt in drivetrains and pdt in drivetrains and rdt != pdt:
+        return False
+    if not _power_compatible(row, peer, gap):
+        return False
+    ry = row.get("year_start")
+    py = peer.get("year_start")
+    if py is None and old_peer is not None:
+        py = old_peer.get("year_start")
+    if py is None:
+        return False
+    if ry is not None:
+        if flag == "newest-version" and int(py) >= int(ry):
+            return False
+        if flag == "older-version" and int(py) <= int(ry):
+            return False
+    if flag == "older-version":
+        rdc, pdc = row.get("dc_km_per_20min"), peer.get("dc_km_per_20min")
+        if rdc is not None and pdc is not None and pdc <= rdc:
+            return False
+    return True
+
+
+def missing_input_flag_changes(
+    new_cat: dict[str, Any] | None,
+    old_cat: dict[str, Any] | None,
+    new_scores: dict[str, Any] | None,
+    old_scores: dict[str, Any] | None,
+    *,
+    gap: float | None = None,
+) -> list[dict[str, Any]]:
+    """G-62 (T-165): rows present in both releases whose derived shortlist flags changed solely
+    because an input is missing in the new build (e.g. `power_kw` under Decision 088), naming
+    the missing input(s)."""
+    if not (new_cat and old_cat and new_scores and old_scores):
+        return []
+    from ev_pipeline.derive import shortlist as sl
+
+    try:
+        params = sl.load_params()
+    except OSError:
+        params = {}
+    if gap is None:
+        gap = float(params.get("trim_line_power_gap", sl.TRIM_LINE_POWER_GAP))
+    drivetrains = sl.DRIVETRAINS
+    lim = params.get("too_big") or {"width_mm": 1950, "kerb_mass_kg": 2300}
+    old_rows = {str(r["variant_id"]): r for r in old_cat.get("rows") or [] if r.get("variant_id")}
+    new_rows = {str(r["variant_id"]): r for r in new_cat.get("rows") or [] if r.get("variant_id")}
+    by_model: dict[str, list[dict[str, Any]]] = {}
+    for r in new_rows.values():
+        by_model.setdefault(str(r.get("model_id") or ""), []).append(r)
+    line_max_year: dict[str, int] = {}
+    for line in sl.trim_lines(list(new_rows.values()), gap):
+        top = max(int(r["year_start"]) for r in line)
+        for r in line:
+            line_max_year[str(r["variant_id"])] = top
+    old_fc, old_ok = _shortlist_flags(old_scores)
+    new_fc, new_ok = _shortlist_flags(new_scores)
+    out: list[dict[str, Any]] = []
+    for vid in sorted(set(old_rows) & set(new_rows)):
+        old_r, new_r = old_rows[vid], new_rows[vid]
+        old_f = set(old_fc.get(vid) or ())
+        new_f = set(new_fc.get(vid) or ())
+        peers = [
+            o for o in by_model.get(str(new_r.get("model_id") or ""), []) if o["variant_id"] != vid
+        ]
+        # 1. Flags lost in the new build (ignoring flags hidden only by becoming ruled-out)
+        for flag in sorted(old_f - new_f):
+            if not (old_fc[vid][flag] & new_ok.get(vid, set())):
+                continue
+            if flag in VERSION_FLAGS:
+                own = _version_own_missing(new_r, flag, drivetrains)
+                if own:
+                    if any(
+                        _peer_can_trigger_version_flag(
+                            new_r, o, old_rows.get(str(o["variant_id"])), flag, drivetrains, gap
+                        )
+                        for o in peers
+                    ):
+                        out.append(
+                            {"variant_id": vid, "flag": flag, "change": "lost", "missing": own}
+                        )
+                else:
+                    # If a newer complete peer already sits in this row's trim line, the row lost
+                    # `newest-version` because it was superseded, not for an older peer's gap.
+                    if (
+                        flag == "newest-version"
+                        and vid in line_max_year
+                        and line_max_year[vid] > int(new_r["year_start"])
+                    ):
+                        continue
+                    peer_miss: list[str] = []
+                    for o in sorted(peers, key=lambda x: str(x["variant_id"])):
+                        oid = str(o["variant_id"])
+                        pm = _version_own_missing(o, flag, drivetrains)
+                        if pm and _peer_can_trigger_version_flag(
+                            new_r, o, old_rows.get(oid), flag, drivetrains, gap
+                        ):
+                            peer_miss.extend(f"{f} (on {oid})" for f in pm)
+                    if peer_miss:
+                        out.append(
+                            {
+                                "variant_id": vid,
+                                "flag": flag,
+                                "change": "lost",
+                                "missing": peer_miss,
+                            }
+                        )
+            elif flag == "lfp-daily-100":
+                if new_r.get("charge_100_daily") is None:
+                    out.append(
+                        {
+                            "variant_id": vid,
+                            "flag": flag,
+                            "change": "lost",
+                            "missing": ["charge_100_daily"],
+                        }
+                    )
+            elif flag == "too-big-for-b-roads":
+                w_new, m_new = new_r.get("width_mm") is not None, _has_mass(new_r)
+                w_old = old_r.get("width_mm")
+                m_old = sl.kerb_mass(old_r, params) if params.get("mro_driver_kg") else None
+                if m_old is None and old_r.get("kerb_mass_kg") is not None:
+                    m_old = float(old_r["kerb_mass_kg"])
+                w_over = w_old is not None and float(w_old) > float(lim["width_mm"])
+                m_over = m_old is not None and m_old > float(lim["kerb_mass_kg"])
+                miss: list[str] = []
+                if not w_new and w_over:
+                    miss.append("width_mm")
+                if not m_new and m_over:
+                    miss.append("kerb_mass_kg")
+                if not w_new and not m_new and not miss:
+                    miss = ["width_mm", "kerb_mass_kg"]
+                if miss:
+                    out.append({"variant_id": vid, "flag": flag, "change": "lost", "missing": miss})
+        # 2. Flags gained solely because a newer peer dropped out due to a missing input
+        for flag in sorted(new_f - old_f):
+            if flag != "newest-version":
+                continue
+            if not (new_fc[vid][flag] & old_ok.get(vid, set())):
+                continue
+            if new_r.get("year_start") is None or new_r.get("drivetrain") not in drivetrains:
+                continue
+            peer_miss = []
+            for o in sorted(peers, key=lambda x: str(x["variant_id"])):
+                pm = _version_own_missing(o, "newest-version", drivetrains)
+                if not pm:
+                    continue
+                oid = str(o["variant_id"])
+                old_o = old_rows.get(oid) or {}
+                oy = (
+                    o.get("year_start")
+                    if o.get("year_start") is not None
+                    else old_o.get("year_start")
+                )
+                odt = (
+                    o.get("drivetrain")
+                    if o.get("drivetrain") in drivetrains
+                    else old_o.get("drivetrain")
+                )
+                if oy is None or int(oy) <= int(new_r["year_start"]):
+                    continue
+                if odt in drivetrains and odt != new_r["drivetrain"]:
+                    continue
+                if not _power_compatible(new_r, o, gap):
+                    continue
+                peer_miss.extend(f"{f} (on {oid})" for f in pm)
+            if peer_miss:
+                out.append(
+                    {"variant_id": vid, "flag": flag, "change": "gained", "missing": peer_miss}
+                )
+    return out
+
+
 def check_claims(body: str, numbers: dict[str, float | int]) -> list[str]:
     """`key: number` lines in a PR body whose key is a report number must match it."""
     bad = []
@@ -420,6 +680,7 @@ def verify(
         return rep
     latest = latest_number(data_dir)
     old_cat = None
+    old_scores = None
     if latest is not None and base_release_from is None:
         from ev_pipeline.release.publish import local_catalogue
 
@@ -435,8 +696,15 @@ def verify(
             else:
                 base_dir = Path(b["dir"])
                 old_cat = json.loads((base_dir / "catalogue.json").read_text(encoding="utf-8"))
+                sp = base_dir / "shortlist_scores.json"
+                if sp.exists():
+                    old_scores = json.loads(sp.read_text(encoding="utf-8"))
         if base_release_from is None or base_dir is not None:
             scratch = scratch_copy(data_dir, Path(tmp), latest, base_dir)
+            if old_scores is None and latest is not None:
+                sp = scratch / "releases" / str(latest) / "shortlist_scores.json"
+                if sp.exists():
+                    old_scores = json.loads(sp.read_text(encoding="utf-8"))
             built = rebuild(data_dir, scratch, now)
         else:
             built = {"status": "fail", "error": "no base build to compare with"}
@@ -509,6 +777,16 @@ def verify(
         rep.numbers["seed_mismatches_new"] = len(new)
         for b in new:
             rep.fail(f"seed check (G-48): {b}")
+    new_scores = built.get("shortlist")
+    if (
+        cat is not None
+        and old_cat is not None
+        and new_scores is not None
+        and old_scores is not None
+    ):
+        mi = missing_input_flag_changes(cat, old_cat, new_scores, old_scores)
+        rep.sections["missing_input_flags"] = {"items": mi}
+        rep.numbers["missing_input_flag_changes"] = len(mi)
     if pr_body is not None:
         bad = check_claims(pr_body, rep.numbers)
         rep.sections["claims"] = {"status": "fail" if bad else "pass", "mismatches": bad}
@@ -597,6 +875,16 @@ def report_md(rep: Report) -> str:
         ]
         if not sc["mismatches"] and not sc.get("pre_existing"):
             out.append("all match")
+    if "missing_input_flags" in s:
+        out += ["", "## Derived flag changes from missing inputs (G-62)", ""]
+        mi_items = s["missing_input_flags"].get("items") or []
+        if mi_items:
+            out += ["| variant | flag | change | missing input |", "|---|---|---|---|"]
+            for m in mi_items:
+                miss = ", ".join(m["missing"])
+                out.append(f"| {m['variant_id']} | {m['flag']} | {m['change']} | {miss} |")
+        else:
+            out.append("none")
     if "claims" in s:
         out += ["", "## PR body claims", ""]
         out += [f"- {m}" for m in s["claims"]["mismatches"]] or ["all match"]

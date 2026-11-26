@@ -190,6 +190,7 @@ def test_top40_section_skips_without_list(tmp_path: Path) -> None:
     assert top40.top40_section({"rows": []}, tmp_path)["status"] == "skipped"
 
 
+@pytest.mark.seed
 def test_committed_top40_yaml_is_consistent() -> None:
     path = REPO / "data" / "seed" / "top40.yaml"
     doc = yaml.safe_load(path.read_text(encoding="utf-8"))

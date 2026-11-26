@@ -12,6 +12,8 @@ from __future__ import annotations
 from datetime import date
 from typing import Any
 
+import pytest
+
 from ev_pipeline.match.matcher import match_records
 from ev_pipeline.match.seed import parse_manual_variants, parse_seed
 from ev_pipeline.records import SourceRecord, SpecValue
@@ -87,6 +89,7 @@ def test_scoped_source_name_picks_the_generation_in_a_shared_year() -> None:
     assert placed[f"{FL}-base"] == {"openev:ioniq_5/2025/base"}
 
 
+@pytest.mark.seed
 def test_shipped_seed_pins_ioniq5_my2024_base_and_awd_to_gen1() -> None:
     """The real seed: OpenEV MY2024 "Base" / "AWD" land on the gen1 77.4 kWh rows."""
     from pathlib import Path
@@ -106,6 +109,7 @@ def test_shipped_seed_pins_ioniq5_my2024_base_and_awd_to_gen1() -> None:
     assert find_generation(model, 2025, ev, recs[1])[0].id == FL
 
 
+@pytest.mark.seed
 def test_retired_ioniq5_release1_ids_have_live_successors() -> None:
     """Release 1 ids hyundai-ioniq-5-gen1-{awd,base,n} must redirect, not 410 (T-062)."""
     from pathlib import Path

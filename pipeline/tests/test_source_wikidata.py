@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib.parse import parse_qs
 
 import httpx
+import pytest
 
 from ev_pipeline import net
 from ev_pipeline.match.matcher import match_records
@@ -168,6 +169,7 @@ def test_fetch_cmd_reports_http_errors(tmp_path: Path, monkeypatch) -> None:
     assert adapter.fetch_cmd(client) == 1
 
 
+@pytest.mark.seed
 def test_matcher_never_turns_wikidata_into_facts() -> None:
     records = adapter.normalise(FIXTURE, DAY)
     result = match_records(records, load_seed(REAL_SEED), eea_corroboration=True)
