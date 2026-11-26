@@ -92,10 +92,10 @@ variants:
     type_codes: [F5E34, F5E44]
     motors: 2
     basis: "rdw-tgk 2026-11-19: F5E34 / F5E44 versions, no 30-min power (two motors), WLTP 572 km"
-  # Kia EV6 facelift (2024-): F5E12 = 63 kWh (not seeded, stays unplaced), F5E22 = 84 kWh one
-  # motor (30-min 56 kW, WLTP 560-582 km), F5E44 = two motors (no 30-min power, 188 km/h,
-  # WLTP 522 km), F5E64 = GT (260 km/h, not seeded: ruled out of both, review).
-  # T-160: the 63 kWh RWD row (Kia DE press kit / price list): F5E12 = 63 kWh, one motor.
+  # Kia EV6 facelift (2024-): F5E12 = 63 kWh one motor (30-min 42 kW, 185 km/h, WLTP 428 km;
+  # seeded in T-160), F5E22 = 84 kWh one motor (30-min 56 kW, WLTP 560-582 km), F5E44 = two
+  # motors (no 30-min power, 188 km/h, WLTP 522 km), F5E64 = GT (260 km/h, not seeded: ruled out
+  # of all three, review).
   kia-ev6-facelift-63kwh-rwd:
     type_codes: [F5E12]
     basis: "rdw-tgk 2026-11-19: F5E12 versions, 30-min 42 kW, 185 km/h, WLTP 428 km"
@@ -185,3 +185,54 @@ variants:
   porsche-taycan-gen1-turbo-gt:
     type_codes: [JR22, JS22]
     basis: "rdw-tgk 2026-11-19: TAYCAN TURBO GT JR22 / JS22 versions (290 / 305 km/h), 2024-"
+  # --- T-163 (batch: data T-163, 2026-11-26): Tesla Model S and Model X variant codes ---
+  # RDW TGK (CC0), staging recorded 2026-11-26 (e4*2007/46*0667 and e4*2018/858*00086).
+  # Tesla Model S gen1 (2013-16): 60 / 60D / 60R = 60 kWh; 85 / 85R = RWD 85 kWh (200-225 km/h,
+  # NEDC 502 km); 85D / 90D = dual-motor AWD (240-250 km/h, NEDC 460-528 km). Unseeded 70D / 70R
+  # / 90R leave the ties for review.
+  tesla-model-s-gen1-60:
+    type_codes: [60, 60D, 60R]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 variants 60 / 60D / 60R, NEDC 390-414 km"
+  tesla-model-s-gen1-85:
+    type_codes: [85, 85R]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 RWD variants 85 / 85R, 200-225 km/h, NEDC 502 km"
+  tesla-model-s-gen1-85d-90d:
+    type_codes: [85D, 90D]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 AWD variants 85D / 90D, 240-250 km/h, NEDC 460-528 km"
+  # Tesla Model S facelift (2016-21): 75D = dual-motor 75 kWh (30-min 79 kW, NEDC 490 km) and
+  # SA1 = 2019 WLTP Standard Range AWD 75 kWh (WLTP 455 km, 225 km/h); rear-motor 75R (30-min
+  # 90 kW, NEDC 480 km) is ruled out of the AWD 75D row (ready for a future 75 RWD row).
+  # Regular 90D / 100D carry uitvoering B... (30-min 79 kW, NEDC 528-632 km); Performance P90D /
+  # P100D carry uitvoering P... (NEDC 491-613 km). SA3 = 2019-20 Raven (WLTP 593-610 km).
+  tesla-model-s-facelift-75d:
+    type_codes: [75D, SA1]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 AWD 75D (NEDC 490 km) and 2019 SA1 (WLTP 455 km); excludes RWD 75R and 60/70 packs"
+  tesla-model-s-facelift-100d:
+    type_codes: [90D+B19B5, 90D+B19B5N, 90D+B21B5, 90D+B21B5N, 100D+B19B5N, 100D+B21B5N]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 90D / 100D non-Performance (uitvoering B..., 30-min 79 kW, NEDC 528-632 km)"
+  tesla-model-s-facelift-p100d:
+    type_codes: [90D+P19B5, 90D+P19B5N, 90D+P21P5, 90D+P21P5N, 100D+P19B5N, 100D+P21P5N]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 P90D / P100D Performance (uitvoering P..., NEDC 491-613 km)"
+  tesla-model-s-facelift-raven-long-range:
+    type_codes: [SA3]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 SA3 Raven versions (2019-20, WLTP 593-610 km, 250-262 km/h)"
+  # Tesla Model S Palladium (2022-): SB1D = Dual Motor Long Range (240-250 km/h, WLTP 634-744 km),
+  # SB1T (and 2022 *02 SB1+TB1T1S5M2C2) = Tri Motor Plaid (300 km/h, WLTP 600-611 km).
+  tesla-model-s-palladium-long-range:
+    type_codes: [SB1D]
+    basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 SB1D Dual Motor versions (240-250 km/h, WLTP 634-744 km)"
+  tesla-model-s-palladium-plaid:
+    type_codes: [SB1T, SB1+TB1T1S5M2C2]
+    basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 SB1T / SB1+TB1T1S5M2C2 Plaid versions (300 km/h, WLTP 600-611 km)"
+  # Tesla Model X Palladium (2022-, OpenEV rows): XB1D (and 2022 *02 XB1+DB1T2S6M1C4 / DB1T2S7M1C4)
+  # = Dual Motor Long Range (240-250 km/h, WLTP 576-600 km); XB1T = Plaid (261-262 km/h, WLTP 543-567 km).
+  # Tesla Model X gen1 (2016-20, rows from T-162): e4*2007/46*0667 variant codes 60X (NEDC 363 km),
+  # 75X (NEDC 417 km), 90X (NEDC 467-489 km), 100X (NEDC 542-565 km), XA1 (2019 WLTP 375 km),
+  # XA3 (2019-20 WLTP 487-507 km). Add those variant rows here once T-162 seeds their ids;
+  # matcher.tgk_pick now accepts type_codes evidence when pack kWh is absent on the seed row.
+  tesla-model-x-palladium-long-range:
+    type_codes: [XB1D, XB1+DB1T2S6M1C4, XB1+DB1T2S7M1C4]
+    basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 XB1D / XB1+DB1T2S{6,7}M1C4 Long Range versions (240-250 km/h, WLTP 576-600 km)"
+  tesla-model-x-palladium-plaid:
+    type_codes: [XB1T]
+    basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 XB1T Plaid versions (261-262 km/h, WLTP 543-567 km)"

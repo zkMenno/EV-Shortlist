@@ -72,6 +72,9 @@ BUILT_ONLY = {
     "porsche-taycan-gen1-turbo",
     "porsche-taycan-gen1-turbo-s",
     "porsche-taycan-gen1-turbo-gt",
+    # T-163: OpenEV-built Model X Palladium rows (no seed row) split by XB1D / XB1T.
+    "tesla-model-x-palladium-long-range",
+    "tesla-model-x-palladium-plaid",
 }
 E208, MY, ID4 = "peugeot-e-208-p21", "tesla-model-y-gen1", "volkswagen-id4-gen1"
 

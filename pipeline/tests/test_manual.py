@@ -534,7 +534,8 @@ def test_repo_manual_facts_split_as_decision_068_says() -> None:
     assert {mf.fact.source.id.root for mf in held} <= {"autotijd", "cited-third-party"}
     assert reg.reason_blocked("autotijd") == "status blocked"
     assert reg.reason_blocked("cited-third-party") == "status blocked"
-    assert reg.reason_blocked("maker-docs") == "status blocked"  # seed cites: not in this step
+    assert reg.releasable("maker-docs")  # T-163 (Decisions 068 / 087): maker hosts only
+    assert reg.cited_url_problem("maker-docs", "https://xr793.com/brochure.pdf") is not None
 
 
 # --- PR #80 review: a manual fact can't borrow an open source's id; hosts by path ---

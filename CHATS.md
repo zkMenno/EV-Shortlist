@@ -5,6 +5,7 @@ One named chat, the **coordinator**; every other chat is a throwaway batch chat 
 | Workstream | Purpose | Link | Since |
 |---|---|---|---|
 | COORDINATOR | **COORDINATOR (current)**: Antigravity takeover, migration #208, BOARD/T-159 refresh #209, T-162/T-163/T-165 briefs | Antigravity: COORDINATOR 2026-11-26 | 2026-11-26 |
+| batch: data T-163 | WS1: T-163 TGK variant codes as split evidence (Model S/X), cited maker facts publish (Decisions 068/087), dc_speed_is_claim | Antigravity: batch: data T-163 | 2026-11-26 |
 | WS0 (2026-11-19) | Coordinator (history): planning, decisions, briefs, INBOX, schema, gate files | https://claude.ai/code/session_01JuyZEWR468Ux4ydBhjKYsp | 2026-11-19 |
 | WS0 (1st) | Coordinator: spec mirror, planning, research, reviews, merges | https://claude.ai/code/session_01JuyZEXBt7oHBm4SwQBwRz1 | 2026-11-15 |
 | WS0 (2nd session) | Wrote the Variant finder spec + Decision 019 in the repo first | https://claude.ai/code/session_01JuyZEVFu9XKbRntUgK2fnm | 2026-11-15 |

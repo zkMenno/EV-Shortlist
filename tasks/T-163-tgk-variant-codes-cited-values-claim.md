@@ -1,6 +1,6 @@
 # T-163 TGK variant codes as split evidence, cited power / gross reach the release, DC claim flag
 Role: builder   Lane: pipeline/ (WS1)   Wave: launch
-Status: todo
+Status: doing (batch: data T-163, 2026-11-26)
 
 ## Goal
 Tesla versions split by their type-approval variant code, cited maker power and gross values actually publish (Decision 068 / 087), and maker-claim DC figures are marked.

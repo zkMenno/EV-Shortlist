@@ -27,14 +27,13 @@ MAKE_ALIASES: dict[str, str] = {
 }
 
 SEED_MANUAL_SOURCE_ID = "seed-manual"
-# A-06 F3: a seed `cited:` value is a fact from the document it cites, not hand-entered seed
-# data, so it carries that document's source: `maker-docs` (maker spec sheets, press kits and
-# price lists, also when a third party hosts the copy) unless the entry names another
-# registered `source_id`. It then goes through the licence gate like any other fact
-# (maker-docs is blocked until Q-008), never under the seed's CC BY licence.
+# A-06 F3 / Decisions 068, 087: a seed `cited:` value is a fact from the document it cites,
+# not hand-entered seed data, so it carries that document's source (`maker-docs` by default)
+# unless the entry names another registered `source_id`. It goes through the licence gate and
+# `cited_hosts` check like any other fact, never under the seed's CC BY licence.
 CITED_DEFAULT_SOURCE_ID = "maker-docs"
 CITED_SOURCE_NAMES = {"maker-docs": "Maker documents and price lists"}
-CITED_LICENCE = "none (individual facts cited by URL and date)"
+CITED_LICENCE = "facts cited, no licence"
 
 
 @dataclass

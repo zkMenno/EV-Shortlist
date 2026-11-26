@@ -1585,6 +1585,15 @@ def _range_named(rec: SourceRecord, name: str) -> bool:
     return bool(ranges & {int(m.group(1)) for m in _RANGE_NUM_RE.finditer(name)})
 
 
+def _has_type_code_match(rec: SourceRecord, c: _Candidate, result: MatchResult) -> bool:
+    """T-163: True when `tgk_split.yaml` lists `type_codes` for `c` and the version matches one.
+    Explicit type-approval variant-code evidence stands in when pack kWh is missing on the row
+    (Tesla Model S 75R / 75D, Model X 60X / 75X / 90X / 100X)."""
+    have = tgk_type_codes(rec)
+    known = result.tgk_split.get(c.root, {}).get("type_codes")
+    return bool(have and known and _split_fits(known, have))
+
+
 def tgk_pick(
     rec: SourceRecord, cands: list[_Candidate], drop: set[str], result: MatchResult
 ) -> tuple[_Candidate | None, str]:
@@ -1612,21 +1621,22 @@ def tgk_pick(
     for c in pool:
         kwh_hit = 1 if any(abs(a - b) <= KWH_TOLERANCE for a in rec_kwh for b in c.kwh) else 0
         named[c.root] = name_score(words, c.name_tokens, kwh_hit) + kwh_hit
+    coded = {c.root for c in pool if _has_type_code_match(rec, c, result)}
     energies = tgk_energies(rec)
     need_evidence = False
     if energies:
         fit = [c for c in pool if c.battery and _battery_fits(energies, c.battery)]
         unknown = [c for c in pool if not c.battery]
         e_txt = "/".join(f"{e:g}" for e in energies)
-        named_unknown = [c for c in unknown if named[c.root] > 0]
-        if fit and named_unknown:
-            # A-05 F12: battery evidence for some, name words only for others. Letting the
-            # name count decide between the two kinds of evidence would be a guess.
-            return None, f"{TGK_TIE}: battery fits {ids(fit)}, name only {ids(named_unknown)}"
+        evidenced_unknown = [c for c in unknown if named[c.root] > 0 or c.root in coded]
+        if fit and evidenced_unknown:
+            # A-05 F12: battery evidence for some, name or type-code evidence for others.
+            return None, f"{TGK_TIE}: battery fits {ids(fit)}, name only {ids(evidenced_unknown)}"
         if fit:
             pool = fit
         elif unknown:
-            pool, need_evidence = unknown, len(cands) > 1
+            pool = unknown
+            need_evidence = len(cands) > 1 and not all(c.root in coded for c in unknown)
         else:
             return None, f"{TGK_MISFIT} the battery (range x consumption {e_txt} kWh)"
     top = max(named[c.root] for c in pool)
