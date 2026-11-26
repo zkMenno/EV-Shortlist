@@ -2,7 +2,7 @@
 
 One screen: what's happening. Coordinator only. Task details live in `tasks/`.
 
-_Last updated: 2026-11-19 16:55 UTC by WS0 (T-149–T-165; the "Now" list below is from 17 Nov)._
+_Last updated: 2026-11-26 19:37 UTC by WS0 (Antigravity takeover #208, T-159 done, Now/Next refreshed)._
 
 ## Launch scope (Decision 051, docs/spec/launch-scope.md)
 
@@ -18,33 +18,33 @@ Builders take only tasks in **Launch**. Everything else needs Menno's yes. Built
 **Launch, content:** T-039 winter range · T-027 charging in 2026 · T-082 batteries + battery health · glossary tooltips
 **Launch, infra:** T-040 AppInfra staging · T-013 deploy · T-064 storage part
 
-**Process: verification layer (Decision 062):** Launch: T-120 REVIEW.md (WS0) · T-121 gate-guard (WS0, observe → enforce 24 Nov) · T-122 rule register (WS0) · T-123 release-diff test (WS1) · T-126 verify skill web (WS2) · T-127 verify skill pipeline (WS1) · T-128 Verified stamp + flaky policy + self-merge rule (WS0). Not launch-blocking: T-124 property tests pipeline (WS1) · T-125 property tests web (WS2) · T-129 reviewer eval set (parked, after launch).
+**Process: verification layer (Decision 062):** Launch: T-120 REVIEW.md (WS0) · T-121 gate-guard (WS0, observe → enforce after review) · T-122 rule register (WS0) · T-123 release-diff test (WS1) · T-126 verify skill web (WS2) · T-127 verify skill pipeline (WS1) · T-128 Verified stamp + flaky policy + self-merge rule (WS0). Not launch-blocking: T-124 property tests pipeline (WS1) · T-125 property tests web (WS2) · T-129 reviewer eval set (parked, after launch).
 
 **After launch (parked):** T-011 rankings pages · T-019 / T-020 / T-021 / T-022 bidirectional · T-024 / T-025 / T-026 / T-028 charging pages + link-outs (built parts stay flagged off) · T-029 ABRP deep links · T-036 quick range check (absorbed into T-080) · T-037 / T-038 Trip fit routes · T-042 bidi verification · T-044 / T-046–T-049 variant clues + finder · T-053 / T-058 registration history display · T-061 known issues · lease figures (rest of T-043)
 
-## Launch, catalogue + data (WS0, 2026-11-19)
-Done: T-149–T-156, T-158, T-160, T-161 (claim item → T-163). Open: T-157 web popularity + photo bundle + DC claim badge (WS2, after release 4) · T-159 matching follow-ups (WS1, part 1 merged, part 2 in review; INBOX 17:40 not processed yet) · T-162 re-cite + Model X + leftovers (WS3) · T-163 TGK variant codes + cited values publish + DC claim flag (WS1) · T-164 cite power, flag-less rows (WS3, after T-163) · T-165 tools round 2 (WS1)
+## Launch, catalogue + data (WS0, 2026-11-26)
+Done: T-149–T-156, T-158, T-159 (#198/#199/#203/#204), T-160, T-161 (claim item → T-163). Open: T-162 re-cite + Model X + leftovers (WS3) · T-163 TGK variant codes + cited values publish + DC claim flag (WS1, unblocked now that T-159 is merged) · T-164 cite power, flag-less rows (WS3, after T-163) · T-165 tools round 2 (WS1) · T-157 web popularity + photo bundle + DC claim badge (WS2, after release 4).
 
 ## Now
-**Open PRs, WS0 reviews and merges in this order:**
-- #44 T-123 release diff N vs N-1 (WS1), then #51 T-127 `ev verify` + pipeline verify skill (WS1, builds on #44)
-- #49 T-124 pipeline property tests + Decision 045 rung fix (WS1)
-- #46 QA launch review 1 (audits/A-35: the fresh review of everything merged without one)
-- #48 WS2 status + verify-report request (docs only)
+**Open PRs:** none (migration PR #208 merged; CI minutes PR #207 merged).
+**Live:** `staging.evshortlist.com` deploys from `main`; data release 3 (`data-v3`) is live; **release 4 not built yet**.
 
-**Chats:** WS1 handing off to a fresh chat · WS2 idle, waiting on WS1 data fields · WS3 paused since 15 Nov (HANDOFF.md) · UX next: differences-only highlight · QA running launch review 1 · WS4 + WS5 not opened yet.
+**Ready to launch as batch conversations (in Antigravity, `/start-batch`):**
+1. **Catalogue (WS3): T-162** — re-cite MX-30 + EV6 63, Elroq 85 DC check, Model X gen1, Citigo e / Mii, EV9, Marvel R, Sealion 7.
+2. **Data (WS1): T-163** — TGK variant codes as split evidence, cited power / gross reach release, `dc_speed_is_claim` + open data (unblocked now that T-159 merged).
+3. **Data tools (WS1 + cross-lane): T-165** — G-61 seed-pinned tests + `seed` marker, G-62 missing-input flag report, G-63 `merge_ready` stuck checks, CI approvals (gate files in their own PR).
 
 ## Next (launch scope only)
-- **WS0:** T-128 `Verified:` stamp + flaky-test policy + self-merge rule · gate-guard to enforce on 2026-11-24 (with the review follow-ups listed in T-121) · forward Q-001/Q-070/Q-073 to WS4
-- **WS1:** T-063 on-board charger field (**unblocked:** `ac_kw_optional` is in the schema) · winter range quality (START §3 item 6) · T-070 real range + DC km from the calibrated matrix · T-064 part 2 after the first published release
-- **WS2:** T-097 hero Nerd table units · winter range on hero cards and T-045 deltas once WS1 ships the field · /learn/batteries links from hero cards
-- **WS3:** T-051 seed coverage (with WS1 T-052 pre-2020 specs) · DE/FR/BE/UK price samples need a person (sites block agents)
-- **WS4:** T-040 AppInfra staging → T-013 deploy. Nothing is deployed yet; this is the main launch gap.
+- **WS3:** **T-164** (cite power for the remaining flag-less rows from T-161, after T-163 merges).
+- **WS1:** Build and publish **data release 4** once T-162–T-165 merge.
+- **WS2:** **T-157** (web reads popularity from release 4, unpacks `images.tar`, shows DC claim badge), then T-146 row thumbnails.
+- **WS0:** Coordinator doc tidy PR + gate PR (`gate-guard` observe → enforce, add `GEMINI.md`/`.agents/**` to `config/gate-files.yaml`, `infra/AGENTS.md` align with CI staging deploy); T-128 `Verified:` stamp.
+- **WS4:** `images.yml` should not ignore `docs/design/**` (web image reads tokens/fonts from it).
+- **QA:** Fresh launch review on release 4 + staging before public launch.
 
 ## Blocked on Menno
-- 7 questions in [QUESTIONS.md](QUESTIONS.md): Q-003 PRs on main · Q-008 maker documents · Q-028 listing URL patterns · Q-037 RDW wording · Q-047 KilowattApp curves (blocks EV3/Inster rows) · Q-072 CCD2 warning wording · Q-079 Actions opening data-release PRs
+- 6 open questions in [QUESTIONS.md](QUESTIONS.md) (Q-008 answered via Decisions 068 / 087): Q-003 PRs on main · Q-028 listing URL patterns · Q-037 RDW wording · Q-047 KilowattApp curves · Q-072 CCD2 warning wording · Q-079 Actions opening data-release PRs
 - T-041 listing templates: his tap check on a phone
-- Opening the WS4 chat (staging) and the WS5 chat
 - Real data in production waits for off-site backups (AppInfra #93). EV holds nothing to back up at launch; the trigger and the AppInfra handoff are in ROADMAP.md Phase 0, "Backups" (2026-11-17)
 
 ## Workstreams and file ownership
@@ -53,7 +53,7 @@ Chats talk through the coordinator's inbox, `workstreams/WS0/INBOX.md`, never th
 
 | Owner | Paths |
 |---|---|
-| WS0 coordinator | AGENTS.md, CLAUDE.md, BOARD.md, QUESTIONS.md, DECISIONS.md, ROADMAP.md, CHANGELOG.md, docs/spec/, packages/schema/, tasks/, research/, audits/, workstreams/README.md + */START.md, .github/ (not image workflows) |
+| WS0 coordinator | AGENTS.md, CLAUDE.md, GEMINI.md, .agents/, BOARD.md, QUESTIONS.md, DECISIONS.md, ROADMAP.md, CHANGELOG.md, docs/spec/, packages/schema/, tasks/, research/, audits/, workstreams/README.md + */START.md, .github/ (not image workflows) |
 | WS1 pipeline | pipeline/ (not Dockerfile), data/sources.yaml, data/field_sources.yaml, data/SOURCES.md, data/releases/, data/review/ |
 | WS2 web | apps/web/ (not Dockerfile) |
 | WS3 curation | data/seed/, data/manual/, data/taxonomy/, content/, config/ |
@@ -64,7 +64,11 @@ Chats talk through the coordinator's inbox, `workstreams/WS0/INBOX.md`, never th
 | everyone | append-only lines in workstreams/WS0/INBOX.md (the one inbox); workstreams/WS0/HANDOFF.md is the coordinator's |
 
 ## Done
-- 2026-11-17: verification layer live: REVIEW.md, gate-guard (observe), rule register G-01–G-33 (#42, #45); T-125 web property tests, T-126 web verify skill, hero a11y + phone fixes, T-096 compare labels (#47–#55); docs tidy + `_archive/` (Decision 063)
+- 2026-11-26: Antigravity migration (#208, Decision 089, G-64): `GEMINI.md`, `.agents/` rules + workflows, `docs/design/brand-design-decisions.md`, `docs/process/owner-context.md`
+- 2026-11-24: CI minutes cut (#207): note-only skip, single web build, pipeline release cache
+- 2026-11-19: T-149–T-156, T-158, T-159 (#198/#199/#203/#204), T-160, T-161; schema `dc_speed_is_claim` (#205); rules G-48–G-63 (#206); Decisions 086–088
+- 2026-11-18: Data release 3 (`data-v3`), T-130–T-137, T-140–T-145, T-148, Ariakit (Decision 056), people carriers (Decision 084), WLTP next to real range (Decision 085), one coordinator + batch chats (#122)
+- 2026-11-17: staging.evshortlist.com live (#88/#89/#94); data release 2 (`data-v2`); verification layer live: REVIEW.md, gate-guard (observe), rule register G-01–G-33 (#42, #45); T-125 web property tests, T-126 web verify skill, hero a11y + phone fixes, T-096 compare labels (#47–#55); docs tidy + `_archive/` (Decision 063)
 - 2026-11-17: batch merge of 10 waiting PRs (#39): T-069 shortlist scores, T-081/T-056 used price bands, T-091 parked flags, T-068 seed gaps, T-031 heat pump, T-041 templates, T-100 glossary, /learn pages (T-082, T-039, T-027), T-093, T-094, T-081 NL aggregates (#38)
 - 2026-11-15: hero shortlist (T-080), suggested sort (T-067), differences only (T-045), open data page (T-090), schema for shortlist rules (T-066/T-065), climate (T-034), consumption model + back-test (T-032/T-033/T-035), charging stats (T-025), releases out of git part 1 (T-064)
 - 2026-11-15: overnight prototype 1 (#1, waves 1–4 + T-053–T-061) and research pack (#2); spec mirrored to docs/spec; workstreams set up; GitHub repo, CI, templates, security settings
