@@ -1,11 +1,11 @@
-# WS0 handoff (2026-11-26 19:45 UTC, Antigravity: WS0 coordinator 2026-11-26)
+# COORDINATOR handoff (2026-11-26 20:21 UTC, Antigravity: COORDINATOR 2026-11-26)
 
-Migrated from Claude to Antigravity on 2026-11-26 (**PR #208**, Decision 089, rule G-64). Pause procedure stays G-58 (HANDOFF + INBOX line + open task Status).
+Migrated from Claude to Antigravity on 2026-11-26 (**PR #208**, Decision 089, rule G-64). Naming: Menno retired the `WS0` label — always write **COORDINATOR** (capitalized) in chat titles, prompts, and updates (repo paths `workstreams/WS0/HANDOFF.md` and `workstreams/WS0/INBOX.md` stay unchanged on disk so scripts/links don't break). Pause procedure stays G-58 (HANDOFF + INBOX line + open task Status).
 
 Repo: **zkMenno/EV-Shortlist** (Antigravity local clone + `gh` CLI; GraphQL, native CI triggers, and merged branch deletion all work normally — see `GEMINI.md`).
 
 ## How we work
-One named coordinator conversation (`WS0 coordinator`, started with `/start-coordinator`). Every other conversation is a throwaway batch (`/start-batch`: one task or small batch, merges included when briefed, independent `/fresh-review` before merge, `sh scripts/merge_ready.sh <pr>` READY as its own step right before merge). Menno: one screen, plain language, 🟢/🟡/🔴, exact paste text in code blocks. The coordinator may merge its own docs / gate PRs after a fresh PASS.
+One named **COORDINATOR** conversation (started with `/start-coordinator`). Every other conversation is a throwaway builder batch (`/start-batch`: one task or small batch, merges included when briefed, independent fresh review via a separate subagent before merge, `sh scripts/merge_ready.sh <pr>` READY as its own step right before merge). Menno: one screen, plain language, 🟢/🟡/🔴, exact paste text in code blocks. The COORDINATOR may merge its own docs / gate PRs after a fresh PASS.
 
 ## State
 - Data release 3 is live (`data-v3`); **release 4 not built yet**. Its approvals: #177, #184, #189, #190, #194, #196, #198, #203 (+ any from T-162–T-164).
