@@ -1,6 +1,6 @@
 # T-162 Re-cite MX-30 + EV6 63, Elroq 85 DC check, Model X gen1, Citigo e / Mii, EV9, Marvel R, Sealion 7
 Role: builder   Lane: data/seed, data/manual (WS3)   Wave: launch
-Status: doing (batch: catalogue T-162, 2026-11-26)
+Status: done (batch: catalogue T-162, 2026-11-26): gate PR #212 merged (625c566), data PR #214 merged (98d0982)
 
 ## Goal
 T-160's two weak citations move to maker-hosted documents, the Elroq 85 DC peak is checked before launch, and the biggest no-variant groups left get cited rows.
@@ -50,3 +50,4 @@ Power citations for the 22 flag-less rows (T-164). Matcher changes (T-163). `tgk
 
 ## Review
 - PR #212 (gate-only, `config/approved_changes.yaml`): Fresh subagent reviewer, 2026-11-26, head `76395ce` then re-verified on merge head `bd5e6c2` — `R0–R3: pass; R4, D1–D13: n/a (bd5e6c2)` (0 findings; https://github.com/zkMenno/EV-Shortlist/pull/212#issuecomment-7203739820). Merged as `625c566` after `merge_ready.sh` READY.
+- PR #214 (data PR): Fresh subagent reviewer, 2026-11-26, head `e1fe633` then re-verified on merge head `f072305` — `R0–R3, D1, D2, D4: pass; R4, D3, D5–D13: n/a (f072305)` (0 findings; https://github.com/zkMenno/EV-Shortlist/pull/214#issuecomment-7204240577). Merged as `98d0982` after `merge_ready.sh` READY.
