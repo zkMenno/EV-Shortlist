@@ -491,3 +491,36 @@ approved:
     change: cleared
   - {<<: *t160zkxz, id: peugeot-e-2008-p24-50kwh}
   - {<<: *t160zkxz, id: opel-corsa-e-f-50kwh}
+  # T-162: Škoda Elroq 85 DC peak corrected from OpenEV's 185 kW (the RS figure) to Škoda Auto's
+  # official spec sheet 135 kW / 28 min (10-80 %, cdn.skoda-storyboard.com TD-Elroq-en_f8cdb684.pdf,
+  # 15 Dec 2025, p. 2; also 5 May 2025 sheet). Against published release 3, skoda-elroq-gen1-85 is a
+  # new row (0 blocking); these 4 entries cover the --base-release-from origin/main diff (T-160 base).
+  - &t162elroq
+    release: 4
+    file: catalogue.json
+    approved_by: "PR #212 (T-162 gate)"
+    reason: "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+    id: skoda-elroq-gen1-85
+    field: dc_peak_kw
+    change: changed
+  - {<<: *t162elroq, field: dc_curve_status, change: cleared}
+  - {<<: *t162elroq, field: dc_peak_held_min, change: cleared}
+  - {<<: *t162elroq, file: shortlist_scores.json, field: "scores.road-tripper.urban.band", change: changed}
+  # T-163 (Decisions 068, 087): cited maker-docs facts now publish with provenance (maker-hosted
+  # URLs in data/sources.yaml cited_hosts), filling DC peak / AC power on 4 release-3 rows whose
+  # shortlist bands move up (8 blocking lines against release 3; measured on 2026-11-26 staging).
+  - &t163
+    release: 4
+    file: shortlist_scores.json
+    approved_by: "Decision 068 (T-163 gate, Decision 087)"
+    reason: "T-163: maker-docs cited facts now publish with provenance (Decisions 068 / 087, maker-hosted URLs in data/sources.yaml cited_hosts). Cupra Born 58 kWh gains dc_peak_kw 124 kW (low-confidence CUPRA launch press pack 120 kW now backs kilowatt-openev instead of leaving dc_peak_kw blank), MG4 Standard gains cited 117 kW DC peak, Megane EV40 gains cited 85 kW DC peak, and Zoe Ph1 Q90 gains cited 43 kW AC; their shortlist bands move up accordingly. Measured: plain ev verify vs release 3 (2026-11-26 staging), these 8 lines are the only T-163 blocking changes against release 3."
+    id: cupra-born-gen1-58kwh
+    field: "scores.daily-driver+kerbside.band"
+    change: changed
+  - {<<: *t163, id: cupra-born-gen1-58kwh, field: "scores.runabout+kerbside.rural.band"}
+  - {<<: *t163, id: cupra-born-gen1-58kwh, field: "scores.runabout+kerbside.urban.band"}
+  - {<<: *t163, id: mg-mg4-gen1-standard, field: "scores.runabout+kerbside.urban.band"}
+  - {<<: *t163, id: mg-mg4-gen1-standard, field: "scores.runabout.rural.band"}
+  - {<<: *t163, id: renault-megane-e-tech-gen1-ev40, field: "scores.runabout+kerbside.band"}
+  - {<<: *t163, id: renault-zoe-ph1-q90, field: "scores.runabout.band"}
+  - {<<: *t163, id: renault-zoe-ph1-q90, field: "scores.runabout.urban.band"}

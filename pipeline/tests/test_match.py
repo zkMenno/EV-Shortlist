@@ -376,6 +376,7 @@ def test_excluded_name_has_a_review_reason(guard_seed) -> None:
     assert res.unmatched[0].reason == "model not in seed (name excluded from audi-e-tron)"
 
 
+@pytest.mark.seed
 def test_real_seed_guards() -> None:
     # The committed seed carries the guards the review asked for.
     real = load_seed(FIX.parents[2].parent / "data" / "seed" / "models.yaml")

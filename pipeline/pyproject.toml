@@ -43,6 +43,9 @@ packages = ["ev_pipeline"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+markers = [
+  "seed: tests that pin committed data/seed state (run by data/seed/data_qa.sh, G-61)",
+]
 
 [tool.ruff]
 line-length = 100

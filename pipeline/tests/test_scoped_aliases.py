@@ -222,6 +222,7 @@ def real():
     return load_seed(REAL_SEED)
 
 
+@pytest.mark.seed
 def test_real_seed_migration_is_complete(real) -> None:
     """Every legacy alias of a model with `aliases_by_source` is still there for the sources
     it was valid for, so turning the flag on never loses a match."""
@@ -244,6 +245,7 @@ def test_real_seed_migration_is_complete(real) -> None:
                 assert has(sid, a.name, prefix=True), (m.id, sid, a.name)
 
 
+@pytest.mark.seed
 @pytest.mark.parametrize(
     ("make", "model", "source", "expected"),
     [
@@ -315,6 +317,7 @@ def test_make_alias_on_two_makes_is_an_error() -> None:
         parse_seed({"makes": [{"id": "a", "name": "A", **mk}, {"id": "b", "name": "B", **mk}]})
 
 
+@pytest.mark.seed
 @pytest.mark.parametrize(
     ("make", "model", "source", "expected"),
     [

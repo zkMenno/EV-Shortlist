@@ -116,6 +116,7 @@ def _model_of(seed, rec: SourceRecord) -> tuple[str | None, str, str | None]:
 # --- source-scoped aliases (KBA) -----------------------------------------------------------
 
 
+@pytest.mark.seed
 @pytest.mark.parametrize(
     ("make", "model", "expected"),
     [
@@ -142,6 +143,7 @@ def test_kba_names(real_seed, make: str, model: str, expected: str | None) -> No
     assert found == expected
 
 
+@pytest.mark.seed
 def test_source_aliases_are_scoped_to_their_source(real_seed) -> None:
     # "4ER" means the i4 only in KBA; the same name in RDW (or any other source) is not an i4.
     assert _model_of(real_seed, _count("kba-fz10", "BMW", "4ER", 1, 2025))[0] == "bmw-i4"
@@ -149,6 +151,7 @@ def test_source_aliases_are_scoped_to_their_source(real_seed) -> None:
     assert _model_of(real_seed, _count("eea", "SEAT", "BORN", 1, 2025))[0] is None
 
 
+@pytest.mark.seed
 def test_source_alias_note_travels_with_the_count(real_seed) -> None:
     _, _, note = _model_of(real_seed, _count("kba-fz10", "VW", "ID.4, ID.5", 1, 2025))
     assert note and "ID.5" in note
@@ -158,6 +161,7 @@ def test_source_alias_note_travels_with_the_count(real_seed) -> None:
 # --- DfT: matched on the variant column ----------------------------------------------------
 
 
+@pytest.mark.seed
 @pytest.mark.parametrize(
     ("genmodel", "variant", "expected"),
     [
