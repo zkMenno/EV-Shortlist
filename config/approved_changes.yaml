@@ -491,3 +491,18 @@ approved:
     change: cleared
   - {<<: *t160zkxz, id: peugeot-e-2008-p24-50kwh}
   - {<<: *t160zkxz, id: opel-corsa-e-f-50kwh}
+  # T-162: Škoda Elroq 85 DC peak corrected from OpenEV's 185 kW (the RS figure) to Škoda Auto's
+  # official spec sheet 135 kW / 28 min (10-80 %, cdn.skoda-storyboard.com TD-Elroq-en_f8cdb684.pdf,
+  # 15 Dec 2025, p. 2; also 5 May 2025 sheet). Against published release 3, skoda-elroq-gen1-85 is a
+  # new row (0 blocking); these 4 entries cover the --base-release-from origin/main diff (T-160 base).
+  - &t162elroq
+    release: 4
+    file: catalogue.json
+    approved_by: "PR #212 (T-162 gate)"
+    reason: "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+    id: skoda-elroq-gen1-85
+    field: dc_peak_kw
+    change: changed
+  - {<<: *t162elroq, field: dc_curve_status, change: cleared}
+  - {<<: *t162elroq, field: dc_peak_held_min, change: cleared}
+  - {<<: *t162elroq, file: shortlist_scores.json, field: "scores.road-tripper.urban.band", change: changed}
