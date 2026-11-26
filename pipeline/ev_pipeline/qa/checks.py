@@ -242,7 +242,10 @@ def check_licence_gate(
                     errors.append(f"{row.get('variant_id')}: registrations.{cc}: {why}")
     for f in facts:
         src = f.get("source") or {}
-        why = _gate_reason(registry, str(src.get("id")), str(src.get("licence") or ""))
+        sid = str(src.get("id"))
+        why = _gate_reason(registry, sid, str(src.get("licence") or "")) or (
+            registry.cited_url_problem(sid, src.get("url"))
+        )
         if why:
             errors.append(f"fact {f.get('id')}: {why}")
     errors += section_gate_problems(catalogue, charging, registry)

@@ -208,8 +208,8 @@
   },
   "maker-docs": {
     "name": "Maker documents and price lists",
-    "licence": "none (individual facts cited by URL and date)",
-    "status": "blocked",
+    "licence": "facts cited, no licence (Decision 068)",
+    "status": "active",
     "owner": "various OEMs"
   },
   "maker-press-photos": {

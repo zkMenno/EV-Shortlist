@@ -15,8 +15,8 @@
 #   only dc_peak_kw sets it (KilowattApp + seed agree -> ships at the KilowattApp confidence).
 # same_origin: {source: origin} (A-06 F8): for this field, that source's values are copies of
 #   that origin and count once with it towards "N sources agree" (OpenEV cites EPA for EPA range).
-# Citations that can't ship yet (A-06 F3; seed `cited:` values are source maker-docs, blocked
-#   until Q-008) are evidence only: when one contradicts a value only one independent origin
+# Citations that can't ship (A-06 F3; blocked sources or third-party / dealer copies outside
+#   `cited_hosts`) are evidence only: when one contradicts a value only one independent origin
 #   backs, the field is withheld and sent to review (qa/value_guard.guard_contradicted).
 schema: field-sources/v1
 fields:
@@ -29,7 +29,7 @@ fields:
   weight_kg:         {primary: [rdw], fallbacks: [eea, euroncap, wikidata, maker-docs, openev, ademe, seed-manual], tolerance: {pct: 1}, merge: priority,
                       note: "ADEME 'poids a vide' = Masse OM - 75 kg (no driver)."}
   towing_kg:         {primary: [rdw], fallbacks: [eea, maker-docs, openev, seed-manual], tolerance: {pct: 1}, merge: priority}
-  power_kw:          {primary: [eea, rdw], fallbacks: [openev, fueleconomy, seed-manual], tolerance: {pct: 2}, merge: priority}
+  power_kw:          {primary: [eea, rdw], fallbacks: [openev, fueleconomy, maker-docs, seed-manual], tolerance: {pct: 2}, merge: priority}
   drivetrain:        {primary: [eea, rdw], fallbacks: [openev, fueleconomy, seed-manual], merge: priority}
   battery_kwh_net:   {primary: [openev, maker-docs], fallbacks: [kilowatt-openev, nyland, naf, adac, seed-manual], tolerance: {pct: 2}, merge: median}
   battery_kwh_gross: {primary: [openev, maker-docs], fallbacks: [nyland, naf, adac, seed-manual], tolerance: {pct: 2}, merge: median}

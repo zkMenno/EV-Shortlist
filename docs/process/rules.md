@@ -66,10 +66,13 @@ Find unverified work: `git log --grep="Verified: none" --oneline` (stamp lands w
 | G-58 | A pause goes into HANDOFF **and** an INBOX line **and** the Status of every open task; batch chats re-read the newest INBOX lines and their task Status before opening a PR | T-156 retro (19 Nov): the pause landed mid-batch and nothing told the running chat | *prose* (WS0 + batch chats) | WS0 | 2026-11-19 | — |
 | G-59 | G-52 also passes when every commit main is ahead by touches only `workstreams/WS0/INBOX.md`, `workstreams/WS0/HANDOFF.md` or `CHATS.md` and GitHub says `mergeable_state: clean` (same idea as G-47) | T-153 retro (19 Nov): main moved 6× by log lines → 5 extra merge + CI rounds | `sh scripts/merge_ready.sh <pr>` (T-158, #195) | WS0 | 2026-11-19 | — |
 | G-60 | A task that adds a `source_holds` entry "remove once T-xxx merges" writes the exact follow-up change into T-xxx's file, or (if T-xxx isn't its own task) into an INBOX line for WS0 | T-153 retro (19 Nov): the Elroq hold removal alone would have shipped a wrong 150 kW | *prose* (builders, WS0 briefs) | WS0 | 2026-11-19 | — |
-| G-61 | `data_qa.sh` runs the tests that pin seed state (`pytest -m seed`, marker registered in `pipeline/pyproject.toml`) | T-160 retro (19 Nov): a seed change broke `test_t153_split` / `test_t159_split`, found only in CI | `data_qa.sh` (T-165) | WS1 + WS3 | 2026-11-19 | — |
-| G-62 | `ev verify` lists rows whose derived flags change only because an input is missing, naming the input | T-161 retro (19 Nov): 22 rows lost a version flag only for missing `power_kw`; the reviewer found it | `ev verify` (T-165) | WS1 | 2026-11-19 | — |
-| G-63 | `merge_ready.sh` treats a check run with a `conclusion` and `completed_at` as completed, and says so | T-158 retro (19 Nov): a check run stuck at `in_progress` with `conclusion: success` blocked #195 | `merge_ready.sh` (T-165) | WS1 | 2026-11-19 | — |
+| G-61 | `data_qa.sh` runs the tests that pin seed state (`pytest -m seed`, marker registered in `pipeline/pyproject.toml`) | T-160 retro (19 Nov): a seed change broke `test_t153_split` / `test_t159_split`, found only in CI | `data_qa.sh` + `pyproject.toml` (T-165, #210/#211) | WS1 + WS3 | 2026-11-19 | — |
+| G-62 | `ev verify` lists rows whose derived flags change only because an input is missing, naming the input | T-161 retro (19 Nov): 22 rows lost a version flag only for missing `power_kw`; the reviewer found it | `ev verify` `missing_input_flag_changes` (T-165, #211) | WS1 | 2026-11-19 | — |
+| G-63 | `merge_ready.sh` treats a check run with a `conclusion` and `completed_at` as completed, and says so | T-158 retro (19 Nov): a check run stuck at `in_progress` with `conclusion: success` blocked #195 | `merge_ready.sh` (T-165, #211) | WS1 | 2026-11-19 | — |
 | G-64 | Antigravity sessions read `GEMINI.md` alongside `AGENTS.md` and `docs/process/README.md`; `GEMINI.md` translates Claude-era mechanics while `AGENTS.md` and `docs/` remain canonical (Decision 089) | Migration from Claude to Antigravity (26 Nov 2026): Claude-era mechanics and project docs needed a repo-tracked adapter | *prose* (`GEMINI.md`, `AGENTS.md`, `.agents/workflows/`) | WS0 | 2026-11-26 | — |
+| G-65 | An automated fixture test scans `pipeline/tests/test_*.py` for reads of committed `data/seed/*.yaml` and asserts they carry `@pytest.mark.seed`, so new seed-pinned tests cannot skip `data_qa.sh` | T-165 retro (26 Nov): initial grep missed 36 real-seed tests in `test_scoped_aliases.py` (`REAL_SEED` variable); caught by round-1 fresh reviewer | fixture test in `pipeline/tests/` (to build: T-166) | WS1 | 2026-11-26 | — |
+| G-66 | `ev release fetch --via-gh` fallback downloads release assets via `gh release download` and places + sha256-checks every file from `manifest.json`, so local `ev verify` works cleanly in proxy-routed VMs | T-165 + T-162 + T-163 retros (26 Nov): Antigravity VM proxy triggered `ev_pipeline.net` SSRF refusal on `github.com` release downloads in all three batches | `ev release fetch --via-gh` (to build: T-166) | WS1 | 2026-11-26 | — |
+| G-67 | Before adding a bare TGK variant code to `pipeline/ev_pipeline/match/tgk_split.yaml`, group staging records by `(variant, uitvoering, wltp_range_km)` to check for sub-trim splits (e.g. `_B_` vs `_P_`) | T-163 retro (26 Nov): bare `SA3` initially mixed Raven Performance (593 km) into Raven LR (610 km); caught by round-1 fresh reviewer | *prose* (`docs/process/rules.md`; REVIEW D4 check) | WS1 | 2026-11-26 | — |
 
 **Old P-ids** (verification chat's seed list, 17 Nov) map here: P-07→G-04/G-05 · P-08→G-09 · P-09→G-03 · P-10→G-08 · P-11→G-15/G-16 · P-12→G-10 · P-14→G-07 · P-15→G-06 · P-20→G-17 · P-21 (CI budget)→G-33; the rest became G-21–G-31.
 
@@ -139,6 +142,17 @@ Added later on 18 Nov: web batch → G-46 accepted; merge batch 4 → G-47 accep
 | Batch: data T-158 | merge_ready treats conclusion + completed_at as completed | Accepted → G-63 (T-165) |
 | Batch: catalogue T-160 | data_qa.sh runs the seed-pinned split tests | Accepted → G-61 (T-165) |
 | Batch: catalogue T-160 | Approvals measured with `ev verify` against the latest release, not only a same-staging main build | Covered: plain `ev verify` diffs against the latest published release; T-162–T-164 ask for it next to `--base-release-from` (G-56 is the code diff) |
+
+## Retro proposals processed (26 Nov 2026)
+
+| From | Proposal | Verdict |
+|---|---|---|
+| Batch: data T-159 | Brief templates say `-F body=@file` (or reject `@/` comment bodies) | Superseded on Antigravity (`gh pr comment --body-file` works natively without Claude proxy) |
+| Batch: data T-159 | `merge_ready.sh` reports when main changed `config/approved_changes.yaml` | Covered by G-52: `config/approved_changes.yaml` is not in `LOG_FILES`, so `merge_ready.sh` already blocks and names it |
+| Batch: T-165 | Fixture test scanning `pipeline/tests/test_*.py` for committed `data/seed/*.yaml` reads asserts `@pytest.mark.seed` | Accepted → G-65 (T-166) |
+| Batch: catalogue T-162 (+ T-165, T-163) | `ev release fetch --via-gh` fallback so local `ev verify` works cleanly in proxy-routed VMs | Accepted → G-66 (T-166) |
+| Batch: data T-163 | Run `test_match`, `test_tgk_attach`, `test_seed_cited` before pushing any `matcher.py` edit | Covered by G-33 (run full local gate before opening or updating a PR) |
+| Batch: data T-163 | Group staging records by `(variant, uitvoering, wltp_range_km)` before adding a bare TGK variant code to `tgk_split.yaml` | Accepted → G-67 |
 
 ## Retro questions (every session end)
 1. What slowed us down? 2. What did Menno have to do by hand? 3. Which rule would have prevented it? **4. What did a check miss, and which check would have caught it?** (answer 4 adds or sharpens a row here or a REVIEW.md item).
