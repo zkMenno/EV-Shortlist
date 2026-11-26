@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""merge_ready (T-158, rules G-52, G-59, G-54): is PR <n> safe to merge right now?
+"""merge_ready (T-158, T-165; rules G-52, G-59, G-54, G-63): is PR <n> safe to merge right now?
 
 Usage:  sh scripts/merge_ready.sh <pr>          (or python3 scripts/merge_ready.py <pr>)
         python3 scripts/merge_ready.py --from-json facts.json   (offline: tests, dry runs)
@@ -14,6 +14,8 @@ Checks:
    `mergeable_state: clean`.
 2. CI on the PR head is green: every check run (latest per name) completed with success /
    neutral / skipped, at least one exists, and no commit status is failing or pending.
+   G-63: a check run with both `conclusion` and `completed_at` counts as completed even if
+   GitHub left its `status` at `in_progress` (noted in output).
 3. G-54: when the PR changes config/approved_changes.yaml, no entry it adds is scoped to a
    release main has already published (`data/releases/latest` on main). Needs the pipeline env
    (uv); skipped with a note when uv is missing.
@@ -85,7 +87,7 @@ def gather(pr: int, api: Callable[[str], Any] = gh) -> dict[str, Any]:
         "ahead_files": sorted({f["filename"] for f in ahead.get("files") or []}),
         "check_runs": [
             {"id": r.get("id"), "name": r.get("name"), "status": r.get("status"),
-             "conclusion": r.get("conclusion")}
+             "conclusion": r.get("conclusion"), "completed_at": r.get("completed_at")}
             for r in runs.get("check_runs") or []
         ],  # fmt: skip
         "statuses": [
@@ -171,10 +173,22 @@ def evaluate(
             " workflow_dispatch and wait for it to finish."
         )
     for r in runs:
-        if r.get("status") != "completed":
-            problems.append(f"CI check '{r['name']}' is still {r.get('status')} on the head.")
-        elif r.get("conclusion") not in OK_CONCLUSIONS:
-            problems.append(f"CI check '{r['name']}' ended {r.get('conclusion')} on the head.")
+        status = r.get("status")
+        conclusion = r.get("conclusion")
+        completed_at = r.get("completed_at")
+        has_conclusion = isinstance(conclusion, str) and bool(conclusion.strip())
+        has_completed_at = isinstance(completed_at, str) and bool(completed_at.strip())
+        completed = status == "completed"
+        if not completed and has_conclusion and has_completed_at:
+            completed = True
+            notes.append(
+                f"CI check '{r['name']}' reports status {status!r} with conclusion"
+                f" '{conclusion}' and completed_at {completed_at}: treated as completed (G-63)."
+            )
+        if not completed:
+            problems.append(f"CI check '{r['name']}' is still {status} on the head.")
+        elif conclusion not in OK_CONCLUSIONS:
+            problems.append(f"CI check '{r['name']}' ended {conclusion} on the head.")
     for s in f.get("statuses") or []:
         if s.get("state") != "success":
             problems.append(f"Commit status '{s.get('context')}' is {s.get('state')} on the head.")

@@ -18,6 +18,8 @@ from ev_pipeline.match.matcher import find_record_model, match_view
 from ev_pipeline.match.seed import load_seed
 from ev_pipeline.records import SourceRecord, SpecValue
 
+pytestmark = pytest.mark.seed
+
 REAL_SEED = Path(__file__).parents[2] / "data" / "seed" / "models.yaml"
 
 RDW = {"id": "rdw", "name": "RDW", "licence": "CC0-1.0"}
