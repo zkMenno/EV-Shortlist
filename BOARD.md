@@ -66,8 +66,8 @@ Chats talk through the coordinator's inbox, `workstreams/WS0/INBOX.md`, never th
 ## Done
 - 2026-11-26: Antigravity migration (#208, Decision 089, G-64): `GEMINI.md`, `.agents/` rules + workflows, `docs/design/brand-design-decisions.md`, `docs/process/owner-context.md`
 - 2026-11-24: CI minutes cut (#207): note-only skip, single web build, pipeline release cache
-- 2026-11-19: T-149–T-156, T-158, T-159 (#198/#199/#203/#204), T-160, T-161; schema `dc_speed_is_claim` (#205); rules G-48–G-63 (#206); Decisions 086–088
-- 2026-11-18: Data release 3 (`data-v3`), T-130–T-137, T-140–T-145, T-148, Ariakit (Decision 056), people carriers (Decision 084), WLTP next to real range (Decision 085), one coordinator + batch chats (#122)
+- 2026-11-19: T-149–T-156, T-158, T-159 (#198/#199/#203/#204), T-160, T-161; schema `dc_speed_is_claim` (#205); rules G-48–G-63 (through #206); Decisions 086–088
+- 2026-11-18: Data release 3 (`data-v3`), T-130, T-131 (WS3), T-132–T-134, T-136, T-137, T-140, T-141, T-143–T-145, T-148, Ariakit (Decision 056), people carriers (Decision 084), WLTP next to real range (Decision 085), one coordinator + batch chats (#122)
 - 2026-11-17: staging.evshortlist.com live (#88/#89/#94); data release 2 (`data-v2`); verification layer live: REVIEW.md, gate-guard (observe), rule register G-01–G-33 (#42, #45); T-125 web property tests, T-126 web verify skill, hero a11y + phone fixes, T-096 compare labels (#47–#55); docs tidy + `_archive/` (Decision 063)
 - 2026-11-17: batch merge of 10 waiting PRs (#39): T-069 shortlist scores, T-081/T-056 used price bands, T-091 parked flags, T-068 seed gaps, T-031 heat pump, T-041 templates, T-100 glossary, /learn pages (T-082, T-039, T-027), T-093, T-094, T-081 NL aggregates (#38)
 - 2026-11-15: hero shortlist (T-080), suggested sort (T-067), differences only (T-045), open data page (T-090), schema for shortlist rules (T-066/T-065), climate (T-034), consumption model + back-test (T-032/T-033/T-035), charging stats (T-025), releases out of git part 1 (T-064)
