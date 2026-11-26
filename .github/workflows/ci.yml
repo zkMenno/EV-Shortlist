@@ -251,6 +251,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0 # so `ev release approvals` can diff new entries against the base commit
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           working-directory: pipeline
@@ -264,6 +265,22 @@ jobs:
         run: uv run python -I ../data/taxonomy/validate_taxonomy.py
       - name: Back-test shortlist rules against Menno's picks (Decision 038)
         run: uv run python -I ../data/editorial/backtest_rules.py
+      - name: Check approved_changes.yaml (G-57, G-54)
+        env:
+          EVENT: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          base=""
+          case "$EVENT" in
+            pull_request) base="$PR_BASE" ;;
+            push) base="$PUSH_BEFORE" ;;
+          esac
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base="HEAD"
+          fi
+          uv run ev release approvals --base "$base"
       - name: Car photos in data/images/photos.yaml (licence, credit, template; Decisions 081, 083)
         run: uv run ev images check
       - name: Blocking QA on the committed release
