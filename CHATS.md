@@ -8,7 +8,7 @@ One named chat, the **coordinator**; every other chat is a throwaway batch chat 
 | WS0 (1st) | Coordinator: spec mirror, planning, research, reviews, merges | https://claude.ai/code/session_01JuyZEXBt7oHBm4SwQBwRz1 | 2026-11-15 |
 | WS0 (2nd session) | Wrote the Variant finder spec + Decision 019 in the repo first | https://claude.ai/code/session_01JuyZEVFu9XKbRntUgK2fnm | 2026-11-15 |
 | OVERNIGHT | Overnight prototype build 1 on `proto/overnight-1` (finished; files in _archive/) | (Menno: add link) | 2026-11-14 |
-| UX | Brand + design system (docs/design/, claude/brand-design-decisions.md) | https://claude.ai/code/session_01JuyZEVwepSTrWVdkrCyGeQ | 2026-11-15 |
+| UX | Brand + design system (docs/design/, docs/design/brand-design-decisions.md) | https://claude.ai/code/session_01JuyZEVwepSTrWVdkrCyGeQ | 2026-11-15 |
 | WS4 prep | AppInfra capacity check chat | (Menno: add link) | 2026-11-15 |
 | OVERNIGHT2 | Overnight research + review pack on `proto/overnight-2` (R-20…R-31, A-20, growth keywords, outreach translations) | https://claude.ai/code/session_01JuyZEVvDWLuBFGEnLBuGTR | 2026-11-15 |
 | WS1 | Data pipeline: T-064 releases out of git, T-025, T-034, T-032/033, T-035, T-051 | https://claude.ai/code/session_01JuyZEUoRSsomn4V9CyYzLY | 2026-11-15 |

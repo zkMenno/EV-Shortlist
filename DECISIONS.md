@@ -1003,4 +1003,19 @@ Engineering decisions for this repo, in a light ADR (Architectural Decision Reco
 
 **Consequences:** T-161 (WS1). The rule's back-test (`backtest_rules.py`) must stay at or above today's band match; the R-32 evidence pairs (G6 2025 vs 2024, EV6 2024 vs 2021, IONIQ 5 2024 vs 2022) keep their flags; the e-tron GT 2024 S / RS / RS performance lose the `older-version` flag. The #184 approvals for those rows are replaced by new ones in T-161's gate PR. Reversible: group by model again.
 
+## Decision 089: Migrate agent execution from Claude to Antigravity via an adapter layer
+
+**Status:** Accepted (Menno, 2026-11-26)
+**Date:** 2026-11-26
+
+**Context:** Building paused on 2026-11-19 on Claude's token budget and is resuming on Antigravity. The repository's engineering rules (`AGENTS.md`), process (`docs/process/README.md`), review checks (`REVIEW.md`), and task state are already in git, while brand decisions (`claude/brand-design-decisions.md`) and owner working context lived in Claude Project knowledge outside the repo, and several docs reference Claude-era mechanics (`add_repo`, `claude.ai/code` links, session-push `workflow_dispatch` quirks, proxy limits).
+
+**Decision:** Run EV Shortlist agents in Antigravity without rewriting the canonical engineering and process docs:
+- Add `GEMINI.md` at the repo root as a thin adapter translating Claude-era mechanics to Antigravity; `AGENTS.md` and `docs/` remain canonical for engineering rules and product scope.
+- Add Antigravity rules and workflows under `.agents/` (`rules/talking-to-menno.md`, `workflows/start-coordinator.md`, `start-batch.md`, `fresh-review.md`, `merge-pr.md`, `handoff.md`).
+- Move former Claude Project docs into the repo: `docs/design/brand-design-decisions.md` and `docs/process/owner-context.md`, and update all active references outside `_archive/` to `docs/design/brand-design-decisions.md`.
+- Keep all existing quality gates unchanged: `Verified: <how>` commits, independent `/fresh-review` before merge, and `sh scripts/merge_ready.sh <pr>` READY right before merging.
+
+**Consequences:** Any Antigravity coordinator or batch conversation can pick up directly from the repo with no external project settings required. Old `claude.ai` links in `CHATS.md` remain as history; new rows use `Antigravity: <conversation title>`. Rule G-64 added in `docs/process/rules.md`. Reversible: `GEMINI.md` and `.agents/` are additive and do not alter `CLAUDE.md` or app/pipeline code.
+
 <!-- Agentic Scaffold v0.5.0 | https://github.com/montymerlin/agentic-scaffold-plugin -->

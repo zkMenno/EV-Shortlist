@@ -4,7 +4,7 @@ For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator).
 
 ## Start
 1. Attach the repo with push access (`add_repo zkMenno/EV-Shortlist`, access `push`); add your row to `CHATS.md`.
-2. Read `AGENTS.md`, `REVIEW.md` (from `origin/main`), `docs/process/README.md`, `apps/web/AGENTS.md`, your task files, this brief. UI work: also the project doc `claude/brand-design-decisions.md` and `docs/design/` (start at `SOURCE.md`).
+2. Read `AGENTS.md`, `REVIEW.md` (from `origin/main`), `docs/process/README.md`, `apps/web/AGENTS.md`, your task files, this brief. UI work: also `docs/design/brand-design-decisions.md` and `docs/design/` (start at `SOURCE.md`).
 3. Before each task and again before its first push: check open PRs and `git ls-remote --heads origin | grep <task-id>`; stop if another chat has it (G-41). Two WS2 chats built T-097 and T-130 twice that way.
 4. Spec only where the task points: `docs/spec/master-spec-v2.md` §3–4 and §9–11, `launch-scope.md` (only Launch tasks, Decision 051).
 
