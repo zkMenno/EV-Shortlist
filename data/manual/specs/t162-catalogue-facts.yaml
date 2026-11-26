@@ -1,0 +1,109 @@
+# T-162 (WS3 catalogue batch, 2026-11-26):
+#  - Škoda Elroq 85 (skoda-elroq-gen1-85): OpenEV's MY2025 Base file gives 185 kW DC peak
+#    (the Elroq RS figure); KilowattApp gives 175 kW (pre-June-2025 / 85x). Both official Škoda
+#    Auto technical specification sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com)
+#    give 135 kW / 28 min (10-80 %) for Elroq 85 RWD (from June 2025 production), 175 kW / 28 min
+#    for Elroq 85x AWD, and 185 kW / 26 min for Elroq RS.
+#  - Tesla Model X gen1 (Raven WLTP-homologated variants): cited WLTP range and consumption from
+#    RDW TGK (opendata.rdw.nl, CC0, EU type approval e4*2007/46*0667), same pattern as
+#    t154-model-3-split.yaml. Pre-Raven 60X / 75X / 90X / 100X are NEDC-only (no WLTP entered).
+# Source `manual` (Decisions 068, 087). Single facts cited per car; no whole tables copied.
+schema: manual-facts/v1
+entered_by: ws3 (agent, T-162 catalogue batch)
+facts:
+  # --- Škoda Elroq 85: DC peak and 10-80 % claim -----------------------------------------------
+  - variant_id: skoda-elroq-gen1-85
+    field: dc_peak_kw
+    value: 135
+    unit: kW
+    source_url: https://cdn.skoda-storyboard.com/2024/10/TD-Elroq-en_f8cdb684.pdf
+    source_name: "Škoda Auto, 'Elroq Technical specifications' (PDF, 15.12.2025)"
+    retrieved: 2026-11-26
+    quote: "DC charging (10–80 %) – power/time 145 kW/25 min 165 kW/24 min 135 kW/28 min 175 kW/28 min 185 kW/26 min"
+    locator: "Page 2, row 'DC charging (10–80 %) – power/time', column Elroq 85: 135 kW/28 min"
+    confidence: medium
+    claim: true
+    notes: "Škoda's 5 May 2025 sheet (Skoda_Elroq_Technical_data_d5686460.pdf, p. 2) gives the same 135 kW/28 min** with footnote '** Values valid for cars manufactured from June 2025.' Early pre-June-2025 Elroq 85 builds (and 85x AWD) were rated 175 kW / 28 min (medium confidence for the single-row production shift); 185 kW is the Elroq RS only."
+  - variant_id: skoda-elroq-gen1-85
+    field: dc_minutes_10_80
+    value: 28
+    unit: min
+    source_url: https://cdn.skoda-storyboard.com/2024/10/TD-Elroq-en_f8cdb684.pdf
+    source_name: "Škoda Auto, 'Elroq Technical specifications' (PDF, 15.12.2025)"
+    retrieved: 2026-11-26
+    quote: "DC charging (10–80 %) – power/time 145 kW/25 min 165 kW/24 min 135 kW/28 min 175 kW/28 min 185 kW/26 min"
+    locator: "Page 2, row 'DC charging (10–80 %) – power/time', column Elroq 85: 135 kW/28 min"
+    confidence: medium
+    claim: true
+    notes: "28 min 10-80 % applies to both the 135 kW (from June 2025) and 175 kW (early build / 85x) batteries."
+
+  # --- Tesla Model X gen1 (Raven WLTP variants, RDW TGK CC0) -----------------------------------
+  - variant_id: tesla-model-x-gen1-75d
+    field: wltp_range_km
+    value: 375
+    unit: km
+    source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*26&codevarianttgk=XA1
+    source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*26, variant XA1, version EBX15N (Tesla Model X Standard Range, CC0)"
+    retrieved: 2026-11-26
+    quote: '"codevarianttgk": "XA1", "codeuitvoeringtgk": "EBX15N", ... "verbruikvolledigelekwltpbgr": "228.00", "actieradiusvolledigelekwltpbgr": "375"'
+    locator: "EU type approval e4*2007/46*0667*26, variant XA1 (210 km/h)"
+    confidence: medium
+    claim: true
+    notes: "WLTP figure for the 2019 Raven Standard Range (variant XA1); earlier 2016-2018 75D (variant 75X) was NEDC-only (417 km)."
+  - variant_id: tesla-model-x-gen1-75d
+    field: consumption_kwh_100km
+    value: 22.8
+    unit: kWh/100km
+    source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*26&codevarianttgk=XA1
+    source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*26, variant XA1, version EBX15N (Tesla Model X Standard Range, CC0)"
+    retrieved: 2026-11-26
+    quote: '"verbruikvolledigelekwltpbgr": "228.00"'
+    locator: "WLTP combined, Wh/km (228 Wh/km = 22.8 kWh/100 km), variant XA1"
+    confidence: medium
+    claim: true
+  - variant_id: tesla-model-x-gen1-long-range
+    field: wltp_range_km
+    value: 507
+    unit: km
+    source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*29&codevarianttgk=XA3
+    source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*29, variant XA3, versions EBX15N / EBX15T (Tesla Model X Long Range, CC0)"
+    retrieved: 2026-11-26
+    quote: '"codevarianttgk": "XA3", "codeuitvoeringtgk": "EBX15N", ... "verbruikvolledigelekwltpbgr": "226.00", "actieradiusvolledigelekwltpbgr": "507"'
+    locator: "EU type approval e4*2007/46*0667*29, variant XA3, versions EBX* (250 km/h)"
+    confidence: medium
+    claim: true
+    notes: "Extensions 23-33 give 507 km (226 Wh/km); agrees with RDW 2019 fleet records (507 km / 22.6 kWh/100 km)."
+  - variant_id: tesla-model-x-gen1-long-range
+    field: consumption_kwh_100km
+    value: 22.6
+    unit: kWh/100km
+    source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*29&codevarianttgk=XA3
+    source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*29, variant XA3, versions EBX15N / EBX15T (Tesla Model X Long Range, CC0)"
+    retrieved: 2026-11-26
+    quote: '"verbruikvolledigelekwltpbgr": "226.00"'
+    locator: "WLTP combined, Wh/km (226 Wh/km = 22.6 kWh/100 km), variant XA3 EBX*"
+    confidence: medium
+    claim: true
+  - variant_id: tesla-model-x-gen1-performance
+    field: wltp_range_km
+    value: 487
+    unit: km
+    source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*29&codevarianttgk=XA3&codeuitvoeringtgk=EPX15T
+    source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*29, variant XA3, version EPX15T (Tesla Model X Performance, CC0)"
+    retrieved: 2026-11-26
+    quote: '"codevarianttgk": "XA3", "codeuitvoeringtgk": "EPX15T", ... "verbruikvolledigelekwltpbgr": "236.00", "actieradiusvolledigelekwltpbgr": "487"'
+    locator: "EU type approval e4*2007/46*0667*29, variant XA3, versions EPX* (250 km/h)"
+    confidence: medium
+    claim: true
+    notes: "Extensions 23-33 give 487 km (236 Wh/km)."
+  - variant_id: tesla-model-x-gen1-performance
+    field: consumption_kwh_100km
+    value: 23.6
+    unit: kWh/100km
+    source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*29&codevarianttgk=XA3&codeuitvoeringtgk=EPX15T
+    source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*29, variant XA3, version EPX15T (Tesla Model X Performance, CC0)"
+    retrieved: 2026-11-26
+    quote: '"verbruikvolledigelekwltpbgr": "236.00"'
+    locator: "WLTP combined, Wh/km (236 Wh/km = 23.6 kWh/100 km), variant XA3 EPX*"
+    confidence: medium
+    claim: true

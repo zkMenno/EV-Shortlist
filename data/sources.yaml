@@ -47,6 +47,9 @@ sources:
        www.jaguar.fr,
        www.media.stellantis.com,
        www.mg.co.uk,
+       # T-162 (WS3): verified maker docs (Mazda, SEAT, MG, BYD, Tesla) & official RDW register (CC0)
+       media-assets.mazda.eu, mundoseat.seat.com, news.mgmotor.eu,
+       service.tesla.com, www.byd.com, opendata.rdw.nl,
        # maker documents on a hosting service: path prefix only, never the whole host (PR #80 review).
        # SEAT Import Belgium (CUPRA) Born press pack CU21/34N on Prezly
        cdn.uc.assets.prezly.com/34359316-f25e-44da-a593-c7ea94745496/]}
@@ -60,6 +63,8 @@ sources:
        www.media.stellantis.com, media.ford.com, europe.nissannews.com,
        # T-156 (WS3): Ford of Europe's own news site (Ford HQ posts); Lucid's investor-relations press releases
        www.fromtheroad.ford.com, ir.lucidmotors.com,
+       # T-162 (WS3): Škoda Auto official press CDN (Elroq technical specification PDFs)
+       cdn.skoda-storyboard.com,
        # maker documents on a hosting service: host/path prefixes only, never the whole host (PR #80 review).
        # Cision company 23604 = Volvo Car Belux press releases; one Toyota Belgium price-list asset on Prezly;
        # Peugeot NL price lists on louwman.nl (dealer group): imprint "Stellantis Nederland B.V." (importer)

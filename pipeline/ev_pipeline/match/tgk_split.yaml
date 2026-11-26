@@ -226,12 +226,31 @@ variants:
   tesla-model-s-palladium-plaid:
     type_codes: [SB1T, SB1+TB1T1S5M2C2]
     basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 SB1T / SB1+TB1T1S5M2C2 Plaid versions (300 km/h, WLTP 600-611 km)"
+  # Tesla Model X gen1 (2016-21, seeded in T-162): e4*2007/46*0667 variant codes 60X (NEDC 363 km),
+  # 75X (NEDC 417 km) + XA1 (2019 WLTP 375 km), 90X (90D / P90D, NEDC 467-489 km), 100X (100D /
+  # P100D, NEDC 542-565 km), and 2019-20 Raven XA3 split by uitvoering EBX* (Long Range, WLTP
+  # 507 km) vs EPX* (Performance, WLTP 487 km). matcher.tgk_pick accepts type_codes evidence when
+  # pack kWh is absent on the seed row.
+  tesla-model-x-gen1-60d:
+    type_codes: [60X]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 60X (NEDC 363 km, 210 km/h)"
+  tesla-model-x-gen1-75d:
+    type_codes: [75X, XA1]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 75X (NEDC 417 km) and 2019 XA1 (WLTP 375 km, 210 km/h)"
+  tesla-model-x-gen1-90d:
+    type_codes: [90X]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 90X (90D / P90D, NEDC 467-489 km, 250 km/h)"
+  tesla-model-x-gen1-100d:
+    type_codes: [100X]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 100X (100D / P100D, NEDC 542-565 km, 250 km/h)"
+  tesla-model-x-gen1-long-range:
+    type_codes: [XA3+EBX15T, XA3+EBX16T, XA3+EBX17T]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 XA3 Raven Long Range (uitvoering EBX*, WLTP 507 km, 250 km/h)"
+  tesla-model-x-gen1-performance:
+    type_codes: [XA3+EPX15T, XA3+EPX16T, XA3+EPX17T]
+    basis: "rdw-tgk 2026-11-26: e4*2007/46*0667 XA3 Raven Performance (uitvoering EPX*, WLTP 487 km, 250 km/h)"
   # Tesla Model X Palladium (2022-, OpenEV rows): XB1D (and 2022 *02 XB1+DB1T2S6M1C4 / DB1T2S7M1C4)
   # = Dual Motor Long Range (240-250 km/h, WLTP 576-600 km); XB1T = Plaid (261-262 km/h, WLTP 543-567 km).
-  # Tesla Model X gen1 (2016-20, rows from T-162): e4*2007/46*0667 variant codes 60X (NEDC 363 km),
-  # 75X (NEDC 417 km), 90X (NEDC 467-489 km), 100X (NEDC 542-565 km), XA1 (2019 WLTP 375 km),
-  # XA3 (2019-20 WLTP 487-507 km). Add those variant rows here once T-162 seeds their ids;
-  # matcher.tgk_pick now accepts type_codes evidence when pack kWh is absent on the seed row.
   tesla-model-x-palladium-long-range:
     type_codes: [XB1D, XB1+DB1T2S6M1C4, XB1+DB1T2S7M1C4]
     basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 XB1D / XB1+DB1T2S{6,7}M1C4 Long Range versions (240-250 km/h, WLTP 576-600 km)"

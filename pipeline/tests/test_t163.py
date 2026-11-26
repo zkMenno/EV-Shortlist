@@ -483,46 +483,25 @@ def test_model_s_raven_performance_excluded_from_long_range() -> None:
 
 @pytest.mark.seed
 def test_model_x_gen1_splits_by_variant_code_without_pack_kwh() -> None:
-    """T-163 / T-162: Model X gen1 rows seeded without pack kWh (Tesla type approval gives
-    60X / 75X / 90X / 100X / XA1 / XA3, no pack kWh) split cleanly via type_codes."""
-    from ev_pipeline.match.matcher import TGK_MISFIT, load_tgk_split
+    """T-163 + T-162: Model X gen1 seed rows (no pack kWh on 60d/75d/90d; Tesla type approval
+    gives 60X / 75X / 90X / 100X / XA1 / XA3) split cleanly via type_codes in tgk_split.yaml."""
+    from ev_pipeline.match.matcher import TGK_MISFIT, TGK_TIE
 
     tgk, oe = _load_split_fixture()
-    mx_rows = [
-        {
-            "generation_id": "tesla-model-x-gen1",
-            "id": f"tesla-model-x-gen1-{slug}",
-            "name": name,
-            "years": [2016, 2020],
-            "drivetrain": "awd",
-            "specs": {},  # pack kWh intentionally absent
-            "confidence": "medium",
-        }
-        for slug, name in (
-            ("60d", "60D"),
-            ("75d", "75D"),
-            ("90d", "90D"),
-            ("100d", "100D"),
-        )
-    ]
-    table = {
-        **load_tgk_split(),
-        "tesla-model-x-gen1-60d": {"type_codes": {"60X"}},
-        "tesla-model-x-gen1-75d": {"type_codes": {"75X", "XA1"}},
-        "tesla-model-x-gen1-90d": {"type_codes": {"90X"}},
-        "tesla-model-x-gen1-100d": {"type_codes": {"100X", "XA3"}},
-    }
     cases = [
         ("|60X|B20B", 2017, "tesla-model-x-gen1-60d"),
         ("|75X|B20B", 2017, "tesla-model-x-gen1-75d"),
         ("|90X|B20B", 2017, "tesla-model-x-gen1-90d"),
         ("|100X|B20B", 2018, "tesla-model-x-gen1-100d"),
         ("|XA1|EBX1", 2019, "tesla-model-x-gen1-75d"),
-        ("|XA3|EBX1", 2019, "tesla-model-x-gen1-100d"),
+        ("|XA3|EBX1", 2019, "tesla-model-x-gen1-long-range"),
+        ("|XA3|EPX15T|", 2019, "tesla-model-x-gen1-performance"),
     ]
     for code, yr, want in cases:
         rec = _tgk_rec(tgk, code, yr)
-        # Without type_codes evidence, missing pack kWh fails with battery unknown
-        assert TGK_MISFIT in _place_one(rec, oe, extra_variants=mx_rows, table={})
-        # With type_codes evidence, each variant code lands on its own row
-        assert _place_one(rec, oe, extra_variants=mx_rows, table=table) == want
+        # NEDC-era 60X/75X/90X/100X have no WLTP; without type_codes they misfit or tie
+        if code.startswith(("|60X|", "|75X|", "|90X|", "|100X|")):
+            before = _place_one(rec, oe, table={})
+            assert TGK_MISFIT in before or TGK_TIE in before, (code, yr, before)
+        # With T-163 tgk_split.yaml, every Model X gen1 code lands on its own T-162 row
+        assert _place_one(rec, oe) == want
