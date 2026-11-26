@@ -22,9 +22,11 @@ Fails closed (T-006 review):
 
 from __future__ import annotations
 
+import fnmatch
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote, urlparse, urlsplit
 
 import yaml
 
@@ -38,6 +40,26 @@ WRITTEN_PERMISSION = "written"
 AGGREGATES_ONLY = "aggregates-only"
 CITED_FACTS = "cited-facts"
 MISSING_REGISTRY = "no data/sources.yaml (licence registry missing; release blocked)"
+
+
+def url_matches(pattern: str, url: str) -> bool:
+    """True when `url` is on `pattern`: a bare host (`www.audi.com`, `*.example.com`) matches
+    that host; `host/path/` matches URLs under that path, segment by segment, where a `*`
+    segment stands for exactly one path segment (`www.louwman.nl/uploads/*/Peugeot/`)."""
+    parts = urlparse(url.strip())
+    host = (parts.hostname or "").lower()
+    pat_host, _, pat_path = pattern.strip().partition("/")
+    if not fnmatch.fnmatchcase(host, pat_host.lower()):  # hosts ignore case; paths don't
+        return False
+    want = [seg for seg in pat_path.split("/") if seg]
+    have = [unquote(seg) for seg in parts.path.split("/") if seg]
+    if want and any(h in (".", "..") or "/" in h or "\\" in h for h in have):
+        return False  # a dot segment or encoded slash could step out of the allowed prefix
+    if len(have) < len(want):
+        return False
+    return all(
+        fnmatch.fnmatchcase(h, w) if w == "*" else h == w for h, w in zip(have, want, strict=False)
+    )
 
 
 @dataclass
@@ -108,6 +130,24 @@ class Registry:
             return None  # Decision 068: single cited maker facts, no licence needed
         return licence_problem(entry.licence)
 
+    def cited_url_problem(self, source_id: str, url: str | None) -> str | None:
+        """Decision 068 / 087: for a `use: cited-facts` source with `cited_hosts`, each
+        published fact's URL must match a listed maker host or path prefix; third-party and
+        dealer copies stay internal evidence only and never ship."""
+        entry = self.sources.get(self.canonical(source_id))
+        if entry is None or entry.use != CITED_FACTS or not entry.cited_hosts:
+            return None
+        if not url or not str(url).strip():
+            return f"missing source_url for cited-facts source {entry.id}"
+        if any(url_matches(h, str(url)) for h in entry.cited_hosts):
+            return None
+        host = (urlsplit(str(url).strip()).hostname or "").lower()
+        return f"source_url host {host!r} not in {entry.id} cited_hosts (Decision 068)"
+
+    def fact_blocked(self, source_id: str, url: str | None = None) -> str | None:
+        """None when a fact from `(source_id, url)` may ship, else why not."""
+        return self.reason_blocked(source_id) or self.cited_url_problem(source_id, url)
+
     def cited_facts(self, source_id: str) -> bool:
         """True when `source_id` ships under Decision 068 (`use: cited-facts` + `decision`):
         its licence text names no licence on purpose, so a licence re-check must skip it."""
@@ -129,8 +169,6 @@ class Registry:
 
     def source_for_url(self, url: str) -> str | None:
         """The registry id whose `site_hosts` names the URL's host, else None."""
-        from urllib.parse import urlsplit
-
         host = (urlsplit(url).hostname or "").lower()
         hits = [e.id for e in self.sources.values() if host and host in e.site_hosts]
         return hits[0] if len(hits) == 1 else None

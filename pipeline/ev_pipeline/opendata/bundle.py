@@ -84,6 +84,7 @@ VALUE_FIELDS: tuple[tuple[str, str, str], ...] = (
     ("dc_km_per_20min", "km", "Motorway km added in 20 minutes of DC charging"),
     ("dc_peak_held_min", "min", "Minutes within 10-80 % at >= 90 % of peak power"),
     ("dc_curve_status", "", "measured | estimated | default (generic shape)"),
+    ("dc_speed_is_claim", "", "true when the DC speed figures come from a maker claim"),
     ("power_kw", "kW", "Maximum motor power"),
     ("accel_0_100_s", "s", "0-100 km/h"),
     ("boot_l", "l", "Boot volume"),
@@ -108,6 +109,7 @@ COMPANION_OF = {
     "real_range_rung": "real_range_km",
     "dc_peak_kw_is_claim": "dc_peak_kw",
     "dc_curve_status": "dc_avg_10_80_kw",
+    "dc_speed_is_claim": "dc_avg_10_80_kw",
 }
 # Interim credit for RDW until Q-037 is answered (same wording as the web app, Q-050).
 ATTRIBUTION_OVERRIDES = {

@@ -31,8 +31,28 @@ sources:
   - {id: sdes, name: SDES vehicle fleet, owner: SDES (FR), licence: Licence-Ouverte-2.0, access: bulk, cadence: yearly, status: active, aggregates: [siv], terms: "Fuel x commune only, no make/model; recent years provisional. Sanity totals only."}
   - {id: kba, name: KBA stock tables (FZ2/FZ6/FZ28), owner: Kraftfahrt-Bundesamt (DE), licence: dl-de/by-2-0 (to confirm per file), access: bulk, cadence: yearly, status: blocked, terms: "Layouts not yet checked (R-02)."}
   - {id: eu-safety-gate, name: EU Safety Gate, owner: European Commission, licence: CC-BY-4.0 (to confirm), access: bulk, cadence: weekly, status: blocked, terms: "Confirm Commission reuse terms."}
-  - {id: maker-docs, name: Maker documents and price lists, owner: various OEMs, licence: none (individual facts cited by URL and date), access: manual, cadence: ad hoc, status: blocked,
-     terms: "Facts cited one by one with URL + date; no copying of tables. Needs a decision before it counts as releasable (Q-008). Seed `cited:` values in data/seed/variants.yaml carry this id (A-06 F3), also for maker documents hosted by third parties; while blocked they never ship and only withhold a lone value they contradict (qa/value_guard.guard_contradicted)."}
+  - {id: maker-docs, name: Maker documents and price lists, owner: various OEMs, licence: "facts cited, no licence (Decision 068)", access: manual, cadence: ad hoc, status: active, use: cited-facts, decision: "068",
+     terms: "Seed `cited:` values in data/seed/variants.yaml (A-06 F3). Decision 068 (Menno, 2026-11-17), widened by Decision 087 (Menno, 2026-11-19): single facts from maker documents (battery, power, WLTP, charging) may ship, any number of single facts per car per document, never a whole spec table, range table or price list. Only facts whose URL matches `cited_hosts` publish; third-party, press and dealer copies stay internal evidence only (qa/value_guard.guard_contradicted) and never reach a release. Not in the CC BY open-data bundle (no licence).",
+     cited_hosts: [
+       # maker and importer press rooms, price lists and sites
+       cdn.group.renault.com, www.renaultgroup.com, www.press.renault.co.uk, www.renault.ie,
+       cdn.skoda-storyboard.com,
+       de.mazda-press.com,
+       media.ford.com, www.fordpers.be,
+       media.mercedes-benz.pl,
+       newsroom.bmwgroup.com, press.bmwgroup.com, www.press.bmwgroup.com,
+       press.kia.com, www.kia.com,
+       volkswagen-newsroom.com, www.volkswagen-newsroom.com,
+       www.hyundai.news,
+       www.jaguar.fr,
+       www.media.stellantis.com,
+       www.mg.co.uk,
+       # T-162 (WS3): verified maker docs (Mazda, SEAT, MG, BYD, Tesla) & official RDW register (CC0)
+       media-assets.mazda.eu, mundoseat.seat.com, news.mgmotor.eu,
+       service.tesla.com, www.byd.com, opendata.rdw.nl,
+       # maker documents on a hosting service: path prefix only, never the whole host (PR #80 review).
+       # SEAT Import Belgium (CUPRA) Born press pack CU21/34N on Prezly
+       cdn.uc.assets.prezly.com/34359316-f25e-44da-a593-c7ea94745496/]}
   - {id: manual, name: "Manual entries (hand-entered, cited by URL)", owner: EV Finder staff, licence: "facts cited, no licence (Decision 068)", access: manual, cadence: ad hoc, status: active, use: cited-facts, decision: "068",
      terms: "data/manual/<topic>/*.yaml, one cited fact each (URL, retrieved date, quote or page); validate with `ev manual check`. Decision 068 (Menno, 2026-11-17), widened by Decision 087 (Menno, 2026-11-19): single facts from maker documents (list price, WLTP range, battery, consumption, power, DC charging) may ship, any number of single facts per car per document, never a whole spec table, range table or price list. Each fact's URL must be on a cited_hosts host or host/path prefix (manual/facts.py); press, dealer and review pages name `source: cited-third-party` (blocked). Not in the CC BY open-data bundle (no licence).",
      cited_hosts: [
