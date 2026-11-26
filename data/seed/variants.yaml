@@ -3087,21 +3087,21 @@ variants:
         notes: "Kia gives the pack size without gross / net; Kia's own EU release of the same update says 62 kWh, so medium."
       power_kw:
         value: 125
-        source_url: https://www.widmann-winterholler.de/fileadmin/user_upload/Fahrzeuge/Neuwagen/Landingpages/Kia/Modell/EV6/Kia-Germany-EV6_Pricelist-Juni2026.pdf
-        source_name: "Kia Deutschland, EV6 price list June 2026 (PDF, copy on a Kia dealer site)"
-        retrieved: 2026-11-19
-        quote: "63-kWh-Batterie, 125 kW (170 PS), Heckantrieb"
-        locator: "Price table, first engine row"
-        confidence: medium
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev6/24_11/Kia_EV6_MJ25_Pressemappe_11-24.pdf
+        source_name: "Kia Deutschland, 'Kia EV6 (Modelljahr 2025) Pressemappe' (PDF, Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "Kia EV6 RWD mit 63-kWh-Batterie (MJ 2025, Strom/Reduktionsgetriebe); 125 kW (170 PS): Stromverbrauch komb. 16,4 kWh/100 km; CO2-Emission komb. 0 g/km; CO2-Klasse A. Reichweite gewichtet (max.): 428 km."
+        locator: "Page 28, footnote *; also Page 5 'Der Kia EV6 auf einen Blick': 'Heckgetriebenes Basismodell (63-kWh-Akku): 125 kW (170 PS), bis zu 428 km Reichweite'"
+        confidence: high
       wltp_range_km:
         value: 428
-        source_url: https://www.widmann-winterholler.de/fileadmin/user_upload/Fahrzeuge/Neuwagen/Landingpages/Kia/Modell/EV6/Kia-Germany-EV6_Pricelist-Juni2026.pdf
-        source_name: "Kia Deutschland, EV6 price list June 2026 (PDF, copy on a Kia dealer site)"
-        retrieved: 2026-11-19
-        quote: "63-kWh-Batterie, 125 kW (170 PS), Heckantrieb 16,4 0 A 428"
-        locator: "Price table, first engine row, column 'Reichweite (komb. in km)'"
-        confidence: medium
-    notes: "Rear-wheel drive: price-list row 'Heckantrieb'. Years: facelift start (Kia DE press kit, Nov 2024). A dealer-hosted copy of Kia's own list, so medium."
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev6/24_11/Kia_EV6_MJ25_Pressemappe_11-24.pdf
+        source_name: "Kia Deutschland, 'Kia EV6 (Modelljahr 2025) Pressemappe' (PDF, Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "Kia EV6 RWD mit 63-kWh-Batterie (MJ 2025, Strom/Reduktionsgetriebe); 125 kW (170 PS): Stromverbrauch komb. 16,4 kWh/100 km; CO2-Emission komb. 0 g/km; CO2-Klasse A. Reichweite gewichtet (max.): 428 km."
+        locator: "Page 28, footnote *; also Page 5 'Der Kia EV6 auf einen Blick': 'bis zu 428 km Reichweite'"
+        confidence: high
+    notes: "Rear-wheel drive: same press kit, Pages 5 ('Heckgetriebenes Basismodell') and 28 ('Kia EV6 RWD'). Years: facelift start (Kia DE press kit, Nov 2024). T-162: re-cited power and WLTP from dealer copy to press.kia.com; values unchanged."
     confidence: medium
   - generation_id: mazda-mx-30-gen1
     id: mazda-mx-30-gen1-ev
@@ -3112,30 +3112,30 @@ variants:
     cited:
       battery_kwh_gross:
         value: 35.5
-        source_url: https://de.mazda-press.com/api/assets/download/9ca9abe0-951a-41b3-a2b4-413d624bac30_Default
-        source_name: "Mazda Deutschland press kit 'Mazda MX-30' (PDF, de.mazda-press.com)"
-        retrieved: 2026-11-19
-        quote: "35,5 kWh starke und somit relativ leichte Hochvoltbatterie"
-        locator: "Body text, battery paragraph"
+        source_url: https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/mx-30/mazda-mx-30-preisliste-01feb2023.pdf
+        source_name: "Mazda Motors (Deutschland) GmbH, 'Mazda MX-30 Preisliste' (PDF, Stand: 1. Februar 2023)"
+        retrieved: 2026-11-26
+        quote: "Batteriekapazität (kWh) 35,5"
+        locator: "Page 20, 'TECHNISCHE DATEN', column 'E-SKYACTIV EV 107 KW (145 PS)'"
         confidence: medium
         notes: "Mazda gives one figure without gross / net; recorded as the pack size, so medium."
       power_kw:
         value: 107
-        source_url: https://de.mazda-press.com/api/assets/download/9ca9abe0-951a-41b3-a2b4-413d624bac30_Default
-        source_name: "Mazda Deutschland press kit 'Mazda MX-30' (PDF, de.mazda-press.com)"
-        retrieved: 2026-11-19
-        quote: "Der e-Skyactiv Motor entwickelt eine Leistung von 107 kW/145 PS"
-        locator: "Body text, drive paragraph"
+        source_url: https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/mx-30/mazda-mx-30-preisliste-01feb2023.pdf
+        source_name: "Mazda Motors (Deutschland) GmbH, 'Mazda MX-30 Preisliste' (PDF, Stand: 1. Februar 2023)"
+        retrieved: 2026-11-26
+        quote: "Maximale Leistung Elektromotor (kW (PS)/bei min-1) 107 (145) / 4.500 – 11.000"
+        locator: "Page 20, 'TECHNISCHE DATEN', column 'E-SKYACTIV EV 107 KW (145 PS)'"
         confidence: high
       wltp_range_km:
         value: 200
-        source_url: https://de.mazda-press.com/api/assets/download/9ca9abe0-951a-41b3-a2b4-413d624bac30_Default
-        source_name: "Mazda Deutschland press kit 'Mazda MX-30' (PDF, de.mazda-press.com)"
-        retrieved: 2026-11-19
-        quote: "Reichweite gemäß WLTP-Testzyklus von 200-262 km (kombiniert/inner"
-        locator: "Footnote 3: 200 km combined, 262 km city"
+        source_url: https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/mx-30/mazda-mx-30-preisliste-01feb2023.pdf
+        source_name: "Mazda Motors (Deutschland) GmbH, 'Mazda MX-30 Preisliste' (PDF, Stand: 1. Februar 2023)"
+        retrieved: 2026-11-26
+        quote: "Elektrische Reichweite (km) kombiniert 200"
+        locator: "Page 20, 'VERBRAUCHS- UND EMISSIONSWERTE NACH WLTP', column 'E-SKYACTIV EV 107 KW (145 PS)'"
         confidence: high
-    notes: "Front-wheel drive: Mazda USA '2022 MX-30 EV Press Kit' (news.mazdausa.com) names a 'Front-wheel drive 80.9 kW electric motor'. One BEV version in the EU; the MX-30 R-EV (range extender) is not a BEV. Years: generation."
+    notes: "Front-wheel drive: same price list, Page 20 ('KRAFTÜBERTRAGUNG', 'Antriebssystem: Vorderradantrieb'). One BEV version in the EU; the MX-30 R-EV (range extender) is not a BEV. Years: generation. T-162: re-cited from password-walled de.mazda-press.com asset to public Mazda DE price list on media-assets.mazda.eu; values unchanged."
     confidence: medium
   - generation_id: smart-eq-forfour-453
     id: smart-eq-forfour-453-eq
@@ -3162,6 +3162,573 @@ variants:
         locator: "Technical data table, column forfour"
         confidence: high
     notes: "Rear-wheel drive: same release ('napędza tylne koła'). The 2020 EQ facelift kept the pack and motor (not re-read from a smart document). NEDC-era car: no WLTP cited. Years: generation."
+    confidence: medium
+
+  # --- T-162 (catalogue batch, 2026-11-26): Tesla Model X gen1, Škoda Citigo e iV, SEAT Mii
+  # electric, Kia EV9, MG Marvel R, BYD Sealion 7. Maker documents / EU type approval only,
+  # single facts cited per car (Decision 087).
+  - generation_id: tesla-model-x-gen1
+    id: tesla-model-x-gen1-60d
+    name: "60D (60 kWh)"
+    years: [2016, 2017]
+    source_names:
+      kilowatt-openev: ["60D"]
+    drivetrain: awd
+    specs: {}
+    notes: "All-wheel drive: Tesla FY2016 Form 10-K (ir.tesla.com, 'our fully electric, all-wheel drive dual motor system'). EU type approval e4*2007/46*0667 variant 60X (RDW TGK gr7t-qfnb, CC0, NEDC 363 km, 210 km/h); EPA 2016-2017 'Model X AWD - 60D'. Software-limited 75 kWh pack on later builds. NEDC-era car: no WLTP cited. Pack kWh not stated on a live Tesla page we could read; linked to tesla-s-60. TGK records tie until T-163 adds TGK variant-code split evidence."
+    confidence: medium
+  - generation_id: tesla-model-x-gen1
+    id: tesla-model-x-gen1-75d
+    name: "75D / Standard Range (75 kWh)"
+    years: [2016, 2020]
+    source_names:
+      kilowatt-openev: ["75D", "Standard Range"]
+    drivetrain: awd
+    specs: {}
+    cited:
+      wltp_range_km:
+        value: 375
+        source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*26&codevarianttgk=XA1
+        source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*26, variant XA1, version EBX15N (Tesla Model X Standard Range, CC0)"
+        retrieved: 2026-11-26
+        quote: '"codevarianttgk": "XA1", "codeuitvoeringtgk": "EBX15N", ... "verbruikvolledigelekwltpbgr": "228.00", "actieradiusvolledigelekwltpbgr": "375"'
+        locator: "EU type approval e4*2007/46*0667*26, variant XA1 (210 km/h)"
+        confidence: medium
+        notes: "2019 Raven Standard Range WLTP figure; earlier 2016-2018 75D (variant 75X) was NEDC-only (417 km)."
+    notes: "All-wheel drive: Tesla FY2016 Form 10-K (ir.tesla.com, dual-motor AWD). Trim names: 75D in Tesla 2015-2020 Model X Owner's Manual Towing table (tesla.com); Standard Range in Subsystems table (205 kW front + 210 kW rear). Covers EU type-approval variants 75X (2016-2018, NEDC 417 km) and XA1 (2019 Raven Standard Range, WLTP 375 km). NEDC-era 75X records tie until T-163 adds TGK variant-code split evidence."
+    confidence: medium
+  - generation_id: tesla-model-x-gen1
+    id: tesla-model-x-gen1-90d
+    name: "90D / P90D (90 kWh)"
+    years: [2016, 2018]
+    source_names:
+      kilowatt-openev: ["90D", "P90D", "P90DL"]
+    drivetrain: awd
+    specs: {}
+    notes: "All-wheel drive: Tesla FY2016 Form 10-K (ir.tesla.com, dual-motor AWD). Trim names: 90D in Tesla 2015-2020 Model X Owner's Manual Towing table (tesla.com); 90D and P90D in Model X Service Manual Rear Lettering (service.tesla.com). EU type approval e4*2007/46*0667 variant 90X (RDW TGK gr7t-qfnb, CC0, NEDC 489 km B2* / 467 km P2*, 250 km/h). NEDC-era car: no WLTP cited. TGK records tie until T-163 adds TGK variant-code split evidence."
+    confidence: medium
+  - generation_id: tesla-model-x-gen1
+    id: tesla-model-x-gen1-100d
+    name: "100D / P100D"
+    years: [2016, 2019]
+    source_names:
+      kilowatt-openev: ["100D", "P100D"]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 100
+        source_url: https://service.tesla.com/docs/ModelX/ServiceManual/en-us/GUID-219B553D-392B-4B3B-9735-A20132B03C92.html
+        source_name: "Tesla 2015-2020 Model X Service Manual, 'Fuse - Pyrotechnic - HV Battery 2.0 (Remove and Replace)'"
+        retrieved: 2026-11-26
+        quote: "Required parts for 100 kWh HV Battery:"
+        locator: "Parts section (cfg_energy = Energy100)"
+        confidence: medium
+        notes: "Tesla gives nominal pack size without gross / net split; recorded as pack size, so medium."
+    notes: "All-wheel drive: Tesla FY2016 Form 10-K (ir.tesla.com, dual-motor AWD). Trim names 100D and P100D: Tesla 2015-2020 Model X Owner's Manual Towing table (tesla.com). EU type approval e4*2007/46*0667 variant 100X (RDW TGK gr7t-qfnb, CC0, NEDC 565 km B2* / 542 km P2*, 250 km/h). NEDC-era car: no WLTP cited. TGK records tie until T-163 adds TGK variant-code split evidence."
+    confidence: medium
+  - generation_id: tesla-model-x-gen1
+    id: tesla-model-x-gen1-long-range
+    name: "Long Range (Raven)"
+    years: [2019, 2021]
+    source_names:
+      kilowatt-openev: ["long range", "Long Range Plus", "Maximum Range"]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 100
+        source_url: https://service.tesla.com/docs/ModelX/ServiceManual/en-us/GUID-219B553D-392B-4B3B-9735-A20132B03C92.html
+        source_name: "Tesla 2015-2020 Model X Service Manual, 'Fuse - Pyrotechnic - HV Battery 2.0 (Remove and Replace)'"
+        retrieved: 2026-11-26
+        quote: "Required parts for 100 kWh HV Battery:"
+        locator: "Parts section (cfg_energy = Energy100)"
+        confidence: medium
+        notes: "Tesla gives nominal pack size without gross / net split; recorded as pack size, so medium."
+      wltp_range_km:
+        value: 507
+        source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*29&codevarianttgk=XA3
+        source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*29, variant XA3, versions EBX15N / EBX15T (Tesla Model X Long Range, CC0)"
+        retrieved: 2026-11-26
+        quote: '"codevarianttgk": "XA3", "codeuitvoeringtgk": "EBX15N", ... "verbruikvolledigelekwltpbgr": "226.00", "actieradiusvolledigelekwltpbgr": "507"'
+        locator: "EU type approval e4*2007/46*0667*29, variant XA3, versions EBX* (250 km/h)"
+        confidence: medium
+        notes: "Extensions 23-33 give 507 km (226 Wh/km); late extension 34 (Long Range Plus) omits WLTP in this table."
+    notes: "All-wheel drive: Tesla 2015-2020 Model X Owner's Manual Subsystems (tesla.com, Long Range: 205 kW front + 210 kW rear). Raven refresh (permanent-magnet front motor). Covers EU type-approval variant XA3 versions EBX* (2019-2021)."
+    confidence: medium
+  - generation_id: tesla-model-x-gen1
+    id: tesla-model-x-gen1-performance
+    name: "Performance (Raven)"
+    years: [2019, 2021]
+    source_names:
+      kilowatt-openev: ["Performance", "Ludicrous Performance"]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 100
+        source_url: https://service.tesla.com/docs/ModelX/ServiceManual/en-us/GUID-219B553D-392B-4B3B-9735-A20132B03C92.html
+        source_name: "Tesla 2015-2020 Model X Service Manual, 'Fuse - Pyrotechnic - HV Battery 2.0 (Remove and Replace)'"
+        retrieved: 2026-11-26
+        quote: "Required parts for 100 kWh HV Battery:"
+        locator: "Parts section (cfg_energy = Energy100)"
+        confidence: medium
+        notes: "Tesla gives nominal pack size without gross / net split; recorded as pack size, so medium."
+      wltp_range_km:
+        value: 487
+        source_url: https://opendata.rdw.nl/resource/gr7t-qfnb.json?typegoedkeuringsnummer=e4*2007/46*0667*29&codevarianttgk=XA3&codeuitvoeringtgk=EPX15T
+        source_name: "RDW TGK Energiebron Uitvoering (gr7t-qfnb), EU type approval e4*2007/46*0667*29, variant XA3, version EPX15T (Tesla Model X Performance, CC0)"
+        retrieved: 2026-11-26
+        quote: '"codevarianttgk": "XA3", "codeuitvoeringtgk": "EPX15T", ... "verbruikvolledigelekwltpbgr": "236.00", "actieradiusvolledigelekwltpbgr": "487"'
+        locator: "EU type approval e4*2007/46*0667*29, variant XA3, versions EPX* (250 km/h)"
+        confidence: medium
+        notes: "Extensions 23-33 give 487 km (236 Wh/km)."
+    notes: "All-wheel drive: Tesla 2015-2020 Model X Owner's Manual Subsystems (tesla.com, Performance: 205 kW front + 375 kW rear). Raven refresh. Covers EU type-approval variant XA3 versions EPX* (2019-2021)."
+    confidence: medium
+  - generation_id: skoda-citigo-e-gen1
+    id: skoda-citigo-e-gen1-ev
+    name: "Citigo e iV (32.3 kWh)"
+    years: [2020, 2021]
+    drivetrain: fwd
+    specs: {}
+    cited:
+      battery_kwh_net:
+        value: 32.3
+        source_url: https://cdn.skoda-storyboard.com/2019/11/03_Press_Kit_SKODA_CITIGOe_iV_SKODA_SUPERB_iV_CITIGOe_iV.pdf
+        source_name: "Škoda Auto Press Kit 'ŠKODA CITIGOe iV' (PDF, Nov 2019)"
+        retrieved: 2026-11-26
+        quote: "The ŠKODA CITIGOe iV’s lithium-ion battery has a capacity of 36.8 kWh, of which 32.3 kWh can be used"
+        locator: "Page 1, powertrain section"
+        confidence: high
+      power_kw:
+        value: 61
+        source_url: https://cdn.skoda-storyboard.com/2019/09/TD-CITIGOe-iV-en.pdf
+        source_name: "Škoda Auto, 'CITIGOe iV Technical specifications' (PDF, 22 Oct 2020)"
+        retrieved: 2026-11-26
+        quote: "Max. engine performance [kW] 61"
+        locator: "Page 1, Engine table"
+        confidence: high
+    notes: "Front-wheel drive: same technical specifications PDF, Page 1 ('Wheel drive: front wheel drive') and Press Kit ('transfers power to the front wheels'). Gross 36.8 kWh on both documents. Škoda technical overview PDF (May 2019, cdn.skoda-storyboard.com) gives 260 km WLTP; RDW plates record 254 km and RDW TGK 274 km (best) / 225 km (worst), so WLTP is left to RDW as on volkswagen-e-up-gen1-32kwh. Years: generation."
+    confidence: high
+  - generation_id: seat-mii-electric-gen1
+    id: seat-mii-electric-gen1-ev
+    name: "Mii electric (32.3 kWh)"
+    years: [2020, 2022]
+    drivetrain: fwd
+    specs: {}
+    cited:
+      battery_kwh_net:
+        value: 32.3
+        source_url: https://mundoseat.seat.com/mediacenter_netstor/seat-media-center/global_site/img/PressKits/Mii-Electric/SEAT-Mii-electric-making-electrification-affordable.pdf
+        source_name: "SEAT Media Center Press Kit 'SEAT Mii electric: making electrification affordable' (PDF, 11 Nov 2019)"
+        retrieved: 2026-11-26
+        quote: "Capacity 32.3kWh (net energy)"
+        locator: "Page 5, Technical data"
+        confidence: high
+      power_kw:
+        value: 61
+        source_url: https://mundoseat.seat.com/mediacenter_netstor/seat-media-center/global_site/img/PressKits/Mii-Electric/SEAT-Mii-electric-making-electrification-affordable.pdf
+        source_name: "SEAT Media Center Press Kit 'SEAT Mii electric: making electrification affordable' (PDF, 11 Nov 2019)"
+        retrieved: 2026-11-26
+        quote: "Motor: Max. power 61kW (83PS)"
+        locator: "Page 5, Technical data; also Page 3 '61kW (83PS) motor'"
+        confidence: high
+    notes: "Front-wheel drive: SEAT Mii electric Owner's Manual (11/2019, seat.com, pp. 49 and 161: 'can only be lifted using the front axle', 'generate braking torque on the front wheels'). Same press kit Page 5 gives 'Combined: 250-259km (WLTP)'; RDW plates record 251-258 km and RDW TGK 274 km (best) / 225 km (worst), so WLTP is left to RDW as on volkswagen-e-up-gen1-32kwh. Years: generation."
+    confidence: high
+  - generation_id: kia-ev9-gen1
+    id: kia-ev9-gen1-76kwh-rwd
+    name: "76.1 kWh RWD"
+    years: [2025, null]
+    source_names:
+      kilowatt-openev: ["76.1 kWh RWD"]
+    drivetrain: rwd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 76.1
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 RWD mit 76,1-kWh-Batterie (MJ 2026, Strom/Reduktionsgetriebe; 160 kW (218 PS): Stromverbrauch kombiniert 19,5 kWh/100 km; CO2-Emission kombiniert 0 g/km; CO2-Klasse A. Reichweite gewichtet (max.): 443 km."
+        locator: "Page 29, footnote *; also Page 19 'Die 76,1-kWh-Batterie'"
+        confidence: medium
+        notes: "Kia gives one capacity figure without gross / net; recorded as pack size, so medium."
+      power_kw:
+        value: 160
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 RWD mit 76,1-kWh-Batterie (MJ 2026, Strom/Reduktionsgetriebe; 160 kW (218 PS)"
+        locator: "Page 29, footnote *; also Page 19 '160 kW Leistung (218 PS)'"
+        confidence: high
+      wltp_range_km:
+        value: 443
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 RWD mit 76,1-kWh-Batterie (MJ 2026, Strom/Reduktionsgetriebe; 160 kW (218 PS): Stromverbrauch kombiniert 19,5 kWh/100 km; CO2-Emission kombiniert 0 g/km; CO2-Klasse A. Reichweite gewichtet (max.): 443 km."
+        locator: "Page 29, footnote *; also Page 19 'bis zu 443 Kilometer Reichweite'"
+        confidence: high
+    notes: "Rear-wheel drive: same press kit, Pages 19 ('Der Hecktriebler') and 29 ('Kia EV9 RWD'). Years: MY2025 entry version (Page 19 'Zum Modelljahr 2025 hat Kia die Antriebspalette des EV9 um eine agile Einstiegsvariante erweitert'; first RDW TGK admissions 2025)."
+    confidence: medium
+  - generation_id: kia-ev9-gen1
+    id: kia-ev9-gen1-99kwh-rwd
+    name: "99.8 kWh RWD"
+    years: [2023, null]
+    source_names:
+      kilowatt-openev: ["99.8 kWh RWD"]
+    drivetrain: rwd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 99.8
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 RWD mit 99,8-kWh-Batterie (MJ 2026, Strom/Reduktionsgetriebe; 150 kW (204 PS): Stromverbrauch kombiniert 20,4/20,2 kWh/100 km (20-/19-Zoll-Räder) ... Reichweite gewichtet (max., 20-/19-Zoll-Räder): 556/563 km."
+        locator: "Page 30, footnote *"
+        confidence: medium
+        notes: "Kia gives one capacity figure without gross / net; recorded as pack size, so medium."
+      power_kw:
+        value: 150
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "dem heckgetriebenen Modell (RWD) mit 150 kW (204 PS)"
+        locator: "Page 19; also Page 30 footnote *"
+        confidence: high
+      wltp_range_km:
+        value: 563
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Der Hecktriebler hat eine Reichweite von bis zu 563 Kilometern (kombinierter Stromverbrauch: 20,2 kWh/100 km; Werte jeweils bei 19-Zoll-Rädern)"
+        locator: "Page 19; also Page 30 footnote * '556/563 km'"
+        confidence: high
+    notes: "Rear-wheel drive: same press kit, Pages 19 ('heckgetriebenen Modell (RWD)') and 30 ('Kia EV9 RWD'). Years: generation start (launch late 2023)."
+    confidence: medium
+  - generation_id: kia-ev9-gen1
+    id: kia-ev9-gen1-99kwh-awd
+    name: "99.8 kWh AWD"
+    years: [2023, null]
+    source_names:
+      kilowatt-openev: ["AWD GT-Line"]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 99.8
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 AWD mit 99,8-kWh-Batterie (MJ 2026, Strom/Reduktionsgetriebe; 283 kW (385 PS)"
+        locator: "Page 30, footnote *"
+        confidence: medium
+        notes: "Kia gives one capacity figure without gross / net; recorded as pack size, so medium."
+      power_kw:
+        value: 283
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "und dem allradgetriebenen Topmodell (283 kW/385 PS), das mit je einem 141,3-kW-Motor an Hinter- und Vorderachse ausgestattet ist."
+        locator: "Page 19; also Page 30 footnote *"
+        confidence: high
+      wltp_range_km:
+        value: 512
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Reichweite gewichtet (max., 21-/19-/20-Zoll-Räder): 505/512/521 km."
+        locator: "Page 30, footnote * (Kia EV9 AWD); also Page 19 'Air/Earth bis zu 512 km je nach Radgröße; GT-line bis zu 505 km'"
+        confidence: medium
+        notes: "19-inch Air/Earth figure (512 km); Kia also lists 505 km (21-inch GT-line) and 521 km (20-inch)."
+    notes: "All-wheel drive: same press kit, Pages 19 ('allradgetriebenen Topmodell', front + rear 141.3 kW motors) and 30 ('Kia EV9 AWD'). Years: generation start (launch late 2023)."
+    confidence: medium
+  - generation_id: kia-ev9-gen1
+    id: kia-ev9-gen1-gt
+    name: "GT (99.8 kWh, AWD)"
+    years: [2025, null]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 99.8
+        source_url: https://www.kia.com/content/dam/kwcms/kme/nl/nl/assets/contents/utility/price-list/Kia-Netherlands-EV9-GT-prijslijst.pdf
+        source_name: "Kia Nederland, 'De Kia EV9 GT Prijslijst' (PDF, augustus 2026)"
+        retrieved: 2026-11-26
+        quote: "Vermogen tot 508 pk (374 kW) > AWD dual motor > Batterijpakket 99.8kWh"
+        locator: "Page 1, EV9 GT highlights (also Kia DE press release 03 Aug 2026 on press.kia.com: 'Kia EV9 GT mit 99,8-kWh-Batterie')"
+        confidence: medium
+        notes: "Kia gives one capacity figure without gross / net; recorded as pack size, so medium."
+      power_kw:
+        value: 374
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 GT (Strom/Reduktionsgetriebe; 374 kW (508 PS): Stromverbrauch kombiniert 21,7 kWh/100 km; CO2-Emission kombiniert 0 g/km; CO2-Klasse A. Reichweite gewichtet (max.): 510 km."
+        locator: "Page 30, footnote *; also Page 19 '374 kW (508 PS) starke Hochleistungsversion'"
+        confidence: high
+      wltp_range_km:
+        value: 510
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev9/25_07/Kia_EV9_MJ26_Pressemappe_07-25.pdf
+        source_name: "Kia Deutschland, 'Kia EV9 (Modelljahr 2026) Pressemappe' (PDF, 07/2025)"
+        retrieved: 2026-11-26
+        quote: "Kia EV9 GT (Strom/Reduktionsgetriebe; 374 kW (508 PS): Stromverbrauch kombiniert 21,7 kWh/100 km; CO2-Emission kombiniert 0 g/km; CO2-Klasse A. Reichweite gewichtet (max.): 510 km."
+        locator: "Page 30, footnote * (Kia NL price list agrees: 510 km WLTP; Kia DE Aug 2026 release gives 505 km)"
+        confidence: high
+    notes: "All-wheel drive: Kia NL EV9 GT price list ('AWD dual motor'). Years: launched May 2025, deliveries Q3 2025 (Kia DE press kit Page 19)."
+    confidence: medium
+  - generation_id: mg-marvel-r-gen1
+    id: mg-marvel-r-gen1-rwd
+    name: "RWD (70 kWh)"
+    years: [2021, 2024]
+    drivetrain: rwd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 70
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "All versions of the MG Marvel R Electric are equipped with a 70 kWh battery."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: medium
+        notes: "MG gives one capacity figure without gross / net; recorded as pack size, so medium."
+      power_kw:
+        value: 132
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "The Comfort and Luxury versions both have rear-wheel drive, two electric motors, a system output of 132 kW (180 ps), 410 Nm of torque, and a WLTP range of 402 kilometres."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+      wltp_range_km:
+        value: 402
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "The Comfort and Luxury versions both have rear-wheel drive, two electric motors, a system output of 132 kW (180 ps), 410 Nm of torque, and a WLTP range of 402 kilometres."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+      ac_kw:
+        value: 11
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "due to the 11 kW 3-phase on-board charger which is standard included."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+      dc_peak_kw:
+        value: 92
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "Furthermore, the battery can be charged at a fast-charging station (DC) with a capacity of up to 92 kW."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+    notes: "Rear-wheel drive (Comfort and Luxury trims, dual rear motors): same release. Years: sales from Oct 2021 (generation 2022-2024; 27 NL cars in 2021)."
+    confidence: medium
+  - generation_id: mg-marvel-r-gen1
+    id: mg-marvel-r-gen1-performance-awd
+    name: "Performance AWD (70 kWh)"
+    years: [2021, 2024]
+    source_names:
+      kilowatt-openev: ["Performance"]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 70
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "All versions of the MG Marvel R Electric are equipped with a 70 kWh battery."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: medium
+        notes: "MG gives one capacity figure without gross / net; recorded as pack size, so medium."
+      power_kw:
+        value: 212
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "The Performance version adds an electric motor to the front axle. It therefore offers permanent all-wheel drive. System output and peak torque are set at 212 kW (288 ps) and 665 Nm of torque, combined with a range of 370 kilometres (WLTP)."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+      wltp_range_km:
+        value: 370
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "System output and peak torque are set at 212 kW (288 ps) and 665 Nm of torque, combined with a range of 370 kilometres (WLTP)."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+      ac_kw:
+        value: 11
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "due to the 11 kW 3-phase on-board charger which is standard included."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+      dc_peak_kw:
+        value: 92
+        source_url: https://news.mgmotor.eu/press/sales-new-mg-marvel-r-electric-starts-today/
+        source_name: "MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021)"
+        retrieved: 2026-11-26
+        quote: "Furthermore, the battery can be charged at a fast-charging station (DC) with a capacity of up to 92 kW."
+        locator: "Section 'Appealing performance with up to 402 km range'"
+        confidence: high
+    notes: "Permanent all-wheel drive (tri-motor Performance trim): same release. Years: sales from Oct 2021 (generation 2022-2024)."
+    confidence: medium
+  - generation_id: byd-sealion-7-gen1
+    id: byd-sealion-7-gen1-comfort-rwd
+    name: "Comfort RWD (82.5 kWh)"
+    years: [2024, null]
+    drivetrain: rwd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 82.5
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "The rear-wheel-drive Comfort spec and all-wheel-drive Design AWD models feature a 82.5 kWh Blade Battery."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: medium
+        notes: "BYD gives rated capacity without gross / net split; recorded as pack size, so medium."
+      power_kw:
+        value: 230
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "This motor produces 230 kW and 380 Nm of torque, and plays a key role in both drive configurations. It's the single motor in the rear-wheel-drive Comfort version of the BYD SEALION 7"
+        locator: "Section 'WORLD'S FASTEST MASS-PRODUCTION E-MOTOR'"
+        confidence: high
+      wltp_range_km:
+        value: 482
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "That's enough, in the single-motor version, for a WLTP combined range of 482 km"
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+      ac_kw:
+        value: 11
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "All versions of the BYD SEALION 7 get 11 kW three-phase AC charging as standard"
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+      dc_peak_kw:
+        value: 150
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "Comfort and Design editions can be recharged at up to 150 kW, allowing the battery to be recharged from 10% to 80% in 32 minutes."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+    notes: "Rear-wheel drive: same release ('rear-wheel-drive Comfort version'). Years: deliveries Q4 2024 (20 NL cars in 2024; generation starts 2025)."
+    confidence: medium
+  - generation_id: byd-sealion-7-gen1
+    id: byd-sealion-7-gen1-design-awd
+    name: "Design AWD (82.5 kWh)"
+    years: [2024, null]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 82.5
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "The rear-wheel-drive Comfort spec and all-wheel-drive Design AWD models feature a 82.5 kWh Blade Battery."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: medium
+        notes: "BYD gives rated capacity without gross / net split; recorded as pack size, so medium."
+      power_kw:
+        value: 390
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "Then, in the Design AWD and Excellence AWD editions, this motor is joined by a further 160 kW unit on the front axle, delivering all-wheel drive and a combined output of 390 kW and 690 Nm of torque."
+        locator: "Section 'WORLD'S FASTEST MASS-PRODUCTION E-MOTOR'"
+        confidence: high
+      wltp_range_km:
+        value: 456
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "while the two-motor Design AWD returns a WLTP figure of 456 km."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+      ac_kw:
+        value: 11
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "All versions of the BYD SEALION 7 get 11 kW three-phase AC charging as standard"
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+      dc_peak_kw:
+        value: 150
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "Comfort and Design editions can be recharged at up to 150 kW, allowing the battery to be recharged from 10% to 80% in 32 minutes."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+    notes: "All-wheel drive (dual motor): same release. Years: deliveries Q4 2024 (generation starts 2025)."
+    confidence: medium
+  - generation_id: byd-sealion-7-gen1
+    id: byd-sealion-7-gen1-excellence-awd
+    name: "Excellence AWD (91.3 kWh)"
+    years: [2024, null]
+    drivetrain: awd
+    specs: {}
+    cited:
+      battery_kwh_gross:
+        value: 91.3
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "The range-topping Excellence AWD gets a larger battery pack, with a capacity of 91.3 kWh."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: medium
+        notes: "BYD gives rated capacity without gross / net split; recorded as pack size, so medium."
+      power_kw:
+        value: 390
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "Then, in the Design AWD and Excellence AWD editions, this motor is joined by a further 160 kW unit on the front axle, delivering all-wheel drive and a combined output of 390 kW and 690 Nm of torque."
+        locator: "Section 'WORLD'S FASTEST MASS-PRODUCTION E-MOTOR'"
+        confidence: high
+      wltp_range_km:
+        value: 502
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "the Excellence AWD version has the longest range of any BYD SEALION 7, at 502 km."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+      ac_kw:
+        value: 11
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "All versions of the BYD SEALION 7 get 11 kW three-phase AC charging as standard"
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+      dc_peak_kw:
+        value: 230
+        source_url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+        source_name: "BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024)"
+        retrieved: 2026-11-26
+        quote: "The larger-battery Excellence AWD can reach speeds of 230 kW when hooked up to a DC ultra-fast charging station."
+        locator: "Section 'MORE THAN 500 KM OF RANGE, AND BYD'S FASTEST CHARGING IN EUROPE'"
+        confidence: high
+    notes: "All-wheel drive (dual motor): same release. Years: deliveries Q4 2024 (generation starts 2025)."
     confidence: medium
 
 source_holds:
