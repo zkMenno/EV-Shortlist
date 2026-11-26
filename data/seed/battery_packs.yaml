@@ -119,6 +119,12 @@ packs:
   # --- Ford E-Tourneo Courier (T-156) ---
   - {id: ford-courier-46, name: "Ford E-Tourneo Courier 46 kWh usable (2026 update)", chemistry_id: not-disclosed, cell_format: not-disclosed, gross_kwh: not-disclosed, usable_kwh: 46, nominal_v: not-disclosed, cooling_id: not-disclosed}
   - {id: xpeng-p7-plus-lr, name: "XPENG P7+ Long Range pack", chemistry_id: not-disclosed, cell_format: not-disclosed, gross_kwh: not-disclosed, usable_kwh: not-disclosed, nominal_v: not-disclosed, cooling_id: not-disclosed}
+  # --- T-162 (2026-11-26): Kia EV9, MG Marvel R, BYD Sealion 7 ---
+  - {id: egmp-76-1, name: "E-GMP 76.1 kWh (Kia EV9)", chemistry_id: not-disclosed, cell_format: not-disclosed, gross_kwh: 76.1, usable_kwh: not-disclosed, nominal_v: not-disclosed, cooling_id: not-disclosed}
+  - {id: egmp-99-8, name: "E-GMP 99.8 kWh (Kia EV9)", chemistry_id: not-disclosed, cell_format: not-disclosed, gross_kwh: 99.8, usable_kwh: not-disclosed, nominal_v: not-disclosed, cooling_id: not-disclosed}
+  - {id: mg-marvel-r-70, name: "MG Marvel R Electric 70 kWh", chemistry_id: not-disclosed, cell_format: not-disclosed, gross_kwh: 70, usable_kwh: not-disclosed, nominal_v: not-disclosed, cooling_id: not-disclosed}
+  - {id: byd-blade-82-5, name: "BYD Blade 82.5 kWh (Sealion 7)", supplier: BYD (FinDreams), chemistry_id: lfp, cell_format: blade, cell_to_pack: true, gross_kwh: 82.5, usable_kwh: not-disclosed, nominal_v: not-disclosed, cooling_id: not-disclosed}
+  - {id: byd-blade-91-3, name: "BYD Blade 91.3 kWh (Sealion 7)", supplier: BYD (FinDreams), chemistry_id: lfp, cell_format: blade, cell_to_pack: true, gross_kwh: 91.3, usable_kwh: not-disclosed, nominal_v: not-disclosed, cooling_id: not-disclosed}
 
 notes:
   tesla-m3-sr-nca: "Fremont-built early SR+; Panasonic 2170 cells. Gross capacity not known to us."
@@ -200,4 +206,9 @@ notes:
   mini-aceman-42-5: "T-154: BMW Group PressClub UK, 'The all-new electric MINI Aceman': 'a high-voltage battery with a capacity of 42.5 kWh'."
   mini-countryman-u25-66: "T-154: BMW Group technical data 'MINI Countryman SE ALL4' (03/2024, https://www.press.bmwgroup.com/global/article/attachment/T0448240EN/629246): voltage 286,3 V, gross 66,5 kWh, net 64,6 kWh; the Countryman E release gives the same pack as 66.45 kWh."
   mini-aceman-54-2: "T-154: BMW Group PressClub UK, 'The all-new electric MINI Aceman': 'a 54.2 kWh battery' for the Aceman SE. Kept apart from the Cooper SE (J01) pack row: no BMW page read says the two packs are the same."
-  mazda-mx-30-35-5: "T-160: Mazda Deutschland press kit 'Mazda MX-30' (de.mazda-press.com): '35,5 kWh starke ... Hochvoltbatterie'; Mazda gives no gross / net split, recorded as gross."
+  mazda-mx-30-35-5: "T-160 / T-162: Mazda Motors (Deutschland) GmbH 'Mazda MX-30 Preisliste' (01 Feb 2023, media-assets.mazda.eu, p. 20): 'Batteriekapazität (kWh) 35,5'; Mazda gives no gross / net split, recorded as gross."
+  egmp-76-1: "T-162: Kia Deutschland 'Kia EV9 (Modelljahr 2026) Pressemappe' (07/2025, press.kia.com, pp. 2, 19, 29): '76,1-kWh-Batterie'; Kia gives no gross / net split, recorded as gross. Chemistry, voltage and cooling not read from that kit."
+  egmp-99-8: "T-162: Kia Deutschland 'Kia EV9 (Modelljahr 2026) Pressemappe' (07/2025, press.kia.com, pp. 3, 19, 30): '99,8-kWh-Batterie'; Kia gives no gross / net split, recorded as gross. Chemistry, voltage and cooling not read from that kit."
+  mg-marvel-r-70: "T-162: MG Motor Europe press release 'Sales new MG Marvel R Electric starts today' (07 Oct 2021, news.mgmotor.eu): '70 kWh battery', 'battery thermal management system (also standard) which can heat or cool the battery'; gross / net, chemistry, cell format and coolant type not stated."
+  byd-blade-82-5: "T-162: BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024, www.byd.com): '82.5 kWh Blade Battery', LFP cathode, Cell-to-Body (cells installed directly into pack); gross / net and cooling medium not stated."
+  byd-blade-91-3: "T-162: BYD Europe press release 'BYD introduces sporty BYD SEALION 7 to European market' (15 Nov 2024, www.byd.com): 'larger battery pack, with a capacity of 91.3 kWh', LFP Blade Battery, Cell-to-Body; gross / net and cooling medium not stated."

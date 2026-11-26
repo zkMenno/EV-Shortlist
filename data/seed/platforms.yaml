@@ -157,6 +157,12 @@ platforms:
     nominal_v: not-disclosed
     voltage_class_id: 400v
     notes: "Electric version of the combustion MG ZS."
+  - id: mg-marvel-r
+    name: "MG Marvel R Electric (platform name not disclosed)"
+    owner: SAIC Motor
+    nominal_v: not-disclosed
+    voltage_class_id: not-disclosed
+    notes: "T-162: platform name and voltage class not read from an MG document, so left not-disclosed."
   - id: volvo-cma
     name: "CMA"
     owner: Geely Holding
