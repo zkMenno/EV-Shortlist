@@ -934,5 +934,7 @@
   "hero.sheet.title": "Je antwoorden",
   "hero.sheet.close": "Antwoorden sluiten",
   "hero.sheet.done": "Toon mijn top 10",
-  "hero.sheet.openN": "Antwoorden & verfijnen · {n}"
+  "hero.sheet.openN": "Antwoorden & verfijnen · {n}",
+  "photo.caption": "Foto: {credit}",
+  "photo.none": "Nog geen foto"
 }

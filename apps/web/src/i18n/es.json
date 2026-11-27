@@ -935,5 +935,7 @@
   "hero.sheet.title": "Tus respuestas",
   "hero.sheet.close": "Cerrar tus respuestas",
   "hero.sheet.done": "Ver mi top 10",
-  "hero.sheet.openN": "Respuestas y filtros · {n}"
+  "hero.sheet.openN": "Respuestas y filtros · {n}",
+  "photo.caption": "Foto: {credit}",
+  "photo.none": "Aún no hay foto"
 }

@@ -935,5 +935,7 @@
   "hero.sheet.title": "Deine Antworten",
   "hero.sheet.close": "Antworten schließen",
   "hero.sheet.done": "Meine Top 10 zeigen",
-  "hero.sheet.openN": "Antworten & verfeinern · {n}"
+  "hero.sheet.openN": "Antworten & verfeinern · {n}",
+  "photo.caption": "Foto: {credit}",
+  "photo.none": "Noch kein Foto"
 }
