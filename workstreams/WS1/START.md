@@ -22,7 +22,7 @@ For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator).
 - Matching or merge-logic change: same-data rebuild diff in the PR body (G-43, REVIEW D4) and the 5 tricky cars (EV6, Ioniq 5, MG4, Model Y LR vs Juniper, P7+).
 
 ## Verify before every push
-- `cd pipeline && uv run ruff check . && uv run ruff format --check . && uv run pytest` (fetch release assets first: `uv run ev release fetch latest`).
+- `cd pipeline && uv run ruff check . && uv run ruff format --check . && uv run pytest` (fetch release assets first: `uv run ev release fetch latest`, or `uv run ev release fetch latest --via-gh` in proxy-routed Antigravity VMs where HTTP downloads hit SSRF checks — rule G-66).
 - Data changes: the `verify-pipeline` skill (`pipeline/.claude/skills/verify/SKILL.md`, `uv run ev verify`): rebuild from staging, release diff vs N-1 (approvals in `config/approved_changes.yaml`, its own gate PR), back-tests, tricky cars. Evidence pack in the PR body; commits end with `Verified: <how>`.
 - Changed `data/sources.yaml`: run `node apps/web/scripts/sources.mjs` and `git diff --exit-code` (the web copy must be regenerated, or CI `web` fails).
 
