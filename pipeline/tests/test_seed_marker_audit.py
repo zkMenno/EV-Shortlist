@@ -99,27 +99,50 @@ def _call_name(node: ast.Call) -> str | None:
     return None
 
 
-def _is_file_parents_expr(node: ast.AST, *, saw_parent: bool = False) -> bool:
-    """True for `Path(__file__)[.resolve()].parents[...]`, `Path(__file__).parent.parent...`,
-    or `<x>.parents[...].parent`."""
-    if isinstance(node, ast.Attribute) and node.attr == "parent":
-        return _is_file_parents_expr(node.value, saw_parent=True)
-    if isinstance(node, ast.Attribute) and node.attr == "resolve":
-        return _is_file_parents_expr(node.value, saw_parent=saw_parent)
+_FILE_ROOTED_KINDS = frozenset({"file_path", "repo_root", "repo_data", "seed_dir", "seed_yaml"})
+
+
+def _is_file_rooted(node: ast.AST, env: dict[str, str]) -> bool:
+    """True when `node` originates from `__file__` (directly or via tracked path variables)."""
+    if isinstance(node, ast.Name):
+        return node.id == "REPO_ROOT" or env.get(node.id) in _FILE_ROOTED_KINDS
+    if isinstance(node, ast.Attribute) and node.attr in ("parent", "resolve"):
+        return _is_file_rooted(node.value, env)
     if isinstance(node, ast.Subscript):
         val = node.value
         if isinstance(val, ast.Attribute) and val.attr == "parents":
-            return True
+            return _is_file_rooted(val.value, env)
     if isinstance(node, ast.Call):
         if isinstance(node.func, ast.Attribute) and node.func.attr == "resolve":
-            return _is_file_parents_expr(node.func.value, saw_parent=saw_parent)
+            return _is_file_rooted(node.func.value, env)
+        if any(isinstance(a, ast.Name) and a.id == "__file__" for a in node.args):
+            return True
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div):
+        return _is_file_rooted(node.left, env)
+    return False
+
+
+def _is_file_parents_expr(node: ast.AST, env: dict[str, str], *, saw_parent: bool = False) -> bool:
+    """True for `Path(__file__)[.resolve()].parents[...]`, `Path(__file__).parent.parent...`,
+    or `<file-rooted>.parents[...].parent`."""
+    if isinstance(node, ast.Attribute) and node.attr == "parent":
+        return _is_file_parents_expr(node.value, env, saw_parent=True)
+    if isinstance(node, ast.Attribute) and node.attr == "resolve":
+        return _is_file_parents_expr(node.value, env, saw_parent=saw_parent)
+    if isinstance(node, ast.Subscript):
+        val = node.value
+        if isinstance(val, ast.Attribute) and val.attr == "parents":
+            return _is_file_rooted(val.value, env)
+    if isinstance(node, ast.Call):
+        if isinstance(node.func, ast.Attribute) and node.func.attr == "resolve":
+            return _is_file_parents_expr(node.func.value, env, saw_parent=saw_parent)
         if saw_parent and any(isinstance(a, ast.Name) and a.id == "__file__" for a in node.args):
             return True
     return False
 
 
 def _flatten_div_chain(node: ast.AST) -> tuple[ast.AST, list[str | None]] | None:
-    """Flatten `base / 'a' / 'b'` into `(base, ['a', 'b'])` (None for dynamic segments)."""
+    """Flatten `base / 'a/b' / 'c'` into `(base, ['a', 'b', 'c'])` (None for dynamic segments)."""
     if not (isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div)):
         return None
     parts: list[str | None] = []
@@ -127,7 +150,8 @@ def _flatten_div_chain(node: ast.AST) -> tuple[ast.AST, list[str | None]] | None
     while isinstance(cur, ast.BinOp) and isinstance(cur.op, ast.Div):
         right = cur.right
         if isinstance(right, ast.Constant) and isinstance(right.value, str):
-            parts.extend(p for p in right.value.split("/") if p)
+            segs = [p for p in right.value.replace("\\", "/").split("/") if p]
+            parts.extend(reversed(segs))
         else:
             parts.append(None)
         cur = cur.left
@@ -140,8 +164,8 @@ def _is_non_yaml_file(segment: str | None) -> bool:
 
 
 def _classify_expr(node: ast.AST, env: dict[str, str]) -> str | None:
-    """Classify an expression as `'repo_root'`, `'repo_data'`, `'seed_dir'`, `'seed_yaml'`,
-    or `None` given variable classifications in `env`."""
+    """Classify an expression as `'file_path'`, `'repo_root'`, `'repo_data'`, `'seed_dir'`,
+    `'seed_yaml'`, or `None` given variable classifications in `env`."""
     if isinstance(node, ast.Name):
         if node.id == "REPO_ROOT":
             return "repo_root"
@@ -158,7 +182,7 @@ def _classify_expr(node: ast.AST, env: dict[str, str]) -> str | None:
             segs: list[str | None] = []
             for a in node.args:
                 if isinstance(a, ast.Constant) and isinstance(a.value, str):
-                    segs.extend(p for p in a.value.split("/") if p)
+                    segs.extend(p for p in a.value.replace("\\", "/").split("/") if p)
                 else:
                     segs.append(None)
             return _advance_path(base_kind, segs)
@@ -202,16 +226,21 @@ def _classify_expr(node: ast.AST, env: dict[str, str]) -> str | None:
             recv = _classify_expr(node.func.value, env)
             if recv == "seed_yaml":
                 return "seed_yaml"
+        if any(isinstance(a, ast.Name) and a.id == "__file__" for a in node.args):
+            return "file_path"
         return None
 
-    if _is_file_parents_expr(node):
+    if _is_file_parents_expr(node, env):
         return "repo_root"
 
     chain = _flatten_div_chain(node)
     if chain is not None:
         base, parts = chain
         base_kind = _classify_expr(base, env)
-        return _advance_path(base_kind, parts)
+        res = _advance_path(base_kind, parts)
+        if res is None and base_kind in _FILE_ROOTED_KINDS:
+            return "file_path"
+        return res
 
     return None
 
@@ -238,28 +267,32 @@ def _advance_path(base_kind: str | None, parts: list[str | None]) -> str | None:
                 kind = "seed_yaml"
             else:
                 return None
-        elif kind == "seed_yaml":
+        else:
             return None
     return kind
 
 
+def _bind_target(tgt: ast.AST, kind: str, env: dict[str, str]) -> None:
+    if isinstance(tgt, ast.Name):
+        if tgt.id != "_":
+            env[tgt.id] = kind
+    elif isinstance(tgt, (ast.Tuple, ast.List)):
+        for elt in tgt.elts:
+            _bind_target(elt, kind, env)
+
+
 def _record_assignments(stmts: list[ast.stmt], env: dict[str, str]) -> None:
-    """Propagate simple path/seed variable bindings across top-level or local statements."""
+    """Propagate path/seed variable bindings (including tuple unpacking) across statements."""
     for stmt in stmts:
-        if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1:
-            tgt = stmt.targets[0]
-            if isinstance(tgt, ast.Name):
-                k = _classify_expr(stmt.value, env)
-                if k is not None:
-                    env[tgt.id] = k
-        elif (
-            isinstance(stmt, ast.AnnAssign)
-            and stmt.value is not None
-            and isinstance(stmt.target, ast.Name)
-        ):
+        if isinstance(stmt, ast.Assign):
             k = _classify_expr(stmt.value, env)
             if k is not None:
-                env[stmt.target.id] = k
+                for tgt in stmt.targets:
+                    _bind_target(tgt, k, env)
+        elif isinstance(stmt, ast.AnnAssign) and stmt.value is not None:
+            k = _classify_expr(stmt.value, env)
+            if k is not None:
+                _bind_target(stmt.target, k, env)
 
 
 def _body_reads_seed(fn: ast.FunctionDef | ast.AsyncFunctionDef, mod_env: dict[str, str]) -> bool:
@@ -515,3 +548,41 @@ def test_audit_catches_stripped_real_scoped_aliases() -> None:
         "test_real_seed_scoped",
         "test_real_seed_make_aliases",
     }
+
+
+def test_audit_handles_multisegment_div_tuple_unpacking_and_tmp_parents() -> None:
+    """PR #221 review fixes: multi-segment string literals in `/` chains, module-level tuple
+    unpacking (`MANUAL, _ = load_manual_variants(...)`), `__file__`-derived `FIX.parents[...]`,
+    and ignoring `tmp_path.parents[0]`."""
+    src = """
+from pathlib import Path
+from ev_pipeline.match.seed import load_manual_variants, load_seed
+
+REPO = Path(__file__).resolve().parents[2]
+FIX = Path(__file__).parent / "fixtures" / "release"
+MANUAL, _ = load_manual_variants(REPO / "data" / "seed" / "variants.yaml")
+
+def test_multisegment_single_literal():
+    assert load_seed(REPO / "data/seed/models.yaml")
+
+def test_multisegment_split_literal():
+    assert load_seed(REPO / "data/seed" / "models.yaml")
+
+def test_tuple_unpacked_module_global():
+    assert MANUAL
+
+def test_fix_parents_chain():
+    assert load_seed(FIX.parents[2].parent / "data" / "seed" / "models.yaml")
+
+def test_tmp_path_parents_is_ignored(tmp_path):
+    p = tmp_path.parents[0] / "data" / "seed" / "models.yaml"
+    assert p
+"""
+    caught = find_unmarked_seed_tests(src, "test_edges.py")
+    names = [entry.rsplit(": ", 1)[1] for entry in caught]
+    assert names == [
+        "test_multisegment_single_literal",
+        "test_multisegment_split_literal",
+        "test_tuple_unpacked_module_global",
+        "test_fix_parents_chain",
+    ]
