@@ -264,7 +264,7 @@ variants:
       power_kw:
         value: 386
         source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
-        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S)"
         retrieved: 2026-11-26
         quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 (front) 193 (Rear)"
         locator: "Page 24, 2017 MY CARB Supplemental Data Sheet for 90D: 193 kW front + 193 kW rear = 386 kW combined motor rating"
@@ -290,7 +290,7 @@ variants:
       power_kw:
         value: 386
         source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
-        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S)"
         retrieved: 2026-11-26
         quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 (front) 193 (Rear)"
         locator: "Page 26, 2017 MY CARB Supplemental Data Sheet for 75D: 193 kW front + 193 kW rear = 386 kW combined motor rating"
@@ -313,7 +313,7 @@ variants:
       power_kw:
         value: 386
         source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
-        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S)"
         retrieved: 2026-11-26
         quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 / 193 KW"
         locator: "Page 32, 2017 MY CARB Supplemental Data Sheet for 100D (and p. 24 for 90D): 193 kW front + 193 kW rear = 386 kW combined motor rating"
@@ -335,7 +335,7 @@ variants:
       power_kw:
         value: 568
         source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
-        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S)"
         retrieved: 2026-11-26
         quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 (front) 375 (Rear)"
         locator: "Page 30, 2017 MY CARB Supplemental Data Sheet for P100D (and p. 22 for P90D: '193 / 375KW'): 193 kW front + 375 kW rear = 568 kW combined motor rating"

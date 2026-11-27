@@ -51,7 +51,7 @@ sources:
        media-assets.mazda.eu, mundoseat.seat.com, news.mgmotor.eu,
        service.tesla.com, www.byd.com, opendata.rdw.nl,
        # T-164 (WS3, cross-lane WS1 edit): official Tesla WLTP support, Audi AG (already in manual.cited_hosts),
-       # and US EPA public-domain (17 U.S.C. 105) maker-submitted certification filings / Test Car List
+       # Tesla maker certification filings hosted on dis.epa.gov, and US EPA Public Domain (17 U.S.C. 105) Test Car List on www.epa.gov
        www.tesla.com, www.audi.com, dis.epa.gov, www.epa.gov,
        # maker documents on a hosting service: path prefix only, never the whole host (PR #80 review).
        # SEAT Import Belgium (CUPRA) Born press pack CU21/34N on Prezly
