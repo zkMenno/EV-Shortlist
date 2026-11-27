@@ -65,6 +65,8 @@ import { LoanBox, LoanWarning, useLoanSettings, type FinanceUi } from "./PriceMo
 import { profileName } from "./SuggestedSort";
 import { TermInfo, type TermText } from "./Term";
 import { OfficialRange } from "./OfficialRange";
+import { CarThumb, type PhotoRef } from "./CarPhoto";
+import { HeroSheet } from "./HeroSheet";
 import { numLabels } from "./num-labels";
 import { ParallaxScene } from "@/components/parallax/ParallaxScene";
 import { city as cityScene, village as villageScene } from "@/components/parallax/scenes.generated";
@@ -96,6 +98,8 @@ export interface HeroProps {
   terms: Record<string, UiTerm | undefined>;
   /** Launch /learn guides that exist (winter range, charging in 2026, batteries). */
   learnLinks?: { slug: string; title: string; href: string }[];
+  /** Generation id → its photo from the release (T-146 row thumbnails); absent = no photo. */
+  photos?: Record<string, PhotoRef>;
 }
 
 // Five amounts + "No limit" = the 3×2 grid of the budget step (T-132).
@@ -205,6 +209,11 @@ export function Hero(props: HeroProps) {
   // The loan settings box renders only when opened (one LoanBox per page until then).
   const [loanOpen, setLoanOpen] = useState(false);
   const [refineOpen, setRefineOpen] = useState(false);
+  // T-146: on phones (< 640 px) the answers sidebar opens as a bottom sheet from the results.
+  const [sheet, setSheet] = useState(false);
+  const sheetOpen = useRef(false);
+  /** The sheet pushed a history entry (so the phone's Back button closes it). */
+  const sheetPushed = useRef(false);
   const [dirty, setDirty] = useState(false);
   const lastUrl = useRef(heroToSearchParams(props.initial).toString());
   // Focus moves to the new question's heading after a step change (not on first paint).
@@ -218,6 +227,11 @@ export function Hero(props: HeroProps) {
   const tip = (id: string) => <TermInfo term={props.terms[id]} base={props.base} text={termText} />;
   const qid = useId();
   const step = heroStep(hero);
+  // The latest state for the popstate handler (it is registered once).
+  const heroRef = useRef(hero);
+  useEffect(() => {
+    heroRef.current = hero;
+  }, [hero]);
 
   useEffect(() => {
     let live = true;
@@ -244,6 +258,16 @@ export function Hero(props: HeroProps) {
   // Back / forward between questions: the URL is the state.
   useEffect(() => {
     const onPop = () => {
+      if (sheetOpen.current) {
+        // Back closed the sheet (T-146). The entry we land on still holds the address from before the
+        // sheet opened: write today's answers into it, so nothing changed in the sheet is lost.
+        sheetOpen.current = false;
+        sheetPushed.current = false;
+        setSheet(false);
+        lastUrl.current = heroToSearchParams(heroRef.current).toString();
+        window.history.replaceState(null, "", mergeHeroIntoUrl(window.location.href, heroRef.current));
+        return;
+      }
       const s = heroFromSearchParams(new URLSearchParams(window.location.search));
       lastUrl.current = heroToSearchParams(s).toString();
       focusStep.current = true;
@@ -279,6 +303,13 @@ export function Hero(props: HeroProps) {
   /** Show another question (a new history entry). "results" is the default screen, so no q. */
   const goTo = (to: HeroStep, from: HeroState = hero) => {
     if (advanceTimer.current) clearTimeout(advanceTimer.current);
+    // A change button inside the phone sheet opens a question: the sheet goes (its history entry
+    // stays behind as the results, so Back from the question returns to them).
+    if (sheetOpen.current) {
+      sheetOpen.current = false;
+      sheetPushed.current = false;
+      setSheet(false);
+    }
     const s: HeroState = { ...from, step: to === "results" ? null : to };
     writeUrl(s, "push");
     focusStep.current = true;
@@ -351,6 +382,25 @@ export function Hero(props: HeroProps) {
       () => setCopied(true),
       () => setCopied(false),
     );
+  };
+
+  const openSheet = () => {
+    if (sheetOpen.current) return;
+    window.history.pushState(null, "", window.location.href);
+    sheetPushed.current = true;
+    sheetOpen.current = true;
+    setSheet(true);
+  };
+  /** Close button, Escape, swipe down, tap outside, wider screen: all go through Back when the
+   *  sheet added a history entry, so the entry never stays behind. */
+  const closeSheet = () => {
+    if (!sheetOpen.current) return;
+    if (sheetPushed.current) {
+      window.history.back();
+      return;
+    }
+    sheetOpen.current = false;
+    setSheet(false);
   };
 
   // ── What the visitor said so far (trail pills, T-132) ──
@@ -575,7 +625,36 @@ export function Hero(props: HeroProps) {
               {/* T-132 part 2: phone = profile, refine, then the results; desktop = the answers in a sticky
                   sidebar (each editable) beside the top 10 (frames t132-m4 / t132-d2). */}
               <div className="lg:mt-6 lg:grid lg:grid-cols-[19rem_minmax(0,1fr)] lg:items-start lg:gap-8">
-              <aside aria-label={t("hero.side.label")} className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto" data-testid="hero-side">
+              {/* T-146: phones get a one-line summary and "Answers & refine"; the sidebar opens as a sheet. */}
+              {rp ? (
+                <div className="mt-4 flex items-center gap-3 rounded-xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-3 sm:hidden" data-testid="hero-phone-bar">
+                  <p className="min-w-0 flex-1 text-[15px] leading-snug">
+                    <strong className="font-[family-name:var(--font-display)]">{profileName(rp, t)}</strong>
+                    <br />
+                    <span className="text-[var(--ink-2)]">{hero.budget === null ? t("hero.summary.noLimit") : t("hero.summary.upTo", { amount: money(hero.budget) })}</span>
+                  </p>
+                  <button
+                    type="button"
+                    className="evs-btn-out shrink-0"
+                    aria-haspopup="dialog"
+                    aria-expanded={sheet}
+                    aria-controls={`${qid}-side`}
+                    onClick={openSheet}
+                    data-testid="hero-refine-open"
+                  >
+                    {refineCount ? t("hero.sheet.openN", { n: refineCount }) : t("hero.sheet.open")}
+                  </button>
+                </div>
+              ) : null}
+              <HeroSheet
+                id={`${qid}-side`}
+                open={sheet}
+                onClose={closeSheet}
+                label={t("hero.side.label")}
+                title={t("hero.sheet.title")}
+                closeLabel={t("hero.sheet.close")}
+                doneLabel={t("hero.sheet.done")}
+              >
               <ProfileBar
                 rp={rp}
                 t={t}
@@ -593,7 +672,7 @@ export function Hero(props: HeroProps) {
                 onGo={(to) => goTo(to)}
               />
               {refine(t("hero.refine.button", { n: refineCount }))}
-              </aside>
+              </HeroSheet>
         <Results
           result={result}
           rp={rp}
@@ -699,8 +778,8 @@ function ProfileBar({
         {rp.layer ? ` ${t(`hero.profile.${rp.layer.id}.short` as MsgKey)}` : ""}
       </p>
       {answers.length ? (
-        // Desktop only: on a phone the summary line and Edit already say the same in less room.
-        <dl className="mt-3 hidden lg:block" data-testid="hero-answers">
+        // Desktop sidebar and the phone sheet (T-146); between 640 px and lg the summary line and Edit say it in less room.
+        <dl className="mt-3 hidden max-sm:block lg:block" data-testid="hero-answers">
           {answers.map((x) => (
             <div key={x.key} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 border-t border-[var(--line)] py-2">
               <dt className="col-start-1 text-[13px] text-[var(--ink-2)]">{x.label}</dt>
@@ -1264,16 +1343,22 @@ function Card({ pick, r }: { pick: HeroPick; r: ResultsProps }) {
   const priceHow = level === "nerd" && pick.price ? priceHowText(pick.price, t, locale, r.money, props.sources) : null;
   const cond = pick.price ? t(pick.price.kind === "new" ? "hero.card.cond.new" : "hero.card.cond.used") : null;
   const tt = { about: t("term.about"), learnMore: t("term.learnMore") };
+  const photo = props.photos?.[row.generation_id];
 
   return (
     <li className="evs-srow evs-srow--card" {...cardAttrs(pick)}>
       <span style={{ gridArea: "rank" }}>{rank}</span>
-      <div style={{ gridArea: "car" }} className="min-w-0">
-        <h4 className="text-[17px] font-bold leading-snug">{link}</h4>
-        <p className="text-sm text-[var(--ink-2)]">
-          {row.variant_name} · {formatYears(row.year_start, row.year_end, t("years.now"))}
-          {cond ? ` · ${cond}` : ""}
-        </p>
+      <div style={{ gridArea: "car" }} className="flex min-w-0 flex-wrap items-start gap-x-3 gap-y-2">
+        {/* T-146: the generation's photo when the release has one; rows without keep the old layout. */}
+        {photo ? <CarThumb photo={photo} alt={`${row.make_name} ${row.model_name} ${row.generation_name}`} text={{ credit: t("photo.credit"), page: t("photo.page"), term: tt }} /> : null}
+        {/* Narrow rows put the photo above the name (the name keeps at least 8rem). */}
+        <div className="min-w-0 grow basis-[8rem]">
+          <h4 className="text-[17px] font-bold leading-snug">{link}</h4>
+          <p className="text-sm text-[var(--ink-2)]">
+            {row.variant_name} · {formatYears(row.year_start, row.year_end, t("years.now"))}
+            {cond ? ` · ${cond}` : ""}
+          </p>
+        </div>
       </div>
       <div className="evs-srow__facts">
         <p style={{ gridArea: "price" }} className="font-bold tabular-nums">

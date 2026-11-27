@@ -927,5 +927,12 @@
   "card.fact.summer": "km zomer",
   "card.fact.dc20": "km / 20 min",
   "card.versions": "{n} uitvoeringen",
-  "card.versions.one": "1 uitvoering"
+  "card.versions.one": "1 uitvoering",
+  "photo.credit": "Fotobron",
+  "photo.page": "Waar deze foto vandaan komt",
+  "hero.sheet.open": "Antwoorden & verfijnen",
+  "hero.sheet.title": "Je antwoorden",
+  "hero.sheet.close": "Antwoorden sluiten",
+  "hero.sheet.done": "Toon mijn top 10",
+  "hero.sheet.openN": "Antwoorden & verfijnen · {n}"
 }

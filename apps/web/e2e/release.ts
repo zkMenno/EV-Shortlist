@@ -29,3 +29,7 @@ export function releaseHas(file: "shortlist_scores.json" | "used_prices.json"): 
 export const HAS_SCORES = releaseHas("shortlist_scores.json");
 export const HAS_USED_PRICES = releaseHas("used_prices.json");
 export const NO_SCORES_REASON = "the release under test has no shortlist_scores.json (Decision 065; release 2 / T-116 adds it)";
+
+/** True when the release under test has its photos unpacked (`images/`, Decision 086; release 4+). */
+export const HAS_PHOTOS = !!folder && existsSync(path.join(folder, "images"));
+export const NO_PHOTOS_REASON = "the release under test has no unpacked images/ folder (photos arrive with release 4, Decision 086)";

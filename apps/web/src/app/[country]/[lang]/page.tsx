@@ -18,6 +18,7 @@ import { heroFromSearchParams } from "@/lib/hero-state";
 import { article, articleTitle } from "@/lib/learn";
 import { LISTING_SITES } from "@/lib/listings";
 import { rankHero, resolveProfile, type UsedBands } from "@/lib/shortlist";
+import { generationPhotos } from "@/lib/photos";
 import { localizeTaxonomy } from "@/lib/taxonomy";
 import { pageMeta, servedRoute } from "./ev/_lib/context";
 
@@ -89,6 +90,11 @@ export default async function ExplorePage({ params, searchParams }: Props) {
     .slice(0, 3)
     .map((a) => ({ slug: a.slug, title: articleTitle(a, lang), href: `${siteBase(country, lang)}/learn/${a.slug}` }));
   const dataUrl = `/data/catalogue-${clientCatalogueKey(cat)}.json`;
+  // T-146: row thumbnails. Only what a row needs (small src + credit), for generations whose photo
+  // files are on disk; the rest keep today's layout.
+  const photos = Object.fromEntries(
+    Object.entries(generationPhotos(cat.generations())).map(([id, p]) => [id, { src: p.src, credit: p.credit, pageUrl: p.pageUrl }]),
+  );
 
   return (
     <>
@@ -113,6 +119,7 @@ export default async function ExplorePage({ params, searchParams }: Props) {
         listingSites={[...LISTING_SITES[country]].sort((a, b) => a.priority - b.priority)}
         terms={heroTerms}
         learnLinks={learnLinks}
+        photos={photos}
       />
       {/* T-130: the full list moved to the catalogue page; the landing links there. */}
       <section aria-labelledby="all-cars-title" className="evs-allcars mt-12 rounded-lg border border-slate-300 bg-white p-6" data-testid="show-all-cars">

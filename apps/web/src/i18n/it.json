@@ -928,5 +928,12 @@
   "card.fact.summer": "km estate",
   "card.fact.dc20": "km / 20 min",
   "card.versions": "{n} versioni",
-  "card.versions.one": "1 versione"
+  "card.versions.one": "1 versione",
+  "photo.credit": "Credito foto",
+  "photo.page": "Da dove viene questa foto",
+  "hero.sheet.open": "Risposte e filtri",
+  "hero.sheet.title": "Le tue risposte",
+  "hero.sheet.close": "Chiudi le tue risposte",
+  "hero.sheet.done": "Mostra la mia top 10",
+  "hero.sheet.openN": "Risposte e filtri · {n}"
 }
