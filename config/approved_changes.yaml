@@ -524,3 +524,16 @@ approved:
   - {<<: *t163, id: renault-megane-e-tech-gen1-ev40, field: "scores.runabout+kerbside.band"}
   - {<<: *t163, id: renault-zoe-ph1-q90, field: "scores.runabout.band"}
   - {<<: *t163, id: renault-zoe-ph1-q90, field: "scores.runabout.urban.band"}
+  # T-166 (Decision 049, T-162 WS1 ask b): splitting Kia EV9 gen1 GT (F6E54 / F7E54, vmax 220,
+  # WLTP 518 km) from 2025+ AWD / RWD versions in match/tgk_split.yaml removes 17 mis-placed
+  # 7-seat AWD/RWD versions from kia-ev9-gen1-gt, leaving its 6 real GT versions (3x 6-seat
+  # F6E54 + 3x 7-seat F7E54) so seats moves 7 -> 6. Against published release 3, kia-ev9-gen1-gt
+  # is a new row (0 blocking); this entry covers the --base-release-from origin/main diff.
+  - release: 4
+    file: catalogue.json
+    approved_by: "Decision 049 (T-166 gate)"
+    reason: "T-166: Kia EV9 gen1 GT (F6E54 / F7E54, 220 km/h, WLTP 518 km) is split in match/tgk_split.yaml from 2025+ AWD (F6E34 / F7E24 / F7E34) and RWD (F7E12) versions whose shared trade name 'EV9 / EV9 GT' previously pulled 17 7-seat non-GT records onto kia-ev9-gen1-gt. With only the 6 real GT versions (3x F6E54 6-seat + 3x F7E54 7-seat), seats moves 7 -> 6 while WLTP stops carrying 17 conflicting values (510 -> 518 km), consumption moves 22.0 -> 20.8 kWh/100 km, and mass moves 2664 -> 2718 kg. Measured: ev verify --base-release-from origin/main on 2026-11-27 staging (1 blocking line, this entry); 0 T-166 blocking lines against published release 3."
+    id: kia-ev9-gen1-gt
+    field: seats
+    change: changed
+
