@@ -1,0 +1,15 @@
+{
+ "release": 4,
+ "generated_at": "2026-11-27T05:24:25+00:00",
+ "retired_ids": {
+  "citroen-e-spacetourer-gen1-base": "citroen-e-spacetourer-gen1-50kwh",
+  "fiat-500e-332-abarth": "abarth-500e-gen1-base",
+  "hyundai-ioniq-5-gen1-awd": "hyundai-ioniq-5-gen1-77kwh-awd",
+  "hyundai-ioniq-5-gen1-base": "hyundai-ioniq-5-gen1-77kwh-rwd",
+  "hyundai-ioniq-5-gen1-n": "hyundai-ioniq-5-facelift-n",
+  "nissan-leaf-ze1-62-kwh": "nissan-leaf-ze1-e-plus-62kwh",
+  "skoda-elroq-gen1-base": "skoda-elroq-gen1-85",
+  "volkswagen-id7-gen1-pro": "volkswagen-id7-gen1-pro-s",
+  "volkswagen-id7-gen1-tour": "volkswagen-id7-gen1-pro-s"
+ }
+}

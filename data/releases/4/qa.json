@@ -1,0 +1,7579 @@
+{
+ "release": 4,
+ "generated_at": "2026-11-27T05:24:25+00:00",
+ "status": "review",
+ "blocking_failures": [],
+ "checks": {
+  "provenance": {
+   "id": "provenance",
+   "title": "Provenance completeness",
+   "blocking": true,
+   "status": "pass",
+   "summary": "9957 values checked; 0 problem(s)",
+   "details": {
+    "values_checked": 9957,
+    "dated_by_fact": 9908,
+    "dated_by_source": 49,
+    "facts_checked": 70176,
+    "errors": [],
+    "error_count": 0
+   }
+  },
+  "licence_gate": {
+   "id": "licence_gate",
+   "title": "Licence gate re-check",
+   "blocking": true,
+   "status": "pass",
+   "summary": "15 sources, 70176 facts; 0 problem(s)",
+   "details": {
+    "sources": [
+     "ademe",
+     "dft-veh",
+     "eea",
+     "fueleconomy",
+     "kba-fz10",
+     "kilowatt-openev",
+     "maker-docs",
+     "manual",
+     "model-estimate",
+     "openev",
+     "rdw",
+     "rdw-defects",
+     "rdw-tgk",
+     "seed-manual",
+     "wikidata"
+    ],
+    "values_per_source": {
+     "ademe": 108,
+     "dft-veh": 358,
+     "eea": 1547,
+     "fueleconomy": 376,
+     "kba-fz10": 362,
+     "kilowatt-openev": 1756,
+     "maker-docs": 281,
+     "manual": 390,
+     "model-estimate": 3158,
+     "openev": 4989,
+     "rdw": 2088,
+     "rdw-tgk": 2044,
+     "seed-manual": 2464
+    },
+    "errors": [],
+    "error_count": 0
+   }
+  },
+  "diff": {
+   "id": "diff",
+   "title": "Diff vs previous release",
+   "blocking": false,
+   "status": "flag",
+   "summary": "vs release 3: 375 -> 419 variants, +50 / -6; 6 flag(s)",
+   "details": {
+    "previous_release": 3,
+    "variants_previous": 375,
+    "variants": 419,
+    "added": [
+     "abarth-500e-gen1-base",
+     "audi-e-tron-gt-facelift-quattro",
+     "byd-sealion-7-gen1-comfort-rwd",
+     "byd-sealion-7-gen1-design-awd",
+     "byd-sealion-7-gen1-excellence-awd",
+     "citroen-e-spacetourer-gen1-50kwh",
+     "citroen-e-spacetourer-gen1-75kwh",
+     "ford-e-tourneo-courier-gen1-46kwh",
+     "hyundai-inster-gen1-42kwh",
+     "hyundai-inster-gen1-49kwh",
+     "jeep-avenger-gen1-54kwh",
+     "kia-ev3-gen1-awd",
+     "kia-ev3-gen1-long-range",
+     "kia-ev3-gen1-standard-range",
+     "kia-ev6-facelift-63kwh-rwd",
+     "kia-ev6-facelift-84kwh-awd",
+     "kia-ev6-facelift-84kwh-rwd",
+     "kia-ev9-gen1-76kwh-rwd",
+     "kia-ev9-gen1-99kwh-awd",
+     "kia-ev9-gen1-99kwh-rwd",
+     "kia-ev9-gen1-gt",
+     "mazda-mx-30-gen1-ev",
+     "mg-marvel-r-gen1-performance-awd",
+     "mg-marvel-r-gen1-rwd",
+     "mini-aceman-gen1-e",
+     "mini-aceman-gen1-se",
+     "mini-countryman-e-gen1-e",
+     "mini-countryman-e-gen1-se-all4",
+     "opel-mokka-gen1-50kwh",
+     "opel-mokka-gen1-54kwh",
+     "renault-twingo-gen3-22kwh",
+     "seat-mii-electric-gen1-ev",
+     "skoda-citigo-e-gen1-ev",
+     "skoda-elroq-gen1-50",
+     "skoda-elroq-gen1-60",
+     "skoda-elroq-gen1-85",
+     "smart-eq-forfour-453-eq",
+     "tesla-model-3-gen1-long-range-2021",
+     "tesla-model-3-gen1-performance-2021",
+     "tesla-model-x-gen1-100d",
+     "tesla-model-x-gen1-60d",
+     "tesla-model-x-gen1-75d",
+     "tesla-model-x-gen1-90d",
+     "tesla-model-x-gen1-long-range",
+     "tesla-model-x-gen1-performance",
+     "volkswagen-e-up-gen1-18kwh",
+     "volkswagen-e-up-gen1-32kwh",
+     "volkswagen-id7-gen1-gtx",
+     "volkswagen-id7-gen1-pro-77kwh",
+     "volkswagen-id7-gen1-pro-s"
+    ],
+    "lost": [
+     "citroen-e-spacetourer-gen1-base",
+     "fiat-500e-332-abarth",
+     "nissan-leaf-ze1-62-kwh",
+     "skoda-elroq-gen1-base",
+     "volkswagen-id7-gen1-pro",
+     "volkswagen-id7-gen1-tour"
+    ],
+    "lost_share": 0.016,
+    "coverage": {
+     "battery_kwh_net": {
+      "filled_pct_previous": 98.9,
+      "filled_pct": 98.8,
+      "two_plus_pct_previous": 20.5,
+      "two_plus_pct": 18.4
+     },
+     "wltp_range_km": {
+      "filled_pct_previous": 81.6,
+      "filled_pct": 83.3,
+      "two_plus_pct_previous": 27.7,
+      "two_plus_pct": 23.9
+     },
+     "epa_range_km": {
+      "filled_pct_previous": 43.2,
+      "filled_pct": 42.7,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "consumption_kwh_100km": {
+      "filled_pct_previous": 89.9,
+      "filled_pct": 90.9,
+      "two_plus_pct_previous": 2.4,
+      "two_plus_pct": 2.1
+     },
+     "ac_kw": {
+      "filled_pct_previous": 97.9,
+      "filled_pct": 94.5,
+      "two_plus_pct_previous": 29.3,
+      "two_plus_pct": 26.3
+     },
+     "ac_kw_optional": {
+      "filled_pct_previous": 0.0,
+      "filled_pct": 0.0,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "dc_peak_kw": {
+      "filled_pct_previous": 92.5,
+      "filled_pct": 84.7,
+      "two_plus_pct_previous": 22.4,
+      "two_plus_pct": 19.8
+     },
+     "dc_avg_10_80_kw": {
+      "filled_pct_previous": 94.1,
+      "filled_pct": 88.5,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "ac_km_per_h": {
+      "filled_pct_previous": 89.1,
+      "filled_pct": 86.4,
+      "two_plus_pct_previous": 2.1,
+      "two_plus_pct": 1.7
+     },
+     "dc_km_per_10min": {
+      "filled_pct_previous": 86.1,
+      "filled_pct": 81.6,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "real_range_km": {
+      "filled_pct_previous": 89.3,
+      "filled_pct": 90.7,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "real_range_winter_km": {
+      "filled_pct_previous": 88.3,
+      "filled_pct": 89.5,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "power_kw": {
+      "filled_pct_previous": 92.5,
+      "filled_pct": 95.0,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "accel_0_100_s": {
+      "filled_pct_previous": 70.9,
+      "filled_pct": 63.7,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "boot_l": {
+      "filled_pct_previous": 43.7,
+      "filled_pct": 38.9,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "length_mm": {
+      "filled_pct_previous": 94.4,
+      "filled_pct": 93.3,
+      "two_plus_pct_previous": 22.4,
+      "two_plus_pct": 20.8
+     },
+     "weight_kg": {
+      "filled_pct_previous": 67.2,
+      "filled_pct": 59.7,
+      "two_plus_pct_previous": 1.6,
+      "two_plus_pct": 1.4
+     },
+     "towing_kg": {
+      "filled_pct_previous": 18.9,
+      "filled_pct": 17.2,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "seats": {
+      "filled_pct_previous": 99.7,
+      "filled_pct": 99.5,
+      "two_plus_pct_previous": 32.5,
+      "two_plus_pct": 29.6
+     },
+     "registered_count_nl": {
+      "filled_pct_previous": 96.3,
+      "filled_pct": 96.7,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "dc_minutes_10_80": {
+      "filled_pct_previous": 94.1,
+      "filled_pct": 88.5,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "dc_km_per_20min": {
+      "filled_pct_previous": 86.1,
+      "filled_pct": 81.6,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "dc_peak_held_min": {
+      "filled_pct_previous": 92.5,
+      "filled_pct": 86.2,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "consumption_motorway_kwh_100km": {
+      "filled_pct_previous": 89.9,
+      "filled_pct": 90.9,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "voltage_nominal_v": {
+      "filled_pct_previous": 15.2,
+      "filled_pct": 16.5,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "voltage_max_v": {
+      "filled_pct_previous": 0.0,
+      "filled_pct": 0.0,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     },
+     "charger_400v_kw": {
+      "filled_pct_previous": 3.5,
+      "filled_pct": 5.3,
+      "two_plus_pct_previous": 0.0,
+      "two_plus_pct": 0.0
+     }
+    },
+    "beyond_tolerance_counts": {
+     "ac_km_per_h": 5,
+     "battery_kwh_net": 2,
+     "consumption_kwh_100km": 5,
+     "consumption_motorway_kwh_100km": 3,
+     "dc_avg_10_80_kw": 2,
+     "dc_km_per_10min": 7,
+     "dc_km_per_20min": 7,
+     "dc_minutes_10_80": 3,
+     "dc_peak_held_min": 1,
+     "epa_range_km": 1,
+     "real_range_km": 6,
+     "real_range_winter_km": 2,
+     "registered_count_nl": 14,
+     "wltp_range_km": 7
+    },
+    "beyond_tolerance": {
+     "ac_km_per_h": [
+      {
+       "variant_id": "mg-mg4-gen1-xpower",
+       "old": 58.8,
+       "new": 61.1,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-4s",
+       "old": 58.2,
+       "new": 55.0,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-base",
+       "old": 57.6,
+       "new": 59.5,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo-s",
+       "old": 53.4,
+       "new": 49.3,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "skoda-enyaq-gen1-80x-rs",
+       "old": 65.3,
+       "new": 68.8,
+       "tolerance": "±3%"
+      }
+     ],
+     "battery_kwh_net": [
+      {
+       "variant_id": "ford-e-tourneo-courier-gen1-base",
+       "old": 51.0,
+       "new": 43.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "skoda-elroq-gen1-rs",
+       "old": 77.0,
+       "new": 79.0,
+       "tolerance": "±2%"
+      }
+     ],
+     "consumption_kwh_100km": [
+      {
+       "variant_id": "mg-mg4-gen1-xpower",
+       "old": 18.7,
+       "new": 18.0,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-4s",
+       "old": 18.9,
+       "new": 20.0,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-base",
+       "old": 19.1,
+       "new": 18.5,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo-s",
+       "old": 20.6,
+       "new": 22.3,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "skoda-enyaq-gen1-80x-rs",
+       "old": 16.9,
+       "new": 16.0,
+       "tolerance": "±3%"
+      }
+     ],
+     "consumption_motorway_kwh_100km": [
+      {
+       "variant_id": "porsche-taycan-gen1-4s",
+       "old": 24.6,
+       "new": 26.0,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo-s",
+       "old": 26.8,
+       "new": 29.0,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "skoda-enyaq-gen1-80x-rs",
+       "old": 21.9,
+       "new": 20.8,
+       "tolerance": "±5%"
+      }
+     ],
+     "dc_avg_10_80_kw": [
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-awd",
+       "old": 148.3,
+       "new": 196.0,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-base",
+       "old": 148.3,
+       "new": 196.0,
+       "tolerance": "±5%"
+      }
+     ],
+     "dc_km_per_10min": [
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-awd",
+       "old": 113.2,
+       "new": 149.6,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-base",
+       "old": 118.8,
+       "new": 157.1,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "mg-mg4-gen1-xpower",
+       "old": 69.3,
+       "new": 72.0,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-4s",
+       "old": 123.5,
+       "new": 116.7,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-base",
+       "old": 122.1,
+       "new": 126.1,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo-s",
+       "old": 113.3,
+       "new": 104.6,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "skoda-enyaq-gen1-80x-rs",
+       "old": 64.1,
+       "new": 67.5,
+       "tolerance": "±3%"
+      }
+     ],
+     "dc_km_per_20min": [
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-awd",
+       "old": 226.4,
+       "new": 269.2,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-base",
+       "old": 237.7,
+       "new": 282.7,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "mg-mg4-gen1-xpower",
+       "old": 138.7,
+       "new": 144.1,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-4s",
+       "old": 238.5,
+       "new": 225.3,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-base",
+       "old": 200.1,
+       "new": 206.7,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo-s",
+       "old": 218.8,
+       "new": 202.1,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "skoda-enyaq-gen1-80x-rs",
+       "old": 128.2,
+       "new": 135.1,
+       "tolerance": "±3%"
+      }
+     ],
+     "dc_minutes_10_80": [
+      {
+       "variant_id": "ford-e-tourneo-courier-gen1-base",
+       "old": 31.8,
+       "new": 26.8,
+       "tolerance": "±2 min"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-awd",
+       "old": 23.8,
+       "new": 18.0,
+       "tolerance": "±2 min"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-base",
+       "old": 23.8,
+       "new": 18.0,
+       "tolerance": "±2 min"
+      }
+     ],
+     "dc_peak_held_min": [
+      {
+       "variant_id": "ford-e-tourneo-courier-gen1-base",
+       "old": 7.3,
+       "new": 6.2,
+       "tolerance": "±3%"
+      }
+     ],
+     "epa_range_km": [
+      {
+       "variant_id": "tesla-model-s-facelift-75d",
+       "old": 400.7,
+       "new": 416.8,
+       "tolerance": "±2%"
+      }
+     ],
+     "real_range_km": [
+      {
+       "variant_id": "audi-e-tron-gt-facelift-s",
+       "old": 491.1,
+       "new": 523.7,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "ford-e-tourneo-courier-gen1-base",
+       "old": 280.0,
+       "new": 230.4,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-base",
+       "old": 415.7,
+       "new": 467.4,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-base",
+       "old": 379.3,
+       "new": 408.3,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo",
+       "old": 387.9,
+       "new": 449.8,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "tesla-model-y-gen1-rwd",
+       "old": 344.0,
+       "new": 364.0,
+       "tolerance": "±5%"
+      }
+     ],
+     "real_range_winter_km": [
+      {
+       "variant_id": "ford-e-tourneo-courier-gen1-base",
+       "old": 188.0,
+       "new": 155.0,
+       "tolerance": "±5%"
+      },
+      {
+       "variant_id": "nissan-leaf-ze1-e-plus-62kwh",
+       "old": 227.0,
+       "new": 239.0,
+       "tolerance": "±5%"
+      }
+     ],
+     "registered_count_nl": [
+      {
+       "variant_id": "ford-puma-gen-e-gen1-base",
+       "old": 1725,
+       "new": 1858,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "genesis-gv60-gen1-advanced",
+       "old": 83,
+       "new": 91,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "genesis-gv60-gen1-base",
+       "old": 83,
+       "new": 91,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "genesis-gv60-gen1-performance",
+       "old": 83,
+       "new": 91,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "leapmotor-b10-gen1-160-kw",
+       "old": 1627,
+       "new": 1718,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "leapmotor-b10-gen1-56-2-kwh",
+       "old": 1627,
+       "new": 1718,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "leapmotor-b10-gen1-base",
+       "old": 1627,
+       "new": 1718,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "renault-4-e-tech-gen1-40-kwh",
+       "old": 2530,
+       "new": 2625,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "renault-4-e-tech-gen1-base",
+       "old": 2530,
+       "new": 2625,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "vinfast-vf6-gen1-base",
+       "old": 471,
+       "new": 783,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "vinfast-vf6-gen1-eco",
+       "old": 471,
+       "new": 783,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "vinfast-vf6-gen1-plus",
+       "old": 471,
+       "new": 783,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "xpeng-p7-plus-gen1-awd-performance",
+       "old": 117,
+       "new": 131,
+       "tolerance": "±3%"
+      },
+      {
+       "variant_id": "xpeng-p7-plus-gen1-rwd-long-range",
+       "old": 117,
+       "new": 131,
+       "tolerance": "±3%"
+      }
+     ],
+     "wltp_range_km": [
+      {
+       "variant_id": "audi-e-tron-gt-facelift-rs-performance",
+       "old": 608.0,
+       "new": 592.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "audi-e-tron-gt-facelift-s",
+       "old": 571.0,
+       "new": 609.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "ford-e-tourneo-courier-gen1-base",
+       "old": 350.0,
+       "new": 288.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "hyundai-ioniq-5-facelift-base",
+       "old": 507.0,
+       "new": 570.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-base",
+       "old": 431.0,
+       "new": 464.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "porsche-taycan-gen1-turbo",
+       "old": 451.0,
+       "new": 523.0,
+       "tolerance": "±2%"
+      },
+      {
+       "variant_id": "tesla-model-y-gen1-rwd",
+       "old": 430.0,
+       "new": 455.0,
+       "tolerance": "±2%"
+      }
+     ]
+    },
+    "flags": [
+     "dc_peak_kw: filled share fell 7.8 points",
+     "dc_avg_10_80_kw: filled share fell 5.6 points",
+     "accel_0_100_s: filled share fell 7.2 points",
+     "weight_kg: filled share fell 7.5 points",
+     "dc_minutes_10_80: filled share fell 5.6 points",
+     "dc_peak_held_min: filled share fell 6.4 points"
+    ]
+   }
+  },
+  "outliers": {
+   "id": "outliers",
+   "title": "Outliers and impossible values",
+   "blocking": false,
+   "status": "flag",
+   "summary": "0 impossible value(s), 162 outside P1-P99 (reference: release 3)",
+   "details": {
+    "impossible_count": 0,
+    "impossible_by_rule": {},
+    "impossible": [],
+    "percentile_count": 162,
+    "percentile_by_field": {
+     "ac_km_per_h": 13,
+     "ac_kw": 2,
+     "accel_0_100_s": 4,
+     "battery_kwh_net": 13,
+     "boot_l": 2,
+     "consumption_kwh_100km": 11,
+     "consumption_motorway_kwh_100km": 12,
+     "dc_avg_10_80_kw": 4,
+     "dc_km_per_10min": 9,
+     "dc_km_per_20min": 8,
+     "dc_minutes_10_80": 8,
+     "dc_peak_held_min": 9,
+     "dc_peak_kw": 3,
+     "epa_range_km": 4,
+     "length_mm": 13,
+     "power_kw": 10,
+     "real_range_km": 14,
+     "real_range_winter_km": 13,
+     "weight_kg": 4,
+     "wltp_range_km": 6
+    },
+    "percentile": [
+     {
+      "variant_id": "audi-e-tron-ge-s",
+      "segment": "J-large",
+      "field": "epa_range_km",
+      "value": 297.7,
+      "p1": 313.6,
+      "p99": 679.36
+     },
+     {
+      "variant_id": "audi-e-tron-ge-s",
+      "segment": "J-large",
+      "field": "consumption_kwh_100km",
+      "value": 27.4,
+      "p1": 16.27,
+      "p99": 26.92
+     },
+     {
+      "variant_id": "audi-e-tron-ge-s",
+      "segment": "J-large",
+      "field": "consumption_motorway_kwh_100km",
+      "value": 35.6,
+      "p1": 21.17,
+      "p99": 35.02
+     },
+     {
+      "variant_id": "audi-q6-e-tron-gen1-quattro-sportback",
+      "segment": "J-medium",
+      "field": "real_range_km",
+      "value": 512.0,
+      "p1": 240.64,
+      "p99": 511.46
+     },
+     {
+      "variant_id": "bmw-i4-g26-m50",
+      "segment": "D",
+      "field": "power_kw",
+      "value": 400.0,
+      "p1": 111.0,
+      "p99": 397.97
+     },
+     {
+      "variant_id": "byd-atto-3-gen1-standard-range",
+      "segment": "J-medium",
+      "field": "dc_km_per_10min",
+      "value": 34.1,
+      "p1": 34.18,
+      "p99": 136.47
+     },
+     {
+      "variant_id": "byd-atto-3-gen1-standard-range",
+      "segment": "J-medium",
+      "field": "dc_km_per_20min",
+      "value": 68.1,
+      "p1": 68.26,
+      "p99": 272.84
+     },
+     {
+      "variant_id": "byd-atto-3-gen1-standard-range-extended-range",
+      "segment": "J-medium",
+      "field": "dc_minutes_10_80",
+      "value": 53.4,
+      "p1": 12.0,
+      "p99": 52.32
+     },
+     {
+      "variant_id": "byd-dolphin-gen1-standard",
+      "segment": "C",
+      "field": "power_kw",
+      "value": 70.0,
+      "p1": 73.0,
+      "p99": 296.0
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "battery_kwh_net",
+      "value": 46.0,
+      "p1": 46.45,
+      "p99": 95.85
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "wltp_range_km",
+      "value": 278.0,
+      "p1": 299.78,
+      "p99": 640.68
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "real_range_km",
+      "value": 222.4,
+      "p1": 240.64,
+      "p99": 511.46
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "real_range_winter_km",
+      "value": 146.0,
+      "p1": 155.0,
+      "p99": 362.88
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "power_kw",
+      "value": 100.0,
+      "p1": 101.5,
+      "p99": 468.68
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "accel_0_100_s",
+      "value": 11.2,
+      "p1": 3.39,
+      "p99": 10.32
+     },
+     {
+      "variant_id": "citroen-e-berlingo-gen3-base",
+      "segment": "J-medium",
+      "field": "boot_l",
+      "value": 1050.0,
+      "p1": 323.8,
+      "p99": 958.0
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-50kwh",
+      "segment": "J-large",
+      "field": "battery_kwh_net",
+      "value": 46.0,
+      "p1": 51.04,
+      "p99": 124.32
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-50kwh",
+      "segment": "J-large",
+      "field": "wltp_range_km",
+      "value": 230.0,
+      "p1": 281.38,
+      "p99": 653.88
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-50kwh",
+      "segment": "J-large",
+      "field": "real_range_km",
+      "value": 184.0,
+      "p1": 223.02,
+      "p99": 582.29
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-50kwh",
+      "segment": "J-large",
+      "field": "real_range_winter_km",
+      "value": 129.0,
+      "p1": 132.6,
+      "p99": 453.23
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-50kwh",
+      "segment": "J-large",
+      "field": "accel_0_100_s",
+      "value": 12.5,
+      "p1": 2.77,
+      "p99": 12.29
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-50kwh",
+      "segment": "J-large",
+      "field": "weight_kg",
+      "value": 1950.0,
+      "p1": 2033.3,
+      "p99": 2989.45
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-75kwh",
+      "segment": "J-large",
+      "field": "dc_km_per_10min",
+      "value": 35.0,
+      "p1": 35.62,
+      "p99": 171.68
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-75kwh",
+      "segment": "J-large",
+      "field": "length_mm",
+      "value": 5331.0,
+      "p1": 4683.1,
+      "p99": 5140.0
+     },
+     {
+      "variant_id": "citroen-e-spacetourer-gen1-75kwh",
+      "segment": "J-large",
+      "field": "dc_km_per_20min",
+      "value": 70.0,
+      "p1": 71.24,
+      "p99": 326.31
+     },
+     {
+      "variant_id": "ds-3-e-tense-facelift-base",
+      "segment": "J-small",
+      "field": "length_mm",
+      "value": 4118.0,
+      "p1": 4125.26,
+      "p99": 4515.0
+     },
+     {
+      "variant_id": "ford-capri-gen1-base",
+      "segment": "J-medium",
+      "field": "consumption_kwh_100km",
+      "value": 13.4,
+      "p1": 14.71,
+      "p99": 25.5
+     },
+     {
+      "variant_id": "ford-capri-gen1-base",
+      "segment": "J-medium",
+      "field": "consumption_motorway_kwh_100km",
+      "value": 17.4,
+      "p1": 19.11,
+      "p99": 33.19
+     },
+     {
+      "variant_id": "ford-mustang-mach-e-gen1-extended-range",
+      "segment": "J-medium",
+      "field": "real_range_winter_km",
+      "value": 363.0,
+      "p1": 155.0,
+      "p99": 362.88
+     },
+     {
+      "variant_id": "ford-puma-gen-e-gen1-base",
+      "segment": "J-small",
+      "field": "consumption_kwh_100km",
+      "value": 13.9,
+      "p1": 13.93,
+      "p99": 19.84
+     },
+     {
+      "variant_id": "ford-puma-gen-e-gen1-base",
+      "segment": "J-small",
+      "field": "consumption_motorway_kwh_100km",
+      "value": 18.1,
+      "p1": 18.13,
+      "p99": 25.79
+     },
+     {
+      "variant_id": "hongqi-e-hs9-gen1-base",
+      "segment": "J-large",
+      "field": "dc_minutes_10_80",
+      "value": 56.1,
+      "p1": 17.76,
+      "p99": 52.8
+     },
+     {
+      "variant_id": "hyundai-inster-gen1-42kwh",
+      "segment": "J-small",
+      "field": "power_kw",
+      "value": 71.0,
+      "p1": 73.74,
+      "p99": 315.0
+     },
+     {
+      "variant_id": "hyundai-inster-gen1-42kwh",
+      "segment": "J-small",
+      "field": "length_mm",
+      "value": 3825.0,
+      "p1": 4125.26,
+      "p99": 4515.0
+     },
+     {
+      "variant_id": "hyundai-inster-gen1-49kwh",
+      "segment": "J-small",
+      "field": "length_mm",
+      "value": 3825.0,
+      "p1": 4125.26,
+      "p99": 4515.0
+     },
+     {
+      "variant_id": "hyundai-ioniq-5-facelift-awd",
+      "segment": "J-medium",
+      "field": "dc_km_per_10min",
+      "value": 149.6,
+      "p1": 34.18,
+      "p99": 136.47
+     },
+     {
+      "variant_id": "hyundai-ioniq-5-facelift-base",
+      "segment": "J-medium",
+      "field": "dc_km_per_10min",
+      "value": 157.1,
+      "p1": 34.18,
+      "p99": 136.47
+     },
+     {
+      "variant_id": "hyundai-ioniq-5-facelift-base",
+      "segment": "J-medium",
+      "field": "dc_km_per_20min",
+      "value": 282.7,
+      "p1": 68.26,
+      "p99": 272.84
+     },
+     {
+      "variant_id": "hyundai-ioniq-5-gen1-58kwh-rwd",
+      "segment": "J-medium",
+      "field": "dc_peak_held_min",
+      "value": 3.8,
+      "p1": 4.12,
+      "p99": 14.14
+     },
+     {
+      "variant_id": "hyundai-ioniq-6-gen1-standard-range",
+      "segment": "D",
+      "field": "dc_minutes_10_80",
+      "value": 14.2,
+      "p1": 14.6,
+      "p99": 40.7
+     },
+     {
+      "variant_id": "hyundai-ioniq-9-gen1-long-range-awd",
+      "segment": "J-large",
+      "field": "dc_minutes_10_80",
+      "value": 17.7,
+      "p1": 17.76,
+      "p99": 52.8
+     },
+     {
+      "variant_id": "hyundai-kona-electric-os-64kwh",
+      "segment": "J-small",
+      "field": "real_range_winter_km",
+      "value": 265.0,
+      "p1": 111.24,
+      "p99": 264.42
+     },
+     {
+      "variant_id": "jaguar-i-pace-x590-ev400",
+      "segment": "J-large",
+      "field": "length_mm",
+      "value": 4682.0,
+      "p1": 4683.1,
+      "p99": 5140.0
+     },
+     {
+      "variant_id": "jeep-avenger-gen1-54kwh",
+      "segment": "J-small",
+      "field": "length_mm",
+      "value": 4084.0,
+      "p1": 4125.26,
+      "p99": 4515.0
+     },
+     {
+      "variant_id": "kia-ev3-gen1-awd",
+      "segment": "J-medium",
+      "field": "length_mm",
+      "value": 4310.0,
+      "p1": 4401.0,
+      "p99": 4783.48
+     },
+     {
+      "variant_id": "kia-soul-ev-ps-27kwh",
+      "segment": "J-small",
+      "field": "battery_kwh_net",
+      "value": 27.0,
+      "p1": 28.05,
+      "p99": 67.49
+     },
+     {
+      "variant_id": "kia-soul-ev-ps-27kwh",
+      "segment": "J-small",
+      "field": "ac_km_per_h",
+      "value": 35.4,
+      "p1": 35.87,
+      "p99": 113.81
+     },
+     {
+      "variant_id": "kia-soul-ev-ps-27kwh",
+      "segment": "J-small",
+      "field": "real_range_km",
+      "value": 137.8,
+      "p1": 159.78,
+      "p99": 388.83
+     },
+     {
+      "variant_id": "kia-soul-ev-ps-27kwh",
+      "segment": "J-small",
+      "field": "real_range_winter_km",
+      "value": 95.0,
+      "p1": 111.24,
+      "p99": 264.42
+     },
+     {
+      "variant_id": "lexus-ux-300e-gen1-base",
+      "segment": "J-small",
+      "field": "dc_km_per_10min",
+      "value": 25.6,
+      "p1": 26.23,
+      "p99": 79.5
+     }
+    ],
+    "reference": "release 3",
+    "segment_fields_checked": 78,
+    "segment_fields_skipped_small": 117,
+    "min_values_per_segment": 30
+   }
+  },
+  "top40_coverage": {
+   "id": "top40_coverage",
+   "title": "Coverage of the top-40 used models",
+   "blocking": false,
+   "status": "info",
+   "summary": "40 models; 2+ agreeing sources on every headline field: 0 (0%, target 80% before launch)",
+   "details": {
+    "ranking": "RDW NL fleet, then DfT UK fleet (PROVISIONAL proxy for used popularity)",
+    "headline_fields": [
+     "battery_kwh_net",
+     "wltp_range_km",
+     "real_range_km",
+     "ac_kw",
+     "dc_peak_kw",
+     "dc_avg_10_80_kw",
+     "dc_km_per_20min"
+    ],
+    "rule": "a model counts for a field when a majority of its variants have 2+ agreeing sources (estimates never count)",
+    "target": 0.8,
+    "share_two_plus_by_field": {
+     "battery_kwh_net": 0.175,
+     "wltp_range_km": 0.275,
+     "real_range_km": 0.0,
+     "ac_kw": 0.3,
+     "dc_peak_kw": 0.175,
+     "dc_avg_10_80_kw": 0.0,
+     "dc_km_per_20min": 0.0
+    },
+    "models_all_fields_two_plus": 0,
+    "models": [
+     {
+      "rank": 1,
+      "model_id": "tesla-model-3",
+      "name": "Tesla Model 3",
+      "variants": 9,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 8,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 8,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 9
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 8,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 8,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 9
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 9
+       }
+      }
+     },
+     {
+      "rank": 2,
+      "model_id": "tesla-model-y",
+      "name": "Tesla Model Y",
+      "variants": 7,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 6,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "one": 3,
+        "two_plus": 4
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 7
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 6,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 7
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 7
+       }
+      }
+     },
+     {
+      "rank": 3,
+      "model_id": "volvo-xc40-recharge",
+      "name": "Volvo XC40 Recharge",
+      "variants": 7,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 7
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 4,
+        "two_plus": 2,
+        "missing": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 1
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 5,
+        "missing": 1,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 1
+       }
+      }
+     },
+     {
+      "rank": 4,
+      "model_id": "volkswagen-id3",
+      "name": "Volkswagen ID.3",
+      "variants": 5,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 5
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 3,
+        "one": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 1,
+        "missing": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 4,
+        "missing": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 4,
+        "missing": 1
+       }
+      }
+     },
+     {
+      "rank": 5,
+      "model_id": "skoda-enyaq",
+      "name": "Skoda Enyaq",
+      "variants": 7,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 5,
+        "one": 2
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 4,
+        "one": 2,
+        "missing": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 1
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 5,
+        "one": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "two_plus": 2,
+        "one": 5
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 7
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 7
+       }
+      }
+     },
+     {
+      "rank": 6,
+      "model_id": "volkswagen-id4",
+      "name": "Volkswagen ID.4",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 2,
+        "one": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 2,
+        "one": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1,
+        "missing": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2,
+        "missing": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2,
+        "missing": 1
+       }
+      }
+     },
+     {
+      "rank": 7,
+      "model_id": "audi-q4-e-tron",
+      "name": "Audi Q4 e-tron",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 3
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 3
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 3
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 3
+       }
+      }
+     },
+     {
+      "rank": 8,
+      "model_id": "volvo-ex30",
+      "name": "Volvo EX30",
+      "variants": 4,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "two_plus": 2,
+        "one": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 4
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 4
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 4
+       }
+      }
+     },
+     {
+      "rank": 9,
+      "model_id": "peugeot-e-208",
+      "name": "Peugeot e-208",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 10,
+      "model_id": "skoda-elroq",
+      "name": "Skoda Elroq",
+      "variants": 4,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 4
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 4
+       },
+       "ac_kw": {
+        "covered": false,
+        "missing": 2,
+        "one": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 2,
+        "one": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 2,
+        "one": 1,
+        "estimate": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 2,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 11,
+      "model_id": "audi-e-tron",
+      "name": "Audi e-tron",
+      "variants": 9,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 9
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 8,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 9
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 8,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 9
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 9
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 9
+       }
+      }
+     },
+     {
+      "rank": 12,
+      "model_id": "kia-ev3",
+      "name": "Kia EV3",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "estimate": 2,
+        "one": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "missing": 2,
+        "one": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 3
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 3
+       }
+      }
+     },
+     {
+      "rank": 13,
+      "model_id": "bmw-ix1",
+      "name": "BMW iX1",
+      "variants": 1,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 1
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 1
+       }
+      }
+     },
+     {
+      "rank": 14,
+      "model_id": "polestar-2",
+      "name": "Polestar Polestar 2",
+      "variants": 9,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "two_plus": 3,
+        "one": 6
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 1,
+        "missing": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "two_plus": 4,
+        "one": 5
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "two_plus": 2,
+        "one": 7
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 9
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 3
+       }
+      }
+     },
+     {
+      "rank": 15,
+      "model_id": "mini-cooper-se",
+      "name": "Mini Cooper SE",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 16,
+      "model_id": "peugeot-e-2008",
+      "name": "Peugeot e-2008",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 17,
+      "model_id": "nissan-leaf",
+      "name": "Nissan Leaf",
+      "variants": 4,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 4
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "missing": 2,
+        "two_plus": 1,
+        "one": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 4
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 4
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 4
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 4
+       }
+      }
+     },
+     {
+      "rank": 18,
+      "model_id": "opel-corsa-e",
+      "name": "Opel Corsa-e",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 19,
+      "model_id": "fiat-500e",
+      "name": "Fiat 500e",
+      "variants": 6,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "missing": 1,
+        "one": 4,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 6
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 1,
+        "one": 4,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 5
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 5
+       }
+      }
+     },
+     {
+      "rank": 20,
+      "model_id": "bmw-i4",
+      "name": "BMW i4",
+      "variants": 4,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 4
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "one": 1,
+        "two_plus": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 4
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 4
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 4
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 4
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 4
+       }
+      }
+     },
+     {
+      "rank": 21,
+      "model_id": "cupra-born",
+      "name": "Cupra Born",
+      "variants": 4,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "missing": 1,
+        "two_plus": 2,
+        "one": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 1,
+        "one": 2,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 3
+       }
+      }
+     },
+     {
+      "rank": 22,
+      "model_id": "renault-5-e-tech",
+      "name": "Renault 5 E-Tech",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 3
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 3
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 3
+       }
+      }
+     },
+     {
+      "rank": 23,
+      "model_id": "renault-megane-e-tech",
+      "name": "Renault Megane E-Tech Electric",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 2
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 1,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 24,
+      "model_id": "bmw-i3",
+      "name": "BMW i3",
+      "variants": 5,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 5
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3,
+        "missing": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 5
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 5
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 5
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 5
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 5
+       }
+      }
+     },
+     {
+      "rank": 25,
+      "model_id": "bmw-ix3",
+      "name": "BMW iX3",
+      "variants": 1,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 1
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 1
+       }
+      }
+     },
+     {
+      "rank": 26,
+      "model_id": "mg-zs-ev",
+      "name": "MG ZS EV",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "estimate": 1,
+        "one": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 3
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 2,
+        "missing": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 3
+       }
+      }
+     },
+     {
+      "rank": 27,
+      "model_id": "kia-niro-ev",
+      "name": "Kia Niro EV",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 3
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 3
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 3
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 3
+       }
+      }
+     },
+     {
+      "rank": 28,
+      "model_id": "volkswagen-id7",
+      "name": "Volkswagen ID.7",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 2,
+        "one": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 1,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 29,
+      "model_id": "mercedes-eqa",
+      "name": "Mercedes-Benz EQA",
+      "variants": 5,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 5
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 5
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 5
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 5
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 5
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 5
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 5
+       }
+      }
+     },
+     {
+      "rank": 30,
+      "model_id": "ford-mustang-mach-e",
+      "name": "Ford Mustang Mach-E",
+      "variants": 7,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "missing": 2,
+        "two_plus": 2,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 1
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 4,
+        "two_plus": 3
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 5,
+        "two_plus": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 7
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 6,
+        "missing": 1
+       }
+      }
+     },
+     {
+      "rank": 31,
+      "model_id": "hyundai-inster",
+      "name": "Hyundai Inster",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "estimate": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": false,
+        "missing": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 2
+       }
+      }
+     },
+     {
+      "rank": 32,
+      "model_id": "renault-scenic-e-tech",
+      "name": "Renault Scenic E-Tech",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 2
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "two_plus": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 33,
+      "model_id": "dacia-spring",
+      "name": "Dacia Spring",
+      "variants": 6,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 6
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "missing": 3,
+        "one": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "missing": 3,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": false,
+        "one": 5,
+        "missing": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 6
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 6
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 3,
+        "estimate": 3
+       }
+      }
+     },
+     {
+      "rank": 34,
+      "model_id": "citroen-e-c4",
+      "name": "Citroën ë-C4",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "two_plus": 1,
+        "one": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 2
+       }
+      }
+     },
+     {
+      "rank": 35,
+      "model_id": "ford-explorer",
+      "name": "Ford Explorer EV",
+      "variants": 1,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 1
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 1
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 1
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 1
+       }
+      }
+     },
+     {
+      "rank": 36,
+      "model_id": "mg-mg4",
+      "name": "MG MG4",
+      "variants": 5,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 3,
+        "two_plus": 2
+       },
+       "wltp_range_km": {
+        "covered": true,
+        "one": 2,
+        "two_plus": 3
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 5
+       },
+       "ac_kw": {
+        "covered": true,
+        "one": 2,
+        "two_plus": 3
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 4,
+        "two_plus": 1
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 5
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 5
+       }
+      }
+     },
+     {
+      "rank": 37,
+      "model_id": "opel-mokka",
+      "name": "Opel Mokka-e",
+      "variants": 2,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 2
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 2
+       },
+       "ac_kw": {
+        "covered": false,
+        "missing": 2
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 2
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 2
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 2
+       }
+      }
+     },
+     {
+      "rank": 38,
+      "model_id": "mercedes-eqb",
+      "name": "Mercedes-Benz EQB",
+      "variants": 6,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "one": 4,
+        "missing": 2
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "two_plus": 2,
+        "one": 4
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 6
+       },
+       "ac_kw": {
+        "covered": false,
+        "two_plus": 2,
+        "one": 4
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "one": 6
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 6
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 4,
+        "missing": 2
+       }
+      }
+     },
+     {
+      "rank": 39,
+      "model_id": "kia-ev6",
+      "name": "Kia EV6",
+      "variants": 7,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": false,
+        "estimate": 2,
+        "one": 5
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 6,
+        "missing": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 7
+       },
+       "ac_kw": {
+        "covered": false,
+        "missing": 2,
+        "one": 5
+       },
+       "dc_peak_kw": {
+        "covered": false,
+        "missing": 3,
+        "one": 4
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "missing": 3,
+        "estimate": 4
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "missing": 3,
+        "estimate": 4
+       }
+      }
+     },
+     {
+      "rank": 40,
+      "model_id": "audi-q6-e-tron",
+      "name": "Audi Q6 e-tron",
+      "variants": 3,
+      "fields": {
+       "battery_kwh_net": {
+        "covered": true,
+        "two_plus": 3
+       },
+       "wltp_range_km": {
+        "covered": false,
+        "one": 2,
+        "two_plus": 1
+       },
+       "real_range_km": {
+        "covered": false,
+        "estimate": 3
+       },
+       "ac_kw": {
+        "covered": true,
+        "two_plus": 3
+       },
+       "dc_peak_kw": {
+        "covered": true,
+        "two_plus": 3
+       },
+       "dc_avg_10_80_kw": {
+        "covered": false,
+        "estimate": 3
+       },
+       "dc_km_per_20min": {
+        "covered": false,
+        "estimate": 3
+       }
+      }
+     }
+    ]
+   }
+  },
+  "sections": {
+   "id": "sections",
+   "title": "New sections (T-059)",
+   "blocking": false,
+   "status": "flag",
+   "summary": "EPA 179 rows (0 with a 2nd EPA source via fueleconomy); years 10/12 generations corroborated; known issues 232 cohorts; charging stats 3810 rows",
+   "details": {
+    "epa_range_km": {
+     "rows": 179
+    },
+    "generation_years": {
+     "generations_checked": 12,
+     "corroborated": 10,
+     "disagreements": [
+      "skoda-enyaq-gen1: start 2017 (Škoda Enyaq iV) vs seed 2020",
+      "volkswagen-id3-gen1: start 2024 (Volkswagen ID.3 Chuzhong) vs seed 2020"
+     ]
+    },
+    "known_issues": {
+     "generations": 84,
+     "cohorts": 232,
+     "cohorts_few_reports": 75,
+     "codes": 26
+    },
+    "charging_stats": {
+     "bnetza-ladesaeulenregister": 2720,
+     "dft-ev-charging-infrastructure": 192,
+     "eafo": 898
+    }
+   }
+  },
+  "plausibility": {
+   "id": "plausibility",
+   "title": "Plausibility gate (A-35 B4)",
+   "blocking": false,
+   "status": "flag",
+   "summary": "5 issue(s) withheld from the rows (in conflicts.csv), 38 to review",
+   "details": {
+    "config": "qa_plausibility.yaml",
+    "by_rule": {
+     "dc_vs_peers review": 4,
+     "dc_vs_peers withhold": 1,
+     "wltp_efficiency review": 34,
+     "wltp_efficiency withhold": 4
+    },
+    "withheld_count": 5,
+    "withheld": [
+     {
+      "variant_id": "byd-atto-3-gen1-60kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 510.0,
+      "action": "withhold",
+      "detail": "WLTP 510 km / 60.5 kWh = 8.43 km/kWh > 8 (withheld above 8.2 for body suv)"
+     },
+     {
+      "variant_id": "hyundai-kona-electric-sx2-long-range",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 484.0,
+      "action": "withhold",
+      "detail": "WLTP 484 km / 58 kWh = 8.34 km/kWh > 8 (withheld above 8.2 for body suv)"
+     },
+     {
+      "variant_id": "hyundai-kona-electric-sx2-standard-range",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 305.0,
+      "action": "withhold",
+      "detail": "WLTP 305 km / 36.5 kWh = 8.36 km/kWh > 8 (withheld above 8.2 for body suv)"
+     },
+     {
+      "variant_id": "skoda-enyaq-gen1-85",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 752.0,
+      "action": "withhold",
+      "detail": "WLTP 752 km / 77 kWh = 9.77 km/kWh > 8 (withheld above 8.2 for body suv)"
+     },
+     {
+      "variant_id": "tesla-model-s-facelift-raven-long-range",
+      "rule": "dc_vs_peers",
+      "field": "dc_km_per_20min",
+      "value": 167.6,
+      "action": "withhold",
+      "detail": "dc_km_per_20min 167.6 = 1.47x the generation + pack median 113.7 (3 variants) > 1.3x"
+     }
+    ],
+    "review_count": 38,
+    "review": [
+     {
+      "variant_id": "bmw-i3-i01-120ah",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 310.0,
+      "action": "review",
+      "detail": "WLTP 310 km / 37.9 kWh = 8.18 km/kWh > 8"
+     },
+     {
+      "variant_id": "bmw-i3-i01-i3s-94ah",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 245.0,
+      "action": "review",
+      "detail": "WLTP 245 km / 27.2 kWh = 9.01 km/kWh > 8"
+     },
+     {
+      "variant_id": "byd-sealion-7-gen1-excellence-awd",
+      "rule": "dc_vs_peers",
+      "field": "dc_km_per_20min",
+      "value": 181.5,
+      "action": "review",
+      "detail": "dc_km_per_20min 181.5 = 1.39x the generation median 130.3 (3 variants) > 1.3x"
+     },
+     {
+      "variant_id": "citroen-e-c3-gen1-electric-200",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 232.0,
+      "action": "review",
+      "detail": "WLTP 232 km / 26 kWh = 8.92 km/kWh > 8"
+     },
+     {
+      "variant_id": "citroen-e-c4-c41-54kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 418.0,
+      "action": "review",
+      "detail": "WLTP 418 km / 50.8 kWh = 8.23 km/kWh > 8"
+     },
+     {
+      "variant_id": "dacia-spring-gen1-essential",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 230.0,
+      "action": "review",
+      "detail": "WLTP 230 km / 26.8 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "dacia-spring-gen1-essential-comfort",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 230.0,
+      "action": "review",
+      "detail": "WLTP 230 km / 26.8 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "dacia-spring-gen1-essential-extreme",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 230.0,
+      "action": "review",
+      "detail": "WLTP 230 km / 26.8 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "fiat-500e-332-24kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 190.0,
+      "action": "review",
+      "detail": "WLTP 190 km / 21.3 kWh = 8.92 km/kWh > 8"
+     },
+     {
+      "variant_id": "fiat-500e-332-42kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 337.0,
+      "action": "review",
+      "detail": "WLTP 337 km / 37.3 kWh = 9.03 km/kWh > 8"
+     },
+     {
+      "variant_id": "fiat-500e-332-icon",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 320.0,
+      "action": "review",
+      "detail": "WLTP 320 km / 37.3 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "fiat-500e-332-la-prima",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 320.0,
+      "action": "review",
+      "detail": "WLTP 320 km / 37.3 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "fiat-500e-332-pop",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 320.0,
+      "action": "review",
+      "detail": "WLTP 320 km / 37.3 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "ford-capri-gen1-base",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 600.0,
+      "action": "review",
+      "detail": "WLTP 600 km / 72 kWh = 8.33 km/kWh > 8"
+     },
+     {
+      "variant_id": "hyundai-inster-gen1-49kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 370.0,
+      "action": "review",
+      "detail": "WLTP 370 km / 45.6 kWh = 8.11 km/kWh > 8"
+     },
+     {
+      "variant_id": "hyundai-ioniq-6-gen1-long-range",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 614.0,
+      "action": "review",
+      "detail": "WLTP 614 km / 72.6 kWh = 8.46 km/kWh > 8"
+     },
+     {
+      "variant_id": "hyundai-ioniq-6-gen1-standard-range",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 429.0,
+      "action": "review",
+      "detail": "WLTP 429 km / 50 kWh = 8.58 km/kWh > 8"
+     },
+     {
+      "variant_id": "hyundai-ioniq-electric-gen1-38kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 311.0,
+      "action": "review",
+      "detail": "WLTP 311 km / 38.3 kWh = 8.12 km/kWh > 8"
+     },
+     {
+      "variant_id": "kia-ev3-gen1-standard-range",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 436.0,
+      "action": "review",
+      "detail": "WLTP 436 km / 54.2 kWh = 8.04 km/kWh > 8"
+     },
+     {
+      "variant_id": "mercedes-cla-gen1-base",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 808.0,
+      "action": "review",
+      "detail": "WLTP 808 km / 82 kWh = 9.85 km/kWh > 8"
+     },
+     {
+      "variant_id": "nissan-micra-ev-gen6-base",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 323.0,
+      "action": "review",
+      "detail": "WLTP 323 km / 40 kWh = 8.07 km/kWh > 8"
+     },
+     {
+      "variant_id": "peugeot-e-2008-p24-54kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 404.0,
+      "action": "review",
+      "detail": "WLTP 404 km / 50 kWh = 8.08 km/kWh > 8"
+     },
+     {
+      "variant_id": "peugeot-e-208-p21-51kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 400.0,
+      "action": "review",
+      "detail": "WLTP 400 km / 48.1 kWh = 8.32 km/kWh > 8"
+     },
+     {
+      "variant_id": "polestar-2-gen1-lr-single-rwd-my24",
+      "rule": "dc_vs_peers",
+      "field": "dc_km_per_20min",
+      "value": 236.2,
+      "action": "review",
+      "detail": "dc_km_per_20min 236.2 = 1.52x the generation median 155.9 (6 variants) > 1.3x"
+     },
+     {
+      "variant_id": "polestar-2-gen1-lr-single-rwd-my24",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 647.0,
+      "action": "review",
+      "detail": "WLTP 647 km / 79 kWh = 8.19 km/kWh > 8"
+     },
+     {
+      "variant_id": "renault-4-e-tech-gen1-40-kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 323.0,
+      "action": "review",
+      "detail": "WLTP 323 km / 38 kWh = 8.50 km/kWh > 8"
+     },
+     {
+      "variant_id": "renault-5-e-tech-gen1-40-kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 323.0,
+      "action": "review",
+      "detail": "WLTP 323 km / 38 kWh = 8.50 km/kWh > 8"
+     },
+     {
+      "variant_id": "renault-twingo-gen3-22kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 186.0,
+      "action": "review",
+      "detail": "WLTP 186 km / 22 kWh = 8.45 km/kWh > 8"
+     },
+     {
+      "variant_id": "tesla-model-3-gen1-long-range-2021",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 602.0,
+      "action": "review",
+      "detail": "WLTP 602 km / 75 kWh = 8.03 km/kWh > 8"
+     },
+     {
+      "variant_id": "tesla-model-3-gen1-sr-plus",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 409.0,
+      "action": "review",
+      "detail": "WLTP 409 km / 50 kWh = 8.18 km/kWh > 8"
+     },
+     {
+      "variant_id": "tesla-model-3-gen1-sr-plus-lfp",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 513.0,
+      "action": "review",
+      "detail": "WLTP 513 km / 52.5 kWh = 9.77 km/kWh > 8"
+     },
+     {
+      "variant_id": "tesla-model-3-highland-long-range",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 629.0,
+      "action": "review",
+      "detail": "WLTP 629 km / 75 kWh = 8.39 km/kWh > 8"
+     },
+     {
+      "variant_id": "tesla-model-3-highland-rear-wheel-drive",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 520.0,
+      "action": "review",
+      "detail": "WLTP 520 km / 57 kWh = 9.12 km/kWh > 8"
+     },
+     {
+      "variant_id": "volkswagen-e-up-gen1-18kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 141.0,
+      "action": "review",
+      "detail": "WLTP 141 km / 17.4 kWh = 8.10 km/kWh > 8"
+     },
+     {
+      "variant_id": "volkswagen-e-up-gen1-32kwh",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 274.0,
+      "action": "review",
+      "detail": "WLTP 274 km / 32.3 kWh = 8.48 km/kWh > 8"
+     },
+     {
+      "variant_id": "volkswagen-id3-gen1-gtx",
+      "rule": "dc_vs_peers",
+      "field": "dc_km_per_20min",
+      "value": 220.7,
+      "action": "review",
+      "detail": "dc_km_per_20min 220.7 = 1.52x the generation median 145.5 (4 variants) > 1.3x"
+     },
+     {
+      "variant_id": "volkswagen-id3-gen1-gtx",
+      "rule": "wltp_efficiency",
+      "field": "wltp_range_km",
+      "value": 633.0,
+      "action": "review",
+      "detail": "WLTP 633 km / 77 kWh = 8.22 km/kWh > 8"
+     },
+     {
+      "variant_id": "zeekr-001-gen1-140-kwh-extended-range-2024",
+      "rule": "dc_vs_peers",
+      "field": "dc_km_per_20min",
+      "value": 342.9,
+      "action": "review",
+      "detail": "dc_km_per_20min 342.9 = 1.45x the generation median 235.8 (4 variants) > 1.3x"
+     }
+    ]
+   }
+  },
+  "images": {
+   "id": "images",
+   "title": "Car photos: licence, file-page template, credit, stored files (Decisions 081, 083)",
+   "blocking": true,
+   "status": "pass",
+   "summary": "119 photo(s) ok",
+   "details": {
+    "problems": [],
+    "generations_with_image": 119,
+    "template_rule_not_applied": []
+   }
+  },
+  "release_diff": {
+   "id": "release_diff",
+   "title": "Release diff vs previous release (T-123)",
+   "blocking": true,
+   "status": "pass",
+   "summary": "vs release 3: 0 blocking, 1262 approved, 19489 review",
+   "details": {
+    "previous_release": 3,
+    "release": 4,
+    "config": {
+     "path": "config/approved_changes.yaml",
+     "sha256": "5598a2ecf8d399696411aadd559a8fd121616e2b58ed4c29467e3bcd3a0725e9"
+    },
+    "status": "pass",
+    "counts": {
+     "approved": 1262,
+     "retired": 21,
+     "review": 19489
+    },
+    "files": {
+     "catalogue.json:generations": {
+      "changed": 1,
+      "filled": 1018
+     },
+     "catalogue.json:rows": {
+      "added": 50,
+      "changed": 498,
+      "cleared": 2042,
+      "filled": 2154,
+      "removed": 6
+     },
+     "charging_stats.json:series": {
+      "charging": 16
+     },
+     "consumption_matrix.json:variants": {
+      "added": 50,
+      "changed": 522,
+      "cleared": 2,
+      "filled": 1,
+      "removed": 5
+     },
+     "shortlist_scores.json:variants": {
+      "added": 50,
+      "changed": 1182,
+      "cleared": 2,
+      "filled": 30,
+      "removed": 6
+     },
+     "towns/fr.json:towns": {
+      "changed": 2
+     },
+     "used_prices.json:variants": {
+      "added": 30,
+      "changed": 7723,
+      "cleared": 836,
+      "filled": 4540,
+      "removed": 6
+     }
+    },
+    "fields": {
+     "catalogue.json:registrations.NL[*].count": 808,
+     "catalogue.json:registrations.NL[*].kind": 808,
+     "catalogue.json:registrations.NL[*].level": 808,
+     "catalogue.json:registrations.NL[*].period": 808,
+     "catalogue.json:registrations.NL[*].source_id": 808,
+     "used_prices.json:bands.NL[*].source.licence": 504,
+     "used_prices.json:bands.BE[*].source.licence": 459,
+     "used_prices.json:bands.DE[*].kept_share": 437,
+     "used_prices.json:bands.DE[*].source.licence": 430,
+     "used_prices.json:bands.IT[*].kept_share": 417,
+     "used_prices.json:bands.ES[*].kept_share": 410,
+     "used_prices.json:bands.FR[*].kept_share": 410,
+     "used_prices.json:bands.IT[*].source.licence": 410,
+     "used_prices.json:bands.ES[*].source.licence": 403,
+     "used_prices.json:bands.FR[*].source.licence": 403,
+     "used_prices.json:bands.BE[*].kept_share": 383,
+     "used_prices.json:bands.DE[*].p75": 376,
+     "used_prices.json:bands.DE[*].median": 369,
+     "used_prices.json:bands.IT[*].p75": 366,
+     "used_prices.json:bands.FR[*].p75": 357
+    },
+    "biggest_moves": [
+     {
+      "file": "shortlist_scores.json",
+      "id": "audi-e-tron-ge-s",
+      "field": "scores.road-tripper+kerbside.rural.score",
+      "old": 0,
+      "new": 5.1,
+      "delta": 5.1,
+      "rel_delta": null,
+      "status": "review"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "audi-e-tron-ge-s",
+      "field": "scores.road-tripper.rural.score",
+      "old": 0,
+      "new": 5.6,
+      "delta": 5.6,
+      "rel_delta": null,
+      "status": "review"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "porsche-taycan-gen1-base",
+      "field": "factors.road-tripper.efficiency",
+      "old": 0.034,
+      "new": 0.138,
+      "delta": 0.104,
+      "rel_delta": 3.0588,
+      "status": "review"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "nissan-leaf-ze1-e-plus-62kwh",
+      "field": "factors.road-tripper.efficiency",
+      "old": 0.138,
+      "new": 0.332,
+      "delta": 0.194,
+      "rel_delta": 1.4058,
+      "status": "review"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "mg-mg4-gen1-xpower",
+      "field": "factors.road-tripper.efficiency",
+      "old": 0.104,
+      "new": 0.225,
+      "delta": 0.121,
+      "rel_delta": 1.1635,
+      "status": "review"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "ford-e-tourneo-courier-gen1-base",
+      "field": "factors.daily-driver.winter-range",
+      "old": 0.184,
+      "new": 0,
+      "delta": -0.184,
+      "rel_delta": -1.0,
+      "status": "review"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "ford-e-tourneo-courier-gen1-base",
+      "field": "scores.daily-driver+kerbside.rural.score",
+      "old": 41.2,
+      "new": 0,
+      "delta": -41.2,
+      "rel_delta": -1.0,
+      "status": "approved"
+     },
+     {
+      "file": "shortlist_scores.json",
+      "id": "ford-e-tourneo-courier-gen1-base",
+      "field": "scores.daily-driver.rural.score",
+      "old": 45.8,
+      "new": 0,
+      "delta": -45.8,
+      "rel_delta": -1.0,
+      "status": "approved"
+     },
+     {
+      "file": "catalogue.json",
+      "id": "vinfast-vf6-gen1-base",
+      "field": "registered_count_nl",
+      "old": 471,
+      "new": 783,
+      "delta": 312.0,
+      "rel_delta": 0.6624,
+      "status": "review"
+     },
+     {
+      "file": "catalogue.json",
+      "id": "vinfast-vf6-gen1-eco",
+      "field": "registered_count_nl",
+      "old": 471,
+      "new": 783,
+      "delta": 312.0,
+      "rel_delta": 0.6624,
+      "status": "review"
+     }
+    ],
+    "blocking": [],
+    "skipped": [],
+    "stale_approvals": [
+     {
+      "index": 179,
+      "approved_by": "PR #167 (T-148)",
+      "reason": "T-148: OpenEV's Elroq 'Base' row (77 kWh, i.e. the Elroq 85, but with 150 kW) carried the NL list price 42005 and the used-price model of RDW Elroq 60 records (RDW 'ELROQ 60 150 kW 2026', catalogue price 42005), placed there by power. PR #167 adds seed rows Elroq 50 / 60 (Skoda technical data, 5 May 2025: 60 = 150 kW), so those records now sit on the 60 row and Base's price and used prices clear. A correction, not a loss. Measured: ev verify main vs PR #167 on the same staging (2026-11-18), 2 blocking, both this variant."
+     },
+     {
+      "index": 189,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 190,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 193,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 194,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 195,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 196,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 200,
+      "approved_by": "PR #194 (T-161 gate, Decision 088)",
+      "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+     },
+     {
+      "index": 228,
+      "approved_by": "PR #212 (T-162 gate)",
+      "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+     },
+     {
+      "index": 229,
+      "approved_by": "PR #212 (T-162 gate)",
+      "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+     },
+     {
+      "index": 230,
+      "approved_by": "PR #212 (T-162 gate)",
+      "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+     },
+     {
+      "index": 231,
+      "approved_by": "PR #212 (T-162 gate)",
+      "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+     },
+     {
+      "index": 240,
+      "approved_by": "Decision 068 (T-164 gate, Decision 087)",
+      "reason": "T-164 (T-163 WS3 ask): Renault NL April 2022 official Twingo E-Tech Electric price list (cdn.group.renault.com, p. 16: 'Vermogen lader AC (kW/h) min-max 2,3 - 22 kW') replaces kilowatt-openev's wrong 11 kW AC figure (11 -> 22 kW; ac_km_per_h 67.9 -> 135.8). New row vs release 3 (0 blocking vs release 3); 1 blocking line vs origin/main."
+     },
+     {
+      "index": 254,
+      "approved_by": "Decision 049 (T-166 gate)",
+      "reason": "T-166: Kia EV9 gen1 GT (F6E54 / F7E54, 220 km/h, WLTP 518 km) is split in match/tgk_split.yaml from 2025+ AWD (F6E34 / F7E24 / F7E34) and RWD (F7E12) versions whose shared trade name 'EV9 / EV9 GT' previously pulled 17 7-seat non-GT records onto kia-ev9-gen1-gt. With only the 6 real GT versions (3x F6E54 6-seat + 3x F7E54 7-seat), seats moves 7 -> 6 while WLTP stops carrying 17 conflicting values (510 -> 518 km), consumption moves 22.0 -> 20.8 kWh/100 km, and mass moves 2664 -> 2718 kg. Measured: ev verify --base-release-from origin/main on 2026-11-27 staging (1 blocking line, this entry); 0 T-166 blocking lines against published release 3."
+     }
+    ],
+    "csv": "data/review/release_diff.csv"
+   }
+  }
+ },
+ "backtest": {
+  "status": "skipped",
+  "note": "no real condition-tagged tests from licence-cleared sources yet (the measured-test sources are still waiting for permission); harness tested on fixtures only",
+  "inputs": [],
+  "left_out": {
+   "fixture_rows": 0,
+   "not_releasable_source": 0
+  }
+ },
+ "release_diff": {
+  "previous_release": 3,
+  "release": 4,
+  "config": {
+   "path": "config/approved_changes.yaml",
+   "sha256": "5598a2ecf8d399696411aadd559a8fd121616e2b58ed4c29467e3bcd3a0725e9"
+  },
+  "status": "pass",
+  "counts": {
+   "approved": 1262,
+   "retired": 21,
+   "review": 19489
+  },
+  "files": {
+   "catalogue.json:generations": {
+    "changed": 1,
+    "filled": 1018
+   },
+   "catalogue.json:rows": {
+    "added": 50,
+    "changed": 498,
+    "cleared": 2042,
+    "filled": 2154,
+    "removed": 6
+   },
+   "charging_stats.json:series": {
+    "charging": 16
+   },
+   "consumption_matrix.json:variants": {
+    "added": 50,
+    "changed": 522,
+    "cleared": 2,
+    "filled": 1,
+    "removed": 5
+   },
+   "shortlist_scores.json:variants": {
+    "added": 50,
+    "changed": 1182,
+    "cleared": 2,
+    "filled": 30,
+    "removed": 6
+   },
+   "towns/fr.json:towns": {
+    "changed": 2
+   },
+   "used_prices.json:variants": {
+    "added": 30,
+    "changed": 7723,
+    "cleared": 836,
+    "filled": 4540,
+    "removed": 6
+   }
+  },
+  "fields": {
+   "catalogue.json:registrations.NL[*].count": 808,
+   "catalogue.json:registrations.NL[*].kind": 808,
+   "catalogue.json:registrations.NL[*].level": 808,
+   "catalogue.json:registrations.NL[*].period": 808,
+   "catalogue.json:registrations.NL[*].source_id": 808,
+   "used_prices.json:bands.NL[*].source.licence": 504,
+   "used_prices.json:bands.BE[*].source.licence": 459,
+   "used_prices.json:bands.DE[*].kept_share": 437,
+   "used_prices.json:bands.DE[*].source.licence": 430,
+   "used_prices.json:bands.IT[*].kept_share": 417,
+   "used_prices.json:bands.ES[*].kept_share": 410,
+   "used_prices.json:bands.FR[*].kept_share": 410,
+   "used_prices.json:bands.IT[*].source.licence": 410,
+   "used_prices.json:bands.ES[*].source.licence": 403,
+   "used_prices.json:bands.FR[*].source.licence": 403,
+   "used_prices.json:bands.BE[*].kept_share": 383,
+   "used_prices.json:bands.DE[*].p75": 376,
+   "used_prices.json:bands.DE[*].median": 369,
+   "used_prices.json:bands.IT[*].p75": 366,
+   "used_prices.json:bands.FR[*].p75": 357
+  },
+  "biggest_moves": [
+   {
+    "file": "shortlist_scores.json",
+    "id": "audi-e-tron-ge-s",
+    "field": "scores.road-tripper+kerbside.rural.score",
+    "old": 0,
+    "new": 5.1,
+    "delta": 5.1,
+    "rel_delta": null,
+    "status": "review"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "audi-e-tron-ge-s",
+    "field": "scores.road-tripper.rural.score",
+    "old": 0,
+    "new": 5.6,
+    "delta": 5.6,
+    "rel_delta": null,
+    "status": "review"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "porsche-taycan-gen1-base",
+    "field": "factors.road-tripper.efficiency",
+    "old": 0.034,
+    "new": 0.138,
+    "delta": 0.104,
+    "rel_delta": 3.0588,
+    "status": "review"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "nissan-leaf-ze1-e-plus-62kwh",
+    "field": "factors.road-tripper.efficiency",
+    "old": 0.138,
+    "new": 0.332,
+    "delta": 0.194,
+    "rel_delta": 1.4058,
+    "status": "review"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "mg-mg4-gen1-xpower",
+    "field": "factors.road-tripper.efficiency",
+    "old": 0.104,
+    "new": 0.225,
+    "delta": 0.121,
+    "rel_delta": 1.1635,
+    "status": "review"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "ford-e-tourneo-courier-gen1-base",
+    "field": "factors.daily-driver.winter-range",
+    "old": 0.184,
+    "new": 0,
+    "delta": -0.184,
+    "rel_delta": -1.0,
+    "status": "review"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "ford-e-tourneo-courier-gen1-base",
+    "field": "scores.daily-driver+kerbside.rural.score",
+    "old": 41.2,
+    "new": 0,
+    "delta": -41.2,
+    "rel_delta": -1.0,
+    "status": "approved"
+   },
+   {
+    "file": "shortlist_scores.json",
+    "id": "ford-e-tourneo-courier-gen1-base",
+    "field": "scores.daily-driver.rural.score",
+    "old": 45.8,
+    "new": 0,
+    "delta": -45.8,
+    "rel_delta": -1.0,
+    "status": "approved"
+   },
+   {
+    "file": "catalogue.json",
+    "id": "vinfast-vf6-gen1-base",
+    "field": "registered_count_nl",
+    "old": 471,
+    "new": 783,
+    "delta": 312.0,
+    "rel_delta": 0.6624,
+    "status": "review"
+   },
+   {
+    "file": "catalogue.json",
+    "id": "vinfast-vf6-gen1-eco",
+    "field": "registered_count_nl",
+    "old": 471,
+    "new": 783,
+    "delta": 312.0,
+    "rel_delta": 0.6624,
+    "status": "review"
+   }
+  ],
+  "blocking": [],
+  "skipped": [],
+  "stale_approvals": [
+   {
+    "index": 179,
+    "approved_by": "PR #167 (T-148)",
+    "reason": "T-148: OpenEV's Elroq 'Base' row (77 kWh, i.e. the Elroq 85, but with 150 kW) carried the NL list price 42005 and the used-price model of RDW Elroq 60 records (RDW 'ELROQ 60 150 kW 2026', catalogue price 42005), placed there by power. PR #167 adds seed rows Elroq 50 / 60 (Skoda technical data, 5 May 2025: 60 = 150 kW), so those records now sit on the 60 row and Base's price and used prices clear. A correction, not a loss. Measured: ev verify main vs PR #167 on the same staging (2026-11-18), 2 blocking, both this variant."
+   },
+   {
+    "index": 189,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 190,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 193,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 194,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 195,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 196,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 200,
+    "approved_by": "PR #194 (T-161 gate, Decision 088)",
+    "reason": "T-161: Decision 088 trim-line rule. The row's newest-version / older-version flag changes because versions are now compared within the same model + drivetrain + power line (> 15 % power starts a new line; unknown drivetrain or power = never compared), not model-wide. Measured: main vs T-161 built with their own code on one staging (2026-11-19): 48 blocking band lines on these 17 ids, 0 catalogue changes."
+   },
+   {
+    "index": 228,
+    "approved_by": "PR #212 (T-162 gate)",
+    "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+   },
+   {
+    "index": 229,
+    "approved_by": "PR #212 (T-162 gate)",
+    "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+   },
+   {
+    "index": 230,
+    "approved_by": "PR #212 (T-162 gate)",
+    "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+   },
+   {
+    "index": 231,
+    "approved_by": "PR #212 (T-162 gate)",
+    "reason": "T-162: OpenEV's MY2025 Base file carried 185 kW (the Elroq RS figure); both official Škoda Auto Elroq Technical Data sheets (5 May 2025 and 15 Dec 2025, cdn.skoda-storyboard.com) state 135 kW max DC and 28 min (10-80 %) for the Elroq 85 RWD. Replacing the lone OpenEV peak with Škoda's cited manual facts (135 kW, 28 min) drops dc_peak_kw 185 -> 135, clears the synthetic default curve fields (dc_curve_status, dc_peak_held_min) now that the maker 10-80 time is explicit, and moves scores.road-tripper.urban.band shortlist -> consider (53.8 -> 51.4). Measured: ev verify --base-release-from origin/main on 2026-11-26 staging (4 blocking lines, all below); 0 blocking against published release 3."
+   },
+   {
+    "index": 240,
+    "approved_by": "Decision 068 (T-164 gate, Decision 087)",
+    "reason": "T-164 (T-163 WS3 ask): Renault NL April 2022 official Twingo E-Tech Electric price list (cdn.group.renault.com, p. 16: 'Vermogen lader AC (kW/h) min-max 2,3 - 22 kW') replaces kilowatt-openev's wrong 11 kW AC figure (11 -> 22 kW; ac_km_per_h 67.9 -> 135.8). New row vs release 3 (0 blocking vs release 3); 1 blocking line vs origin/main."
+   },
+   {
+    "index": 254,
+    "approved_by": "Decision 049 (T-166 gate)",
+    "reason": "T-166: Kia EV9 gen1 GT (F6E54 / F7E54, 220 km/h, WLTP 518 km) is split in match/tgk_split.yaml from 2025+ AWD (F6E34 / F7E24 / F7E34) and RWD (F7E12) versions whose shared trade name 'EV9 / EV9 GT' previously pulled 17 7-seat non-GT records onto kia-ev9-gen1-gt. With only the 6 real GT versions (3x F6E54 6-seat + 3x F7E54 7-seat), seats moves 7 -> 6 while WLTP stops carrying 17 conflicting values (510 -> 518 km), consumption moves 22.0 -> 20.8 kWh/100 km, and mass moves 2664 -> 2718 kg. Measured: ev verify --base-release-from origin/main on 2026-11-27 staging (1 blocking line, this entry); 0 T-166 blocking lines against published release 3."
+   }
+  ],
+  "csv": "data/review/release_diff.csv"
+ },
+ "top40": {
+  "status": "info",
+  "list": "data/seed/top40.yaml",
+  "release": 4,
+  "models": 40,
+  "target_share_two_plus": 0.8,
+  "rule": "a model takes the best level a majority of its release variants reach (2+ agreeing outside sources > 1 source > estimate or seed-manual only > none); a model not in the release is none. Registrations: number of sources with a count per country (periods differ, so 'sources present', not 'agreeing').",
+  "generation_years_disagreeing": [
+   {
+    "model_id": "volkswagen-id3",
+    "item": "Q125739580",
+    "label": "Volkswagen ID.3 Chuzhong",
+    "boundary": "production_start",
+    "year": 2024,
+    "agrees": false
+   },
+   {
+    "model_id": "skoda-enyaq",
+    "item": "Q30753091",
+    "label": "Škoda Enyaq iV",
+    "boundary": "production_start",
+    "year": 2017,
+    "agrees": false
+   }
+  ],
+  "fields_meeting_target": [
+   "registrations.DE",
+   "registrations.NL"
+  ],
+  "by_field": {
+   "battery_kwh_net": {
+    "two_plus": 9,
+    "one": 28,
+    "estimate": 3,
+    "none": 0,
+    "share_two_plus": 0.225,
+    "meets_target": false,
+    "could_fill": "openev (2023+), kilowatt-openev; owner tests (permission pending)"
+   },
+   "wltp_range_km": {
+    "two_plus": 12,
+    "one": 24,
+    "estimate": 0,
+    "none": 4,
+    "share_two_plus": 0.3,
+    "meets_target": false,
+    "could_fill": "openev, ademe (FR line-up), rdw fuel table (adapter live, Q-068), eea per type (adapter extension)"
+   },
+   "ac_kw": {
+    "two_plus": 14,
+    "one": 22,
+    "estimate": 3,
+    "none": 1,
+    "share_two_plus": 0.35,
+    "meets_target": false,
+    "could_fill": "openev, kilowatt-openev"
+   },
+   "dc_peak_kw": {
+    "two_plus": 9,
+    "one": 21,
+    "estimate": 8,
+    "none": 2,
+    "share_two_plus": 0.225,
+    "meets_target": false,
+    "could_fill": "openev, kilowatt-openev; fastned (waiting)"
+   },
+   "dc_avg_10_80_kw": {
+    "two_plus": 0,
+    "one": 0,
+    "estimate": 38,
+    "none": 2,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "openev 10-80 % time; kilowatt-openev curves (estimated); fastned / owner tests (permission pending)"
+   },
+   "real_range_km": {
+    "two_plus": 0,
+    "one": 0,
+    "estimate": 38,
+    "none": 2,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "real-world tests (permission pending); model-estimate only"
+   },
+   "price_new.NL": {
+    "two_plus": 0,
+    "one": 21,
+    "estimate": 0,
+    "none": 19,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "rdw catalogusprijs (imported)"
+   },
+   "price_new.DE": {
+    "two_plus": 0,
+    "one": 4,
+    "estimate": 0,
+    "none": 36,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "openev (2023+); maker-docs (blocked, Q-008)"
+   },
+   "price_new.FR": {
+    "two_plus": 0,
+    "one": 3,
+    "estimate": 0,
+    "none": 37,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "ademe (current line-up)"
+   },
+   "price_new.BE": {
+    "two_plus": 0,
+    "one": 1,
+    "estimate": 0,
+    "none": 39,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "none open (R-02); maker-docs (blocked)"
+   },
+   "price_new.UK": {
+    "two_plus": 0,
+    "one": 0,
+    "estimate": 0,
+    "none": 40,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "openev GBP list prices (2023+); maker-docs (blocked)"
+   },
+   "price_used": {
+    "two_plus": 0,
+    "one": 0,
+    "estimate": 0,
+    "none": 40,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "none in data/sources.yaml (partner feeds / indices, Decision 004)"
+   },
+   "registrations.NL": {
+    "two_plus": 40,
+    "one": 0,
+    "estimate": 0,
+    "none": 0,
+    "share_two_plus": 1.0,
+    "meets_target": true,
+    "could_fill": "rdw fleet + eea new"
+   },
+   "registrations.DE": {
+    "two_plus": 38,
+    "one": 2,
+    "estimate": 0,
+    "none": 0,
+    "share_two_plus": 0.95,
+    "meets_target": true,
+    "could_fill": "kba-fz10 + eea (new registrations only; no open DE fleet by model)"
+   },
+   "registrations.FR": {
+    "two_plus": 0,
+    "one": 40,
+    "estimate": 0,
+    "none": 0,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "eea (new registrations only; no open FR fleet by model)"
+   },
+   "registrations.BE": {
+    "two_plus": 0,
+    "one": 40,
+    "estimate": 0,
+    "none": 0,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "eea (new registrations only; be-mobilit blocked)"
+   },
+   "registrations.UK": {
+    "two_plus": 0,
+    "one": 40,
+    "estimate": 0,
+    "none": 0,
+    "share_two_plus": 0.0,
+    "meets_target": false,
+    "could_fill": "dft-veh fleet only (no UK row in EEA after Brexit)"
+   },
+   "generation_years": {
+    "two_plus": 9,
+    "one": 2,
+    "estimate": 0,
+    "none": 29,
+    "share_two_plus": 0.225,
+    "meets_target": false,
+    "could_fill": "rdw first-admission years per type approval (adapter extension); eea back years; wikidata (sparse: few car items carry dates)"
+   }
+  },
+  "per_model": [
+   {
+    "rank": 1,
+    "model_id": "tesla-model-3",
+    "in_seed": true,
+    "variants_in_release": 9,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 2,
+    "model_id": "tesla-model-y",
+    "in_seed": true,
+    "variants_in_release": 7,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 3,
+    "model_id": "kia-niro-ev",
+    "in_seed": true,
+    "variants_in_release": 3,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 4,
+    "model_id": "volkswagen-id3",
+    "in_seed": true,
+    "variants_in_release": 5,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "one"
+    }
+   },
+   {
+    "rank": 5,
+    "model_id": "skoda-enyaq",
+    "in_seed": true,
+    "variants_in_release": 7,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "one"
+    }
+   },
+   {
+    "rank": 6,
+    "model_id": "hyundai-kona-electric",
+    "in_seed": true,
+    "variants_in_release": 4,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "none",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "none",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 7,
+    "model_id": "audi-q4-e-tron",
+    "in_seed": true,
+    "variants_in_release": 3,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 8,
+    "model_id": "volvo-xc40-recharge",
+    "in_seed": true,
+    "variants_in_release": 7,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 9,
+    "model_id": "volkswagen-id4",
+    "in_seed": true,
+    "variants_in_release": 3,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "one",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 10,
+    "model_id": "nissan-leaf",
+    "in_seed": true,
+    "variants_in_release": 4,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "none",
+     "ac_kw": "one",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 11,
+    "model_id": "audi-e-tron",
+    "in_seed": true,
+    "variants_in_release": 9,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 12,
+    "model_id": "polestar-2",
+    "in_seed": true,
+    "variants_in_release": 9,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "one",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 13,
+    "model_id": "peugeot-e-208",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 14,
+    "model_id": "bmw-i4",
+    "in_seed": true,
+    "variants_in_release": 4,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 15,
+    "model_id": "mini-cooper-se",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "one",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 16,
+    "model_id": "renault-zoe",
+    "in_seed": true,
+    "variants_in_release": 7,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "none",
+     "ac_kw": "one",
+     "dc_peak_kw": "none",
+     "dc_avg_10_80_kw": "none",
+     "real_range_km": "none",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 17,
+    "model_id": "mg-mg4",
+    "in_seed": true,
+    "variants_in_release": 5,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 18,
+    "model_id": "volvo-ex30",
+    "in_seed": true,
+    "variants_in_release": 4,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "one",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 19,
+    "model_id": "peugeot-e-2008",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 20,
+    "model_id": "cupra-born",
+    "in_seed": true,
+    "variants_in_release": 4,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 21,
+    "model_id": "opel-corsa-e",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "estimate",
+     "wltp_range_km": "one",
+     "ac_kw": "estimate",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 22,
+    "model_id": "mercedes-eqa",
+    "in_seed": true,
+    "variants_in_release": 5,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 23,
+    "model_id": "kia-ev6",
+    "in_seed": true,
+    "variants_in_release": 7,
+    "levels": {
+     "battery_kwh_net": "estimate",
+     "wltp_range_km": "one",
+     "ac_kw": "estimate",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 24,
+    "model_id": "mg-zs-ev",
+    "in_seed": true,
+    "variants_in_release": 3,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 25,
+    "model_id": "hyundai-ioniq-5",
+    "in_seed": true,
+    "variants_in_release": 9,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "estimate",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 26,
+    "model_id": "bmw-ix1",
+    "in_seed": true,
+    "variants_in_release": 1,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "one",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 27,
+    "model_id": "bmw-ix3",
+    "in_seed": true,
+    "variants_in_release": 1,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "one",
+     "price_new.FR": "one",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 28,
+    "model_id": "fiat-500e",
+    "in_seed": true,
+    "variants_in_release": 6,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 29,
+    "model_id": "opel-mokka",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "estimate",
+     "wltp_range_km": "one",
+     "ac_kw": "none",
+     "dc_peak_kw": "none",
+     "dc_avg_10_80_kw": "none",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 30,
+    "model_id": "bmw-i3",
+    "in_seed": true,
+    "variants_in_release": 5,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 31,
+    "model_id": "jaguar-i-pace",
+    "in_seed": true,
+    "variants_in_release": 1,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 32,
+    "model_id": "ford-mustang-mach-e",
+    "in_seed": true,
+    "variants_in_release": 7,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 33,
+    "model_id": "mercedes-eqb",
+    "in_seed": true,
+    "variants_in_release": 6,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 34,
+    "model_id": "renault-megane-e-tech",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 35,
+    "model_id": "porsche-taycan",
+    "in_seed": true,
+    "variants_in_release": 5,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "one",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "one",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 36,
+    "model_id": "volkswagen-e-golf",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "none",
+     "ac_kw": "one",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 37,
+    "model_id": "bmw-ix",
+    "in_seed": true,
+    "variants_in_release": 3,
+    "levels": {
+     "battery_kwh_net": "two_plus",
+     "wltp_range_km": "two_plus",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "one",
+     "price_new.FR": "one",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   },
+   {
+    "rank": 38,
+    "model_id": "citroen-e-c4",
+    "in_seed": true,
+    "variants_in_release": 2,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "one",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "none",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 39,
+    "model_id": "ford-explorer",
+    "in_seed": true,
+    "variants_in_release": 1,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "two_plus",
+     "dc_peak_kw": "two_plus",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "two_plus",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "none"
+    }
+   },
+   {
+    "rank": 40,
+    "model_id": "mercedes-eqc",
+    "in_seed": true,
+    "variants_in_release": 1,
+    "levels": {
+     "battery_kwh_net": "one",
+     "wltp_range_km": "one",
+     "ac_kw": "one",
+     "dc_peak_kw": "estimate",
+     "dc_avg_10_80_kw": "estimate",
+     "real_range_km": "estimate",
+     "price_new.NL": "one",
+     "price_new.DE": "none",
+     "price_new.FR": "none",
+     "price_new.BE": "none",
+     "price_new.UK": "none",
+     "price_used": "none",
+     "registrations.NL": "two_plus",
+     "registrations.DE": "one",
+     "registrations.FR": "one",
+     "registrations.BE": "one",
+     "registrations.UK": "one",
+     "generation_years": "two_plus"
+    }
+   }
+  ]
+ },
+ "backtest_epa": {
+  "kind": "proxy",
+  "note": "EPA label values (fueleconomy.gov, public domain): US cycles, 5-cycle adjusted. A check that WLTP-based estimates land near an independent measurement, not the launch gate (independent real-world tests, spec §5).",
+  "range": {
+   "status": "flag",
+   "gate": "median absolute error < 10% (proxy, not the launch gate)",
+   "n": 104,
+   "variants": 104,
+   "median_abs_pct": 7.18,
+   "mean_signed_pct": -2.36,
+   "by_body": {
+    "coupe": {
+     "n": 3,
+     "median_abs_pct": 20.72,
+     "mean_signed_pct": -4.81
+    },
+    "crossover": {
+     "n": 23,
+     "median_abs_pct": 7.97,
+     "mean_signed_pct": -4.88
+    },
+    "hatchback": {
+     "n": 6,
+     "median_abs_pct": 8.12,
+     "mean_signed_pct": 7.39
+    },
+    "sedan": {
+     "n": 33,
+     "median_abs_pct": 7.06,
+     "mean_signed_pct": 3.96
+    },
+    "suv": {
+     "n": 39,
+     "median_abs_pct": 6.95,
+     "mean_signed_pct": -7.53
+    }
+   },
+   "by_model": {
+    "audi-e-tron": {
+     "n": 3,
+     "median_abs_pct": 7.27,
+     "mean_signed_pct": 0.76
+    },
+    "audi-e-tron-gt": {
+     "n": 3,
+     "median_abs_pct": 9.57,
+     "mean_signed_pct": 9.3
+    },
+    "audi-q4-e-tron": {
+     "n": 2,
+     "median_abs_pct": 7.55,
+     "mean_signed_pct": -7.55
+    },
+    "audi-q6-e-tron": {
+     "n": 2,
+     "median_abs_pct": 9.13,
+     "mean_signed_pct": 1.12
+    },
+    "bmw-i4": {
+     "n": 4,
+     "median_abs_pct": 4.42,
+     "mean_signed_pct": 4.42
+    },
+    "bmw-i5": {
+     "n": 2,
+     "median_abs_pct": 9.84,
+     "mean_signed_pct": 9.84
+    },
+    "bmw-i7": {
+     "n": 2,
+     "median_abs_pct": 7.48,
+     "mean_signed_pct": 7.48
+    },
+    "bmw-ix": {
+     "n": 3,
+     "median_abs_pct": 3.75,
+     "mean_signed_pct": -3.5
+    },
+    "ford-mustang-mach-e": {
+     "n": 1,
+     "median_abs_pct": 10.24,
+     "mean_signed_pct": -10.24
+    },
+    "genesis-gv60": {
+     "n": 2,
+     "median_abs_pct": 4.66,
+     "mean_signed_pct": -4.66
+    },
+    "hyundai-ioniq-5": {
+     "n": 4,
+     "median_abs_pct": 4.7,
+     "mean_signed_pct": -4.48
+    },
+    "hyundai-ioniq-6": {
+     "n": 3,
+     "median_abs_pct": 2.25,
+     "mean_signed_pct": 1.33
+    },
+    "hyundai-ioniq-9": {
+     "n": 1,
+     "median_abs_pct": 8.21,
+     "mean_signed_pct": -8.21
+    },
+    "jaguar-i-pace": {
+     "n": 1,
+     "median_abs_pct": 2.66,
+     "mean_signed_pct": -2.66
+    },
+    "kia-ev3": {
+     "n": 3,
+     "median_abs_pct": 1.94,
+     "mean_signed_pct": -3.08
+    },
+    "kia-ev6": {
+     "n": 6,
+     "median_abs_pct": 11.38,
+     "mean_signed_pct": -10.22
+    },
+    "kia-ev9": {
+     "n": 4,
+     "median_abs_pct": 7.55,
+     "mean_signed_pct": -8.1
+    },
+    "kia-niro-ev": {
+     "n": 1,
+     "median_abs_pct": 7.37,
+     "mean_signed_pct": -7.37
+    },
+    "maserati-grecale-folgore": {
+     "n": 1,
+     "median_abs_pct": 5.14,
+     "mean_signed_pct": -5.14
+    },
+    "mazda-mx-30": {
+     "n": 1,
+     "median_abs_pct": 1.93,
+     "mean_signed_pct": 1.93
+    },
+    "mercedes-cla": {
+     "n": 1,
+     "median_abs_pct": 27.87,
+     "mean_signed_pct": 27.87
+    },
+    "mercedes-eqb": {
+     "n": 2,
+     "median_abs_pct": 2.38,
+     "mean_signed_pct": -2.38
+    },
+    "mercedes-eqe": {
+     "n": 2,
+     "median_abs_pct": 5.25,
+     "mean_signed_pct": 5.25
+    },
+    "mercedes-eqs": {
+     "n": 1,
+     "median_abs_pct": 3.54,
+     "mean_signed_pct": 3.54
+    },
+    "mercedes-g-580": {
+     "n": 1,
+     "median_abs_pct": 0.42,
+     "mean_signed_pct": -0.42
+    },
+    "mini-cooper-se": {
+     "n": 2,
+     "median_abs_pct": 23.0,
+     "mean_signed_pct": 23.0
+    },
+    "mini-countryman-e": {
+     "n": 1,
+     "median_abs_pct": 6.95,
+     "mean_signed_pct": -6.95
+    },
+    "nissan-ariya": {
+     "n": 3,
+     "median_abs_pct": 4.27,
+     "mean_signed_pct": -2.26
+    },
+    "nissan-leaf": {
+     "n": 2,
+     "median_abs_pct": 6.04,
+     "mean_signed_pct": -6.04
+    },
+    "polestar-2": {
+     "n": 2,
+     "median_abs_pct": 10.84,
+     "mean_signed_pct": 10.84
+    },
+    "polestar-3": {
+     "n": 2,
+     "median_abs_pct": 3.5,
+     "mean_signed_pct": -3.5
+    },
+    "polestar-4": {
+     "n": 2,
+     "median_abs_pct": 4.56,
+     "mean_signed_pct": 2.35
+    },
+    "porsche-taycan": {
+     "n": 4,
+     "median_abs_pct": 9.66,
+     "mean_signed_pct": 8.56
+    },
+    "rolls-royce-spectre": {
+     "n": 1,
+     "median_abs_pct": 20.72,
+     "mean_signed_pct": -20.72
+    },
+    "smart-eq-fortwo": {
+     "n": 1,
+     "median_abs_pct": 15.78,
+     "mean_signed_pct": 15.78
+    },
+    "tesla-model-3": {
+     "n": 6,
+     "median_abs_pct": 5.09,
+     "mean_signed_pct": -4.72
+    },
+    "tesla-model-s": {
+     "n": 3,
+     "median_abs_pct": 7.87,
+     "mean_signed_pct": -7.73
+    },
+    "tesla-model-x": {
+     "n": 4,
+     "median_abs_pct": 22.47,
+     "mean_signed_pct": -22.19
+    },
+    "tesla-model-y": {
+     "n": 7,
+     "median_abs_pct": 11.49,
+     "mean_signed_pct": -12.27
+    },
+    "volkswagen-e-golf": {
+     "n": 1,
+     "median_abs_pct": 5.37,
+     "mean_signed_pct": -5.37
+    },
+    "volkswagen-id4": {
+     "n": 1,
+     "median_abs_pct": 6.26,
+     "mean_signed_pct": -6.26
+    },
+    "volvo-ec40": {
+     "n": 2,
+     "median_abs_pct": 22.72,
+     "mean_signed_pct": 3.15
+    },
+    "volvo-ex30": {
+     "n": 1,
+     "median_abs_pct": 9.63,
+     "mean_signed_pct": -9.63
+    },
+    "volvo-ex90": {
+     "n": 1,
+     "median_abs_pct": 0.75,
+     "mean_signed_pct": 0.75
+    },
+    "volvo-xc40-recharge": {
+     "n": 2,
+     "median_abs_pct": 5.88,
+     "mean_signed_pct": -5.88
+    }
+   },
+   "top40": {
+    "models_with_data": 20,
+    "models": 40,
+    "by_model": {
+     "tesla-model-3": {
+      "n": 6,
+      "median_abs_pct": 5.09,
+      "mean_signed_pct": -4.72
+     },
+     "tesla-model-y": {
+      "n": 7,
+      "median_abs_pct": 11.49,
+      "mean_signed_pct": -12.27
+     },
+     "kia-niro-ev": {
+      "n": 1,
+      "median_abs_pct": 7.37,
+      "mean_signed_pct": -7.37
+     },
+     "audi-q4-e-tron": {
+      "n": 2,
+      "median_abs_pct": 7.55,
+      "mean_signed_pct": -7.55
+     },
+     "volvo-xc40-recharge": {
+      "n": 2,
+      "median_abs_pct": 5.88,
+      "mean_signed_pct": -5.88
+     },
+     "volkswagen-id4": {
+      "n": 1,
+      "median_abs_pct": 6.26,
+      "mean_signed_pct": -6.26
+     },
+     "nissan-leaf": {
+      "n": 2,
+      "median_abs_pct": 6.04,
+      "mean_signed_pct": -6.04
+     },
+     "audi-e-tron": {
+      "n": 3,
+      "median_abs_pct": 7.27,
+      "mean_signed_pct": 0.76
+     },
+     "polestar-2": {
+      "n": 2,
+      "median_abs_pct": 10.84,
+      "mean_signed_pct": 10.84
+     },
+     "bmw-i4": {
+      "n": 4,
+      "median_abs_pct": 4.42,
+      "mean_signed_pct": 4.42
+     },
+     "mini-cooper-se": {
+      "n": 2,
+      "median_abs_pct": 23.0,
+      "mean_signed_pct": 23.0
+     },
+     "volvo-ex30": {
+      "n": 1,
+      "median_abs_pct": 9.63,
+      "mean_signed_pct": -9.63
+     },
+     "kia-ev6": {
+      "n": 6,
+      "median_abs_pct": 11.38,
+      "mean_signed_pct": -10.22
+     },
+     "hyundai-ioniq-5": {
+      "n": 4,
+      "median_abs_pct": 4.7,
+      "mean_signed_pct": -4.48
+     },
+     "jaguar-i-pace": {
+      "n": 1,
+      "median_abs_pct": 2.66,
+      "mean_signed_pct": -2.66
+     },
+     "ford-mustang-mach-e": {
+      "n": 1,
+      "median_abs_pct": 10.24,
+      "mean_signed_pct": -10.24
+     },
+     "mercedes-eqb": {
+      "n": 2,
+      "median_abs_pct": 2.38,
+      "mean_signed_pct": -2.38
+     },
+     "porsche-taycan": {
+      "n": 4,
+      "median_abs_pct": 9.66,
+      "mean_signed_pct": 8.56
+     },
+     "volkswagen-e-golf": {
+      "n": 1,
+      "median_abs_pct": 5.37,
+      "mean_signed_pct": -5.37
+     },
+     "bmw-ix": {
+      "n": 3,
+      "median_abs_pct": 3.75,
+      "mean_signed_pct": -3.5
+     }
+    },
+    "missing": [
+     "volkswagen-id3",
+     "skoda-enyaq",
+     "hyundai-kona-electric",
+     "peugeot-e-208",
+     "renault-zoe",
+     "mg-mg4",
+     "peugeot-e-2008",
+     "cupra-born",
+     "opel-corsa-e",
+     "mercedes-eqa",
+     "mg-zs-ev",
+     "bmw-ix1",
+     "bmw-ix3",
+     "fiat-500e",
+     "opel-mokka",
+     "bmw-i3",
+     "renault-megane-e-tech",
+     "citroen-e-c4",
+     "ford-explorer",
+     "mercedes-eqc"
+    ]
+   },
+   "worst": [
+    {
+     "variant_id": "mini-cooper-se-j01-se",
+     "model_id": "mini-cooper-se",
+     "body": "hatchback",
+     "rung": "body-ratio",
+     "predicted_km": 252.4,
+     "measured_km": 183.5,
+     "error_pct": 37.55,
+     "epa_records": 1
+    },
+    {
+     "variant_id": "mercedes-cla-gen1-base",
+     "model_id": "mercedes-cla",
+     "body": "sedan",
+     "rung": "body-ratio",
+     "predicted_km": 711.0,
+     "measured_km": 556.0,
+     "error_pct": 27.87,
+     "epa_records": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-long-range",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "rung": "body-ratio",
+     "predicted_km": 395.5,
+     "measured_km": 546.4,
+     "error_pct": -27.62,
+     "epa_records": 4
+    },
+    {
+     "variant_id": "volvo-ec40-c40-twin-motor",
+     "model_id": "volvo-ec40",
+     "body": "coupe",
+     "rung": "body-ratio",
+     "predicted_km": 457.8,
+     "measured_km": 363.7,
+     "error_pct": 25.87,
+     "epa_records": 2
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-75d",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "rung": "body-ratio",
+     "predicted_km": 292.5,
+     "measured_km": 383.0,
+     "error_pct": -23.63,
+     "epa_records": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-performance",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "rung": "body-ratio",
+     "predicted_km": 379.9,
+     "measured_km": 482.8,
+     "error_pct": -21.31,
+     "epa_records": 5
+    },
+    {
+     "variant_id": "rolls-royce-spectre-gen1-black-badge",
+     "model_id": "rolls-royce-spectre",
+     "body": "coupe",
+     "rung": "body-ratio",
+     "predicted_km": 339.4,
+     "measured_km": 428.1,
+     "error_pct": -20.72,
+     "epa_records": 8
+    },
+    {
+     "variant_id": "volvo-ec40-ec40-twin-motor",
+     "model_id": "volvo-ec40",
+     "body": "coupe",
+     "rung": "body-ratio",
+     "predicted_km": 346.9,
+     "measured_km": 431.3,
+     "error_pct": -19.57,
+     "epa_records": 2
+    },
+    {
+     "variant_id": "tesla-model-y-juniper-performance",
+     "model_id": "tesla-model-y",
+     "body": "suv",
+     "rung": "body-ratio",
+     "predicted_km": 400.9,
+     "measured_km": 492.5,
+     "error_pct": -18.6,
+     "epa_records": 3
+    },
+    {
+     "variant_id": "tesla-model-y-gen1-performance",
+     "model_id": "tesla-model-y",
+     "body": "suv",
+     "rung": "body-ratio",
+     "predicted_km": 400.9,
+     "measured_km": 487.6,
+     "error_pct": -17.78,
+     "epa_records": 4
+    }
+   ]
+  },
+  "consumption": {
+   "status": "flag",
+   "gate": "median absolute error < 10% (proxy, not the launch gate)",
+   "n": 176,
+   "variants": 88,
+   "median_abs_pct": 6.47,
+   "mean_signed_pct": 1.63,
+   "by_body": {
+    "coupe": {
+     "n": 2,
+     "median_abs_pct": 14.63,
+     "mean_signed_pct": -14.63
+    },
+    "crossover": {
+     "n": 32,
+     "median_abs_pct": 5.75,
+     "mean_signed_pct": -0.31
+    },
+    "hatchback": {
+     "n": 12,
+     "median_abs_pct": 10.04,
+     "mean_signed_pct": 9.74
+    },
+    "sedan": {
+     "n": 60,
+     "median_abs_pct": 7.88,
+     "mean_signed_pct": -1.55
+    },
+    "suv": {
+     "n": 70,
+     "median_abs_pct": 6.21,
+     "mean_signed_pct": 4.31
+    }
+   },
+   "by_model": {
+    "audi-e-tron": {
+     "n": 2,
+     "median_abs_pct": 8.38,
+     "mean_signed_pct": 8.38
+    },
+    "audi-e-tron-gt": {
+     "n": 6,
+     "median_abs_pct": 9.29,
+     "mean_signed_pct": -8.55
+    },
+    "audi-q4-e-tron": {
+     "n": 4,
+     "median_abs_pct": 4.16,
+     "mean_signed_pct": 4.04
+    },
+    "audi-q6-e-tron": {
+     "n": 4,
+     "median_abs_pct": 5.36,
+     "mean_signed_pct": -2.38
+    },
+    "bmw-i4": {
+     "n": 8,
+     "median_abs_pct": 3.6,
+     "mean_signed_pct": -4.01
+    },
+    "bmw-i5": {
+     "n": 4,
+     "median_abs_pct": 5.88,
+     "mean_signed_pct": -1.0
+    },
+    "bmw-i7": {
+     "n": 4,
+     "median_abs_pct": 7.38,
+     "mean_signed_pct": -6.32
+    },
+    "bmw-ix": {
+     "n": 6,
+     "median_abs_pct": 7.26,
+     "mean_signed_pct": -4.91
+    },
+    "ford-mustang-mach-e": {
+     "n": 2,
+     "median_abs_pct": 4.49,
+     "mean_signed_pct": -4.49
+    },
+    "hyundai-ioniq-5": {
+     "n": 8,
+     "median_abs_pct": 7.04,
+     "mean_signed_pct": -1.1
+    },
+    "hyundai-ioniq-6": {
+     "n": 6,
+     "median_abs_pct": 6.22,
+     "mean_signed_pct": 0.4
+    },
+    "hyundai-ioniq-9": {
+     "n": 2,
+     "median_abs_pct": 6.07,
+     "mean_signed_pct": 3.04
+    },
+    "hyundai-kona-electric": {
+     "n": 4,
+     "median_abs_pct": 5.15,
+     "mean_signed_pct": 2.32
+    },
+    "jaguar-i-pace": {
+     "n": 2,
+     "median_abs_pct": 0.73,
+     "mean_signed_pct": -0.23
+    },
+    "kia-ev3": {
+     "n": 6,
+     "median_abs_pct": 6.77,
+     "mean_signed_pct": -3.57
+    },
+    "kia-ev6": {
+     "n": 8,
+     "median_abs_pct": 4.13,
+     "mean_signed_pct": 6.88
+    },
+    "kia-ev9": {
+     "n": 8,
+     "median_abs_pct": 6.0,
+     "mean_signed_pct": -0.23
+    },
+    "kia-niro-ev": {
+     "n": 2,
+     "median_abs_pct": 4.96,
+     "mean_signed_pct": 4.96
+    },
+    "maserati-grecale-folgore": {
+     "n": 2,
+     "median_abs_pct": 5.96,
+     "mean_signed_pct": 5.96
+    },
+    "mazda-mx-30": {
+     "n": 2,
+     "median_abs_pct": 6.53,
+     "mean_signed_pct": -6.53
+    },
+    "mercedes-cla": {
+     "n": 2,
+     "median_abs_pct": 13.91,
+     "mean_signed_pct": -13.91
+    },
+    "mercedes-eqb": {
+     "n": 4,
+     "median_abs_pct": 7.1,
+     "mean_signed_pct": -6.82
+    },
+    "mercedes-eqe": {
+     "n": 4,
+     "median_abs_pct": 5.41,
+     "mean_signed_pct": 0.1
+    },
+    "mercedes-eqs": {
+     "n": 2,
+     "median_abs_pct": 8.45,
+     "mean_signed_pct": 4.22
+    },
+    "mercedes-g-580": {
+     "n": 2,
+     "median_abs_pct": 6.67,
+     "mean_signed_pct": -6.67
+    },
+    "mini-cooper-se": {
+     "n": 4,
+     "median_abs_pct": 6.83,
+     "mean_signed_pct": -7.12
+    },
+    "mini-countryman-e": {
+     "n": 2,
+     "median_abs_pct": 2.74,
+     "mean_signed_pct": -1.0
+    },
+    "nissan-ariya": {
+     "n": 2,
+     "median_abs_pct": 12.29,
+     "mean_signed_pct": -12.29
+    },
+    "nissan-leaf": {
+     "n": 4,
+     "median_abs_pct": 16.81,
+     "mean_signed_pct": 18.05
+    },
+    "polestar-3": {
+     "n": 4,
+     "median_abs_pct": 1.44,
+     "mean_signed_pct": 2.12
+    },
+    "porsche-taycan": {
+     "n": 8,
+     "median_abs_pct": 10.04,
+     "mean_signed_pct": -9.65
+    },
+    "smart-eq-fortwo": {
+     "n": 2,
+     "median_abs_pct": 31.42,
+     "mean_signed_pct": 31.42
+    },
+    "tesla-model-3": {
+     "n": 10,
+     "median_abs_pct": 4.73,
+     "mean_signed_pct": 4.65
+    },
+    "tesla-model-s": {
+     "n": 6,
+     "median_abs_pct": 9.6,
+     "mean_signed_pct": 11.13
+    },
+    "tesla-model-x": {
+     "n": 8,
+     "median_abs_pct": 15.55,
+     "mean_signed_pct": 19.66
+    },
+    "tesla-model-y": {
+     "n": 14,
+     "median_abs_pct": 8.99,
+     "mean_signed_pct": 10.08
+    },
+    "volkswagen-e-golf": {
+     "n": 2,
+     "median_abs_pct": 5.18,
+     "mean_signed_pct": 5.18
+    },
+    "volkswagen-id4": {
+     "n": 2,
+     "median_abs_pct": 6.0,
+     "mean_signed_pct": 6.0
+    },
+    "volvo-ec40": {
+     "n": 2,
+     "median_abs_pct": 14.63,
+     "mean_signed_pct": -14.63
+    },
+    "volvo-ex90": {
+     "n": 2,
+     "median_abs_pct": 4.11,
+     "mean_signed_pct": 4.11
+    }
+   },
+   "top40": {
+    "models_with_data": 18,
+    "models": 40,
+    "by_model": {
+     "tesla-model-3": {
+      "n": 10,
+      "median_abs_pct": 4.73,
+      "mean_signed_pct": 4.65
+     },
+     "tesla-model-y": {
+      "n": 14,
+      "median_abs_pct": 8.99,
+      "mean_signed_pct": 10.08
+     },
+     "kia-niro-ev": {
+      "n": 2,
+      "median_abs_pct": 4.96,
+      "mean_signed_pct": 4.96
+     },
+     "hyundai-kona-electric": {
+      "n": 4,
+      "median_abs_pct": 5.15,
+      "mean_signed_pct": 2.32
+     },
+     "audi-q4-e-tron": {
+      "n": 4,
+      "median_abs_pct": 4.16,
+      "mean_signed_pct": 4.04
+     },
+     "volkswagen-id4": {
+      "n": 2,
+      "median_abs_pct": 6.0,
+      "mean_signed_pct": 6.0
+     },
+     "nissan-leaf": {
+      "n": 4,
+      "median_abs_pct": 16.81,
+      "mean_signed_pct": 18.05
+     },
+     "audi-e-tron": {
+      "n": 2,
+      "median_abs_pct": 8.38,
+      "mean_signed_pct": 8.38
+     },
+     "bmw-i4": {
+      "n": 8,
+      "median_abs_pct": 3.6,
+      "mean_signed_pct": -4.01
+     },
+     "mini-cooper-se": {
+      "n": 4,
+      "median_abs_pct": 6.83,
+      "mean_signed_pct": -7.12
+     },
+     "kia-ev6": {
+      "n": 8,
+      "median_abs_pct": 4.13,
+      "mean_signed_pct": 6.88
+     },
+     "hyundai-ioniq-5": {
+      "n": 8,
+      "median_abs_pct": 7.04,
+      "mean_signed_pct": -1.1
+     },
+     "jaguar-i-pace": {
+      "n": 2,
+      "median_abs_pct": 0.73,
+      "mean_signed_pct": -0.23
+     },
+     "ford-mustang-mach-e": {
+      "n": 2,
+      "median_abs_pct": 4.49,
+      "mean_signed_pct": -4.49
+     },
+     "mercedes-eqb": {
+      "n": 4,
+      "median_abs_pct": 7.1,
+      "mean_signed_pct": -6.82
+     },
+     "porsche-taycan": {
+      "n": 8,
+      "median_abs_pct": 10.04,
+      "mean_signed_pct": -9.65
+     },
+     "volkswagen-e-golf": {
+      "n": 2,
+      "median_abs_pct": 5.18,
+      "mean_signed_pct": 5.18
+     },
+     "bmw-ix": {
+      "n": 6,
+      "median_abs_pct": 7.26,
+      "mean_signed_pct": -4.91
+     }
+    },
+    "missing": [
+     "volkswagen-id3",
+     "skoda-enyaq",
+     "volvo-xc40-recharge",
+     "polestar-2",
+     "peugeot-e-208",
+     "renault-zoe",
+     "mg-mg4",
+     "volvo-ex30",
+     "peugeot-e-2008",
+     "cupra-born",
+     "opel-corsa-e",
+     "mercedes-eqa",
+     "mg-zs-ev",
+     "bmw-ix1",
+     "bmw-ix3",
+     "fiat-500e",
+     "opel-mokka",
+     "bmw-i3",
+     "renault-megane-e-tech",
+     "citroen-e-c4",
+     "ford-explorer",
+     "mercedes-eqc"
+    ]
+   },
+   "worst": [
+    {
+     "variant_id": "smart-eq-fortwo-453-eq",
+     "model_id": "smart-eq-fortwo",
+     "body": "hatchback",
+     "band": "town",
+     "predicted_wh_km": 218.8,
+     "measured_wh_km": 155.8,
+     "error_pct": 40.39,
+     "tests": 6
+    },
+    {
+     "variant_id": "nissan-leaf-ze1-40kwh",
+     "model_id": "nissan-leaf",
+     "body": "hatchback",
+     "band": "town",
+     "predicted_wh_km": 201.2,
+     "measured_wh_km": 150.0,
+     "error_pct": 34.18,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-long-range",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "band": "rural",
+     "predicted_wh_km": 252.6,
+     "measured_wh_km": 190.3,
+     "error_pct": 32.77,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-75d",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "band": "rural",
+     "predicted_wh_km": 254.8,
+     "measured_wh_km": 192.3,
+     "error_pct": 32.52,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-long-range",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "band": "town",
+     "predicted_wh_km": 224.7,
+     "measured_wh_km": 178.3,
+     "error_pct": 26.0,
+     "tests": 4
+    },
+    {
+     "variant_id": "smart-eq-fortwo-453-eq",
+     "model_id": "smart-eq-fortwo",
+     "body": "hatchback",
+     "band": "rural",
+     "predicted_wh_km": 244.4,
+     "measured_wh_km": 199.6,
+     "error_pct": 22.45,
+     "tests": 6
+    },
+    {
+     "variant_id": "kia-ev6-gen1-58kwh-rwd",
+     "model_id": "kia-ev6",
+     "body": "crossover",
+     "band": "town",
+     "predicted_wh_km": 165.1,
+     "measured_wh_km": 135.1,
+     "error_pct": 22.22,
+     "tests": 2
+    },
+    {
+     "variant_id": "tesla-model-s-facelift-75d",
+     "model_id": "tesla-model-s",
+     "body": "sedan",
+     "band": "rural",
+     "predicted_wh_km": 211.7,
+     "measured_wh_km": 175.5,
+     "error_pct": 20.65,
+     "tests": 6
+    },
+    {
+     "variant_id": "nissan-leaf-ze1-40kwh",
+     "model_id": "nissan-leaf",
+     "body": "hatchback",
+     "band": "rural",
+     "predicted_wh_km": 224.8,
+     "measured_wh_km": 186.5,
+     "error_pct": 20.55,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-y-juniper-long-range-rwd",
+     "model_id": "tesla-model-y",
+     "body": "suv",
+     "band": "town",
+     "predicted_wh_km": 158.1,
+     "measured_wh_km": 131.2,
+     "error_pct": 20.5,
+     "tests": 7
+    }
+   ]
+  },
+  "consumption_oos": {
+   "status": "flag",
+   "gate": "median absolute error < 10% (proxy, not the launch gate)",
+   "n": 176,
+   "variants": 88,
+   "median_abs_pct": 7.0,
+   "mean_signed_pct": 1.69,
+   "by_body": {
+    "coupe": {
+     "n": 2,
+     "median_abs_pct": 14.93,
+     "mean_signed_pct": -14.93
+    },
+    "crossover": {
+     "n": 32,
+     "median_abs_pct": 5.78,
+     "mean_signed_pct": -0.27
+    },
+    "hatchback": {
+     "n": 12,
+     "median_abs_pct": 10.49,
+     "mean_signed_pct": 10.04
+    },
+    "sedan": {
+     "n": 60,
+     "median_abs_pct": 8.28,
+     "mean_signed_pct": -1.67
+    },
+    "suv": {
+     "n": 70,
+     "median_abs_pct": 6.35,
+     "mean_signed_pct": 4.51
+    }
+   },
+   "by_model": {
+    "audi-e-tron": {
+     "n": 2,
+     "median_abs_pct": 8.4,
+     "mean_signed_pct": 8.4
+    },
+    "audi-e-tron-gt": {
+     "n": 6,
+     "median_abs_pct": 10.27,
+     "mean_signed_pct": -9.5
+    },
+    "audi-q4-e-tron": {
+     "n": 4,
+     "median_abs_pct": 4.46,
+     "mean_signed_pct": 4.34
+    },
+    "audi-q6-e-tron": {
+     "n": 4,
+     "median_abs_pct": 5.36,
+     "mean_signed_pct": -2.37
+    },
+    "bmw-i4": {
+     "n": 8,
+     "median_abs_pct": 3.58,
+     "mean_signed_pct": -4.74
+    },
+    "bmw-i5": {
+     "n": 4,
+     "median_abs_pct": 5.87,
+     "mean_signed_pct": -1.0
+    },
+    "bmw-i7": {
+     "n": 4,
+     "median_abs_pct": 7.8,
+     "mean_signed_pct": -6.73
+    },
+    "bmw-ix": {
+     "n": 6,
+     "median_abs_pct": 7.31,
+     "mean_signed_pct": -5.05
+    },
+    "ford-mustang-mach-e": {
+     "n": 2,
+     "median_abs_pct": 4.54,
+     "mean_signed_pct": -4.54
+    },
+    "hyundai-ioniq-5": {
+     "n": 8,
+     "median_abs_pct": 7.2,
+     "mean_signed_pct": -1.18
+    },
+    "hyundai-ioniq-6": {
+     "n": 6,
+     "median_abs_pct": 6.2,
+     "mean_signed_pct": -0.27
+    },
+    "hyundai-ioniq-9": {
+     "n": 2,
+     "median_abs_pct": 6.25,
+     "mean_signed_pct": 3.15
+    },
+    "hyundai-kona-electric": {
+     "n": 4,
+     "median_abs_pct": 5.21,
+     "mean_signed_pct": 2.23
+    },
+    "jaguar-i-pace": {
+     "n": 2,
+     "median_abs_pct": 0.7,
+     "mean_signed_pct": -0.29
+    },
+    "kia-ev3": {
+     "n": 6,
+     "median_abs_pct": 6.84,
+     "mean_signed_pct": -3.63
+    },
+    "kia-ev6": {
+     "n": 8,
+     "median_abs_pct": 4.12,
+     "mean_signed_pct": 7.21
+    },
+    "kia-ev9": {
+     "n": 8,
+     "median_abs_pct": 6.1,
+     "mean_signed_pct": -0.31
+    },
+    "kia-niro-ev": {
+     "n": 2,
+     "median_abs_pct": 5.04,
+     "mean_signed_pct": 5.04
+    },
+    "maserati-grecale-folgore": {
+     "n": 2,
+     "median_abs_pct": 6.12,
+     "mean_signed_pct": 6.12
+    },
+    "mazda-mx-30": {
+     "n": 2,
+     "median_abs_pct": 6.59,
+     "mean_signed_pct": -6.59
+    },
+    "mercedes-cla": {
+     "n": 2,
+     "median_abs_pct": 14.21,
+     "mean_signed_pct": -14.21
+    },
+    "mercedes-eqb": {
+     "n": 4,
+     "median_abs_pct": 7.2,
+     "mean_signed_pct": -6.93
+    },
+    "mercedes-eqe": {
+     "n": 4,
+     "median_abs_pct": 5.4,
+     "mean_signed_pct": 0.23
+    },
+    "mercedes-eqs": {
+     "n": 2,
+     "median_abs_pct": 8.82,
+     "mean_signed_pct": 4.41
+    },
+    "mercedes-g-580": {
+     "n": 2,
+     "median_abs_pct": 6.73,
+     "mean_signed_pct": -6.73
+    },
+    "mini-cooper-se": {
+     "n": 4,
+     "median_abs_pct": 7.31,
+     "mean_signed_pct": -7.59
+    },
+    "mini-countryman-e": {
+     "n": 2,
+     "median_abs_pct": 2.8,
+     "mean_signed_pct": -0.97
+    },
+    "nissan-ariya": {
+     "n": 2,
+     "median_abs_pct": 12.37,
+     "mean_signed_pct": -12.37
+    },
+    "nissan-leaf": {
+     "n": 4,
+     "median_abs_pct": 17.75,
+     "mean_signed_pct": 19.0
+    },
+    "polestar-3": {
+     "n": 4,
+     "median_abs_pct": 1.57,
+     "mean_signed_pct": 2.19
+    },
+    "porsche-taycan": {
+     "n": 8,
+     "median_abs_pct": 12.04,
+     "mean_signed_pct": -11.46
+    },
+    "smart-eq-fortwo": {
+     "n": 2,
+     "median_abs_pct": 31.89,
+     "mean_signed_pct": 31.89
+    },
+    "tesla-model-3": {
+     "n": 10,
+     "median_abs_pct": 5.81,
+     "mean_signed_pct": 6.26
+    },
+    "tesla-model-s": {
+     "n": 6,
+     "median_abs_pct": 10.98,
+     "mean_signed_pct": 12.53
+    },
+    "tesla-model-x": {
+     "n": 8,
+     "median_abs_pct": 16.07,
+     "mean_signed_pct": 20.18
+    },
+    "tesla-model-y": {
+     "n": 14,
+     "median_abs_pct": 9.74,
+     "mean_signed_pct": 10.83
+    },
+    "volkswagen-e-golf": {
+     "n": 2,
+     "median_abs_pct": 5.53,
+     "mean_signed_pct": 5.53
+    },
+    "volkswagen-id4": {
+     "n": 2,
+     "median_abs_pct": 6.13,
+     "mean_signed_pct": 6.13
+    },
+    "volvo-ec40": {
+     "n": 2,
+     "median_abs_pct": 14.93,
+     "mean_signed_pct": -14.93
+    },
+    "volvo-ex90": {
+     "n": 2,
+     "median_abs_pct": 4.12,
+     "mean_signed_pct": 4.12
+    }
+   },
+   "top40": {
+    "models_with_data": 18,
+    "models": 40,
+    "by_model": {
+     "tesla-model-3": {
+      "n": 10,
+      "median_abs_pct": 5.81,
+      "mean_signed_pct": 6.26
+     },
+     "tesla-model-y": {
+      "n": 14,
+      "median_abs_pct": 9.74,
+      "mean_signed_pct": 10.83
+     },
+     "kia-niro-ev": {
+      "n": 2,
+      "median_abs_pct": 5.04,
+      "mean_signed_pct": 5.04
+     },
+     "hyundai-kona-electric": {
+      "n": 4,
+      "median_abs_pct": 5.21,
+      "mean_signed_pct": 2.23
+     },
+     "audi-q4-e-tron": {
+      "n": 4,
+      "median_abs_pct": 4.46,
+      "mean_signed_pct": 4.34
+     },
+     "volkswagen-id4": {
+      "n": 2,
+      "median_abs_pct": 6.13,
+      "mean_signed_pct": 6.13
+     },
+     "nissan-leaf": {
+      "n": 4,
+      "median_abs_pct": 17.75,
+      "mean_signed_pct": 19.0
+     },
+     "audi-e-tron": {
+      "n": 2,
+      "median_abs_pct": 8.4,
+      "mean_signed_pct": 8.4
+     },
+     "bmw-i4": {
+      "n": 8,
+      "median_abs_pct": 3.58,
+      "mean_signed_pct": -4.74
+     },
+     "mini-cooper-se": {
+      "n": 4,
+      "median_abs_pct": 7.31,
+      "mean_signed_pct": -7.59
+     },
+     "kia-ev6": {
+      "n": 8,
+      "median_abs_pct": 4.12,
+      "mean_signed_pct": 7.21
+     },
+     "hyundai-ioniq-5": {
+      "n": 8,
+      "median_abs_pct": 7.2,
+      "mean_signed_pct": -1.18
+     },
+     "jaguar-i-pace": {
+      "n": 2,
+      "median_abs_pct": 0.7,
+      "mean_signed_pct": -0.29
+     },
+     "ford-mustang-mach-e": {
+      "n": 2,
+      "median_abs_pct": 4.54,
+      "mean_signed_pct": -4.54
+     },
+     "mercedes-eqb": {
+      "n": 4,
+      "median_abs_pct": 7.2,
+      "mean_signed_pct": -6.93
+     },
+     "porsche-taycan": {
+      "n": 8,
+      "median_abs_pct": 12.04,
+      "mean_signed_pct": -11.46
+     },
+     "volkswagen-e-golf": {
+      "n": 2,
+      "median_abs_pct": 5.53,
+      "mean_signed_pct": 5.53
+     },
+     "bmw-ix": {
+      "n": 6,
+      "median_abs_pct": 7.31,
+      "mean_signed_pct": -5.05
+     }
+    },
+    "missing": [
+     "volkswagen-id3",
+     "skoda-enyaq",
+     "volvo-xc40-recharge",
+     "polestar-2",
+     "peugeot-e-208",
+     "renault-zoe",
+     "mg-mg4",
+     "volvo-ex30",
+     "peugeot-e-2008",
+     "cupra-born",
+     "opel-corsa-e",
+     "mercedes-eqa",
+     "mg-zs-ev",
+     "bmw-ix1",
+     "bmw-ix3",
+     "fiat-500e",
+     "opel-mokka",
+     "bmw-i3",
+     "renault-megane-e-tech",
+     "citroen-e-c4",
+     "ford-explorer",
+     "mercedes-eqc"
+    ]
+   },
+   "worst": [
+    {
+     "variant_id": "smart-eq-fortwo-453-eq",
+     "model_id": "smart-eq-fortwo",
+     "body": "hatchback",
+     "band": "town",
+     "predicted_wh_km": 219.3,
+     "measured_wh_km": 155.8,
+     "error_pct": 40.74,
+     "tests": 6
+    },
+    {
+     "variant_id": "nissan-leaf-ze1-40kwh",
+     "model_id": "nissan-leaf",
+     "body": "hatchback",
+     "band": "town",
+     "predicted_wh_km": 203.0,
+     "measured_wh_km": 150.0,
+     "error_pct": 35.32,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-long-range",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "band": "rural",
+     "predicted_wh_km": 253.1,
+     "measured_wh_km": 190.3,
+     "error_pct": 32.98,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-75d",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "band": "rural",
+     "predicted_wh_km": 255.3,
+     "measured_wh_km": 192.3,
+     "error_pct": 32.75,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-x-gen1-long-range",
+     "model_id": "tesla-model-x",
+     "body": "suv",
+     "band": "town",
+     "predicted_wh_km": 226.3,
+     "measured_wh_km": 178.3,
+     "error_pct": 26.91,
+     "tests": 4
+    },
+    {
+     "variant_id": "smart-eq-fortwo-453-eq",
+     "model_id": "smart-eq-fortwo",
+     "body": "hatchback",
+     "band": "rural",
+     "predicted_wh_km": 245.6,
+     "measured_wh_km": 199.6,
+     "error_pct": 23.04,
+     "tests": 6
+    },
+    {
+     "variant_id": "kia-ev6-gen1-58kwh-rwd",
+     "model_id": "kia-ev6",
+     "body": "crossover",
+     "band": "town",
+     "predicted_wh_km": 165.9,
+     "measured_wh_km": 135.1,
+     "error_pct": 22.78,
+     "tests": 2
+    },
+    {
+     "variant_id": "tesla-model-s-facelift-75d",
+     "model_id": "tesla-model-s",
+     "body": "sedan",
+     "band": "rural",
+     "predicted_wh_km": 213.8,
+     "measured_wh_km": 175.5,
+     "error_pct": 21.83,
+     "tests": 6
+    },
+    {
+     "variant_id": "nissan-leaf-ze1-40kwh",
+     "model_id": "nissan-leaf",
+     "body": "hatchback",
+     "band": "rural",
+     "predicted_wh_km": 226.5,
+     "measured_wh_km": 186.5,
+     "error_pct": 21.43,
+     "tests": 4
+    },
+    {
+     "variant_id": "tesla-model-y-juniper-long-range-rwd",
+     "model_id": "tesla-model-y",
+     "body": "suv",
+     "band": "town",
+     "predicted_wh_km": 158.7,
+     "measured_wh_km": 131.2,
+     "error_pct": 20.93,
+     "tests": 7
+    }
+   ],
+   "note": "Leave-one-model-out: each model's prediction uses ratios fitted without it. This is the honest error of the calibrated wltp-ratio rung on an unseen model."
+  },
+  "regressions": [
+   {
+    "model_id": "audi-e-tron-gt",
+    "previous": 4.55,
+    "now": 9.57,
+    "check": "range"
+   },
+   {
+    "model_id": "porsche-taycan",
+    "previous": 3.91,
+    "now": 9.66,
+    "check": "range"
+   },
+   {
+    "model_id": "tesla-model-x",
+    "previous": 16.19,
+    "now": 22.47,
+    "check": "range"
+   },
+   {
+    "model_id": "tesla-model-x",
+    "previous": 11.38,
+    "now": 15.55,
+    "check": "consumption"
+   },
+   {
+    "model_id": "tesla-model-s",
+    "previous": 7.94,
+    "now": 10.98,
+    "check": "consumption_oos"
+   },
+   {
+    "model_id": "tesla-model-x",
+    "previous": 11.48,
+    "now": 16.07,
+    "check": "consumption_oos"
+   }
+  ]
+ },
+ "backtest_popularity": {
+  "status": "ok",
+  "note": "Report only (no gate). release = generations[].popularity (T-149); reference = the web build's ranking (apps/web/src/lib/popularity.ts on data/seed/top40.yaml), same picks and weights. Spearman over generations both rank; ties take their average rank.",
+  "generations_release": 156,
+  "generations_reference": 87,
+  "generations_both": 87,
+  "spearman": 0.952,
+  "spearman_previous": null,
+  "median_abs_rank_move": 4.0,
+  "top10_overlap": 9,
+  "top20_overlap": 16,
+  "worst": [
+   {
+    "generation_id": "skoda-elroq-gen1",
+    "rank_release": 13.0,
+    "rank_reference": 49.0,
+    "score_release": 29.2,
+    "score_reference": 12.1
+   },
+   {
+    "generation_id": "kia-ev3-gen1",
+    "rank_release": 16.0,
+    "rank_reference": 47.0,
+    "score_release": 28.3,
+    "score_reference": 12.6
+   },
+   {
+    "generation_id": "renault-5-e-tech-gen1",
+    "rank_release": 42.5,
+    "rank_reference": 66.0,
+    "score_release": 15.2,
+    "score_reference": 6.1
+   },
+   {
+    "generation_id": "volkswagen-id5-gen1",
+    "rank_release": 34.0,
+    "rank_reference": 51.0,
+    "score_release": 19.7,
+    "score_reference": 12.0
+   },
+   {
+    "generation_id": "hyundai-inster-gen1",
+    "rank_release": 65.0,
+    "rank_reference": 80.0,
+    "score_release": 8.8,
+    "score_reference": 2.2
+   },
+   {
+    "generation_id": "polestar-4-gen1",
+    "rank_release": 14.5,
+    "rank_reference": 26.5,
+    "score_release": 28.5,
+    "score_reference": 20.0
+   },
+   {
+    "generation_id": "audi-e-tron-ge",
+    "rank_release": 28.0,
+    "rank_reference": 17.0,
+    "score_release": 21.4,
+    "score_reference": 25.1
+   },
+   {
+    "generation_id": "bmw-ix1-gen1",
+    "rank_release": 24.0,
+    "rank_reference": 35.0,
+    "score_release": 22.4,
+    "score_reference": 16.9
+   },
+   {
+    "generation_id": "fiat-500e-332",
+    "rank_release": 51.0,
+    "rank_reference": 41.0,
+    "score_release": 13.3,
+    "score_reference": 13.8
+   },
+   {
+    "generation_id": "ford-explorer-gen1",
+    "rank_release": 47.0,
+    "rank_reference": 56.5,
+    "score_release": 14.3,
+    "score_reference": 9.5
+   }
+  ]
+ },
+ "profile_fields": {
+  "note": "Report only. Ratios compare the catalogue figure with the calibrated consumption matrix (1.0 = same). The winter temperature step is unvalidated (needs winter road tests, Q-059).",
+  "definitions": {
+   "winter_temperature_band": "t1",
+   "mild_temperature_band": "t5",
+   "road_mix": {
+    "town": 0.3,
+    "rural": 0.3,
+    "motorway": 0.4
+   }
+  },
+  "variants": 419,
+  "winter_range_km": {
+   "coverage": 375,
+   "rungs": {
+    "wltp-ratio": 249,
+    "measured+physics": 126
+   },
+   "heater": {
+    "None": 375
+   },
+   "proxy_20c_consumption": {
+    "n": 176,
+    "median_abs_pct": 7.0,
+    "mean_signed_pct": 1.69,
+    "status": "flag"
+   },
+   "unvalidated": "temperature step (heating, traction) from consumption_params.yaml"
+  },
+  "real_range_km": {
+   "coverage": 380,
+   "rungs": {
+    "body-ratio": 380
+   },
+   "proxy_epa_range": {
+    "n": 104,
+    "median_abs_pct": 7.18,
+    "mean_signed_pct": -2.36,
+    "status": "flag"
+   },
+   "vs_matrix_mild_range": {
+    "n": 375,
+    "ratio_p10": 1.02,
+    "ratio_median": 1.106,
+    "ratio_p90": 1.207,
+    "outside_tolerance": 204,
+    "tolerance": 0.1,
+    "worst": [
+     {
+      "variant_id": "smart-eq-forfour-453-eq",
+      "ratio": 1.636
+     },
+     {
+      "variant_id": "volvo-ec40-c40-twin-motor",
+      "ratio": 1.552
+     },
+     {
+      "variant_id": "hyundai-ioniq-6-gen1-53kwh-rwd",
+      "ratio": 1.494
+     },
+     {
+      "variant_id": "porsche-taycan-gen1-turbo-gt",
+      "ratio": 1.49
+     },
+     {
+      "variant_id": "mercedes-cla-gen1-base",
+      "ratio": 1.478
+     }
+    ]
+   }
+  },
+  "dc_km_per_20min": {
+   "coverage": 342,
+   "curve_status": {
+    "default": 276,
+    "estimated": 60,
+    "None": 6
+   },
+   "dc_avg_10_80_kw": {
+    "1 source": 8,
+    "estimate": 363,
+    "missing": 48
+   },
+   "proxy": null,
+   "proxy_note": "No licence-clean charging test yet (real-world test sources, Q-059).",
+   "consumption_vs_matrix_motorway": {
+    "n": 338,
+    "ratio_p10": 0.922,
+    "ratio_median": 0.956,
+    "ratio_p90": 1.053,
+    "outside_tolerance": 49,
+    "tolerance": 0.1,
+    "worst": [
+     {
+      "variant_id": "rolls-royce-spectre-gen1-black-badge",
+      "ratio": 1.42
+     },
+     {
+      "variant_id": "tesla-model-s-facelift-p100d",
+      "ratio": 1.415
+     },
+     {
+      "variant_id": "lucid-gravity-gen1-touring",
+      "ratio": 1.316
+     },
+     {
+      "variant_id": "tesla-model-x-gen1-long-range",
+      "ratio": 1.266
+     },
+     {
+      "variant_id": "tesla-model-x-gen1-75d",
+      "ratio": 1.264
+     }
+    ]
+   }
+  },
+  "consumption_kwh_100km": {
+   "coverage": 381,
+   "provenance": {
+    "1 source": 254,
+    "2+ agreeing sources": 9,
+    "estimate": 118,
+    "missing": 38
+   },
+   "proxy_epa_in_sample": {
+    "n": 176,
+    "median_abs_pct": 6.47,
+    "mean_signed_pct": 1.63,
+    "status": "flag"
+   },
+   "proxy_epa_out_of_sample": {
+    "n": 176,
+    "median_abs_pct": 7.0,
+    "mean_signed_pct": 1.69,
+    "status": "flag"
+   },
+   "estimate_vs_official_wltp": {
+    "n": 257,
+    "median_abs_pct": 3.0,
+    "mean_signed_pct": -0.5,
+    "status": "ok",
+    "worst": [
+     {
+      "variant_id": "mini-cooper-se-j01-se",
+      "error_pct": 35.5
+     },
+     {
+      "variant_id": "smart-eq-forfour-453-eq",
+      "error_pct": -31.3
+     },
+     {
+      "variant_id": "nissan-ariya-gen1-engage-87-kwh",
+      "error_pct": 30.2
+     },
+     {
+      "variant_id": "smart-eq-fortwo-453-eq",
+      "error_pct": -27.7
+     },
+     {
+      "variant_id": "peugeot-e-408-gen1-base",
+      "error_pct": 20.3
+     }
+    ]
+   }
+  }
+ },
+ "backtest_used_prices": {
+  "rows_compared": 76,
+  "median_abs_error": 0.098,
+  "median_error": -0.014,
+  "gate": false,
+  "worst": [
+   {
+    "subject": "nissan-leaf-ze1",
+    "country": "NL",
+    "build_year": 2019,
+    "sample_median": 12000.0,
+    "samples": 11,
+    "model_median": 16533,
+    "error": 0.378
+   },
+   {
+    "subject": "fiat-500e-332",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 18900.0,
+    "samples": 11,
+    "model_median": 14006,
+    "error": -0.259
+   },
+   {
+    "subject": "nissan-leaf-ze1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 14900.0,
+    "samples": 10,
+    "model_median": 18635,
+    "error": 0.251
+   },
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "BE",
+    "build_year": 2022,
+    "sample_median": 27700.0,
+    "samples": 17,
+    "model_median": 34590,
+    "error": 0.249
+   },
+   {
+    "subject": "opel-corsa-e-f",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 18400.0,
+    "samples": 16,
+    "model_median": 22847,
+    "error": 0.242
+   }
+  ],
+  "note": null,
+  "rows": [
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "BE",
+    "build_year": 2021,
+    "sample_median": 34700.0,
+    "samples": 10,
+    "model_median": 28779,
+    "error": -0.171
+   },
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "BE",
+    "build_year": 2022,
+    "sample_median": 27700.0,
+    "samples": 17,
+    "model_median": 34590,
+    "error": 0.249
+   },
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 34500.0,
+    "samples": 20,
+    "model_median": 41517,
+    "error": 0.203
+   },
+   {
+    "subject": "fiat-500e-332",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 22500.0,
+    "samples": 9,
+    "model_median": 17579,
+    "error": -0.219
+   },
+   {
+    "subject": "mg-mg4-gen1",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 22000.0,
+    "samples": 5,
+    "model_median": 21728,
+    "error": -0.012
+   },
+   {
+    "subject": "polestar-2-gen1",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 29800.0,
+    "samples": 5,
+    "model_median": 31887,
+    "error": 0.07
+   },
+   {
+    "subject": "skoda-enyaq-gen1",
+    "country": "BE",
+    "build_year": 2022,
+    "sample_median": 31000.0,
+    "samples": 7,
+    "model_median": 28604,
+    "error": -0.077
+   },
+   {
+    "subject": "skoda-enyaq-gen1",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 38500.0,
+    "samples": 6,
+    "model_median": 35433,
+    "error": -0.08
+   },
+   {
+    "subject": "tesla-model-y-gen1",
+    "country": "BE",
+    "build_year": 2022,
+    "sample_median": 35900.0,
+    "samples": 8,
+    "model_median": 29588,
+    "error": -0.176
+   },
+   {
+    "subject": "tesla-model-y-gen1",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 35400.0,
+    "samples": 22,
+    "model_median": 32554,
+    "error": -0.08
+   },
+   {
+    "subject": "tesla-model-y-gen1",
+    "country": "BE",
+    "build_year": 2024,
+    "sample_median": 36700.0,
+    "samples": 8,
+    "model_median": 35201,
+    "error": -0.041
+   },
+   {
+    "subject": "volkswagen-id3-gen1",
+    "country": "BE",
+    "build_year": 2025,
+    "sample_median": 35800.0,
+    "samples": 10,
+    "model_median": 32676,
+    "error": -0.087
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "BE",
+    "build_year": 2022,
+    "sample_median": 28500.0,
+    "samples": 6,
+    "model_median": 26621,
+    "error": -0.066
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "BE",
+    "build_year": 2023,
+    "sample_median": 32500.0,
+    "samples": 13,
+    "model_median": 29127,
+    "error": -0.104
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "BE",
+    "build_year": 2024,
+    "sample_median": 37000.0,
+    "samples": 5,
+    "model_median": 35324,
+    "error": -0.045
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "BE",
+    "build_year": 2025,
+    "sample_median": 40500.0,
+    "samples": 6,
+    "model_median": 39778,
+    "error": -0.018
+   },
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 27200.0,
+    "samples": 32,
+    "model_median": 28779,
+    "error": 0.058
+   },
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 29400.0,
+    "samples": 26,
+    "model_median": 34590,
+    "error": 0.177
+   },
+   {
+    "subject": "audi-q4-e-tron-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 34000.0,
+    "samples": 19,
+    "model_median": 41517,
+    "error": 0.221
+   },
+   {
+    "subject": "fiat-500e-332",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 18900.0,
+    "samples": 11,
+    "model_median": 14006,
+    "error": -0.259
+   },
+   {
+    "subject": "fiat-500e-332",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 18200.0,
+    "samples": 18,
+    "model_median": 15688,
+    "error": -0.138
+   },
+   {
+    "subject": "fiat-500e-332",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 17500.0,
+    "samples": 59,
+    "model_median": 17579,
+    "error": 0.005
+   },
+   {
+    "subject": "fiat-500e-332",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 19700.0,
+    "samples": 34,
+    "model_median": 19711,
+    "error": 0.001
+   },
+   {
+    "subject": "hyundai-ioniq-5-gen1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 28000.0,
+    "samples": 19,
+    "model_median": 27432,
+    "error": -0.02
+   },
+   {
+    "subject": "hyundai-ioniq-5-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 30400.0,
+    "samples": 16,
+    "model_median": 31950,
+    "error": 0.051
+   },
+   {
+    "subject": "hyundai-ioniq-5-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 33300.0,
+    "samples": 21,
+    "model_median": 38192,
+    "error": 0.147
+   },
+   {
+    "subject": "hyundai-kona-electric-os",
+    "country": "NL",
+    "build_year": 2020,
+    "sample_median": 20000.0,
+    "samples": 9,
+    "model_median": 16078,
+    "error": -0.196
+   },
+   {
+    "subject": "hyundai-kona-electric-os",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 19400.0,
+    "samples": 8,
+    "model_median": 18015,
+    "error": -0.071
+   },
+   {
+    "subject": "hyundai-kona-electric-sx2",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 31700.0,
+    "samples": 5,
+    "model_median": 25210,
+    "error": -0.205
+   },
+   {
+    "subject": "hyundai-kona-electric-sx2",
+    "country": "NL",
+    "build_year": 2025,
+    "sample_median": 33800.0,
+    "samples": 7,
+    "model_median": 28249,
+    "error": -0.164
+   },
+   {
+    "subject": "kia-ev6-gen1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 28400.0,
+    "samples": 9,
+    "model_median": 25562,
+    "error": -0.1
+   },
+   {
+    "subject": "kia-ev6-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 26200.0,
+    "samples": 18,
+    "model_median": 28777,
+    "error": 0.098
+   },
+   {
+    "subject": "kia-ev6-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 31500.0,
+    "samples": 21,
+    "model_median": 34470,
+    "error": 0.094
+   },
+   {
+    "subject": "kia-niro-ev-de",
+    "country": "NL",
+    "build_year": 2019,
+    "sample_median": 19900.0,
+    "samples": 7,
+    "model_median": 15882,
+    "error": -0.202
+   },
+   {
+    "subject": "kia-niro-ev-de",
+    "country": "NL",
+    "build_year": 2020,
+    "sample_median": 20200.0,
+    "samples": 18,
+    "model_median": 17799,
+    "error": -0.119
+   },
+   {
+    "subject": "kia-niro-ev-de",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 23000.0,
+    "samples": 97,
+    "model_median": 19945,
+    "error": -0.133
+   },
+   {
+    "subject": "mg-mg4-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 22000.0,
+    "samples": 39,
+    "model_median": 21728,
+    "error": -0.012
+   },
+   {
+    "subject": "mg-mg4-gen1",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 25000.0,
+    "samples": 9,
+    "model_median": 24362,
+    "error": -0.026
+   },
+   {
+    "subject": "mg-mg4-gen1",
+    "country": "NL",
+    "build_year": 2025,
+    "sample_median": 24700.0,
+    "samples": 8,
+    "model_median": 27298,
+    "error": 0.105
+   },
+   {
+    "subject": "nissan-leaf-ze1",
+    "country": "NL",
+    "build_year": 2018,
+    "sample_median": 11700.0,
+    "samples": 14,
+    "model_median": 13225,
+    "error": 0.13
+   },
+   {
+    "subject": "nissan-leaf-ze1",
+    "country": "NL",
+    "build_year": 2019,
+    "sample_median": 12000.0,
+    "samples": 11,
+    "model_median": 16533,
+    "error": 0.378
+   },
+   {
+    "subject": "nissan-leaf-ze1",
+    "country": "NL",
+    "build_year": 2020,
+    "sample_median": 15400.0,
+    "samples": 8,
+    "model_median": 17780,
+    "error": 0.155
+   },
+   {
+    "subject": "nissan-leaf-ze1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 14900.0,
+    "samples": 10,
+    "model_median": 18635,
+    "error": 0.251
+   },
+   {
+    "subject": "opel-corsa-e-f",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 15400.0,
+    "samples": 32,
+    "model_median": 16859,
+    "error": 0.095
+   },
+   {
+    "subject": "opel-corsa-e-f",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 16000.0,
+    "samples": 11,
+    "model_median": 18883,
+    "error": 0.18
+   },
+   {
+    "subject": "opel-corsa-e-f",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 18400.0,
+    "samples": 16,
+    "model_median": 22847,
+    "error": 0.242
+   },
+   {
+    "subject": "opel-corsa-e-f",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 21900.0,
+    "samples": 13,
+    "model_median": 25617,
+    "error": 0.17
+   },
+   {
+    "subject": "opel-corsa-e-f",
+    "country": "NL",
+    "build_year": 2025,
+    "sample_median": 25000.0,
+    "samples": 10,
+    "model_median": 28706,
+    "error": 0.148
+   },
+   {
+    "subject": "peugeot-e-208-p21",
+    "country": "NL",
+    "build_year": 2020,
+    "sample_median": 16900.0,
+    "samples": 7,
+    "model_median": 13551,
+    "error": -0.198
+   },
+   {
+    "subject": "peugeot-e-208-p21",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 15900.0,
+    "samples": 43,
+    "model_median": 15185,
+    "error": -0.045
+   },
+   {
+    "subject": "peugeot-e-208-p21",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 17000.0,
+    "samples": 34,
+    "model_median": 19457,
+    "error": 0.145
+   },
+   {
+    "subject": "peugeot-e-208-p21",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 20500.0,
+    "samples": 23,
+    "model_median": 22682,
+    "error": 0.106
+   },
+   {
+    "subject": "peugeot-e-208-p21",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 25900.0,
+    "samples": 23,
+    "model_median": 23873,
+    "error": -0.078
+   },
+   {
+    "subject": "polestar-2-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 32400.0,
+    "samples": 9,
+    "model_median": 31887,
+    "error": -0.016
+   },
+   {
+    "subject": "renault-zoe-ph1",
+    "country": "NL",
+    "build_year": 2018,
+    "sample_median": 11600.0,
+    "samples": 8,
+    "model_median": 12050,
+    "error": 0.039
+   },
+   {
+    "subject": "renault-zoe-ph2",
+    "country": "NL",
+    "build_year": 2020,
+    "sample_median": 13000.0,
+    "samples": 22,
+    "model_median": 14980,
+    "error": 0.152
+   },
+   {
+    "subject": "renault-zoe-ph2",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 15400.0,
+    "samples": 23,
+    "model_median": 16892,
+    "error": 0.097
+   },
+   {
+    "subject": "renault-zoe-ph2",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 16700.0,
+    "samples": 6,
+    "model_median": 18950,
+    "error": 0.135
+   },
+   {
+    "subject": "skoda-enyaq-gen1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 24900.0,
+    "samples": 53,
+    "model_median": 25275,
+    "error": 0.015
+   },
+   {
+    "subject": "skoda-enyaq-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 26900.0,
+    "samples": 41,
+    "model_median": 28604,
+    "error": 0.063
+   },
+   {
+    "subject": "skoda-enyaq-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 33400.0,
+    "samples": 22,
+    "model_median": 35433,
+    "error": 0.061
+   },
+   {
+    "subject": "skoda-enyaq-gen1",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 32400.0,
+    "samples": 5,
+    "model_median": 38426,
+    "error": 0.186
+   },
+   {
+    "subject": "tesla-model-3-highland",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 38000.0,
+    "samples": 9,
+    "model_median": 32131,
+    "error": -0.154
+   },
+   {
+    "subject": "tesla-model-y-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 30900.0,
+    "samples": 11,
+    "model_median": 29588,
+    "error": -0.042
+   },
+   {
+    "subject": "tesla-model-y-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 35500.0,
+    "samples": 43,
+    "model_median": 32554,
+    "error": -0.083
+   },
+   {
+    "subject": "tesla-model-y-gen1",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 39300.0,
+    "samples": 44,
+    "model_median": 35201,
+    "error": -0.104
+   },
+   {
+    "subject": "volkswagen-id3-gen1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 20900.0,
+    "samples": 15,
+    "model_median": 18843,
+    "error": -0.098
+   },
+   {
+    "subject": "volkswagen-id3-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 21900.0,
+    "samples": 20,
+    "model_median": 22432,
+    "error": 0.024
+   },
+   {
+    "subject": "volkswagen-id3-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 26000.0,
+    "samples": 13,
+    "model_median": 26007,
+    "error": 0.0
+   },
+   {
+    "subject": "volkswagen-id3-gen1",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 27900.0,
+    "samples": 14,
+    "model_median": 29160,
+    "error": 0.045
+   },
+   {
+    "subject": "volkswagen-id3-gen1",
+    "country": "NL",
+    "build_year": 2025,
+    "sample_median": 32900.0,
+    "samples": 7,
+    "model_median": 32676,
+    "error": -0.007
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "NL",
+    "build_year": 2021,
+    "sample_median": 26800.0,
+    "samples": 37,
+    "model_median": 23694,
+    "error": -0.116
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "NL",
+    "build_year": 2022,
+    "sample_median": 27900.0,
+    "samples": 29,
+    "model_median": 26621,
+    "error": -0.046
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "NL",
+    "build_year": 2023,
+    "sample_median": 32700.0,
+    "samples": 35,
+    "model_median": 29127,
+    "error": -0.109
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "NL",
+    "build_year": 2024,
+    "sample_median": 36900.0,
+    "samples": 6,
+    "model_median": 35324,
+    "error": -0.043
+   },
+   {
+    "subject": "volkswagen-id4-gen1",
+    "country": "NL",
+    "build_year": 2025,
+    "sample_median": 41900.0,
+    "samples": 7,
+    "model_median": 39778,
+    "error": -0.051
+   }
+  ],
+  "holdout": {
+   "method": "leave one generation out: fit on the other generations, then the visitor's path (choose_curve, kept_share on the yearly table, rounded band per variant)",
+   "error": "shown median / sample median - 1 (asking prices); in_band = sample median inside the shown P25-P75",
+   "fitted": {
+    "rows_compared": 76,
+    "median_abs_error": 0.108,
+    "median_error": 0.0,
+    "within_15pct": 0.697,
+    "in_band": 0.553,
+    "worst": [
+     {
+      "subject": "nissan-leaf-ze1",
+      "country": "NL",
+      "build_year": 2019,
+      "samples": 11,
+      "sample_median": 12000,
+      "curve": "fitted",
+      "p25": 15400.0,
+      "median": 17500.0,
+      "p75": 19550.0,
+      "error": 0.458,
+      "in_band": false
+     },
+     {
+      "subject": "audi-q4-e-tron-gen1",
+      "country": "BE",
+      "build_year": 2022,
+      "samples": 17,
+      "sample_median": 27700,
+      "curve": "fitted:J-medium",
+      "p25": 31600.0,
+      "median": 35900.0,
+      "p75": 40200.0,
+      "error": 0.296,
+      "in_band": false
+     },
+     {
+      "subject": "nissan-leaf-ze1",
+      "country": "NL",
+      "build_year": 2021,
+      "samples": 10,
+      "sample_median": 14900,
+      "curve": "fitted",
+      "p25": 16950.0,
+      "median": 19300.0,
+      "p75": 21600.0,
+      "error": 0.295,
+      "in_band": false
+     },
+     {
+      "subject": "opel-corsa-e-f",
+      "country": "NL",
+      "build_year": 2023,
+      "samples": 16,
+      "sample_median": 18400,
+      "curve": "fitted",
+      "p25": 20550.0,
+      "median": 23300.0,
+      "p75": 26150.0,
+      "error": 0.266,
+      "in_band": false
+     },
+     {
+      "subject": "fiat-500e-332",
+      "country": "NL",
+      "build_year": 2021,
+      "samples": 11,
+      "sample_median": 18900,
+      "curve": "fitted",
+      "p25": 12200.0,
+      "median": 13900.0,
+      "p75": 15500.0,
+      "error": -0.265,
+      "in_band": false
+     }
+    ],
+    "curves_used": {
+     "fitted": 43,
+     "fitted:J-medium": 33
+    }
+   },
+   "published": {
+    "rows_compared": 76,
+    "median_abs_error": 0.168,
+    "median_error": -0.163,
+    "within_15pct": 0.461,
+    "in_band": 0.355,
+    "worst": [
+     {
+      "subject": "fiat-500e-332",
+      "country": "NL",
+      "build_year": 2021,
+      "samples": 11,
+      "sample_median": 18900,
+      "curve": "published",
+      "p25": 10500.0,
+      "median": 11900.0,
+      "p75": 13300.0,
+      "error": -0.37,
+      "in_band": false
+     },
+     {
+      "subject": "fiat-500e-332",
+      "country": "BE",
+      "build_year": 2023,
+      "samples": 9,
+      "sample_median": 22500,
+      "curve": "published",
+      "p25": 12700.0,
+      "median": 14500.0,
+      "p75": 16200.0,
+      "error": -0.356,
+      "in_band": false
+     },
+     {
+      "subject": "hyundai-kona-electric-sx2",
+      "country": "NL",
+      "build_year": 2024,
+      "samples": 5,
+      "sample_median": 31700,
+      "curve": "published",
+      "p25": 19000.0,
+      "median": 21600.0,
+      "p75": 24200.0,
+      "error": -0.319,
+      "in_band": false
+     },
+     {
+      "subject": "tesla-model-y-gen1",
+      "country": "BE",
+      "build_year": 2022,
+      "samples": 8,
+      "sample_median": 35900,
+      "curve": "published",
+      "p25": 21750.0,
+      "median": 24750.0,
+      "p75": 27700.0,
+      "error": -0.311,
+      "in_band": false
+     },
+     {
+      "subject": "peugeot-e-208-p21",
+      "country": "NL",
+      "build_year": 2020,
+      "samples": 7,
+      "sample_median": 16900,
+      "curve": "published",
+      "p25": 10400.0,
+      "median": 11800.0,
+      "p75": 13300.0,
+      "error": -0.302,
+      "in_band": false
+     }
+    ]
+   }
+  },
+  "fit_points": 76,
+  "model_curve": "fitted"
+ },
+ "open_data": {
+  "rows": 419,
+  "columns": 185,
+  "sources": [
+   "ademe",
+   "dft-veh",
+   "eea",
+   "fueleconomy",
+   "kba-fz10",
+   "kilowatt-openev",
+   "model-estimate",
+   "openev",
+   "rdw",
+   "rdw-tgk",
+   "seed-manual"
+  ],
+  "withheld": {
+   "maker-docs": 281,
+   "manual": 389
+  },
+  "files": {
+   "ATTRIBUTION.md": 4415,
+   "LICENSE": 715,
+   "README.md": 15804,
+   "variants.csv": 1546227,
+   "variants.json": 3482853
+  }
+ }
+}
