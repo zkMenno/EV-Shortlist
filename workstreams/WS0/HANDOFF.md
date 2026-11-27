@@ -1,4 +1,6 @@
-# COORDINATOR handoff (2026-11-27 12:10 UTC, Antigravity: COORDINATOR 2026-11-27)
+# COORDINATOR handoff (2026-11-27 22:20 UTC, Claude: COORDINATOR 2026-11-27 evening, https://claude.ai/code/session_01JuyZEWwQDPkqpriznYQTsU)
+
+Note 2026-11-27 22:20: Menno opened this COORDINATOR in Claude again (after building in Antigravity). Both hosts work: Claude uses CLAUDE.md + the Claude-era mechanics (no GraphQL, `workflow_dispatch` after push, PRs via `gh api`); Antigravity uses GEMINI.md.
 
 Migrated from Claude to Antigravity on 2026-11-26 (**PR #208**, Decision 089, rule G-64). Naming: Menno retired the `WS0` label — always write **COORDINATOR** (capitalized) in chat titles, prompts, and updates (repo paths `workstreams/WS0/HANDOFF.md` and `workstreams/WS0/INBOX.md` stay unchanged on disk so scripts/links don't break). Pause procedure stays G-58 (HANDOFF + INBOX line + open task Status).
 
@@ -12,10 +14,10 @@ One named **COORDINATOR** conversation (started with `/start-coordinator`, retir
 - **`gate-guard` is now in `enforce` mode** and protects `GEMINI.md` + `.agents/**` (**Decision 090**, #230 + #231).
 - Decisions up to **090**; next free **091** (from spare block `091–099`). Tasks up to **T-167**; next free **T-168**. Rules up to **G-70**; next free **G-71**.
 - Done: T-149–T-156, T-158–T-167 (data release 4 live: #224/#225/#226/#227), CI minutes (#207), Antigravity migration (#208), BOARD refreshes (#209, #217, #223, #229), gate rules G-65–G-70 (#216, #222, #228), coordinator docs tidy + Decision 090 (#230), gate-guard enforce + gate docs tidy (#231). Schema has `PublishedVariant.dc_speed_is_claim` (#205).
-- Open PRs: **none**. Unhandled INBOX items: **none**. Running builder batch: **T-157** (WS2, started by Menno 2026-11-27).
+- **T-157 done** (#232 → `f833b3d`, 2026-11-27 12:37 UTC). Open PRs: **none** (checked 22:15 UTC). Unhandled INBOX items: **none**. Staging health 22:16 UTC: `{"status":"ok","release":4}`. Running builder batch: **none**; next = overnight WS2 batch T-146 → T-135 → T-131 (WS2).
 
 ## Next batch conversations
-1. **Web (WS2): T-157** (`tasks/T-157-web-popularity-from-release.md`, **running now**) — `apps/web/scripts/popularity.mjs` reads `generations[].popularity` from release 4 (Spearman ≥ 0.95, D5 N-1 fallback); `apps/web/scripts/fetch-release.mjs` unpacks `images.tar` + verifies sha256 per file (releases 1–3 still work); `dc_speed_is_claim: true` claim badge carried in `explore-data.ts` + shown on all 4 DC speed fields; `apps/web/scripts/budget.mjs` 85 % (`255 KB`) early warning (G-69).
+1. ~~**Web (WS2): T-157**~~ done #232. (`tasks/T-157-web-popularity-from-release.md`) — `apps/web/scripts/popularity.mjs` reads `generations[].popularity` from release 4 (Spearman ≥ 0.95, D5 N-1 fallback); `apps/web/scripts/fetch-release.mjs` unpacks `images.tar` + verifies sha256 per file (releases 1–3 still work); `dc_speed_is_claim: true` claim badge carried in `explore-data.ts` + shown on all 4 DC speed fields; `apps/web/scripts/budget.mjs` 85 % (`255 KB`) early warning (G-69).
 2. **Next after T-157 lands — Web (WS2): T-146** (`tasks/T-146-hero-results-follow-ups.md`) — phone Refine bottom sheet (≤ 640 px), row photo thumbnails from unpacked `images.tar` (Decision 081), `hero-results` feature-map flow (gate PR approved by COORDINATOR in advance). Followed by **T-135** (photo cards) and **T-131** (WS2 Popular used EVs landing section).
 3. **After T-157 + T-146 (+ T-135/T-131):** Fresh **QA** launch review on release 4 + staging before public launch.
 
