@@ -5,6 +5,7 @@ One named chat, the **coordinator**; every other chat is a throwaway batch chat 
 | Workstream | Purpose | Link | Since |
 |---|---|---|---|
 | COORDINATOR | **COORDINATOR (current)**: Antigravity takeover, migration #208, BOARD/T-159 refresh #209, T-162/T-163/T-165 briefs | Antigravity: COORDINATOR 2026-11-26 | 2026-11-26 |
+| batch: T-167 | WS1: T-167 data release 4 (`data-v4`, `latest = 4`), RDW drift gate #224, EEA fallback #225, cross-lane client provenance perf fix #227, release PR #226 + staging deploy | Antigravity: batch T-167 (2026-11-27) | 2026-11-27 |
 | batch: T-166 | WS1: T-166 G-65 seed-marker scan, G-66 `ev release fetch --via-gh`, Kia EV9 GT `tgk_split`, Stellantis `trim_lines` float fix | Antigravity: batch T-166 (2026-11-26) | 2026-11-26 |
 | batch: catalogue T-164 | WS3: T-164 cite power_kw for 20 flag-less rows (12 Tesla + 8 non-Tesla) and Twingo 22 kW AC | Antigravity: batch catalogue T-164 | 2026-11-26 |
 | batch: catalogue T-162 | WS3: T-162 re-cite MX-30 + EV6 63, Elroq 85 DC check, Model X gen1, Citigo e / Mii, EV9, Marvel R, Sealion 7 | Antigravity: batch catalogue T-162 | 2026-11-26 |
