@@ -17,6 +17,7 @@ Project: a used-EV finder, a better EV Database. Owner: Menno, not a developer. 
 | "Fresh subagent review before merge" | A reviewer that has **not** seen the build: a new Antigravity agent/conversation running `/fresh-review <PR>`. Never self-review. |
 | "After a push from a Claude session, start CI with `workflow_dispatch`" | Claude-proxy quirk. Normal pushes trigger CI. Only use `workflow_dispatch` if the PR head has no run. Rule R0 still holds: trust only the CI run on the PR head commit. |
 | "Proxy blocks GraphQL / branch deletion" | No longer applies. You may delete merged branches yourself. |
+| Publishing GitHub Release assets (`gh release upload`) | `uploads.github.com` returns HTTP 401 via the Antigravity VM proxy; publish data releases via `gh workflow run data-refresh.yml` (rule G-70), and fetch locally via `uv run ev release fetch latest --via-gh` (rule G-66). |
 | Project doc `claude/brand-design-decisions.md` | `docs/design/brand-design-decisions.md` in the repo (added at migration). |
 | claude.ai artifact links (design system, board, architecture) | Not reachable. Use `docs/design/` (tokens.json, components, assets) — it is the source of truth for code. |
 | "Before a chat gets long … successor prompt" | Same idea: before context gets heavy, run `/handoff`. |
