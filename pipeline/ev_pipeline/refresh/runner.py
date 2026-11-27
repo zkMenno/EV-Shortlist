@@ -265,7 +265,13 @@ def _refresh_source(
     responses = [r for r in rec.responses if r.get("method") != "HEAD"]
     run.step("fetch", t, "ok" if rc == 0 else "failed", responses=len(responses))
     if rc != 0:
-        run.status, run.message = "failed", "fetch failed (see the adapter's message above)"
+        msg = "fetch failed (see the adapter's message above)"
+        if not staging.exists():
+            restored = _restore_staging_from_release(ps, data_dir, staging, run)
+            if restored is not None:
+                prev_rel, n_rows = restored
+                msg = f"fetch failed; restored {n_rows} cached records from release {prev_rel}"
+        run.status, run.message = "failed", msg
         return
 
     # 3. snapshot
@@ -394,6 +400,41 @@ def _restore_raw(
             run.steps.append({"step": "restore_raw", "outcome": "ok", "snapshot": manifest.id})
     except SnapshotError as exc:
         run.steps.append({"step": "restore_raw", "outcome": "failed", "detail": str(exc)})
+
+
+def _restore_staging_from_release(
+    ps: PlannedSource, data_dir: Path, staging: Path, run: SourceRun
+) -> tuple[int, int] | None:
+    """Optional adapter hook: on an ephemeral runner (no on-disk staging) whose fetch failed,
+    reconstruct staging records from the latest published release (preserving original
+    retrieved_at and provenance) so a single upstream outage on a slow-moving source (e.g.
+    yearly EEA) does not block publishing a release. Never raises."""
+    from ev_pipeline.health.state import latest_release
+
+    hook = getattr(ps.adapter, "restore_from_release", None)
+    if not callable(hook):
+        return None
+    prev = latest_release(data_dir)
+    if prev is None:
+        return None
+    t = time.monotonic()
+    try:
+        records = hook(data_dir, prev)
+    except Exception as exc:  # noqa: BLE001  fallback must never break a refresh
+        run.step(
+            "restore_from_release",
+            t,
+            "failed",
+            release=prev,
+            error=f"{type(exc).__name__}: {exc}"[:200],
+        )
+        return None
+    if not records:
+        run.step("restore_from_release", t, "empty", release=prev)
+        return None
+    n = c.write_records(records, staging)
+    run.step("restore_from_release", t, "ok", release=prev, records=n)
+    return prev, n
 
 
 # --- the whole run --------------------------------------------------------------------------

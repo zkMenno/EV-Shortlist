@@ -289,6 +289,76 @@ def _positive(v: object) -> bool:
     return isinstance(v, int | float) and not isinstance(v, bool) and v > 0
 
 
+def restore_from_release(data_dir: Path, release_num: int) -> list[SourceRecord]:
+    """Reconstruct cached EEA registration_count staging records from a published release's
+    `facts.parquet` when Discodata / SDI are unreachable on a fresh runner (preserving each
+    fact's original `retrieved_at` date, confidence, country, year and record key).
+
+    EEA tables 2018-2024 are final and the provisional year updates yearly, so keeping the
+    previous release's facts matches the on-disk keep-previous behaviour of a persistent host.
+    """
+    import pyarrow.parquet as pq
+
+    from ev_pipeline.release.publish import PublishError, ensure_local, read_manifest
+
+    release_dir = data_dir / "releases" / str(release_num)
+    facts_path = release_dir / "facts.parquet"
+    if not facts_path.exists() or read_manifest(release_dir) is not None:
+        try:
+            ensure_local(data_dir, release_num, only=frozenset({"facts.parquet"}))
+        except PublishError:
+            return []
+    if not facts_path.exists():
+        return []
+    table = pq.read_table(facts_path)
+    records: list[SourceRecord] = []
+    seen: set[str] = set()
+    for row in table.to_pylist():
+        if row.get("source_id") != NAME or row.get("field") != FactField.registered_count.value:
+            continue
+        key = row.get("source_record")
+        if not isinstance(key, str) or ":" not in key or key in seen:
+            continue
+        _, rest = key.split(":", 1)
+        head = rest.split("|", 2)
+        if len(head) != 3 or "|" not in head[2]:
+            continue
+        ms, make, tail = head
+        model, year_s = tail.rsplit("|", 1)
+        if ms not in COUNTRIES or not make or not model:
+            continue
+        val = row.get("value_num")
+        if not isinstance(val, int | float) or isinstance(val, bool) or val <= 0:
+            continue
+        year = int(year_s) if year_s.isdigit() else row.get("record_year")
+        if not isinstance(year, int) or isinstance(year, bool):
+            continue
+        retrieved = row.get("retrieved_at")
+        if not isinstance(retrieved, str):
+            continue
+        try:
+            retrieved_date = date.fromisoformat(retrieved)
+            conf = Confidence(str(row.get("confidence")))
+        except ValueError:
+            continue
+        seen.add(key)
+        records.append(
+            SourceRecord(
+                source=SOURCE,
+                record_key=key,
+                kind="registration_count",
+                make=make,
+                model=model,
+                year=year,
+                country=Country(ms),
+                specs={FactField.registered_count: SpecValue(value=int(round(val)), unit="count")},
+                retrieved_at=retrieved_date,
+                confidence=conf,
+            )
+        )
+    return records
+
+
 def fetch_cmd(client: httpx.Client | None = None) -> int:
     target = c.raw_dir(NAME)
     own = client is None
