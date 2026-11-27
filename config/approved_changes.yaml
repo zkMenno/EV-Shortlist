@@ -524,3 +524,52 @@ approved:
   - {<<: *t163, id: renault-megane-e-tech-gen1-ev40, field: "scores.runabout+kerbside.band"}
   - {<<: *t163, id: renault-zoe-ph1-q90, field: "scores.runabout.band"}
   - {<<: *t163, id: renault-zoe-ph1-q90, field: "scores.runabout.urban.band"}
+  # T-164 (Decisions 068, 087, 088): cite power_kw for the 20 remaining flag-less rows from T-161
+  # (+ Model S Raven LR 415 kW so 75D/100D do not falsely take newest-version, G-62) and Twingo
+  # 22 kW AC (T-163 WS3 ask). Measured on 2026-11-26 staging: 58 blocking lines vs origin/main and
+  # 63 T-164 blocking lines vs published release 3 (all covered below; 0 other T-164 blocking lines).
+  - release: 4
+    file: catalogue.json
+    approved_by: "Decision 068 (T-164 gate, Decision 087)"
+    reason: "T-164 (T-163 WS3 ask): Renault NL April 2022 official Twingo E-Tech Electric price list (cdn.group.renault.com, p. 16: 'Vermogen lader AC (kW/h) min-max 2,3 - 22 kW') replaces kilowatt-openev's wrong 11 kW AC figure (11 -> 22 kW; ac_km_per_h 67.9 -> 135.8). New row vs release 3 (0 blocking vs release 3); 1 blocking line vs origin/main."
+    id: renault-twingo-gen3-22kwh
+    field: ac_kw
+    change: changed
+  - release: 4
+    file: catalogue.json
+    approved_by: "Decision 087 (T-164 gate, Decision 088)"
+    reason: "T-164: citing Tesla UK Support's official 220 kW rating for Model Y RWD (2020-2024) lets the 220 kW RWD LFP versions match cleanly; WLTP moves from the earliest-year 20-inch TGK version (430 km) to the standard 19-inch WLTP figure (455 km; real_range_km 344 -> 364) and fills price_new.NL.amount (44,290 EUR). Measured on 2026-11-26 staging vs both origin/main and release 3."
+    id: tesla-model-y-gen1-rwd
+    field: wltp_range_km
+    change: changed
+  - &t164enyaq
+    release: 4
+    file: catalogue.json
+    approved_by: "Decision 087 (T-164 gate, Decision 088)"
+    reason: "T-164: citing Škoda Storyboard's official 195 kW rating for ENYAQ iV 80x causes the matcher's power gate to reject the 250 kW 2026 SKODA ENYAQ RS RDW record (ACNX1EDL1IX1, 58,080 EUR) that previously landed on skoda-enyaq-gen1-80x-rs only because power_kw was missing. Clearing that mis-attached 2026 RS price clears price_new.NL.amount and the 51 derived used_prices.json bands built from it; removing the mixed RS consumption cleans up WLTP (518 -> 527 km) and consumption (16.9 -> 16.0 kWh/100 km), lifting road-tripper* scores +11-12 points vs release 3 and moving 4 bands fallback -> consider. Measured on 2026-11-26 staging (56 blocking lines vs origin/main; 62 vs release 3)."
+    id: skoda-enyaq-gen1-80x-rs
+    field: "price_new.NL.amount"
+    change: cleared
+  - {<<: *t164enyaq, file: used_prices.json, field: "bands.*", change: cleared}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper.band", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper.rural.band", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper+kerbside.band", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper+kerbside.rural.band", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper.score", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper.rural.score", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper.urban.score", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper+kerbside.score", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper+kerbside.rural.score", change: changed}
+  - {<<: *t164enyaq, file: shortlist_scores.json, field: "scores.road-tripper+kerbside.urban.score", change: changed}
+  # T-166 (Decision 049, T-162 WS1 ask b): splitting Kia EV9 gen1 GT (F6E54 / F7E54, vmax 220,
+  # WLTP 518 km) from 2025+ AWD / RWD versions in match/tgk_split.yaml removes 17 mis-placed
+  # 7-seat AWD/RWD versions from kia-ev9-gen1-gt, leaving its 6 real GT versions (3x 6-seat
+  # F6E54 + 3x 7-seat F7E54) so seats moves 7 -> 6. Against published release 3, kia-ev9-gen1-gt
+  # is a new row (0 blocking); this entry covers the --base-release-from origin/main diff.
+  - release: 4
+    file: catalogue.json
+    approved_by: "Decision 049 (T-166 gate)"
+    reason: "T-166: Kia EV9 gen1 GT (F6E54 / F7E54, 220 km/h, WLTP 518 km) is split in match/tgk_split.yaml from 2025+ AWD (F6E34 / F7E24 / F7E34) and RWD (F7E12) versions whose shared trade name 'EV9 / EV9 GT' previously pulled 17 7-seat non-GT records onto kia-ev9-gen1-gt. With only the 6 real GT versions (3x F6E54 6-seat + 3x F7E54 7-seat), seats moves 7 -> 6 while WLTP stops carrying 17 conflicting values (510 -> 518 km), consumption moves 22.0 -> 20.8 kWh/100 km, and mass moves 2664 -> 2718 kg. Measured: ev verify --base-release-from origin/main on 2026-11-27 staging (1 blocking line, this entry); 0 T-166 blocking lines against published release 3."
+    id: kia-ev9-gen1-gt
+    field: seats
+    change: changed
