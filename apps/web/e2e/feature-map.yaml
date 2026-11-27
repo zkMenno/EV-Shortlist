@@ -174,6 +174,58 @@ features:
         what: the brand in the page address
         why: the brand choice is lost on reload or share (filters live in the URL)
 
+  # T-146: the results layout (T-132 parts 1 + 2): rows, "Also worth a look", the answers sidebar, Show all cars.
+  - id: hero-results
+    title: "Hero results: shortlist rows, 'Also worth a look', the answers sidebar and Show all cars"
+    triggers: [src/components/Hero.tsx, src/components/HeroSteps.tsx, src/lib/hero-state.ts, src/lib/shortlist.ts, "src/app/[[]country]/[[]lang]/page.tsx", src/i18n/en.json]
+    steps:
+      - goto: /nl/en?role=main&trips=monthly&charge=home&budget=40000
+      - wait: "@hero-shortlist @hero-card"
+    expect:
+      - count: "@hero-shortlist @hero-card"
+        min: 1
+        max: 5
+        what: the "Your shortlist" rows (up to five priced cars)
+        why: the results don't show a shortlist for a common answer set
+      - text: "@hero-more"
+        contains: Also worth a look
+        on: release
+        what: the "Also worth a look" rows after the shortlist
+        why: cars six to ten are missing or unlabelled
+      - visible: "@hero-side"
+        what: the answers sidebar beside the results
+        why: the visitor can't see what the ranking is based on
+      - text: "@hero-answers"
+        contains: Our main car
+        what: every answer listed in the sidebar
+        why: the sidebar doesn't say what the visitor picked
+      - visible: "@hero-answer-trips"
+        what: a change button next to each answer
+        why: changing one answer means starting over
+      - attr: "@hero-all-cars-link"
+        name: href
+        match: "/nl/en/cars\\?.*role=main.*sort=-suggested"
+        what: the Show all cars link under the results
+        why: the full list loses the answers or the suggested order
+  - id: hero-results-edit
+    title: "Hero results: a change button in the answers sidebar opens that question"
+    triggers: [src/components/Hero.tsx, src/components/HeroSteps.tsx, src/lib/hero-state.ts]
+    steps:
+      - goto: /nl/en?role=main&trips=monthly&charge=home&budget=25000
+      - wait: "@hero-answer-trips"
+      - click: "@hero-answer-trips"
+      - wait: "@hero-q-trips"
+    expect:
+      - url: "q=trips"
+        what: the trips question in the address bar
+        why: Back won't return to the results (every question is a history entry, T-132)
+      - visible: "@hero-q-trips"
+        what: the long-trips question
+        why: the change button doesn't lead to the answer it names
+      - text: "@hero-stepline"
+        match: "\\d"
+        what: the step line on the question
+        why: the visitor loses track of where they are in the questions
   - id: hero-nerd
     title: "Hero: Nerd level shows how the score is built"
     triggers: [src/components/Hero.tsx, src/lib/shortlist.ts, src/lib/use-level.ts]
