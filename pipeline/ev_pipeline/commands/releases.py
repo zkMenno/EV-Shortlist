@@ -334,16 +334,30 @@ def cmd_publish(args: argparse.Namespace) -> int:
 
 
 def cmd_fetch(args: argparse.Namespace) -> int:
+    from ev_pipeline.net import FetchBlocked
     from ev_pipeline.release.publish import PublishError, fetch, load_config
 
     data_dir = default_data_dir()
     try:
         only = frozenset(x for x in (args.only or "").split(",") if x) or None
-        stats = fetch(_release_dir(data_dir, args.n), load_config(data_dir), only=only)
+        stats = fetch(
+            _release_dir(data_dir, args.n),
+            load_config(data_dir),
+            only=only,
+            via_gh=bool(args.via_gh),
+        )
+    except FetchBlocked as exc:
+        print(f"fetch: {exc}")
+        print(
+            f"hint: if direct HTTPS is blocked by a proxy, retry with "
+            f"`ev release fetch {args.n} --via-gh`"
+        )
+        return 1
     except (ReleaseOpError, PublishError) as exc:
         print(f"fetch: {exc}")
         return 1
-    print(f"release {args.n}: {stats['downloaded']} downloaded, {stats['kept']} already ok")
+    extra = f", {stats['unpacked']} unpacked" if stats.get("unpacked") else ""
+    print(f"release {args.n}: {stats['downloaded']} downloaded, {stats['kept']} already ok{extra}")
     return 0
 
 
@@ -440,6 +454,11 @@ def register(sub: argparse._SubParsersAction) -> None:
     p = actions.add_parser("fetch", help="download a release's files by its manifest")
     p.add_argument("n", help="release number or 'latest'")
     p.add_argument("--only", help="comma-separated paths (a trailing / = a folder); default all")
+    p.add_argument(
+        "--via-gh",
+        action="store_true",
+        help="download assets via `gh release download` instead of direct HTTPS (G-66)",
+    )
     p.set_defaults(func=cmd_fetch)
     p = actions.add_parser("verify", help="check local release files against manifest.json")
     p.add_argument("n", help="release number or 'latest'")

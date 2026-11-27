@@ -338,6 +338,42 @@ def test_version_flags_gap_from_params() -> None:
     assert sl.load_params()["trim_line_power_gap"] == pytest.approx(0.15)
 
 
+def test_trim_lines_exact_15_percent_boundary() -> None:
+    """T-166: IEEE-754 `100.0 * (1 + 0.15) == 114.99999999999999 < 115.0` must not split exact
+    +15 % pairs (Stellantis 100 -> 115 kW e-CMP models), while > 15 % still starts a new line."""
+    assert 100.0 * (1 + 0.15) < 115.0  # confirm the float representation we guard against
+    rows = [
+        vrow(
+            "e208-50",
+            drivetrain="fwd",
+            year_start=2020,
+            power_kw=100.0,
+            dc_km_per_20min=180.0,
+        ),
+        vrow(
+            "e208-51",
+            drivetrain="fwd",
+            year_start=2024,
+            power_kw=115.0,
+            dc_km_per_20min=210.0,
+        ),
+        vrow(
+            "e208-gt-plus",
+            drivetrain="fwd",
+            year_start=2025,
+            power_kw=115.1,
+            dc_km_per_20min=220.0,
+        ),
+    ]
+    lines = sl.trim_lines(rows, gap=0.15)
+    assert [[r["variant_id"] for r in ln] for ln in lines] == [
+        ["e208-50", "e208-51"],
+        ["e208-gt-plus"],
+    ]
+    flags = sl.version_flags(rows[:2], gap=0.15)
+    assert flags == {"e208-50": {"older-version"}, "e208-51": {"newest-version"}}
+
+
 def test_bonus_and_rural_penalty(tmp_path: Path) -> None:
     big = row(charge_100_daily=True, mass_running_order_kg=2500.0)  # kerb 2425 > 2300
     sc = scores(run(tmp_path, [big]), big["variant_id"])["scores"]

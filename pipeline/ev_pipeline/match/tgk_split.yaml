@@ -257,3 +257,27 @@ variants:
   tesla-model-x-palladium-plaid:
     type_codes: [XB1T]
     basis: "rdw-tgk 2026-11-26: e4*2018/858*00086 XB1T Plaid versions (261-262 km/h, WLTP 543-567 km)"
+  # --- T-166 (batch: T-166, 2026-11-26): Kia EV9 gen1 GT vs AWD / RWD split (T-162 WS1 ask b) ---
+  # RDW TGK (CC0), staging 2026-11-27 (48 versions, grouped by (variant, uitvoering, wltp_range_km)
+  # per G-67): 2025+ type-approval trade-name lists read "EV9 / EV9 GT", so the name word "GT"
+  # pulled 2025+ RWD (F7E12, 185 km/h, 577-579 km) and AWD (F6E34 / F7E24 / F7E34, 200 km/h,
+  # 522-551 km) versions onto kia-ev9-gen1-gt (causing WLTP spread withholding and wrong vmax=200),
+  # while earlier versions tied across the three 99.8 kWh rows.
+  kia-ev9-gen1-76kwh-rwd:
+    type_codes: [F7E42]
+    top_speed_kmh: [185]
+    basis: "rdw-tgk 2026-11-27: e4*2018/858*00178 F7E42 (E11A11), 1 motor (30-min 53 kW), 185 km/h, WLTP 443-456 km (85.3-86.4 kWh drawn)"
+  kia-ev9-gen1-99kwh-rwd:
+    type_codes: [F7E12]
+    top_speed_kmh: [185]
+    basis: "rdw-tgk 2026-11-27: e4*2018/858*00178 F7E12 (E11A11 / E11C11), 1 motor (30-min 53 kW), 185 km/h, WLTP 556-579 km"
+  kia-ev9-gen1-99kwh-awd:
+    type_codes: [F6E34, F7E24, F7E34]
+    top_speed_kmh: [200]
+    motors: 2
+    basis: "rdw-tgk 2026-11-27: e4*2018/858*00178 F6E34 / F7E24 / F7E34 (6/7-seat AWD), no 30-min power (two motors), 200 km/h, WLTP 505-551 km"
+  kia-ev9-gen1-gt:
+    type_codes: [F6E54, F7E54]
+    top_speed_kmh: [220]
+    motors: 2
+    basis: "rdw-tgk 2026-11-27: e4*2018/858*00178 F6E54 / F7E54 (E12D11, 6/7-seat GT), no 30-min power (two motors), 220 km/h, WLTP 518 km"
