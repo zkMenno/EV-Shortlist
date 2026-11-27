@@ -123,7 +123,12 @@ export function toExploreRow(
   }
   const prov: Record<string, FieldProvenance> = {};
   for (const [k, p] of Object.entries(row.provenance ?? {})) {
-    if (NUMERIC.has(k) || k.startsWith("price_new")) prov[k] = p;
+    if (NUMERIC.has(k) || k.startsWith("price_new")) {
+      // fact_ids stay on the server (catalogue.json / per-generation detail); Explore never reads them (T-167 perf budget).
+      const compact: FieldProvenance = { ...p };
+      delete compact.fact_ids;
+      prov[k] = compact;
+    }
   }
   out.provenance = prov;
   const bands = compactBands(used?.get(row.variant_id));
