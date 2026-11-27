@@ -48,7 +48,7 @@ export function HeroSheet({
     const panel = panelRef.current;
     closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      // An open popover or combobox inside handles its own Escape first.
+      // An open ⓘ tip (use-popover.ts) takes its Escape first and marks it handled; the next Escape closes the sheet.
       if (e.key === "Escape" && !e.defaultPrevented) {
         closeFn.current();
         return;

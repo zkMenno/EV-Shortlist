@@ -93,6 +93,40 @@ test.describe("hero results on a phone (360 px)", () => {
     await expect(page).toHaveURL(/role=main/);
   });
 
+  test("a double tap on 'Show my top 10' goes back once: the results and filters stay (review #235)", async ({ page }) => {
+    // Start one question earlier, so a second Back would land on a question and drop the answers.
+    await page.goto("/nl/en?q=budget&role=main&trips=monthly&charge=home&budget=40000");
+    await page.getByTestId("hero-show").click();
+    await expect(page.getByTestId("hero-card").first()).toBeVisible();
+    const dialog = await openSheet(page);
+    await dialog.getByTestId("hero-refine").locator("summary").click();
+    await dialog.getByTestId("hero-seats").selectOption("5");
+    await expect(page).toHaveURL(/seats=5/);
+    await page.getByTestId("hero-sheet-done").dblclick();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page).not.toHaveURL(/q=budget/);
+    await expect(page).toHaveURL(/seats=5/);
+    await expect(page).toHaveURL(/budget=40000/);
+    await expect(page.getByTestId("hero-card").first()).toBeVisible();
+    // Escape then a tap on the backdrop: also one Back.
+    await openSheet(page);
+    await page.keyboard.press("Escape");
+    await page.mouse.click(180, 20);
+    await expect(page).toHaveURL(/seats=5/);
+    await expect(page).not.toHaveURL(/q=budget/);
+  });
+
+  test("Escape on an open ⓘ tip in the sheet closes the tip only; the next Escape closes the sheet", async ({ page }) => {
+    const dialog = await openSheet(page);
+    const tip = dialog.getByRole("button", { name: /About/ }).first();
+    await tip.click();
+    await expect(dialog.getByRole("tooltip").first()).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+  });
+
   test("a short swipe snaps back and the sheet stays open", async ({ page }) => {
     await openSheet(page);
     const bar = page.getByTestId("hero-sheet-bar");
