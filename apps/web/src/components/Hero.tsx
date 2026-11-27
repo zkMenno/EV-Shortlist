@@ -214,6 +214,8 @@ export function Hero(props: HeroProps) {
   const sheetOpen = useRef(false);
   /** The sheet pushed a history entry (so the phone's Back button closes it). */
   const sheetPushed = useRef(false);
+  /** history.back() is on its way (popstate is async): a second close in the meantime must not go back again. */
+  const sheetClosing = useRef(false);
   const [dirty, setDirty] = useState(false);
   const lastUrl = useRef(heroToSearchParams(props.initial).toString());
   // Focus moves to the new question's heading after a step change (not on first paint).
@@ -263,6 +265,7 @@ export function Hero(props: HeroProps) {
         // sheet opened: write today's answers into it, so nothing changed in the sheet is lost.
         sheetOpen.current = false;
         sheetPushed.current = false;
+        sheetClosing.current = false;
         setSheet(false);
         lastUrl.current = heroToSearchParams(heroRef.current).toString();
         window.history.replaceState(null, "", mergeHeroIntoUrl(window.location.href, heroRef.current));
@@ -308,6 +311,7 @@ export function Hero(props: HeroProps) {
     if (sheetOpen.current) {
       sheetOpen.current = false;
       sheetPushed.current = false;
+      sheetClosing.current = false;
       setSheet(false);
     }
     const s: HeroState = { ...from, step: to === "results" ? null : to };
@@ -385,7 +389,7 @@ export function Hero(props: HeroProps) {
   };
 
   const openSheet = () => {
-    if (sheetOpen.current) return;
+    if (sheetOpen.current || sheetClosing.current) return;
     window.history.pushState(null, "", window.location.href);
     sheetPushed.current = true;
     sheetOpen.current = true;
@@ -394,8 +398,10 @@ export function Hero(props: HeroProps) {
   /** Close button, Escape, swipe down, tap outside, wider screen: all go through Back when the
    *  sheet added a history entry, so the entry never stays behind. */
   const closeSheet = () => {
-    if (!sheetOpen.current) return;
+    // Double tap, Escape + tap, swipe + tap: one Back only (review #235: a second Back left the results).
+    if (!sheetOpen.current || sheetClosing.current) return;
     if (sheetPushed.current) {
+      sheetClosing.current = true;
       window.history.back();
       return;
     }
