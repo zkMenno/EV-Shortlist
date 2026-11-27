@@ -78,6 +78,7 @@ export default async function CataloguePage({ params, searchParams }: Props) {
   }
   const initialRows = matches.filter((r, i) => i < SSR_ROWS || firstGens.has(r.generation_id));
   const pct = weightPercents(popularityInputs.weights);
+  const popAsOf = cat.popularityAsOf() ?? undefined;
 
   return (
     <>
@@ -110,7 +111,7 @@ export default async function CataloguePage({ params, searchParams }: Props) {
         finance={financeProfile(cfg.code)}
         payFromUrl={hasPayParam(sp)}
         defaultView="cards"
-        popularityAsOf={popularityInputs.inputs.top40_generated_on ?? undefined}
+        popularityAsOf={popAsOf}
         howWeRankHref={`#${HOW_ID}`}
       />
       <section id={HOW_ID} aria-labelledby={`${HOW_ID}-title`} className="mt-12 max-w-3xl scroll-mt-4" data-testid="how-we-rank">
@@ -118,7 +119,7 @@ export default async function CataloguePage({ params, searchParams }: Props) {
           {t("catalogue.how.title")}
         </h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-800">
-          <li>{t("catalogue.how.regs", { regs: pct.regs, date: popularityInputs.inputs.top40_generated_on ?? "—" })}</li>
+          <li>{t("catalogue.how.regs", { regs: pct.regs, date: popAsOf ?? "—" })}</li>
           <li>{t("catalogue.how.split")}</li>
           <li>{t("catalogue.how.picks", { picks: pct.picks })}</li>
           <li>{t("catalogue.how.none")}</li>

@@ -54,3 +54,13 @@ describe("Client Explore provenance omits unused fact_ids (T-167 perf budget)", 
   });
 });
 
+describe("dc_speed_is_claim carried in Explore rows (T-157)", () => {
+  it("carries dc_speed_is_claim when true and drops it when absent", () => {
+    expect(EXPLORE_FIELDS as readonly string[]).toContain("dc_speed_is_claim");
+    const claimed = row({ variant_id: "elroq-85", dc_speed_is_claim: true, dc_km_per_20min: 192.3 });
+    expect(claimed.dc_speed_is_claim).toBe(true);
+    const measured = row({ variant_id: "measured", dc_km_per_20min: 200 });
+    expect(measured).not.toHaveProperty("dc_speed_is_claim");
+  });
+});
+

@@ -25,6 +25,25 @@ export function isDcDependent(key: string): key is DcDependentKey {
   return (DC_DEPENDENT_KEYS as readonly string[]).includes(key);
 }
 
+/** DC speed fields that carry the maker-claim badge when `dc_speed_is_claim: true` (T-157). */
+export const DC_SPEED_CLAIM_KEYS = [
+  "dc_avg_10_80_kw",
+  "dc_minutes_10_80",
+  "dc_km_per_10min",
+  "dc_km_per_20min",
+] as const;
+
+export type DcSpeedClaimKey = (typeof DC_SPEED_CLAIM_KEYS)[number];
+
+type ClaimRow = Partial<Pick<PublishedVariant, "dc_peak_kw_is_claim" | "dc_speed_is_claim">>;
+
+/** True when `key` on `row` is a maker claim rather than a measured or curve-modelled figure. */
+export function isClaimField(row: ClaimRow, key: string): boolean {
+  if (key === "dc_peak_kw") return !!row.dc_peak_kw_is_claim;
+  if ((DC_SPEED_CLAIM_KEYS as readonly string[]).includes(key)) return !!row.dc_speed_is_claim;
+  return false;
+}
+
 /** True when `key` must read as missing for this row (a DC-behaviour field on a car without DC data). */
 export function hiddenForNoDc(row: DcRow, key: string): boolean {
   return isDcDependent(key) && !hasDcData(row);

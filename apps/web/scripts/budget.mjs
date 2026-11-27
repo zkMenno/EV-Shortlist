@@ -22,6 +22,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 export const WEB_DIR = path.resolve(here, "..");
 export const JS_BUDGET_KB = 200;
 export const CATALOGUE_BUDGET_KB = 300;
+/** G-69 (T-167 retro): warn above 85 % of the client catalogue budget (255 KB) before it fails at 300 KB. */
+export const CATALOGUE_WARN_RATIO = 0.85;
+export const CATALOGUE_WARN_KB = CATALOGUE_BUDGET_KB * CATALOGUE_WARN_RATIO;
 
 /** The app entries whose client chunks load on /[country]/[lang] (Explore). */
 // Since Decision 015 the root layout is app/[country]/[lang]/layout (no app/layout).
@@ -35,6 +38,41 @@ export const PAGES = [
 
 export const gzipBytes = (buf) => gzipSync(buf, { level: 9 }).length;
 export const kb = (bytes) => Math.round(bytes / 100) / 10;
+
+/**
+ * Evaluate the gzipped client catalogue size against the budget (G-69):
+ * - "fail" when >= budgetKb * 1000 (300 KB, unchanged)
+ * - "warn" when >  budgetKb * warnRatio * 1000 (255 KB = 85 % of 300 KB)
+ * - "ok"   otherwise
+ */
+export function evaluateCatalogueBudget(gzBytes, budgetKb = CATALOGUE_BUDGET_KB, warnRatio = CATALOGUE_WARN_RATIO) {
+  const budgetBytes = budgetKb * 1000;
+  const warnKb = Math.round(budgetKb * warnRatio * 10) / 10;
+  const warnBytes = Math.round(budgetBytes * warnRatio);
+  const sizeKb = kb(gzBytes);
+  const pct = Math.round((gzBytes / budgetBytes) * 1000) / 10;
+  if (gzBytes >= budgetBytes) {
+    return {
+      status: "fail",
+      kb: sizeKb,
+      pct,
+      warnKb,
+      budgetKb,
+      message: `client catalogue ${sizeKb} KB gzip is not under ${budgetKb} KB`,
+    };
+  }
+  if (gzBytes > warnBytes) {
+    return {
+      status: "warn",
+      kb: sizeKb,
+      pct,
+      warnKb,
+      budgetKb,
+      message: `client catalogue ${sizeKb} KB gzip is ${pct} % of the ${budgetKb} KB budget (warning threshold ${warnKb} KB / ${Math.round(warnRatio * 100)} %)`,
+    };
+  }
+  return { status: "ok", kb: sizeKb, pct, warnKb, budgetKb, message: null };
+}
 
 /** Reads `globalThis.__RSC_MANIFEST[...] = {...}` from a client-reference manifest file. */
 export function parseClientReferenceManifest(src) {
@@ -97,9 +135,9 @@ async function measureCatalogue() {
     const p = path.join(path.dirname(file), name);
     return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null;
   };
-  // Popularity per generation (T-130), as catalogue.ts builds it.
-  const { rankGenerations } = await import(pathToFileURL(path.join(WEB_DIR, "src/lib/popularity.ts")).href);
-  const pop = rankGenerations(cat.rows, JSON.parse(readFileSync(path.join(WEB_DIR, "src/config/popularity.generated.json"), "utf8")));
+  // Popularity per generation (T-130, T-157), as catalogue.ts resolves it.
+  const { resolvePopularity } = await import(pathToFileURL(path.join(WEB_DIR, "src/lib/popularity.ts")).href);
+  const pop = resolvePopularity(cat.rows, cat.generations, JSON.parse(readFileSync(path.join(WEB_DIR, "src/config/popularity.generated.json"), "utf8")));
   const body = Buffer.from(JSON.stringify(toClientCatalogue(cat.release, cat.sources, cat.rows, parseVariantUsedPrices(side("used_prices.json")), parseShortlistScores(side("shortlist_scores.json")), pop)));
   return { file: path.relative(process.cwd(), file), rows: cat.rows.length, raw: body.length, gz: gzipBytes(body) };
 }
@@ -118,10 +156,12 @@ async function main() {
     if (jsGz > JS_BUDGET_KB * 1000) fails.push(`${page.label} JS ${kb(jsGz)} KB gzip is over ${JS_BUDGET_KB} KB`);
   }
   const cat = await measureCatalogue();
+  const catCheck = evaluateCatalogueBudget(cat.gz);
 
-  console.log(`Client catalogue (${cat.file}, ${cat.rows} rows): ${kb(cat.gz)} KB gzip (${kb(cat.raw)} KB raw); budget < ${CATALOGUE_BUDGET_KB} KB`);
+  console.log(`Client catalogue (${cat.file}, ${cat.rows} rows): ${kb(cat.gz)} KB gzip (${kb(cat.raw)} KB raw); budget < ${CATALOGUE_BUDGET_KB} KB (warn > ${CATALOGUE_WARN_KB} KB)`);
 
-  if (cat.gz >= CATALOGUE_BUDGET_KB * 1000) fails.push(`client catalogue ${kb(cat.gz)} KB gzip is not under ${CATALOGUE_BUDGET_KB} KB`);
+  if (catCheck.status === "warn") console.warn(`::warning::Perf budget: ${catCheck.message}`);
+  if (catCheck.status === "fail") fails.push(catCheck.message);
   if (fails.length) {
     for (const f of fails) console.error(`::error::Perf budget: ${f}`);
     process.exit(1);

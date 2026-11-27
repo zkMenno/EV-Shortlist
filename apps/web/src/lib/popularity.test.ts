@@ -1,7 +1,27 @@
-import { readFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import * as yaml from "js-yaml";
 import { describe, expect, it } from "vitest";
-import { buildPopularity, loadPopularity, OUT_FILE, parseConfig, pickScores, registrationScores, serialize } from "../../scripts/popularity.mjs";
-import { rankGenerations, type PopularityInputs } from "./popularity";
+import {
+  buildPopularity,
+  CONFIG_FILE,
+  fromRelease,
+  loadPopularity,
+  OUT_FILE,
+  parseConfig,
+  pickScores,
+  registrationScores,
+  serialize,
+} from "../../scripts/popularity.mjs";
+import {
+  rankGenerations,
+  releasePopularity,
+  releasePopularityAsOf,
+  resolvePopularity,
+  type PopularityInputs,
+  type PopularityReleaseData,
+} from "./popularity";
 import { sortRows } from "./filters";
 import { MENU_SORTS, sortBy, defaultState, fromSearchParams, toSearchParams } from "./state";
 import type { ExploreRow } from "./explore-data";
@@ -60,6 +80,50 @@ describe("rankGenerations (T-130 blend)", () => {
   });
 });
 
+describe("releasePopularity and resolvePopularity (T-157)", () => {
+  const relGens = [
+    { id: "g-second", popularity: { score: 42.5, rank: 2, registrations: 12000, as_of: "2026-06-30", source_ids: ["dft-veh"] as [string, ...string[]] } },
+    { id: "g-first", popularity: { score: 87.2, rank: 1, registrations: 50000, as_of: "2026-11-27", source_ids: ["dft-veh", "rdw"] as [string, ...string[]] } },
+    { id: "g-none" },
+  ];
+
+  it("reads generations[].popularity ordered by rank and picks newest as_of", () => {
+    const map = releasePopularity(relGens);
+    expect([...map.entries()]).toEqual([
+      ["g-first", { score: 87.2, rank: 1 }],
+      ["g-second", { score: 42.5, rank: 2 }],
+    ]);
+    expect(releasePopularityAsOf(relGens)).toBe("2026-11-27");
+  });
+
+  it("prefers release generations[].popularity over fallback inputs", () => {
+    const map = resolvePopularity([one("a", "g-first"), one("b", "g-second")], relGens, inputs);
+    expect(map.get("g-first")).toEqual({ score: 87.2, rank: 1 });
+    expect(map.get("g-second")).toEqual({ score: 42.5, rank: 2 });
+  });
+
+  it("falls back to rankGenerations on older releases without generations[].popularity (D5 N-1)", () => {
+    const oldGens = [{ id: "a-gen1" }, { id: "b-gen1" }];
+    expect(releasePopularity(oldGens).size).toBe(0);
+    expect(releasePopularityAsOf(oldGens)).toBeNull();
+    const map = resolvePopularity([one("a", "a-gen1"), one("b", "b-gen1")], oldGens, inputs);
+    expect(map.get("a-gen1")).toEqual({ score: 80, rank: 1 });
+    expect(map.get("b-gen1")).toEqual({ score: 40, rank: 2 });
+  });
+
+  it("uses build-time release rankings snapshot when a fixture has no generation popularity", () => {
+    const snap: PopularityReleaseData = {
+      schema: "popularity-release/v1",
+      release: 4,
+      weights: { registrations: 0.8, owner_picks: 0.2 },
+      inputs: { as_of: "2026-11-27", registration_sources: ["dft-veh", "rdw"] },
+      rankings: { "a-gen1": { score: 80, rank: 1 }, "other-gen": { score: 50, rank: 2 } },
+    };
+    const map = resolvePopularity([one("a", "a-gen1"), one("b", "b-gen1")], [{ id: "a-gen1" }], snap);
+    expect([...map.entries()]).toEqual([["a-gen1", { score: 80, rank: 1 }]]);
+  });
+});
+
 describe("popular sort", () => {
   const row = (id: string, pop?: number) => ({ variant_id: id, ...(pop === undefined ? {} : { pop }) }) as unknown as ExploreRow;
   it("sorts high to low with unknowns last", () => {
@@ -86,8 +150,65 @@ describe("popular sort", () => {
 });
 
 describe("scripts/popularity.mjs", () => {
-  it("committed JSON matches the YAML inputs (run `node scripts/popularity.mjs`)", () => {
-    expect(readFileSync(OUT_FILE, "utf8")).toBe(serialize(loadPopularity()));
+  it("committed JSON weights match config/popularity.yaml and rankings match the current release when aligned", () => {
+    const committed = JSON.parse(readFileSync(OUT_FILE, "utf8")) as Record<string, unknown>;
+    const cfg = parseConfig(yaml.load(readFileSync(CONFIG_FILE, "utf8"), { schema: yaml.CORE_SCHEMA }));
+    expect(committed.weights).toEqual({ registrations: cfg.registrations, owner_picks: cfg.owner_picks });
+    const fresh = loadPopularity();
+    expect(fresh).not.toBeNull();
+    // On the same release number, the committed JSON must stay in sync (`node scripts/popularity.mjs`).
+    // A future data-refresh PR bumps `latest` before `pnpm build` regenerates OUT_FILE, so only fail when
+    // the release number matches.
+    if (committed.schema === fresh!.schema && committed.release === fresh!.release) {
+      expect(readFileSync(OUT_FILE, "utf8")).toBe(serialize(fresh));
+    }
+  });
+  it("fromRelease reads generations[].popularity directly and returns null when absent (N-1)", () => {
+    const w = { registrations: 0.8, owner_picks: 0.2 };
+    expect(fromRelease({ release: 3, generations: [{ id: "g1" }] }, w)).toBeNull();
+    const out = fromRelease(
+      {
+        release: 4,
+        generations: [
+          { id: "b-gen", popularity: { score: 12.3, rank: 2, as_of: "2026-06-30", source_ids: ["dft-veh"] } },
+          { id: "a-gen", popularity: { score: 87.2, rank: 1, as_of: "2026-11-27", source_ids: ["rdw", "dft-veh"] } },
+          { id: "no-pop" },
+        ],
+      },
+      w,
+    );
+    expect(out).toEqual({
+      schema: "popularity-release/v1",
+      release: 4,
+      weights: w,
+      inputs: { as_of: "2026-11-27", registration_sources: ["dft-veh", "rdw"] },
+      rankings: {
+        "a-gen": { score: 87.2, rank: 1 },
+        "b-gen": { score: 12.3, rank: 2 },
+      },
+    });
+  });
+  it("loadPopularity reads release 4+ popularity and falls back to top40 + picks on an N-1 release", () => {
+    const dir4 = mkdtempSync(path.join(tmpdir(), "ev-pop-r4-"));
+    mkdirSync(path.join(dir4, "4"));
+    writeFileSync(path.join(dir4, "latest"), "4\n");
+    writeFileSync(
+      path.join(dir4, "4", "catalogue.json"),
+      JSON.stringify({
+        release: 4,
+        generations: [{ id: "tesla-model-y-gen1", popularity: { score: 87.2, rank: 1, as_of: "2026-11-27", source_ids: ["rdw"] } }],
+      }),
+    );
+    const r4 = loadPopularity({ catalogueDir: dir4 });
+    expect(r4).toMatchObject({ schema: "popularity-release/v1", release: 4, rankings: { "tesla-model-y-gen1": { score: 87.2, rank: 1 } } });
+
+    const dir3 = mkdtempSync(path.join(tmpdir(), "ev-pop-r3-"));
+    mkdirSync(path.join(dir3, "3"));
+    writeFileSync(path.join(dir3, "latest"), "3\n");
+    writeFileSync(path.join(dir3, "3", "catalogue.json"), JSON.stringify({ release: 3, generations: [{ id: "tesla-model-y-gen1" }] }));
+    const r3 = loadPopularity({ catalogueDir: dir3 });
+    expect(r3).toMatchObject({ schema: "popularity-inputs/v1" });
+    expect(r3?.models).toBeDefined();
   });
   it("rejects bad weights", () => {
     expect(() => parseConfig({ weights: { registrations: 0, owner_picks: 0 }, pick_values: { shortlist: 1, consider: 0.5, fallback: 0.2 } })).toThrow();

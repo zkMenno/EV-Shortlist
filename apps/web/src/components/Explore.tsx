@@ -14,7 +14,7 @@ import { generationHref, variantHref } from "@/app/[country]/[lang]/ev/_lib/rout
 import type { CountrySlug, Lang } from "@/config/countries";
 import { makeT, type Dict, type MsgKey, type T } from "@/i18n/t";
 import { compareStore, COMPARE_MAX } from "@/lib/compare-store";
-import { hasDcData } from "@/lib/dc";
+import { hasDcData, isClaimField } from "@/lib/dc";
 import type { ExploreRow } from "@/lib/explore-data";
 import { favouriteStore } from "@/lib/favourites";
 import { activeGroups, applyFilters, displayName, mostRestrictive, priceFor, sortRows, withoutGroup, type FilterGroup } from "@/lib/filters";
@@ -1296,7 +1296,7 @@ const ALL: readonly Level[] = LEVELS;
 const DN: readonly Level[] = ["detailed", "nerd"];
 const N: readonly Level[] = ["nerd"];
 
-function num(r: ExploreRow, c: Ctx, v: number | null | undefined, field: string, unit?: string, digits = 1, note?: string, claim = false) {
+function num(r: ExploreRow, c: Ctx, v: number | null | undefined, field: string, unit?: string, digits = 1, note?: string, claim = isClaimField(r, field)) {
   return (
     <Num
       value={v}
@@ -1666,6 +1666,7 @@ function spanNum(s: Span | null, field: string, c: Ctx, digits = 0, unit?: strin
       locale={c.locale}
       labels={c.labels}
       digits={digits}
+      claim={isClaimField(s.row, field)}
       // Cards stay calm (T-130 design): badges and sources live in the popover until Nerd level.
       level={c.level === "nerd" ? "nerd" : "simple"}
       asOf={c.asOf}
