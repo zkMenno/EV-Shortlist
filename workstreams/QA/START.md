@@ -5,7 +5,7 @@ For any batch chat whose prompt is a review or audit. Owner: WS0 (the coordinato
 ## Start
 1. Attach the repo with push access (`add_repo zkMenno/EV-Shortlist`, access `push`); add your row to `CHATS.md`. Branch `qa/<slug>` from `main`.
 2. Read `AGENTS.md`, `REVIEW.md` **from `origin/main`** (`git show origin/main:REVIEW.md`), `docs/process/README.md`, `docs/spec/launch-scope.md` (the only scope that counts), your task files or audit brief, `docs/design/README.md`.
-3. Fetch the release before pipeline tests or walks: `cd pipeline && uv run ev release fetch latest` (the web build fetches only a few files). Run the web app locally on the current release (`apps/web/README.md`).
+3. Fetch the release before pipeline tests or walks: `cd pipeline && uv run ev release fetch latest` (or `--via-gh` in proxy-routed Antigravity VMs, G-66; the web build fetches only a few files). Run the web app locally on the current release (`apps/web/README.md`).
 
 ## What the lane owns
 `audits/A-35…` (numbers from WS0), `## Review` sections in task files, `workstreams/QA/tools/`. Small fixes elsewhere ride in the QA PR, each flagged to the owning lane in one `workstreams/WS0/INBOX.md` line.

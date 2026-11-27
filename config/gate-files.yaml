@@ -1,7 +1,7 @@
 # Gate files: the checks and rules that judge a change (T-121, rule G-06, Decision 062).
 # A PR that touches these AND other files is flagged by the gate-guard CI job.
 # Owner: WS0. Changing this file is itself a gate change.
-mode: observe          # off | observe | enforce  (observe until 2026-11-24, then enforce + log a Decision)
+mode: enforce          # off | observe | enforce  (enforced per Decision 090, 2026-11-27)
 escape_label: gate-ok  # applied by WS0 only; logged in the job summary
 test_change_marker: "Test-change:"
 gate_files:
@@ -12,6 +12,8 @@ gate_files:
   - AGENTS.md
   - "**/AGENTS.md"
   - CLAUDE.md
+  - GEMINI.md
+  - .agents/**
   - docs/process/rules.md
   - .githooks/**
   - scripts/gate_guard.py

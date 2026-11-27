@@ -42,11 +42,9 @@ Acceptance criteria ticked · unit tests + a Playwright check for key flows · w
 ## Finish the batch
 State lives in task files and PRs, not here. When the batch is done or blocked: one line in `workstreams/WS0/INBOX.md` (`- YYYY-MM-DD HH:MM UTC · from <chat link> · …`, with the four retro answers or a link to them), then stop. No STATUS or HANDOFF files.
 
-## Open lane threads (from the retired WS2 HANDOFF, 2026-11-18; WS0 turns them into tasks)
-- #126 (T-130 part 2) and then #137 (gate-only apps/web/AGENTS.md line + #118 redirect should-fix) wait for merge; merge main into #137 first if it conflicts.
-- T-132 hero redesign (6th-chat line, branch `t-132-hero-questions`): plan in tasks/T-132; spec `docs/design/explorations/staging-r1/README.md` §T-132; suggested split questions / results.
-- T-131 Popular used EVs (`data/editorial/popular_used.yaml`; landing page only, not Hero.tsx). T-135 photo cards on `GenerationCard` (`generations[].image`, credit under every photo; fetch-release must pull `images/*`).
-- Verify flow `tooltip` takes the first of ~336 hidden nodes (`scripts/verify.mjs` ~223, `.first()`): match `:visible` or scope to the clicked term; small PR with a `Test-change:` line.
-- #126 should-fix: used-price Nerd line lacks a licence until WS1 adds `licence` to used_prices.json band sources.
-- #126 follow-ups: phone toggles above the list (first card at y≈760 at 360×800); used band reads p25–p75 under "Up to €25,000" (label "typical"?).
-- From the Ariakit chat: brand fonts not loaded (Atkinson Hyperlegible, Bitter; body is system-ui); hero refine form not on the evs-field spec (17 px bold label, 48 px input).
+## Open lane threads (current queue lives in BOARD.md and workstreams/WS0/HANDOFF.md)
+- T-157: read `generations[].popularity` from release 4, unpack `images.tar`, `dc_speed_is_claim` badge, G-69 85 % budget warning.
+- T-146: hero results phone Refine bottom sheet, row photo thumbnails from `images.tar`, `hero-results` feature-map flow.
+- T-135: photo cards on `GenerationCard` and generation pages with credit lines (`generations[].image`).
+- T-131 (WS2): Popular used EVs section on the landing page (`data/editorial/popular_used.yaml`).
+- #126 follow-ups (non-blocking): phone toggles above the list; used band p25–p75 wording under "Up to €25,000"; hero refine form `evs-field` styling check.

@@ -8,17 +8,12 @@ Format: `Q-NNN` · task id (if any) · who asked · date.
 
 **Only questions Menno must answer live here** (money, legal or licence risk, public or irreversible steps, his accounts and settings, scope). Engineering judgement calls are not questions: agents take the reversible default, log it in DECISIONS or the task file, and move on. Closed and triaged questions: `_archive/questions-closed.md` (archive: open only when Menno asks).
 
-## Open — needs Menno (7)
+## Open — needs Menno (6)
 
 ### Q-003 · Pull requests on `main` · coordinator · 2026-11-15
 Right now `main` only blocks force-pushes and deletion. Once code arrives, should `main` require a pull request with green CI (agents can't push straight to `main`)? Recommended: yes, from wave 1.
 
 **Answer:**
-
-### Q-008 · Maker documents and unclear-licence registries · coordinator · 2026-11-15
-Decision 009 lets only sources with a named licence or written permission reach a release. Maker spec sheets and price lists have no licence; we would cite single facts by URL and date. KBA, SDES and EU Safety Gate reuse terms weren't checked tonight. **Default:** all four are `blocked` in data/sources.yaml. Can cited single facts from maker documents count as releasable (facts aren't copyrightable, but EU database right may apply)?
-
-**Answer:** Yes, single cited facts (Menno, 2026-11-17, popup). Decision 068. KBA/SDES/Safety Gate stay blocked.
 
 ### Q-028 · "See listings" URL patterns are guesses · T-008 / T-009 · builder · 2026-11-15
 `apps/web/src/config/countries.ts` holds 2–3 marketplace search templates per country, all `verified: false` (best guesses, nothing fetched). **Default:** ship them marked unverified; someone opens each by hand before launch. Cazoo (UK) is skipped because it closed.
@@ -44,3 +39,10 @@ The loan calculator shows the CCD2 warning in the page language: EN "Borrowing m
 One settings switch for you, no cost. `.github/workflows/data-refresh.yml` runs every Monday (and on demand), refreshes the open sources and opens a PR with only the new release folder and its QA report. **To make it work:** GitHub → repo Settings → Actions → General → tick "Allow GitHub Actions to create and approve pull requests". **Good to know:** PRs opened by the workflow's own token don't start CI by themselves; close and reopen the PR (one click) to run CI before you merge. Later option: a small GitHub App token so CI starts on its own (no cost, a bit of setup). **Default until you answer:** the workflow runs; if the setting is off, the PR step fails and the run's summary page still shows what changed. Also open: the S3 snapshot backend (Scaleway) is an interface only tonight; raw snapshots stay on the machine that runs the refresh (Decision 021).
 
 **Answer:**
+
+---
+
+## Recently answered (logged in DECISIONS.md)
+
+### Q-008 · Maker documents and unclear-licence registries · coordinator · 2026-11-15
+**Answer:** Yes, single cited facts (Menno, 2026-11-17, popup) — **Decision 068**, widened to any number of single facts per car (never a whole table/price list) in **Decision 087**. KBA, SDES and EU Safety Gate stay blocked until reuse terms are checked.

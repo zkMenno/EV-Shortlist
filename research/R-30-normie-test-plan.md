@@ -82,7 +82,7 @@ After all five: the **stuck list** — each term or screen with the number of te
 
 - Stuck for 2+ testers → change the label, tooltip or layout before launch (a WS2 or WS3 task, glossary edit first).
 - Stuck for 1 tester → log it; fix it if the fix is a glossary text change.
-- Any task with 2+ "gave up" → the flow needs a redesign; send it to UX's INBOX.
+- Any task with 2+ "gave up" → the flow needs a redesign; send it to the coordinator's INBOX (`workstreams/WS0/INBOX.md`) for UX.
 - Retest the changed terms with 2 new people (15 minutes each).
 
 ## 7. When

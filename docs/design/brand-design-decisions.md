@@ -1,12 +1,12 @@
 # EV Shortlist — brand and design decisions (owner: UX/design chat)
 
-> Exported verbatim from the claude.ai Project doc `claude/brand-design-decisions.md` on 26 Nov 2026. In Antigravity, commit this to the repo as `docs/design/brand-design-decisions.md` and treat that copy as the source from now on. The claude.ai artifact links below are not reachable from Gemini — see claude-only-links.md.
+> Migrated from the former claude.ai Project doc `claude/brand-design-decisions.md` on 26 Nov 2026 (Decision 089). This repo file (`docs/design/brand-design-decisions.md`) and `docs/design/` are the source of truth from now on; the historical `claude.ai` artifact links below are not reachable from Antigravity.
 
-Other chats: read this, don't edit it. Send requests to `workstreams/UX/INBOX.md` in the repo.
+Other chats: read this, don't edit it. Send requests to the coordinator's INBOX (`workstreams/WS0/INBOX.md`) for UX.
 
-**Design system (source of truth):** https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP, mirrored for builders at https://github.com/zkMenno/EV-Finder/tree/main/docs/design (start with docs/design/SOURCE.md). Class prefix `evs-`.
-**Design board (visual companion: logo sheet, elements, icons, textures, illustrations, phone + desktop mockups):** https://claude.ai/artifact/7oaYaK26i6xQBogFuuctMp. It installs the system's tokens; the system and the board link to each other. When one changes, update the other (Menno, 2026-11-15).
-**Architecture design file (system map, data model, tech board):** https://claude.ai/artifact/9wDnjtwg7iFcFtfSAoATKH
+**Design system (source of truth in repo):** mirrored for builders at https://github.com/zkMenno/EV-Shortlist/tree/main/docs/design (start with `docs/design/SOURCE.md`; historical Claude artifact https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP). Class prefix `evs-`.
+**Design board (historical visual companion: logo sheet, elements, icons, textures, illustrations, phone + desktop mockups):** https://claude.ai/artifact/7oaYaK26i6xQBogFuuctMp. It installs the system's tokens; the system and the board link to each other. When one changes, update the other (Menno, 2026-11-15).
+**Architecture design file (historical system map, data model, tech board):** https://claude.ai/artifact/9wDnjtwg7iFcFtfSAoATKH
 
 ## Solarpunk x EV round: Menno's picks (2026-11-15)
 - **Illustration direction: B + C combined.** C's layered hills and a winding road that narrows into the distance (it echoes the tick-V logo), drawn in B's picture-book ink line. Menno liked all three directions (A Play mat, B Picture-book map, C Paper cutout).
@@ -16,7 +16,7 @@ Other chats: read this, don't edit it. Send requests to `workstreams/UX/INBOX.md
 - **Night drive: deep green hills** (Menno's pick over blue-green).
 - 10 illustration-only colour tokens: hill-1..3 (soft), hill-rich-1..3, leaf, forest, solar-gold (#F0BE45, a deeper sunflower, not orange), solar-panel. Never text or states.
 - Home hero: "Used EVs got good." + step 1 of 3 (country), rich village scene with a small taped shortlist note. No numbers inside illustrations.
-- Renders: https://github.com/zkMenno/EV-Finder/tree/main/docs/design/explorations/solarpunk-r1 · SVGs: docs/design/assets/Illustrations/
+- Renders: https://github.com/zkMenno/EV-Shortlist/tree/main/docs/design/explorations/solarpunk-r1 · SVGs: docs/design/assets/Illustrations/
 
 ## Brief for this round (Menno, 2026-11-15)
 - Go more solarpunk. The site should evoke optimism: used EVs are now genuinely good at an approachable price (not super cheap yet, but within reach). Menno's "350–500 km for €10–12k (e.g. a used Kia Niro EV)" was an illustration of that feeling, not a slogan to print. The design and copy carry the mood; any specific price or range shown on the site still comes from our data. Charging is nothing to worry about any more. The solarpunk future is being realised and you can be part of it; this is a tool that helps accelerate the EV transition.
