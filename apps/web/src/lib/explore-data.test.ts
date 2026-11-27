@@ -28,3 +28,29 @@ describe("Nerd 'Sources' list reaches the WLTP source (T-143 review)", () => {
     expect(hit).toMatchObject({ label: "range.wltp.label", names: "Open EV Data", confidence: "medium" });
   });
 });
+
+describe("Client Explore provenance omits unused fact_ids (T-167 perf budget)", () => {
+  it("drops fact_ids from Explore rows while keeping source_ids, confidence, estimate and note", () => {
+    const r = row({
+      variant_id: "x",
+      wltp_range_km: 452,
+      provenance: {
+        wltp_range_km: {
+          source_ids: ["rdw-tgk"] as [string],
+          confidence: "high",
+          estimate: false,
+          note: "TGK best case",
+          fact_ids: ["rdw-tgk:very-long-id-1", "rdw-tgk:very-long-id-2"],
+        },
+      },
+    });
+    expect(r.provenance.wltp_range_km).toEqual({
+      source_ids: ["rdw-tgk"],
+      confidence: "high",
+      estimate: false,
+      note: "TGK best case",
+    });
+    expect(r.provenance.wltp_range_km).not.toHaveProperty("fact_ids");
+  });
+});
+
