@@ -573,3 +573,23 @@ approved:
     id: kia-ev9-gen1-gt
     field: seats
     change: changed
+  # T-167 (upstream RDW fleet drift between release 3 [2026-11-18] and 2026-11-27; rdw/adapter.py
+  # unchanged since 2026-11-15 commit 87cea7f): 62 blocking lines across 2 variants, all traced to
+  # live RDW m9d7-ebf2 changes (not a pipeline or matching regression).
+  - &t167mg4
+    release: 4
+    file: catalogue.json
+    approved_by: "Decision 035 (T-167 gate)"
+    reason: "T-167: upstream RDW m9d7-ebf2 fleet change between 2026-11-18 (release 3) and 2026-11-27 (rdw/adapter.py unchanged since 2026-11-15). Live RDW now has only 2 plates matching the deterministic 10% sample (`kenteken like '___7%'`) for MG|MG4 ELECTRIC|2024|SEH3|1EAB4EI (38 total cars, 22 flagged export_indicator='Ja'), below MIN_SAMPLE = 5. While judge_price still passes via narrow_full (n=37, 40990..41640 EUR), judge_sample declines to emit wltp_range_km, consumption_kwh_100km, and variant_name ('320 kW') on n=2, so the attach-only matcher rightly declines to guess among the 4 MG4 gen1 trims. Clearing price_new.NL.amount (41640 EUR) clears its 60 derived used_prices.json bands (20 country/year bands x p25/median/p75; the 4 NL Marktplaats sample bands remain); rdw-tgk still supplies WLTP/consumption. Measured: ev verify vs release 3 on 2026-11-27 staging (61 lines)."
+    id: mg-mg4-gen1-xpower
+    field: "price_new.NL.amount"
+    change: cleared
+  - {<<: *t167mg4, file: used_prices.json, field: "bands.*", change: cleared}
+  - release: 4
+    file: shortlist_scores.json
+    approved_by: "Decision 035 (T-167 gate)"
+    reason: "T-167: upstream RDW m9d7-ebf2 fleet change between 2026-11-18 (release 3) and 2026-11-27 (rdw/adapter.py unchanged since 2026-11-15). The 2022 SKODA|ENYAQ 80X deterministic 10% plate sample grew from n=7 to n=8 (used imports with nieuw_nl=false), shifting its sample medians from 486 km / 18.07 kWh/100km to 481 km / 18.17 kWh/100km. That nudges scores.daily-driver+kerbside.urban.score across the 48.0 band boundary (48.0 -> 47.9), moving scores.daily-driver+kerbside.urban.band consider -> fallback. Measured: ev verify vs release 3 on 2026-11-27 staging (1 line)."
+    id: skoda-enyaq-gen1-80x
+    field: "scores.daily-driver+kerbside.urban.band"
+    change: changed
+
