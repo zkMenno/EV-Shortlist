@@ -1,22 +1,21 @@
-# COORDINATOR handoff (2026-11-26 23:33 UTC, Antigravity: COORDINATOR 2026-11-26)
+# COORDINATOR handoff (2026-11-27 02:51 UTC, Antigravity: COORDINATOR 2026-11-26)
 
 Migrated from Claude to Antigravity on 2026-11-26 (**PR #208**, Decision 089, rule G-64). Naming: Menno retired the `WS0` label — always write **COORDINATOR** (capitalized) in chat titles, prompts, and updates (repo paths `workstreams/WS0/HANDOFF.md` and `workstreams/WS0/INBOX.md` stay unchanged on disk so scripts/links don't break). Pause procedure stays G-58 (HANDOFF + INBOX line + open task Status).
 
 Repo: **zkMenno/EV-Shortlist** (Antigravity local clone + `gh` CLI; GraphQL, native CI triggers, and merged branch deletion all work normally — see `GEMINI.md`).
 
 ## How we work
-One named **COORDINATOR** conversation (started with `/start-coordinator`). Every other conversation is a throwaway builder batch (`/start-batch`: one task or small batch, merges included when briefed, independent fresh review via a separate subagent before merge, `sh scripts/merge_ready.sh <pr>` READY as its own step right before merge). Menno: one screen, plain language, 🟢/🟡/🔴, exact paste text in code blocks. The COORDINATOR may merge its own docs / gate PRs after a fresh PASS.
+One named **COORDINATOR** conversation (started with `/start-coordinator`, retired via `/handoff` when context grows). Every other conversation is a throwaway builder batch (`/start-batch`: one task or small batch, merges included when briefed, independent fresh review via a separate subagent before merge, `sh scripts/merge_ready.sh <pr>` READY as its own step right before merge). Menno: one screen, plain language, 🟢/🟡/🔴, exact paste text in code blocks. The COORDINATOR may merge its own docs / gate PRs after a fresh PASS.
 
 ## State
-- Data release 3 is live (`data-v3`); **release 4 not built yet**. Its approvals: #177, #184, #189, #190, #194, #196, #198, #203, #212, #213 (+ any from T-164 / T-166).
-- Decisions up to **089**; next free **090** (from spare block `090–099`, WS0 block `080–089` is full). Tasks up to **T-166**; next free **T-167**. Rules up to **G-67**; next free **G-68**.
-- Done: T-149–T-156, T-158, T-159 (#198/#199/#203/#204), T-160, T-161, **T-162** (#212/#214), **T-163** (#213/#215), **T-165** (#210/#211), CI minutes (#207), Antigravity migration (#208), BOARD refreshes (#209, #217), gate rules G-65–G-67 (#216). Schema has `PublishedVariant.dc_speed_is_claim` (#205).
+- Data release 3 is live (`data-v3`); **release 4 is ready to build & publish (T-167)**. Its approvals in `config/approved_changes.yaml` (21 `release: 4` entries): #177, #184, #189, #190, #194, #196, #198, #203, #212, #213, #218, #219 (+ any gate approval T-167 needs for the 62 pre-existing RDW staging drift lines on `mg-mg4-gen1-xpower` and `skoda-enyaq-gen1-80x`).
+- Decisions up to **089**; next free **090** (from spare block `090–099`, WS0 block `080–089` is full). Tasks up to **T-167**; next free **T-168**. Rules up to **G-68**; next free **G-69**.
+- Done: T-149–T-156, T-158–T-166 (incl. **T-164** #218/#220 and **T-166** #219/#221), CI minutes (#207), Antigravity migration (#208), BOARD refreshes (#209, #217, #223), gate rules G-65–G-68 (#216, #222). Schema has `PublishedVariant.dc_speed_is_claim` (#205).
 - Open PRs: **none**. Unhandled INBOX items: **none**.
 
-## Next batch conversations (briefs ready for Menno 2026-11-26)
-1. **Data tools & fixes (WS1): T-166** — G-65 automated seed-marker scan test, G-66 `ev release fetch --via-gh` fallback for proxy-routed VMs, Kia EV9 GT `tgk_split.yaml` split (`kia-ev9-gen1-gt` vs `kia-ev9-gen1-99kwh-awd`, following G-67), and Stellantis 100→115 kW `derive/shortlist.py:130` `trim_lines` IEEE-754 float boundary fix.
-2. **Catalogue (WS3): T-164** — cite `power_kw` for the 20 remaining flag-less rows from T-161 + cite `ac_kw: 22` for `renault-twingo-gen3-22kwh` (**unblocked** now that T-163 merged; note `maker-docs.cited_hosts` for seed `cited:` blocks vs `manual.cited_hosts` for `data/manual/`).
-- After T-164 and T-166 merge: build and publish **data release 4** (investigate/approve the pre-existing `mg-mg4-gen1-xpower` RDW 2024 NL price / `used_prices` and `skoda-enyaq-gen1-80x` 48.0→47.9 staging drift noted by T-163), then **T-157** (WS2: popularity from release 4, `images.tar` unpack, DC claim badge), then T-146 row thumbnails.
+## Next batch conversations (brief given to Menno 2026-11-27)
+1. **Data release 4 (WS1): T-167** (`tasks/T-167-data-release-4.md`) — trace/approve the 62 pre-existing RDW staging drift lines (`mg-mg4-gen1-xpower` [61], `skoda-enyaq-gen1-80x` [1]), refresh staging, build release 4 (`images.tar`, `generations[].popularity`, `dc_speed_is_claim`, 128+ `maker-docs` facts, 419 variants), upload `data-v4` via `GITHUB_REPOSITORY=zkMenno/EV-Shortlist pipeline/scripts/gh-publish-release.sh data/releases/4`, open & merge `Data release 4` PR (`latest = 4`), confirm `Data publish` + `Images` staging deploy green on `main`.
+2. **Next after T-167 lands — Web (WS2): T-157** (`tasks/T-157-web-popularity-from-release.md`) — web reads `generations[].popularity` from release 4, unpacks `images.tar`, displays DC claim badge for `dc_speed_is_claim`. Then **T-146** (row thumbnails) and **QA** fresh launch review on release 4 + staging.
 
 ## Parked / later
 - Remaining `no-variant` catalogue groups after T-162 (top by NL cars): `kia-ev5-gen1` (4,665), `bmw-ix3-gen2` (3,368), `mg-mg5-gen1` (2,960), `opel-ampera-e-gen1` (2,622), `kia-ev4-gen1` (2,307), `opel-frontera-gen1` (2,027), `xpeng-g9-gen1` (1,822).
