@@ -2,7 +2,7 @@
 
 One screen: what's happening. Coordinator only. Task details live in `tasks/`.
 
-_Last updated: 2026-11-27 11:06 UTC by COORDINATOR (T-167 data release 4 live on staging, #228 done; T-157 unblocked)._
+_Last updated: 2026-11-27 22:20 UTC by COORDINATOR (T-157 done #232; gate-guard enforce #230/#231; next: overnight WS2 batch T-146 → T-135 → T-131)._
 
 ## Launch scope (Decision 051, docs/spec/launch-scope.md)
 
@@ -23,18 +23,17 @@ Builders take only tasks in **Launch**. Everything else needs Menno's yes. Built
 **After launch (parked):** T-011 rankings pages · T-019 / T-020 / T-021 / T-022 bidirectional · T-024 / T-025 / T-026 / T-028 charging pages + link-outs (built parts stay flagged off) · T-029 ABRP deep links · T-036 quick range check (absorbed into T-080) · T-037 / T-038 Trip fit routes · T-042 bidi verification · T-044 / T-046–T-049 variant clues + finder · T-053 / T-058 registration history display · T-061 known issues · lease figures (rest of T-043)
 
 ## Launch, catalogue + data (COORDINATOR, 2026-11-27)
-Done: T-149–T-156, T-158–T-167 (data release 4 `data-v4` live on `staging.evshortlist.com`). Open: **T-157** web popularity + photo bundle unpack + DC claim badge + budget 85 % warning G-69 (WS2, **unblocked**) · **T-146** hero results phone Refine sheet + row photo thumbnails + feature-map flow (WS2, after T-157).
+Done: T-149–T-156, T-158–T-167 (data release 4 `data-v4` live on `staging.evshortlist.com`). Done also: **T-157** (#232). Open: **T-146** hero results phone Refine sheet + row photo thumbnails + feature-map flow (WS2) · **T-135** photo cards + credit line (WS2) · **T-131** WS2 Popular used EVs landing section (WS2).
 
 ## Now
-**Open PRs:** none (T-167 #224/#225/#226/#227 and gate #228 merged).
+**Open PRs:** none (T-157 #232, coordinator #230, gate #231 merged).
 **Live:** `staging.evshortlist.com` runs **data release 4 (`data-v4`)** (`419` variants, `images.tar` 357 WebP files, `156` generations with popularity, `150` `maker-docs` + `174` `manual` facts, `0` provenance/licence/impossible-value problems).
 
 **Ready to launch now (in Antigravity, `/start-batch`):**
-1. **Web (WS2): T-157** — read `generations[].popularity` from release 4, unpack `images.tar` in `fetch-release.mjs`, show claim badge for `dc_speed_is_claim: true`, and add 85 % client-catalogue budget warning in `apps/web/scripts/budget.mjs` (G-69).
+1. **Web (WS2) overnight batch: T-146 → T-135 → T-131 (WS2 section)** — phone Refine bottom sheet, row photo thumbnails from unpacked `images.tar`, `hero-results` feature-map flow (gate PR pre-approved); photo cards + credit line; landing Popular used EVs section from `data/editorial/popular_used.yaml`.
 
 ## Next (launch scope only)
-- **WS2:** **T-146** (phone Refine bottom sheet, row photo thumbnails from unpacked `images.tar`, `hero-results` feature-map flow — right after T-157 lands).
-- **COORDINATOR:** Doc tidy PR + gate PR (`gate-guard` observe → enforce, add `GEMINI.md`/`.agents/**` to `config/gate-files.yaml`, `infra/AGENTS.md` align with CI staging deploy); T-128 `Verified:` stamp.
+- **COORDINATOR:** T-128 `Verified:` stamp; #231 review nits (G-38 parenthetical, `infra/AGENTS.md` rule 2).
 - **WS4:** `images.yml` should not ignore `docs/design/**` (web image reads tokens/fonts from it).
 - **QA:** Fresh launch review on release 4 + staging (after T-157 + T-146) before public launch.
 
@@ -60,6 +59,7 @@ Chats talk through the coordinator's inbox, `workstreams/WS0/INBOX.md`, never th
 | everyone | append-only lines in workstreams/WS0/INBOX.md (the one inbox); workstreams/WS0/HANDOFF.md is the coordinator's |
 
 ## Done
+- 2026-11-27: **T-157** (#232: release popularity Spearman 0.952, `images.tar` unpack + sha256, `dc_speed_is_claim` badge, G-69 85 % budget warning); Decision 090 + docs tidy (#230); `gate-guard` enforce + `GEMINI.md`/`.agents/**` protected (#231)
 - 2026-11-27: **Data release 4 (`data-v4`) live on staging** — T-167 (#224 gate RDW drift approvals, #225 EEA `restore_from_release`, #227 client catalogue halved `337.4→170.6 KB` gzip, #226 Data release 4 with `images.tar`, `generations[].popularity`, `dc_speed_is_claim`, 419 variants); gate #228 (G-69 budget warn, G-70 `data-refresh.yml` publish); T-166 (#219/#221); T-164 (#218/#220); gate #222 (G-65/G-66 shipped, G-68) & #223
 - 2026-11-26: T-163 (#213 gate, #215 main: TGK variant codes Model S/X `tie 12→0`, `maker-docs` unblocked with 128 cited facts publishing, `dc_speed_is_claim` wired); T-162 (#212 gate, #214 data: re-cited MX-30 + EV6 63, fixed Elroq 85 DC 185 → 135 kW, seeded 17 cited rows incl. Model X gen1 / Citigo e / Mii / EV9 / Marvel R / Sealion 7); T-165 (#210 gate, #211 main: G-61 237 seed-marked tests in `data_qa.sh`, G-62 `ev verify` missing-input flags, G-63 `merge_ready` stuck checks, CI `ev release approvals`); gate #216 (G-65–G-67); Antigravity migration (#208, Decision 089, G-64) & BOARD refreshes (#209, #217)
 - 2026-11-24: CI minutes cut (#207): note-only skip, single web build, pipeline release cache
