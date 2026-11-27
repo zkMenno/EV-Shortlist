@@ -1,6 +1,6 @@
 # WS4 lane brief: infra
 
-For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator). How chats work: [docs/process/README.md](../../docs/process/README.md) §3; rules: [rules.md](../../docs/process/rules.md). The lane writes infra files and copy-paste runbooks; **Menno applies them** (infra/AGENTS.md rule 1: agents never ssh, deploy or edit AppInfra; Decision 067). The server is Menno's shared Hetzner CAX31 next to GardenLayer and Dungeon Tracker.
+For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator). How chats work: [docs/process/README.md](../../docs/process/README.md) §3; rules: [rules.md](../../docs/process/rules.md). The lane writes infra files and copy-paste runbooks; **Menno applies AppInfra / live server changes** (`infra/AGENTS.md` rule 1: agents never ssh or edit AppInfra by hand; staging `ev-staging` deploys automatically from `main` via `.github/workflows/images.yml` `deploy-staging`, #88/#89/#94). The server is Menno's shared Hetzner CAX31 next to GardenLayer and Dungeon Tracker.
 
 ## Start
 1. Attach the repo with push access (`add_repo zkMenno/EV-Shortlist`, access `push`); add your row to `CHATS.md`. Attach the AppInfra repo too if the prompt says so. Say in your first line which access the chat really has.
@@ -13,7 +13,7 @@ For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator).
 
 ## Lane rules
 - Measure first, then size. Never guess server facts; record measurements with date and time (G-24).
-- The shared server comes first: ev-web 768 MB / 1 CPU, staging 256 MB / 0.5 CPU, ev-jobs 1 GB / 1 CPU low priority, 00:30–02:30 UTC. Don't touch other apps' services, data or limits; propose changes to their owners.
+- The shared server comes first: ev-web 768 MB / 1 CPU, staging 384 MB on AppInfra (reference compose 256 MB) / 0.5 CPU, ev-jobs 1 GB / 1 CPU low priority, 00:30–02:30 UTC. Don't touch other apps' services, data or limits; propose changes to their owners.
 - Off-site backups (AppInfra #93) must work and be restore-tested before EV Finder holds real user data. Trigger and handoff: ROADMAP.md Phase 0 "Backups".
 - No secrets in this public repo; server env files and GitHub secrets only.
 - Money over ~€50/month or €200 one-off, irreversible steps (volumes, databases, public DNS) and the brand domain go to Menno via WS0's INBOX. The Valhalla box (~€5–15/month, parked) is within remit once the sizing test shows its size.
@@ -35,8 +35,8 @@ Change written, measured where possible · documented in the README with rollbac
 ## Finish the batch
 State lives in task files and PRs, not here. When the batch is done or blocked: one line in `workstreams/WS0/INBOX.md` (`- YYYY-MM-DD HH:MM UTC · from <chat link> · …`, with the four retro answers or a link to them), then stop. No STATUS or HANDOFF files.
 
-## Open lane threads (from the retired WS4 STATUS, 2026-11-18; WS0 turns them into tasks)
-- #59 (T-040 staging runbook, basic-auth hook, measure.sh): close or rework now that CI deploys staging (#88/#89/#94/#90)?
+## Open lane threads (current queue lives in BOARD.md and workstreams/WS0/HANDOFF.md)
+- `.github/workflows/images.yml` `paths-ignore` ignores `docs/**`, but the web image reads `docs/design/**` (token/font changes don't rebuild staging; #207 follow-up).
 - Live (`ev`) waits for Menno's "launch"; then Q-001 busy-evening numbers (`docker stats`, memory, load, disk; upgrade trigger >10 GB or >70 % CPU for weeks), EV database + Postgres checks (`pg_trgm`, PostGIS), off-site backups with one restore test.
 - Monitoring: `/health` in the watchdog, disk and memory alerts, monthly check of email and Actions usage.
 - Parked after launch: T-037 Valhalla sizing test (NL+BE+LU+DE+FR+UK tiles on a temporary machine).

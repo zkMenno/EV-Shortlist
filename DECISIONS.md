@@ -10,12 +10,12 @@ Engineering decisions for this repo, in a light ADR (Architectural Decision Reco
 
 | Block | Owner |
 |---|---|
-| 001–039, 050–051, 062–069, 080–089 | WS0 coordinator |
+| 001–039, 050–051, 062–069, 080–090 | WS0 / COORDINATOR |
 | 040–049 | WS1 pipeline |
 | 052–056 | WS2 web (052–054 went to the Dependabot fix chat) |
 | 057–061 | WS3 curation |
 | 070–079 | WS4 infra, WS5 growth, UX (ask WS0 for a sub-range) |
-| 090–099 | spare; ask WS0 |
+| 091–099 | spare; ask COORDINATOR |
 
 
 ---
@@ -1017,5 +1017,19 @@ Engineering decisions for this repo, in a light ADR (Architectural Decision Reco
 - Keep all existing quality gates unchanged: `Verified: <how>` commits, independent `/fresh-review` before merge, and `sh scripts/merge_ready.sh <pr>` READY right before merging.
 
 **Consequences:** Any Antigravity coordinator or batch conversation can pick up directly from the repo with no external project settings required. Old `claude.ai` links in `CHATS.md` remain as history; new rows use `Antigravity: <conversation title>`. Rule G-64 added in `docs/process/rules.md`. Reversible: `GEMINI.md` and `.agents/` are additive and do not alter `CLAUDE.md` or app/pipeline code.
+
+## Decision 090: Switch `gate-guard` from observe to enforce and protect `GEMINI.md` / `.agents/**`
+
+**Status:** Accepted (COORDINATOR, 2026-11-27; engineering call, reversible)
+**Date:** 2026-11-27
+
+**Context:** `config/gate-files.yaml` (T-121, rule G-06, Decision 062) ran in `mode: observe` for its initial observation window (until 2026-11-24). Across 180+ PRs since 17 Nov 2026, builders and coordinators have consistently split gate-only PRs (`config/approved_changes.yaml`, `docs/process/rules.md`, workflows, `pyproject.toml`) cleanly from code/data PRs, with zero false-positive blocks and a working `gate-ok` escape hatch for rare coordinator-approved mixed changes (e.g. #49). With the Antigravity migration (Decision 089), `GEMINI.md` and `.agents/**` now hold active agent rules and workflows alongside `AGENTS.md` and `CLAUDE.md`, so they need the same gate protection (#208 review nit 4).
+
+**Decision:**
+- Switch `config/gate-files.yaml` from `mode: observe` to `mode: enforce` (implemented in the companion gate-only PR per G-06).
+- Add `GEMINI.md` and `.agents/**` to `config/gate-files.yaml` `gate_files:` and exclude them from CI's note-only skip in `.github/workflows/ci.yml` (`detect` job), matching `AGENTS.md` and `CLAUDE.md`.
+- Keep the `gate-ok` PR label escape hatch (COORDINATOR-only) and `Test-change:` marker unchanged.
+
+**Consequences:** Mixed PRs touching gate files and code/data files without `gate-ok`, or deleting/weakening tests without a `Test-change:` line, now fail CI `gate-guard` instead of only warning. Reversible: changing `mode: enforce` back to `observe` in a one-line gate PR restores warning-only mode immediately.
 
 <!-- Agentic Scaffold v0.5.0 | https://github.com/montymerlin/agentic-scaffold-plugin -->
