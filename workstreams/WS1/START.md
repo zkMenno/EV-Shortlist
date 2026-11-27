@@ -28,7 +28,7 @@ For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator).
 
 ## Gotchas
 - Same-data rebuild recipe (from #135): detached worktree of `origin/main`, copy release assets in, `uv run ev refresh --force --no-release` (all 16 sources, ~20 min, peak ~450 MB), then `build_release(data_dir)` with old and new code; diff rows and facts.
-- `gh pr create` fails in these sessions (GraphQL blocked): use `gh api repos/zkMenno/EV-Shortlist/pulls`.
+- `gh pr create` works natively in Antigravity (use `gh api repos/zkMenno/EV-Shortlist/pulls` only in environments where GraphQL is blocked).
 - A data-publish PR should also build the web image (`build web (linux/arm64)`) before `latest` moves: release 2 once shipped with an image that still read catalogue.json from git.
 - In Antigravity VMs, `gh release upload` hits `uploads.github.com` HTTP 401 through the VM proxy; publish data releases via `gh workflow run data-refresh.yml` instead (rule G-70), which also exercises the full CI release path.
 - fueleconomy.gov: BEV range is column `range`; EPA kWh/100 mi never goes into the WLTP consumption field.
@@ -39,11 +39,9 @@ Acceptance criteria ticked · tests for every data rule and bug · local gate gr
 ## Finish the batch
 State lives in task files and PRs, not here. When the batch is done or blocked: one line in `workstreams/WS0/INBOX.md` (`- YYYY-MM-DD HH:MM UTC · from <chat link> · …`, with the four retro answers or a link to them in a PR body), then stop. No STATUS or HANDOFF files.
 
-## Open lane threads (from the retired WS1 HANDOFF/STATUS, 2026-11-18; WS0 turns them into tasks)
-- After the first night run since #110: check refresh.json `images` (fetched / failed / stopped, `pending_generations` once #134 is in).
-- Ioniq 5 facelift: RDW variant codes F5E62 etc. land on facelift-base (WS3 T-140 item 2); overlaps T-073 (#127).
+## Open lane threads (non-blocking / parked; current queue lives in BOARD.md and workstreams/WS0/HANDOFF.md)
 - Press photos only when WS3 marks a maker `allowed` in `data/images/press-terms.yaml` (none today).
-- #110 nit: COMMONS_LICENCE accepts any 2-letter CC port; needs the real CC 2.0–3.0 port list from creativecommons.org.
+- #110 nit: `COMMONS_LICENCE` accepts any 2-letter CC port; needs the real CC 2.0–3.0 port list from creativecommons.org.
 - #58 follow-up test for the `ac_kw_optional` rows guard.
-- 🟡 #135 rebuild: Leaf e+ winter range went up (225 → 239) while EPA went down (364 → 346): not traced.
-- Blocked: T-063 data side, T-064 part 2, EV3/Inster rows (Q-047), launch gate (Q-059).
+- Small-volume RDW trims (e.g. MG4 XPower, `n < MIN_SAMPLE`) cross-joining `rdw-tgk` codes for power/WLTP evidence on `narrow_full` price records (T-167 follow-up).
+- OpenEV `markets` filter (parked; zero-diff allowlist design in WS0 INBOX 2026-11-18 19:14).

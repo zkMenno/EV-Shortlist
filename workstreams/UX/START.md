@@ -1,6 +1,6 @@
 # UX lane brief: brand and design
 
-For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator). How chats work: [docs/process/README.md](../../docs/process/README.md) §3; rules: [rules.md](../../docs/process/rules.md). Brand decisions live in `docs/design/brand-design-decisions.md`; the design system is https://claude.ai/artifact/EiqvMW5NcFgxFq6c5YHuPP, mirrored in `docs/design/` (start at [SOURCE.md](../../docs/design/SOURCE.md)). Design board: https://claude.ai/artifact/7oaYaK26i6xQBogFuuctMp. Keep system and board in sync.
+For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator). How chats work: [docs/process/README.md](../../docs/process/README.md) §3; rules: [rules.md](../../docs/process/rules.md). Brand decisions live in `docs/design/brand-design-decisions.md`; the repo design system in `docs/design/` (start at [SOURCE.md](../../docs/design/SOURCE.md)) is the source of truth in Antigravity (Decision 089; historical Claude artifacts are not reachable).
 
 ## Start
 1. Attach the repo with push access (`add_repo zkMenno/EV-Shortlist`, access `push`); add your row to `CHATS.md`.
@@ -31,7 +31,6 @@ Design signed off by Menno (or the reversible default noted) · `docs/design/` u
 ## Finish the batch
 State lives in task files and PRs, not here. When the batch is done or blocked: one line in `workstreams/WS0/INBOX.md` (`- YYYY-MM-DD HH:MM UTC · from <chat link> · …`, with the four retro answers), then stop. No STATUS or HANDOFF files.
 
-## Open lane threads (from the retired UX STATUS/HANDOFF, 2026-11-18; WS0 turns them into tasks)
-- Design check on staging once WS2 builds T-132 / T-130.
-- `--line-strong` (input and filter-pill borders) measures 2.83–2.91:1 in both themes; Field README asks 3:1+ (from the Ariakit chat).
-- Variant finder differences-only highlight for WS2; EV-media logo audit; logo round 2 after the name is final.
+## Open lane threads (current queue lives in BOARD.md and workstreams/WS0/HANDOFF.md)
+- T-147: accept/adjust WS2's `--line-strong` values (#158), widen `contrast.py` UI pairs to all 4 grounds, update `docs/design/README.md` contrast line, add `OFL.txt` to `docs/design/fonts/`.
+- Design check on staging after T-157 + T-146; variant finder differences-only highlight; EV-media logo audit; logo round 2 after the name is final.

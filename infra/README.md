@@ -11,7 +11,8 @@
 EV Finder runs on the shared AppInfra server next to GardenLayer and Dungeon Tracker
 (Decision 006): the server's Caddy in front, the shared Postgres behind a private network,
 and images built in GitHub Actions (Decision 005). Limits per service are fixed by Decision 006
-and listed in [`AGENTS.md`](AGENTS.md); agents never apply anything to the server.
+and listed in [`AGENTS.md`](AGENTS.md); agents never apply changes to the server by hand (staging
+deploys automatically through `.github/workflows/images.yml` `deploy-staging`).
 
 Check the files locally (no server needed; both pass on 2026-11-15), from the repo root:
 
@@ -71,9 +72,9 @@ host is in the source's `hosts:` and pass `-c protocol.allow=never -c protocol.h
 pipeline lane). In CI the clone runs in the data-refresh `refresh` job, which has a read-only
 token that is not stored on disk (F11).
 
-## How to apply (later, by hand)
+## Reference manual runbook (superseded for staging by AppInfra + CI)
 
-Assumes SSH access to the server and the usual AppInfra layout. Each 🟡 needs a check first.
+> Staging (`ev-staging`) now deploys automatically from `main` via `.github/workflows/images.yml` (`deploy-staging`) against the `zkMenno/AppInfra` definition (#88/#89/#94). The checklist below is kept only as a historical reference for manual bring-up or live (`ev`) setup; each 🟡 needs a check first.
 
 1. **Answer the open questions:** Q-001 (capacity, job window), Q-006 (file location), and the
    domain. Replace `ev.example.com` / `staging.ev.example.com` in `deploy/ev.caddy`.
@@ -123,8 +124,8 @@ web image for now, so a data rollback is an image rollback.
 
 ## Next steps (not done)
 
-- An SSH deploy job in CI (Decision 005/006), with a deploy key held in GitHub secrets. Only after
-  the manual steps above have worked once.
+- Live (`ev`) deploy in AppInfra once Menno gives the go-ahead for launch (staging SSH deploy via CI is live since #88/#89/#94).
+- Ensure `.github/workflows/images.yml` rebuilds staging when `docs/design/**` changes (#207 follow-up).
 - Serve releases from a mounted `/srv/ev/data/releases` (`CATALOGUE_DIR`) so a data release no
   longer needs a new image.
 - Pin base images by digest; add Dependabot `docker` entries for both Dockerfiles.
