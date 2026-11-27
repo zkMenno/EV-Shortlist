@@ -1,6 +1,6 @@
 # T-157 Web reads popularity from the release; unpack the photo bundle
 Role: builder   Lane: apps/web (WS2)   Wave: launch
-Status: doing (batch: T-157, 2026-11-27)
+Status: done (merged #232, f833b3d; 2026-11-27)
 
 ## Goal
 The web ranking uses the release's own popularity figures instead of its own script, and the build can read photos from the new bundle.
@@ -35,4 +35,5 @@ Showing photos in rows (T-146).
   - Release 4 client catalogue measured at **171.0 KB gzip** (`2973.3 KB raw`, 57.0 % of 300 KB budget); Landing first-load JS **172.4 KB**, Explore `/cars` **168.8 KB** (both < 200 KB).
 
 ## Review
+- Fresh reviewer, 2026-11-27, `482424c` (https://github.com/zkMenno/EV-Shortlist/pull/232#issuecomment-7218454141): R0–R3, D5 (N-1), D7, D8, D10, D13: **pass** — **PASS** (0 must-fix, 0 should-fix; nits: two-pass validate-before-write in `unpackBundle`, `Array.isArray(entry.bundle.files)` guard in `bundleMembersReady`; WS0 doc follow-up: `apps/web/AGENTS.md:47`).
 
