@@ -30,6 +30,7 @@ For any batch chat whose prompt touches this lane. Owner: WS0 (the coordinator).
 - Same-data rebuild recipe (from #135): detached worktree of `origin/main`, copy release assets in, `uv run ev refresh --force --no-release` (all 16 sources, ~20 min, peak ~450 MB), then `build_release(data_dir)` with old and new code; diff rows and facts.
 - `gh pr create` fails in these sessions (GraphQL blocked): use `gh api repos/zkMenno/EV-Shortlist/pulls`.
 - A data-publish PR should also build the web image (`build web (linux/arm64)`) before `latest` moves: release 2 once shipped with an image that still read catalogue.json from git.
+- In Antigravity VMs, `gh release upload` hits `uploads.github.com` HTTP 401 through the VM proxy; publish data releases via `gh workflow run data-refresh.yml` instead (rule G-70), which also exercises the full CI release path.
 - fueleconomy.gov: BEV range is column `range`; EPA kWh/100 mi never goes into the WLTP consumption field.
 
 ## Done (per task)
