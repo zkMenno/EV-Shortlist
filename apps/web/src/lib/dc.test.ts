@@ -2,7 +2,7 @@ import type { FieldProvenance, PublishedVariant } from "@ev/schema";
 import { describe, expect, it } from "vitest";
 import { rowSources } from "@/components/Explore";
 import { catalogue, row } from "@/test/helpers";
-import { hasDcData, hiddenForNoDc } from "./dc";
+import { DC_SPEED_CLAIM_KEYS, hasDcData, hiddenForNoDc, isClaimField } from "./dc";
 import { defaultFilters } from "./state";
 import { applyFilters } from "./filters";
 import { cellValue, DIFF_KEYS, fieldsFor, SPEC_FIELDS, specDiff } from "./spec-diff";
@@ -85,5 +85,23 @@ describe("no DC data → no 400 V behaviour anywhere", () => {
     const zoe = catalogue.rows.find((r) => r.variant_id === "renault-zoe-x10-r240")!;
     expect(zoe).toBeTruthy();
     expect(hasDcData(zoe)).toBe(false);
+  });
+});
+
+describe("isClaimField (T-157)", () => {
+  it("flags dc_peak_kw only when dc_peak_kw_is_claim is true", () => {
+    expect(isClaimField({ dc_peak_kw_is_claim: true }, "dc_peak_kw")).toBe(true);
+    expect(isClaimField({ dc_peak_kw_is_claim: false }, "dc_peak_kw")).toBe(false);
+    expect(isClaimField({ dc_speed_is_claim: true }, "dc_peak_kw")).toBe(false);
+  });
+
+  it("flags all four DC speed fields when dc_speed_is_claim is true, and never other fields", () => {
+    for (const key of DC_SPEED_CLAIM_KEYS) {
+      expect(isClaimField({ dc_speed_is_claim: true }, key), key).toBe(true);
+      expect(isClaimField({ dc_speed_is_claim: false }, key), key).toBe(false);
+      expect(isClaimField({ dc_peak_kw_is_claim: true }, key), key).toBe(false);
+    }
+    expect(isClaimField({ dc_speed_is_claim: true, dc_peak_kw_is_claim: true }, "real_range_km")).toBe(false);
+    expect(isClaimField({ dc_speed_is_claim: true, dc_peak_kw_is_claim: true }, "ac_kw")).toBe(false);
   });
 });

@@ -6,7 +6,7 @@ import { OfficialRange } from "@/components/OfficialRange";
 import { Term, TermInfo } from "@/components/Term";
 import { hasMsgKey, type MsgKey } from "@/i18n";
 import { acOptionalKw } from "@/lib/ac-optional";
-import { hiddenForNoDc } from "@/lib/dc";
+import { hiddenForNoDc, isClaimField } from "@/lib/dc";
 import { DASH, formatMoney } from "@/lib/format";
 import type { SpecField } from "@/lib/spec-diff";
 import { sourcesFor, type PageCtx } from "../_lib/context";
@@ -165,7 +165,7 @@ export function SpecValue({ ctx, row, field }: { ctx: PageCtx; row: PublishedVar
       labels={ctx.labels}
       note={note}
       noteTerm={note ? "rung" : undefined}
-      claim={field.key === "dc_peak_kw" && !!row.dc_peak_kw_is_claim}
+      claim={isClaimField(row, field.key)}
       asOf={ctx.asOf}
     />
   );

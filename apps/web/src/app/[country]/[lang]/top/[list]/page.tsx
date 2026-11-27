@@ -8,6 +8,7 @@ import { Num } from "@/components/Num";
 import { RankingTable } from "@/components/RankingTable";
 import { TermInfo } from "@/components/Term";
 import { COUNTRIES, isCountrySlug, isServed, type CountrySlug } from "@/config/countries";
+import { isClaimField } from "@/lib/dc";
 import { formatMoney, formatYears, localeFor } from "@/lib/format";
 import { isRankingId, PRICE_THRESHOLD, ranking, RANKING_IDS, type RankEntry, type RankingId } from "@/lib/rankings";
 import { getCatalogue } from "@/lib/catalogue";
@@ -89,6 +90,7 @@ function metricCell(ctx: PageCtx, e: RankEntry, unit: string | undefined) {
       labels={ctx.labels}
       note={note}
       noteTerm={note ? "rung" : undefined}
+      claim={isClaimField(e.row, e.field)}
       asOf={ctx.asOf}
     />
   );

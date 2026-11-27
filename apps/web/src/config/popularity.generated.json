@@ -1,110 +1,641 @@
 {
-  "schema": "popularity-inputs/v1",
+  "schema": "popularity-release/v1",
+  "release": 4,
   "weights": {
     "registrations": 0.8,
     "owner_picks": 0.2
   },
   "inputs": {
-    "top40_generated_on": "2026-11-15",
-    "picks_imported": "2026-11-15",
+    "as_of": "2026-11-27",
     "registration_sources": [
-      "rdw",
-      "dft-veh"
+      "dft-veh",
+      "rdw"
     ]
   },
-  "models": {
-    "audi-a6-e-tron": 0.111,
-    "audi-e-tron": 2.174,
-    "audi-q4-e-tron": 2.845,
-    "audi-q6-e-tron": 0.582,
-    "bmw-i3": 0.987,
-    "bmw-i4": 1.787,
-    "bmw-i5": 0.404,
-    "bmw-ix": 0.695,
-    "bmw-ix1": 1.193,
-    "bmw-ix3": 1.183,
-    "byd-atto-3": 0.531,
-    "citroen-e-c4": 0.683,
-    "cupra-born": 1.404,
-    "cupra-tavascan": 0.243,
-    "dacia-spring": 0.613,
-    "fiat-500e": 1.087,
-    "ford-explorer": 0.669,
-    "ford-mustang-mach-e": 0.92,
-    "ford-puma-gen-e": 0.448,
-    "honda-e": 0.079,
-    "hyundai-inster": 0.152,
-    "hyundai-ioniq-5": 1.242,
-    "hyundai-ioniq-6": 0.283,
-    "hyundai-ioniq-electric": 0.501,
-    "hyundai-kona-electric": 2.932,
-    "jaguar-i-pace": 0.939,
-    "kia-ev3": 0.462,
-    "kia-ev6": 1.388,
-    "kia-niro-ev": 3.686,
-    "kia-soul-ev": 0.25,
-    "mercedes-cla": 0.209,
-    "mercedes-eqa": 1.395,
-    "mercedes-eqb": 0.904,
-    "mercedes-eqc": 0.654,
-    "mg-mg4": 1.59,
-    "mg-zs-ev": 1.341,
-    "mini-cooper-se": 1.75,
-    "nissan-leaf": 2.335,
-    "opel-corsa-e": 1.398,
-    "opel-mokka": 1.023,
-    "peugeot-e-2008": 1.476,
-    "peugeot-e-208": 1.977,
-    "polestar-2": 1.993,
-    "porsche-macan-electric": 0.31,
-    "porsche-taycan": 0.874,
-    "renault-5-e-tech": 0.428,
-    "renault-megane-e-tech": 0.881,
-    "renault-scenic-e-tech": 0.536,
-    "renault-zoe": 1.668,
-    "skoda-elroq": 0.43,
-    "skoda-enyaq": 3.023,
-    "smart-eq-fortwo": 0.262,
-    "tesla-model-3": 8.263,
-    "tesla-model-s": 0.645,
-    "tesla-model-y": 6.914,
-    "toyota-bz4x": 0.512,
-    "volkswagen-e-golf": 0.857,
-    "volkswagen-id-buzz": 0.327,
-    "volkswagen-id3": 3.42,
-    "volkswagen-id4": 2.473,
-    "volkswagen-id7": 0.431,
-    "volvo-ex30": 1.523,
-    "volvo-xc40-recharge": 2.518
-  },
-  "generations": {
-    "hyundai-ioniq-3-gen1": 0.3,
-    "hyundai-ioniq-5-facelift": 1,
-    "hyundai-ioniq-5-gen1": 0.3,
-    "kia-ev3-gen1": 0.3,
-    "kia-ev4-gen1": 0.8,
-    "kia-ev6-facelift": 1,
-    "kia-ev6-gen1": 0.3,
-    "mg-im6-gen1": 0.6,
-    "mg-mg4-gen1": 0.3,
-    "polestar-2-gen1": 0.3,
-    "polestar-4-gen1": 1,
-    "renault-megane-e-tech-gen1": 0.6,
-    "renault-scenic-e-tech-gen1": 0.3,
-    "skoda-elroq-gen1": 0.3,
-    "skoda-enyaq-gen1": 0.6,
-    "tesla-model-y-gen1": 0.6,
-    "volkswagen-id5-gen1": 0.6,
-    "volkswagen-id7-gen1": 1,
-    "volvo-ex50-gen1": 1,
-    "volvo-ex60-gen1": 1,
-    "xpeng-g6-facelift": 1,
-    "xpeng-g6-gen1": 0.3,
-    "xpeng-l03-gen1": 1,
-    "xpeng-l05-gen1": 1,
-    "xpeng-p7-plus-gen1": 1,
-    "zeekr-001-gen1": 1,
-    "zeekr-7gt-gen1": 1,
-    "zeekr-7x-gen1": 0.6
+  "rankings": {
+    "abarth-500e-gen1": {
+      "score": 0.5,
+      "rank": 134
+    },
+    "audi-a6-e-tron-gen1": {
+      "score": 4.9,
+      "rank": 87
+    },
+    "audi-e-tron-ge": {
+      "score": 21.4,
+      "rank": 28
+    },
+    "audi-e-tron-gt-facelift": {
+      "score": 0.4,
+      "rank": 137
+    },
+    "audi-e-tron-gt-gen1": {
+      "score": 2.8,
+      "rank": 100
+    },
+    "audi-e-tron-q8": {
+      "score": 4.8,
+      "rank": 88
+    },
+    "audi-q4-e-tron-gen1": {
+      "score": 45.9,
+      "rank": 5
+    },
+    "audi-q6-e-tron-gen1": {
+      "score": 13.2,
+      "rank": 52
+    },
+    "bmw-i3-i01": {
+      "score": 14.5,
+      "rank": 46
+    },
+    "bmw-i4-g26": {
+      "score": 27.7,
+      "rank": 18
+    },
+    "bmw-i5-gen1": {
+      "score": 7.8,
+      "rank": 70
+    },
+    "bmw-i7-g70": {
+      "score": 1.4,
+      "rank": 120
+    },
+    "bmw-ix-gen1": {
+      "score": 10.8,
+      "rank": 56
+    },
+    "bmw-ix1-gen1": {
+      "score": 22.4,
+      "rank": 24
+    },
+    "bmw-ix2-gen1": {
+      "score": 6,
+      "rank": 79
+    },
+    "bmw-ix3-gen1": {
+      "score": 15.7,
+      "rank": 41
+    },
+    "byd-atto-3-gen1": {
+      "score": 8.2,
+      "rank": 67
+    },
+    "byd-dolphin-gen1": {
+      "score": 4.1,
+      "rank": 94
+    },
+    "byd-han-gen1": {
+      "score": 0,
+      "rank": 150
+    },
+    "byd-seal-gen1": {
+      "score": 8.4,
+      "rank": 66
+    },
+    "byd-sealion-7-gen1": {
+      "score": 4.6,
+      "rank": 89
+    },
+    "byd-tang-gen1": {
+      "score": 0.2,
+      "rank": 142
+    },
+    "cadillac-lyriq-gen1": {
+      "score": 0,
+      "rank": 151
+    },
+    "citroen-e-berlingo-gen3": {
+      "score": 2,
+      "rank": 113
+    },
+    "citroen-e-c3-gen1": {
+      "score": 5.7,
+      "rank": 82
+    },
+    "citroen-e-c4-c41": {
+      "score": 9.2,
+      "rank": 61
+    },
+    "citroen-e-spacetourer-gen1": {
+      "score": 2.3,
+      "rank": 105
+    },
+    "cupra-born-gen1": {
+      "score": 21.5,
+      "rank": 27
+    },
+    "cupra-tavascan-gen1": {
+      "score": 6,
+      "rank": 80
+    },
+    "dacia-spring-gen1": {
+      "score": 9,
+      "rank": 63
+    },
+    "ds-3-e-tense-facelift": {
+      "score": 1.1,
+      "rank": 125
+    },
+    "fiat-500e-312": {
+      "score": 1.6,
+      "rank": 118
+    },
+    "fiat-500e-332": {
+      "score": 13.3,
+      "rank": 51
+    },
+    "fiat-600e-gen1": {
+      "score": 1.4,
+      "rank": 121
+    },
+    "ford-capri-gen1": {
+      "score": 4.5,
+      "rank": 91
+    },
+    "ford-e-tourneo-courier-gen1": {
+      "score": 0,
+      "rank": 152
+    },
+    "ford-explorer-gen1": {
+      "score": 14.3,
+      "rank": 47
+    },
+    "ford-mustang-mach-e-gen1": {
+      "score": 12.7,
+      "rank": 54
+    },
+    "ford-puma-gen-e-gen1": {
+      "score": 9,
+      "rank": 64
+    },
+    "genesis-gv60-gen1": {
+      "score": 1.2,
+      "rank": 124
+    },
+    "gwm-ora-03-gen1": {
+      "score": 0.1,
+      "rank": 146
+    },
+    "honda-e-gen1": {
+      "score": 1.1,
+      "rank": 126
+    },
+    "hyundai-inster-gen1": {
+      "score": 8.8,
+      "rank": 65
+    },
+    "hyundai-ioniq-5-facelift": {
+      "score": 23.8,
+      "rank": 22
+    },
+    "hyundai-ioniq-5-gen1": {
+      "score": 20.5,
+      "rank": 32
+    },
+    "hyundai-ioniq-6-gen1": {
+      "score": 4.4,
+      "rank": 92
+    },
+    "hyundai-ioniq-9-gen1": {
+      "score": 0.6,
+      "rank": 131
+    },
+    "hyundai-ioniq-electric-gen1": {
+      "score": 7.1,
+      "rank": 71
+    },
+    "hyundai-kona-electric-os": {
+      "score": 28.5,
+      "rank": 14
+    },
+    "hyundai-kona-electric-sx2": {
+      "score": 13.4,
+      "rank": 50
+    },
+    "jaguar-i-pace-x590": {
+      "score": 14,
+      "rank": 48
+    },
+    "jeep-avenger-gen1": {
+      "score": 6.5,
+      "rank": 75
+    },
+    "kia-ev3-gen1": {
+      "score": 28.3,
+      "rank": 16
+    },
+    "kia-ev6-facelift": {
+      "score": 23.2,
+      "rank": 23
+    },
+    "kia-ev6-gen1": {
+      "score": 21.8,
+      "rank": 26
+    },
+    "kia-ev9-gen1": {
+      "score": 4.6,
+      "rank": 90
+    },
+    "kia-niro-ev-de": {
+      "score": 26.5,
+      "rank": 19
+    },
+    "kia-niro-ev-sg2": {
+      "score": 21.3,
+      "rank": 29
+    },
+    "kia-soul-ev-ps": {
+      "score": 0.5,
+      "rank": 135
+    },
+    "kia-soul-ev-sk3": {
+      "score": 2.9,
+      "rank": 98
+    },
+    "leapmotor-b10-gen1": {
+      "score": 2.8,
+      "rank": 101
+    },
+    "leapmotor-c10-gen1": {
+      "score": 2.9,
+      "rank": 99
+    },
+    "lexus-rz-gen1": {
+      "score": 2.2,
+      "rank": 109
+    },
+    "lexus-ux-300e-gen1": {
+      "score": 1.7,
+      "rank": 116
+    },
+    "lotus-eletre-gen1": {
+      "score": 1.4,
+      "rank": 122
+    },
+    "lotus-emeya-gen1": {
+      "score": 0.2,
+      "rank": 143
+    },
+    "maserati-grecale-folgore-gen1": {
+      "score": 0,
+      "rank": 153
+    },
+    "mazda-mx-30-gen1": {
+      "score": 4.4,
+      "rank": 93
+    },
+    "mercedes-cla-gen1": {
+      "score": 6.1,
+      "rank": 78
+    },
+    "mercedes-eqa-h243": {
+      "score": 21.9,
+      "rank": 25
+    },
+    "mercedes-eqb-gen1": {
+      "score": 14.6,
+      "rank": 45
+    },
+    "mercedes-eqc-n293": {
+      "score": 9.5,
+      "rank": 60
+    },
+    "mercedes-eqe-gen1": {
+      "score": 6.7,
+      "rank": 74
+    },
+    "mercedes-eqs-gen1": {
+      "score": 2.3,
+      "rank": 106
+    },
+    "mercedes-eqv-gen1": {
+      "score": 1.9,
+      "rank": 114
+    },
+    "mercedes-g-580-gen1": {
+      "score": 0.4,
+      "rank": 138
+    },
+    "mg-cyberster-gen1": {
+      "score": 0.4,
+      "rank": 139
+    },
+    "mg-im6-gen1": {
+      "score": 12.5,
+      "rank": 55
+    },
+    "mg-marvel-r-gen1": {
+      "score": 0.5,
+      "rank": 136
+    },
+    "mg-mg4-gen1": {
+      "score": 31.1,
+      "rank": 11
+    },
+    "mg-s5-gen1": {
+      "score": 3.9,
+      "rank": 95
+    },
+    "mg-zs-ev-gen1": {
+      "score": 19,
+      "rank": 36
+    },
+    "mini-aceman-gen1": {
+      "score": 7,
+      "rank": 73
+    },
+    "mini-cooper-se-f56": {
+      "score": 16.2,
+      "rank": 40
+    },
+    "mini-cooper-se-j01": {
+      "score": 10,
+      "rank": 58
+    },
+    "mini-countryman-e-gen1": {
+      "score": 3,
+      "rank": 97
+    },
+    "nio-es8-gen1": {
+      "score": 0,
+      "rank": 154
+    },
+    "nio-et5-gen1": {
+      "score": 0.2,
+      "rank": 144
+    },
+    "nio-et7-gen1": {
+      "score": 0.3,
+      "rank": 140
+    },
+    "nissan-ariya-gen1": {
+      "score": 7.9,
+      "rank": 69
+    },
+    "nissan-leaf-ze0": {
+      "score": 5.7,
+      "rank": 83
+    },
+    "nissan-leaf-ze1": {
+      "score": 29.5,
+      "rank": 12
+    },
+    "nissan-micra-ev-gen6": {
+      "score": 0.6,
+      "rank": 132
+    },
+    "opel-corsa-e-f": {
+      "score": 19.5,
+      "rank": 35
+    },
+    "opel-mokka-gen1": {
+      "score": 14.8,
+      "rank": 44
+    },
+    "peugeot-e-2008-p24": {
+      "score": 20.6,
+      "rank": 31
+    },
+    "peugeot-e-208-p21": {
+      "score": 25,
+      "rank": 21
+    },
+    "peugeot-e-3008-gen1": {
+      "score": 2.2,
+      "rank": 110
+    },
+    "peugeot-e-408-gen1": {
+      "score": 0.1,
+      "rank": 147
+    },
+    "peugeot-e-5008-gen1": {
+      "score": 5.2,
+      "rank": 86
+    },
+    "polestar-2-gen1": {
+      "score": 34.7,
+      "rank": 9
+    },
+    "polestar-3-gen1": {
+      "score": 1.7,
+      "rank": 117
+    },
+    "polestar-4-gen1": {
+      "score": 28.5,
+      "rank": 15
+    },
+    "porsche-macan-electric-gen1": {
+      "score": 6.3,
+      "rank": 77
+    },
+    "porsche-taycan-gen1": {
+      "score": 12.8,
+      "rank": 53
+    },
+    "renault-4-e-tech-gen1": {
+      "score": 2.3,
+      "rank": 107
+    },
+    "renault-5-e-tech-gen1": {
+      "score": 15.2,
+      "rank": 42
+    },
+    "renault-kangoo-e-tech-gen1": {
+      "score": 0,
+      "rank": 155
+    },
+    "renault-megane-e-tech-gen1": {
+      "score": 25.3,
+      "rank": 20
+    },
+    "renault-scenic-e-tech-gen1": {
+      "score": 17.8,
+      "rank": 39
+    },
+    "renault-twingo-gen3": {
+      "score": 2.4,
+      "rank": 103
+    },
+    "renault-zoe-ph1": {
+      "score": 9.2,
+      "rank": 62
+    },
+    "renault-zoe-ph2": {
+      "score": 15.2,
+      "rank": 43
+    },
+    "rolls-royce-spectre-gen1": {
+      "score": 0.1,
+      "rank": 148
+    },
+    "seat-mii-electric-gen1": {
+      "score": 2.3,
+      "rank": 108
+    },
+    "skoda-citigo-e-gen1": {
+      "score": 2.1,
+      "rank": 111
+    },
+    "skoda-elroq-gen1": {
+      "score": 29.2,
+      "rank": 13
+    },
+    "skoda-enyaq-gen1": {
+      "score": 55.8,
+      "rank": 3
+    },
+    "smart-1-gen1": {
+      "score": 2.4,
+      "rank": 104
+    },
+    "smart-3-gen1": {
+      "score": 1.3,
+      "rank": 123
+    },
+    "smart-eq-forfour-453": {
+      "score": 1.6,
+      "rank": 119
+    },
+    "smart-eq-fortwo-451": {
+      "score": 0,
+      "rank": 156
+    },
+    "smart-eq-fortwo-453": {
+      "score": 2.1,
+      "rank": 112
+    },
+    "tesla-model-3-gen1": {
+      "score": 80,
+      "rank": 2
+    },
+    "tesla-model-3-highland": {
+      "score": 37.2,
+      "rank": 7
+    },
+    "tesla-model-s-facelift": {
+      "score": 8.1,
+      "rank": 68
+    },
+    "tesla-model-s-gen1": {
+      "score": 3.5,
+      "rank": 96
+    },
+    "tesla-model-s-palladium": {
+      "score": 0.9,
+      "rank": 127
+    },
+    "tesla-model-x-gen1": {
+      "score": 5.7,
+      "rank": 84
+    },
+    "tesla-model-x-palladium": {
+      "score": 0.8,
+      "rank": 128
+    },
+    "tesla-model-y-gen1": {
+      "score": 87.2,
+      "rank": 1
+    },
+    "tesla-model-y-juniper": {
+      "score": 35.7,
+      "rank": 8
+    },
+    "toyota-bz4x-gen1": {
+      "score": 9.6,
+      "rank": 59
+    },
+    "vinfast-vf6-gen1": {
+      "score": 0.7,
+      "rank": 130
+    },
+    "vinfast-vf8-gen1": {
+      "score": 0.3,
+      "rank": 141
+    },
+    "volkswagen-e-golf-mk7": {
+      "score": 0.6,
+      "rank": 133
+    },
+    "volkswagen-e-golf-mk75": {
+      "score": 10.6,
+      "rank": 57
+    },
+    "volkswagen-e-up-gen1": {
+      "score": 5.5,
+      "rank": 85
+    },
+    "volkswagen-id-buzz-gen1": {
+      "score": 5.9,
+      "rank": 81
+    },
+    "volkswagen-id3-gen1": {
+      "score": 49.2,
+      "rank": 4
+    },
+    "volkswagen-id4-gen1": {
+      "score": 38.1,
+      "rank": 6
+    },
+    "volkswagen-id5-gen1": {
+      "score": 19.7,
+      "rank": 34
+    },
+    "volkswagen-id7-gen1": {
+      "score": 32.2,
+      "rank": 10
+    },
+    "volvo-ec40-c40": {
+      "score": 6.4,
+      "rank": 76
+    },
+    "volvo-ec40-ec40": {
+      "score": 2.5,
+      "rank": 102
+    },
+    "volvo-ex30-gen1": {
+      "score": 28.1,
+      "rank": 17
+    },
+    "volvo-ex90-gen1": {
+      "score": 1.8,
+      "rank": 115
+    },
+    "volvo-xc40-recharge-ex40": {
+      "score": 18.6,
+      "rank": 37
+    },
+    "volvo-xc40-recharge-gen1": {
+      "score": 18.5,
+      "rank": 38
+    },
+    "voyah-free-gen1": {
+      "score": 0.1,
+      "rank": 149
+    },
+    "xpeng-g6-gen1": {
+      "score": 7.1,
+      "rank": 72
+    },
+    "xpeng-p7-gen1": {
+      "score": 0.2,
+      "rank": 145
+    },
+    "xpeng-p7-plus-gen1": {
+      "score": 20.1,
+      "rank": 33
+    },
+    "zeekr-001-gen1": {
+      "score": 21.1,
+      "rank": 30
+    },
+    "zeekr-7x-gen1": {
+      "score": 13.5,
+      "rank": 49
+    },
+    "zeekr-x-gen1": {
+      "score": 0.8,
+      "rank": 129
+    }
   }
 }

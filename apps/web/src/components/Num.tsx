@@ -27,7 +27,7 @@ export interface NumProps {
   note?: string;
   /** Glossary term behind `note` (e.g. "rung" for the real-range method); the popover links it. */
   noteTerm?: NumTermKey;
-  /** Value is a maker claim, not measured (e.g. dc_peak_kw_is_claim). */
+  /** Value is a maker claim, not measured (e.g. dc_peak_kw_is_claim, dc_speed_is_claim). */
   claim?: boolean;
   /**
    * simple: value only (details in the popover); detailed (default): + text badges;

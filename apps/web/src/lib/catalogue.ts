@@ -22,7 +22,13 @@ import fixture from "../fixtures/catalogue.sample.json";
 import fixtureScores from "../fixtures/shortlist-scores.sample.json";
 import { isUsedPriceBand } from "./used-rankings";
 import popularityInputs from "../config/popularity.generated.json";
-import { rankGenerations, type Popularity, type PopularityInputs } from "./popularity";
+import {
+  generatedAsOf,
+  releasePopularityAsOf,
+  resolvePopularity,
+  type Popularity,
+  type PopularityGenerated,
+} from "./popularity";
 
 export interface Catalogue {
   release(): number;
@@ -59,11 +65,13 @@ export interface Catalogue {
    */
   shortlistScores(): ReleaseScores | null;
   /**
-   * "Most popular" score + rank per generation (T-130, Decision 038 blend). Today built from
-   * src/config/popularity.generated.json (top40 registrations + owner picks, weights in config/popularity.yaml);
-   * a release field from WS1 replaces it here once published, with no change for callers.
+   * "Most popular" score + rank per generation (T-130, T-149, T-157, Decision 038 blend). Reads
+   * `generations[].popularity` from the release (release 4+) and falls back to
+   * `src/config/popularity.generated.json` for older releases without the field (D5 N-1).
    */
   popularity(): Map<Id, Popularity>;
+  /** Newest registration date behind `popularity()`, or null when unknown. */
+  popularityAsOf(): string | null;
 }
 
 class JsonCatalogue implements Catalogue {
@@ -144,7 +152,14 @@ class JsonCatalogue implements Catalogue {
     return this.used;
   }
   popularity(): Map<Id, Popularity> {
-    return (this.pop ??= rankGenerations(this.data.rows, popularityInputs as PopularityInputs));
+    return (this.pop ??= resolvePopularity(
+      this.data.rows,
+      this.data.generations,
+      popularityInputs as PopularityGenerated,
+    ));
+  }
+  popularityAsOf(): string | null {
+    return releasePopularityAsOf(this.data.generations) ?? generatedAsOf(popularityInputs as PopularityGenerated);
   }
   shortlistScores(): ReleaseScores | null {
     if (this.scores !== undefined) return this.scores;

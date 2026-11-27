@@ -2,6 +2,17 @@
 export const WEB_DIR: string;
 export const JS_BUDGET_KB: number;
 export const CATALOGUE_BUDGET_KB: number;
+export const CATALOGUE_WARN_RATIO: number;
+export const CATALOGUE_WARN_KB: number;
+export interface CatalogueBudgetResult {
+  status: "ok" | "warn" | "fail";
+  kb: number;
+  pct: number;
+  warnKb: number;
+  budgetKb: number;
+  message: string | null;
+}
+export function evaluateCatalogueBudget(gzBytes: number, budgetKb?: number, warnRatio?: number): CatalogueBudgetResult;
 export const EXPLORE_ENTRIES: string[];
 export const CATALOGUE_ENTRIES: string[];
 export const PAGES: { label: string; dir: string; entries: string[] }[];

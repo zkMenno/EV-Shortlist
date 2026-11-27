@@ -1,28 +1,41 @@
-// Build-time inputs for the "Most popular" sort (T-130, Decision 038 blend). Reads
-//   data/seed/top40.yaml           registration score per model (NL used fleet + UK fleet, WS1 pipeline)
-//   data/editorial/menno-picks.yaml owner verdicts per generation (via owner-picks.mjs)
-//   config/popularity.yaml          blend weights (never in code)
-// and writes src/config/popularity.generated.json. The blend itself runs in src/lib/popularity.ts.
-// YAML is parsed here only, so no YAML library reaches the bundles (same pattern as sources.mjs).
+// Build-time inputs for the "Most popular" sort (T-130, T-149, T-157, Decision 038 blend).
+// Reads `generations[].popularity` from the latest release (`data/releases/<latest>/catalogue.json`)
+// instead of computing its own ranking. Older releases (1–3) without the field still build cleanly
+// (REVIEW D5 N-1) by falling back to `data/seed/top40.yaml` + `data/editorial/menno-picks.yaml`.
+// Weights come from `config/popularity.yaml` (never hard-coded; YAML stays build-time only).
 //
 //   node scripts/popularity.mjs           write the JSON (runs before `next build` and `next dev`)
 //   node scripts/popularity.mjs --check   fail if the committed JSON is out of date
 /* global process, console */
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import * as yaml from "js-yaml";
 import { PICKS_FILE, ownerNotes } from "./owner-picks.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+export const RELEASES_DIR = path.resolve(here, "../../../data/releases");
 export const TOP40_FILE = path.resolve(here, "../../../data/seed/top40.yaml");
 export const CONFIG_FILE = path.resolve(here, "../../../config/popularity.yaml");
 export const OUT_FILE = path.resolve(here, "../src/config/popularity.generated.json");
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const VERDICTS = ["shortlist", "consider", "fallback"];
 
 const load = (file) => yaml.load(readFileSync(file, "utf8"), { schema: yaml.CORE_SCHEMA });
 const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+
+/** Same lookup as src/lib/catalogue.ts latestCataloguePath(). */
+export function latestCatalogue(dir = RELEASES_DIR) {
+  try {
+    const latest = path.join(dir, "latest");
+    const st = statSync(latest);
+    const p = st.isDirectory() ? path.join(latest, "catalogue.json") : path.join(dir, readFileSync(latest, "utf8").trim(), "catalogue.json");
+    return existsSync(p) ? p : null;
+  } catch {
+    return null;
+  }
+}
 
 /** Validated blend config. Throws on anything the blend can't use. */
 export function parseConfig(doc) {
@@ -69,6 +82,46 @@ export function pickScores(picksDoc, cfg) {
   return out;
 }
 
+/**
+ * Read `generations[].popularity` from a published release (T-149, T-157).
+ * Returns null when the release carries no popularity fields (older releases 1–3: N-1 fallback).
+ */
+export function fromRelease(catDoc, weights) {
+  const gens = Array.isArray(catDoc?.generations) ? catDoc.generations : [];
+  const entries = [];
+  const sources = new Set();
+  let asOf = null;
+  for (const g of gens) {
+    const id = g?.id;
+    const p = g?.popularity;
+    const score = num(p?.score);
+    const rank = num(p?.rank);
+    if (typeof id !== "string" || !ID_RE.test(id) || score === null || score < 0 || rank === null || !Number.isInteger(rank) || rank < 1) {
+      continue;
+    }
+    entries.push([id, { score, rank }]);
+    if (typeof p.as_of === "string" && DATE_RE.test(p.as_of) && (asOf === null || p.as_of > asOf)) {
+      asOf = p.as_of;
+    }
+    if (Array.isArray(p.source_ids)) {
+      for (const s of p.source_ids) if (typeof s === "string" && s) sources.add(s);
+    }
+  }
+  if (!entries.length) return null;
+  entries.sort((a, b) => a[0].localeCompare(b[0]));
+  return {
+    schema: "popularity-release/v1",
+    release: typeof catDoc?.release === "number" ? catDoc.release : null,
+    weights: { registrations: weights.registrations, owner_picks: weights.owner_picks },
+    inputs: {
+      as_of: asOf,
+      registration_sources: sources.size ? [...sources].sort() : ["dft-veh", "rdw"],
+    },
+    rankings: Object.fromEntries(entries),
+  };
+}
+
+/** Legacy fallback builder for older releases (1–3) without `generations[].popularity`. */
 export function buildPopularity(top40Doc, picksDoc, configDoc) {
   const cfg = parseConfig(configDoc);
   return {
@@ -84,8 +137,32 @@ export function buildPopularity(top40Doc, picksDoc, configDoc) {
   };
 }
 
-export function loadPopularity() {
-  return buildPopularity(load(TOP40_FILE), load(PICKS_FILE), load(CONFIG_FILE));
+function readWeights(configFile, fallbackWeights) {
+  if (existsSync(configFile)) {
+    const cfg = parseConfig(load(configFile));
+    return { registrations: cfg.registrations, owner_picks: cfg.owner_picks };
+  }
+  const w = fallbackWeights;
+  if (w && num(w.registrations) !== null && num(w.owner_picks) !== null && w.registrations + w.owner_picks > 0) {
+    return { registrations: w.registrations, owner_picks: w.owner_picks };
+  }
+  return { registrations: 0.8, owner_picks: 0.2 };
+}
+
+export function loadPopularity(opts = {}) {
+  const dir = opts.catalogueDir ?? (process.env.CATALOGUE_DIR ? path.resolve(here, "..", process.env.CATALOGUE_DIR) : RELEASES_DIR);
+  const catFile = opts.catalogueFile ?? latestCatalogue(dir);
+  const configFile = opts.configFile ?? CONFIG_FILE;
+  if (catFile && existsSync(catFile)) {
+    const catDoc = JSON.parse(readFileSync(catFile, "utf8"));
+    const fromRel = fromRelease(catDoc, readWeights(configFile, opts.fallbackWeights));
+    if (fromRel) return fromRel;
+  }
+  const top40File = opts.top40File ?? TOP40_FILE;
+  const picksFile = opts.picksFile ?? PICKS_FILE;
+  const missing = [top40File, picksFile, configFile].filter((f) => !existsSync(f));
+  if (missing.length) return null;
+  return buildPopularity(load(top40File), load(picksFile), load(configFile));
 }
 
 export function serialize(x) {
@@ -94,15 +171,23 @@ export function serialize(x) {
 
 function main() {
   const check = process.argv.includes("--check");
-  const missing = [TOP40_FILE, PICKS_FILE, CONFIG_FILE].filter((f) => !existsSync(f));
-  if (missing.length) {
-    // e.g. a Docker build context without data/ or config/: keep the committed JSON.
-    if (check) throw new Error(`${missing.join(", ")} not found`);
-    console.warn(`popularity: ${missing.map((f) => path.basename(f)).join(", ")} not found, keeping ${path.basename(OUT_FILE)}`);
+  const current = existsSync(OUT_FILE) ? readFileSync(OUT_FILE, "utf8") : "";
+  let fallbackWeights = null;
+  if (current) {
+    try {
+      fallbackWeights = JSON.parse(current)?.weights ?? null;
+    } catch {
+      fallbackWeights = null;
+    }
+  }
+  const data = loadPopularity({ fallbackWeights });
+  if (!data) {
+    // e.g. a Docker build context on an N-1 release without data/ or config/: keep the committed JSON.
+    if (check) throw new Error("popularity: release has no generations[].popularity and YAML fallback inputs are not found");
+    console.warn(`popularity: release has no popularity and fallback YAML inputs not found, keeping ${path.basename(OUT_FILE)}`);
     return;
   }
-  const json = serialize(loadPopularity());
-  const current = existsSync(OUT_FILE) ? readFileSync(OUT_FILE, "utf8") : "";
+  const json = serialize(data);
   if (check) {
     if (current !== json) {
       console.error("popularity: src/config/popularity.generated.json is out of date; run `node scripts/popularity.mjs`");
