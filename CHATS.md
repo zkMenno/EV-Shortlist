@@ -5,6 +5,7 @@ One named chat, the **coordinator**; every other chat is a throwaway batch chat 
 | Workstream | Purpose | Link | Since |
 |---|---|---|---|
 | COORDINATOR | **COORDINATOR (current)**: Antigravity takeover, migration #208, BOARD/T-159 refresh #209, T-162/T-163/T-165 briefs | Antigravity: COORDINATOR 2026-11-26 | 2026-11-26 |
+| batch: catalogue T-164 | WS3: T-164 cite power_kw for 20 flag-less rows (12 Tesla + 8 non-Tesla) and Twingo 22 kW AC | Antigravity: batch catalogue T-164 | 2026-11-26 |
 | batch: catalogue T-162 | WS3: T-162 re-cite MX-30 + EV6 63, Elroq 85 DC check, Model X gen1, Citigo e / Mii, EV9, Marvel R, Sealion 7 | Antigravity: batch catalogue T-162 | 2026-11-26 |
 | batch: data T-163 | WS1: T-163 TGK variant codes as split evidence (Model S/X), cited maker facts publish (Decisions 068/087), dc_speed_is_claim | Antigravity: batch: data T-163 | 2026-11-26 |
 | WS0 (2026-11-19) | Coordinator (history): planning, decisions, briefs, INBOX, schema, gate files | https://claude.ai/code/session_01JuyZEWR468Ux4ydBhjKYsp | 2026-11-19 |

@@ -21,6 +21,16 @@ variants:
       length_mm: 4694
       towing_kg: 1000
       seats: 5
+    cited:
+      power_kw:
+        value: 208
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Rear-Wheel Drive (2017-2023) | Power - Front/Rear (kW): 208 (R)"
+        locator: "Model 3 table, row 'Rear-Wheel Drive (2017-2023)', column 'Power - Front/Rear (kW)'"
+        confidence: medium
+        notes: "Tesla's EU/UK WLTP table groups 2017-2023 single-motor Model 3 trims under 208 kW rear motor rating."
     notes: "Early SR+ with NCA cells; later SR+ switched to LFP (see separate variant). WLTP roughly 400-450 km depending on year."
     confidence: low
   - generation_id: tesla-model-3-gen1
@@ -35,6 +45,15 @@ variants:
       length_mm: 4694
       towing_kg: 1000
       seats: 5
+    cited:
+      power_kw:
+        value: 208
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Rear-Wheel Drive (2017-2023) | Power - Front/Rear (kW): 208 (R)"
+        locator: "Model 3 table, row 'Rear-Wheel Drive (2017-2023)', column 'Power - Front/Rear (kW)'"
+        confidence: high
     notes: "Shanghai-built LFP battery from late 2021; renamed RWD in 2022. WLTP roughly 490 km."
     confidence: low
   - generation_id: tesla-model-3-gen1
@@ -49,6 +68,16 @@ variants:
       length_mm: 4694
       towing_kg: 1000
       seats: 5
+    cited:
+      power_kw:
+        value: 366
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Long Range (2017-2023) | Power - Front/Rear (kW): 158 (F) 208 (R)"
+        locator: "Model 3 table, row 'Long Range (2017-2023)', column 'Power - Front/Rear (kW)': 158 + 208 = 366 kW"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention used by OpenEV for Highland Long Range 366 kW); Tesla's table spans 2017-2023."
     notes: "T-154: 2019-2020 builds only (RDW TGK variants E3D / E5D, 560 km); the 2021 refresh is tesla-model-3-gen1-long-range-2021. Battery size changed slightly over the years."
     confidence: low
   # T-154 (2026-11-19): year split. RDW (CC0, m9d7-ebf2, read 2026-11-19) by first admission: the
@@ -69,6 +98,16 @@ variants:
       length_mm: 4694
       towing_kg: 1000
       seats: 5
+    cited:
+      power_kw:
+        value: 366
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Long Range (2017-2023) | Power - Front/Rear (kW): 158 (F) 208 (R)"
+        locator: "Model 3 table, row 'Long Range (2017-2023)', column 'Power - Front/Rear (kW)': 158 + 208 = 366 kW"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention used by OpenEV for Highland Long Range 366 kW); Tesla's table spans 2017-2023."
     notes: "2021 refresh (heat pump, new pack chemistry per year). WLTP per RDW TGK: 602 km (E5LD, Shanghai, the most registered), 614 km (E3LD, Fremont), 580 / 604 km on other extensions."
     confidence: low
   - generation_id: tesla-model-3-gen1
@@ -84,6 +123,16 @@ variants:
       top_speed_kmh: 261
       length_mm: 4694
       seats: 5
+    cited:
+      power_kw:
+        value: 393
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Performance (2018-2023) | Power - Front/Rear (kW): 158 (F) 235 (R)"
+        locator: "Model 3 table, row 'Performance (2018-2023)', column 'Power - Front/Rear (kW)': 158 + 235 = 393 kW"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention used by OpenEV for Highland Performance 393 kW); Tesla's table spans 2018-2023."
     notes: "T-154: 2019-2020 builds only (530 km); the 2021 refresh is tesla-model-3-gen1-performance-2021. Not homologated for towing on some model years; check the registration document."
     confidence: low
   - generation_id: tesla-model-3-gen1
@@ -99,6 +148,16 @@ variants:
       top_speed_kmh: 261
       length_mm: 4694
       seats: 5
+    cited:
+      power_kw:
+        value: 393
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Performance (2018-2023) | Power - Front/Rear (kW): 158 (F) 235 (R)"
+        locator: "Model 3 table, row 'Performance (2018-2023)', column 'Power - Front/Rear (kW)': 158 + 235 = 393 kW"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention used by OpenEV for Highland Performance 393 kW); Tesla's table spans 2018-2023."
     notes: "2021 refresh. WLTP per RDW TGK: 547 km (E5LD, Shanghai, the most registered, from extension 22), 567 km (E3LD Fremont, extensions 14-25), 559 km on later E3LD extensions. Not homologated for towing on some model years."
     confidence: low
   - generation_id: tesla-model-y-gen1
@@ -114,6 +173,15 @@ variants:
       length_mm: 4751
       towing_kg: 1600
       seats: 5
+    cited:
+      power_kw:
+        value: 220
+        source_url: https://www.tesla.com/en_gb/support/power-consumption
+        source_name: "Tesla Support United Kingdom, 'Vehicle Power Consumption' (WLTP table)"
+        retrieved: 2026-11-26
+        quote: "Rear-Wheel Drive (2020-2024) | Power - Front/Rear (kW): 220 (R)"
+        locator: "Model Y table, row 'Rear-Wheel Drive (2020-2024)', column 'Power - Front/Rear (kW)'"
+        confidence: high
     notes: "WLTP roughly 450 km."
     confidence: low
   - generation_id: tesla-model-y-gen1
@@ -170,6 +238,15 @@ variants:
       dc_peak_kw: 120
       length_mm: 4970
       seats: 5
+    cited:
+      power_kw:
+        value: 270
+        source_url: https://www.epa.gov/sites/default/files/2016-07/13tstcar.csv
+        source_name: "US EPA, 2013 Test Car List Data (manufacturer-submitted Tesla Model S certification data, Public Domain 17 U.S.C. 105)"
+        retrieved: 2026-11-26
+        quote: "Model S, S2, MS212-L1S, 2-Wheel Drive, Rear, Rated Horsepower 362"
+        locator: "Rows for Test Vehicle ID MS212-L1S (S2) and MS312-L1S (S3), column 'Rated Horsepower': 362 hp (270 kW at 0.7457 kW/hp)"
+        confidence: high
     notes: "Single rear motor. Optional second on-board charger (dual charger) for faster AC on many cars."
     confidence: low
   - generation_id: tesla-model-s-gen1
@@ -183,6 +260,16 @@ variants:
       dc_peak_kw: 120
       length_mm: 4970
       seats: 5
+    cited:
+      power_kw:
+        value: 386
+        source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        retrieved: 2026-11-26
+        quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 (front) 193 (Rear)"
+        locator: "Page 24, 2017 MY CARB Supplemental Data Sheet for 90D: 193 kW front + 193 kW rear = 386 kW combined motor rating"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention Tesla uses on its EU WLTP support table); peak system output is battery-limited below the motor sum, and row spans 85D / 90D / P85D / P90D."
     notes: "Dual-motor 'D' versions; 90 kWh pack from 2015. Range figures differ by pack and trim."
     confidence: low
   - generation_id: tesla-model-s-facelift
@@ -199,6 +286,16 @@ variants:
       dc_peak_kw: 120
       length_mm: 4979
       seats: 5
+    cited:
+      power_kw:
+        value: 386
+        source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        retrieved: 2026-11-26
+        quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 (front) 193 (Rear)"
+        locator: "Page 26, 2017 MY CARB Supplemental Data Sheet for 75D: 193 kW front + 193 kW rear = 386 kW combined motor rating"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention Tesla uses on its EU WLTP support table); peak system output is battery-limited below the motor sum."
     notes: "Dual-motor 75D. The rear-motor 75 (TGK variant '75R', 2016-2018) is not split out: it shares the pack, so the matcher needs TGK variant-code evidence to tell them apart (WS1 ask, T-160). Some cars are software-limited larger packs."
     confidence: low
   - generation_id: tesla-model-s-facelift
@@ -212,6 +309,16 @@ variants:
       dc_peak_kw: 120
       length_mm: 4979
       seats: 5
+    cited:
+      power_kw:
+        value: 386
+        source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        retrieved: 2026-11-26
+        quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 / 193 KW"
+        locator: "Page 32, 2017 MY CARB Supplemental Data Sheet for 100D (and p. 24 for 90D): 193 kW front + 193 kW rear = 386 kW combined motor rating"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention Tesla uses on its EU WLTP support table); peak system output is battery-limited below the motor sum."
     notes: "100 kWh pack from 2017."
     confidence: low
   - generation_id: tesla-model-s-facelift
@@ -224,6 +331,16 @@ variants:
       dc_peak_kw: 120
       length_mm: 4979
       seats: 5
+    cited:
+      power_kw:
+        value: 568
+        source_url: https://dis.epa.gov/otaqpub/display_file.jsp?docid=39834&flag=1
+        source_name: "Tesla, Inc. via US EPA DIS, 2017 MY Model S AWD Application for Certification (Engine Family HTSLV00.0L2S, Public Domain 17 U.S.C. 105)"
+        retrieved: 2026-11-26
+        quote: "Number of Drive Motor(s): 2 (Two) Rated Motor Power 193 (front) 375 (Rear)"
+        locator: "Page 30, 2017 MY CARB Supplemental Data Sheet for P100D (and p. 22 for P90D: '193 / 375KW'): 193 kW front + 375 kW rear = 568 kW combined motor rating"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (same convention Tesla uses on its EU WLTP support table); peak system output is battery-limited below the motor sum."
     notes: "Performance dual motor with Ludicrous mode."
     confidence: low
   - generation_id: tesla-model-s-facelift
@@ -237,6 +354,16 @@ variants:
       dc_peak_kw: 200
       length_mm: 4979
       seats: 5
+    cited:
+      power_kw:
+        value: 415
+        source_url: https://www.tesla.com/ownersmanual/2012_2020_models/en_kr/GUID-E414862C-CFA1-4A0B-9548-BE21C32CAA58.html
+        source_name: "Tesla, Model S Owner's Manual (2012-2020, English / Korea), 'Specifications - Subsystems'"
+        retrieved: 2026-11-26
+        quote: "Long Range | Front 205 kW | Rear 210 kW (*Tested in accordance with ECE R85.)"
+        locator: "Specifications > Subsystems > Maximum Motor Power table, row 'Long Range' (permanent-magnet front motor + AC induction rear motor = Raven): 205 + 210 = 415 kW"
+        confidence: medium
+        notes: "Combined front+rear rated motor power (ECE R85); row spans both Raven Long Range (415 kW) and Performance (205 + 375 = 580 kW). Cited so 2016-2019 75D/100D (386 kW) do not falsely take newest-version (G-62)."
     notes: "2019 'Raven' update: permanent-magnet front motor, adaptive air suspension, faster Supercharging. Trim names Long Range (Plus) and Performance."
     confidence: low
   - generation_id: tesla-model-s-palladium
@@ -646,6 +773,16 @@ variants:
       boot_l: 385
       length_mm: 4261
       seats: 5
+    cited:
+      power_kw:
+        value: 150
+        source_url: https://www.volkswagen-newsroom.com/en/press-releases/volkswagen-brand-with-effective-crisis-management-in-the-first-half-of-the-year-6275
+        source_name: "Volkswagen Newsroom, 'Volkswagen brand with effective crisis management in the first half of the year' (31 Jul 2020)"
+        retrieved: 2026-11-26
+        quote: "01. ID.3 Pro Performance, 150 kW / combined power consumption in kWh/100 km: 16.9 - 15.4 (WLTP)"
+        locator: "Footnote 01 for ID.3 launch ordering models"
+        confidence: medium
+        notes: "Row spans both Pro (107 kW) and Pro Performance (150 kW, the main launch version); 150 kW is filed."
     notes: "Includes 1st Edition. WLTP roughly 420 km. Power 107 / 150 / later 150-170 kW depending on version."
     confidence: low
   - generation_id: volkswagen-id3-gen1
@@ -721,7 +858,16 @@ variants:
         quote: "81.4 kWh Li-ion  battery"
         locator: "Battery pack table, column 'AWD (81.4kWh)'"
         confidence: medium
-    notes: "Two motors, all-wheel drive, 81.4 kWh: covers both EU two-motor versions until power evidence can split them (T-153): the 195 kW AWD (150 + 45 kW, MY2027, from Apr 2026) and the 215 kW GT (Kia UK's 'AWD' column: 215 kW, 468 Nm; Kia Germany: 'Kia EV3 GT-Allradantrieb, 81,4-kWh-Batterie ... 215 kW'). No power cited because the row holds both. Years: RDW TGK two-motor variants F5E34 / F5E44 from 2026."
+      power_kw:
+        value: 195
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemitteilungen/produkt/2026/260424_ev3_mj27/PM_Kia_EV3_jetzt_mit_AWD_und_22-kW-AC-Laden.pdf
+        source_name: "Kia Deutschland, 'Kia EV3 jetzt mit AWD und 22-kW-AC-Laden' (24 Apr 2026, PDF)"
+        retrieved: 2026-11-26
+        quote: "Kia EV3 mit 81,4-kWh-Batterie AWD (MJ 2027, Strom/Reduktionsgetriebe); 195 kW (265 PS)"
+        locator: "Page 4, footnotes (also p. 1: 'Die AWD-Version ist mit 195 kW (265 PS) die neue Topmotorisierung')"
+        confidence: medium
+        notes: "Regular AWD is 195 kW; the 215 kW GT is also covered by this row until split (215 kW is within 15% of 195 kW)."
+    notes: "Two motors, all-wheel drive, 81.4 kWh: covers both EU two-motor versions until power evidence can split them (T-153): the 195 kW AWD (150 + 45 kW, MY2027, from Apr 2026, cited) and the 215 kW GT (Kia UK's 'AWD' column: 215 kW, 468 Nm; Kia Germany: 'Kia EV3 GT-Allradantrieb, 81,4-kWh-Batterie ... 215 kW'). Years: RDW TGK two-motor variants F5E34 / F5E44 from 2026."
     confidence: medium
   # --- T-154 (catalogue batch, 2026-11-19): no-variant list, biggest EU groups first ---
   # Battery and power cited from maker pages (matching evidence; maker-docs values stay internal).
@@ -911,7 +1057,15 @@ variants:
         quote: "84.0kWh Li-ion polymer battery"
         locator: "Battery pack table, columns RWD and AWD Dual Motor"
         confidence: medium
-    notes: "All-wheel drive: Kia UK column 'AWD Dual Motor 320 BHP'. Years: the two-motor RDW TGK group starts 2025. EV6 GT (facelift) not split out."
+      power_kw:
+        value: 239
+        source_url: https://press.kia.com/content/dam/kiapress/DE/Germany/pressemappen/ev6/24_11/Kia_EV6_MJ25_Pressemappe_11-24.pdf
+        source_name: "Kia Deutschland, 'Kia EV6 MJ25 Pressemappe' (Nov 2024, PDF)"
+        retrieved: 2026-11-26
+        quote: "Kia EV6 AWD mit 84-kWh-Batterie (MJ 2025, Strom/Reduktionsgetriebe); 239 kW (325 PS)"
+        locator: "Page 28, footnotes (also p. 7: 'Allradantrieb, 239 kW (325 PS)')"
+        confidence: high
+    notes: "All-wheel drive: Kia UK column 'AWD Dual Motor 320 BHP' and Kia Germany MJ25 press kit ('Allradantrieb, 239 kW (325 PS)'). Years: the two-motor RDW TGK group starts 2025. EV6 GT (facelift) not split out."
     confidence: medium
 
   # --- T-148 (variant queue batch, 2026-11-18): ID.7 by battery. OpenEV's only ID.7 rows ("PRO", "Tour",
@@ -1845,6 +1999,16 @@ variants:
       length_mm: 4649
       towing_kg: 1400
       seats: 5
+    cited:
+      power_kw:
+        value: 195
+        source_url: https://cdn.skoda-storyboard.com/2020/08/TD-ENYAQ-iV-en.pdf
+        source_name: "Škoda Storyboard, 'ENYAQ iV Technical specifications' (PDF, 29 Nov 2021)"
+        retrieved: 2026-11-26
+        quote: "Max. system engine performance  [kW] 109 132 150 195"
+        locator: "Page 1, Technical specifications table, column 'ENYAQ iV 80x': 195 kW"
+        confidence: medium
+        notes: "Row spans both 80x (195 kW) and later 85x / RS (210-250 kW); 195 kW is cited for the 80x."
     notes: "Dual motor. 80x / 85x and RS; RS about 220-250 kW depending on year."
     confidence: low
   - generation_id: skoda-enyaq-gen1
@@ -2084,7 +2248,16 @@ variants:
       dc_peak_kw: 150
       length_mm: 4902
       seats: 5
-    notes: "Tri-motor, 95 kWh gross. About 370 kW in boost."
+    cited:
+      power_kw:
+        value: 370
+        source_url: https://www.audi.com/en/images/detail/40-years-40-figures-40-images-fascinating-facts-and-tales-about-audi-s-quattro-technology-95802
+        source_name: "AUDI AG, Audi Media Center, '40 years, 40 figures, 40 images: fascinating facts and tales about Audi's quattro technology' (16 Oct 2020)"
+        retrieved: 2026-11-26
+        quote: "Up to 973 Nm (717.6 lb-ft) of torque is produced by the three electric motors in the Audi e-tron S 1, 2, 3. The two fully electric SUV models achieve a power output of 370 kW (507 PS) in boost mode."
+        locator: "Caption text for Image No. A207063 (Audi e-tron S and Audi e-tron S Sportback)"
+        confidence: high
+    notes: "Tri-motor, 95 kWh gross. 370 kW in boost mode (cited)."
     confidence: low
   - generation_id: audi-q4-e-tron-gen1
     id: audi-q4-e-tron-gen1-35
@@ -2468,6 +2641,14 @@ variants:
         retrieved: 2026-11-15
         locator: "Battery System section: gross energy (installed) SR/ER 75.7/98.7 kWh; usable energy SR/ER 68/88 kWh"
         confidence: medium
+      power_kw:
+        value: 198
+        source_url: https://www.fordpers.be/editor/files/ford_mustang_mach_e_2020_techspecs_eu_2.pdf
+        source_name: "Ford Europe press (fordpers.be), Mustang Mach-E Technical Specifications (EU), availability early/late 2021"
+        retrieved: 2026-11-26
+        quote: "Peak Power [PS/kW] Standard Range (SR) 269/198 Extended Range (ER) 294/216"
+        locator: "Page 1, Drive System table, column Single-motor, RWD only, Standard Range (SR): 269 PS / 198 kW"
+        confidence: high
     notes: "Battery: Ford EU tech specs (cited), 75.7 kWh gross / 68 usable for the first cars. WLTP roughly 440 km."
     confidence: low
   - generation_id: ford-mustang-mach-e-gen1
@@ -2527,6 +2708,14 @@ variants:
         retrieved: 2026-11-15
         locator: "Battery System section: gross energy (installed) SR/ER 75.7/98.7 kWh; usable energy SR/ER 68/88 kWh"
         confidence: medium
+      power_kw:
+        value: 258
+        source_url: https://www.fordpers.be/editor/files/ford_mustang_mach_e_2020_techspecs_eu_2.pdf
+        source_name: "Ford Europe press (fordpers.be), Mustang Mach-E Technical Specifications (EU), availability early/late 2021"
+        retrieved: 2026-11-26
+        quote: "Peak Power [PS/kW] Standard Range (SR) 269/198 Extended Range (ER) 351/258"
+        locator: "Page 1, Drive System table, column Dual-motor, AWD only, Extended Range (ER): 351 PS / 258 kW"
+        confidence: high
     notes: "Dual motor. Battery: Ford EU tech specs (cited), 98.7 kWh gross / 88 usable for the first cars. WLTP roughly 540 km."
     confidence: low
   - generation_id: ford-mustang-mach-e-gen1
@@ -2620,6 +2809,16 @@ variants:
       length_mm: 3701
       towing_kg: 0
       seats: 4
+    cited:
+      power_kw:
+        value: 48
+        source_url: https://cdn.group.renault.com/dac/nl/brochures-en-prijslijsten/prijslijst/archief/spring-prijslijst-08-2025.pdf
+        source_name: "Dacia Nederland, Spring prijslijst (August 2025, PDF)"
+        retrieved: 2026-11-26
+        quote: "maximaal vermogen kW (pk) 33 (44) 48 (65)"
+        locator: "Page 7, Technische gegevens, column 'electric 65' (2024 facelift, 308 L boot, 225 km WLTP)"
+        confidence: medium
+        notes: "Row spans both 33 kW (electric 45) and 48 kW (electric 65); 48 kW is filed for this -65 row."
     notes: "New body and interior; 33 or 48 kW. WLTP roughly 225 km."
     confidence: low
   - generation_id: smart-eq-fortwo-451
@@ -2999,6 +3198,14 @@ variants:
         source_name: "Renault Group, 'New Twingo Electric', 01.07.2020"
         retrieved: 2026-11-18
         quote: "Its 60 kW (82 hp) engine delivers a maximum torque of 160 Nm immediately available."
+        confidence: high
+      ac_kw:
+        value: 22
+        source_url: https://cdn.group.renault.com/ren/nl/brochures-en-prijslijsten/prijzenarchief/twingo/twingo-prijslijst-april-2022.pdf
+        source_name: "Renault Nederland, Twingo E-Tech Electric prijslijst (April 2022, PDF)"
+        retrieved: 2026-11-26
+        quote: "Vermogen lader AC (kW/h) min-max 2,3 - 22 kW"
+        locator: "Page 16, Technische gegevens, row 'Vermogen lader AC (kW/h) min-max' (Caméléon 22 kW AC charger standard on all trims, p. 14)"
         confidence: high
     notes: "Rear-wheel drive: Renault Group, 'Twingo Electric: electric gives it even more spark' ('a rear-mounted motor', https://www.renaultgroup.com/en/news-on-air/news/twingo-electric-electric-gives-it-even-more-spark/). One battery and motor for the whole run."
     confidence: medium

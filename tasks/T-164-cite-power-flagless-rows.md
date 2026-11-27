@@ -1,6 +1,6 @@
 # T-164 Cite power for the rows that lose version flags only for missing power
 Role: builder   Lane: data/seed, data/manual (WS3)   Wave: launch
-Status: todo (unblocked: T-163 merged #213/#215)
+Status: doing (batch: catalogue T-164, 2026-11-26)
 
 ## Goal
 The rows Decision 088 can't compare only because `power_kw` is missing get a cited maker power, so their newest / older flags come back, and `renault-twingo-gen3-22kwh` gets its cited 22 kW AC figure.
