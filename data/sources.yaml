@@ -50,6 +50,9 @@ sources:
        # T-162 (WS3): verified maker docs (Mazda, SEAT, MG, BYD, Tesla) & official RDW register (CC0)
        media-assets.mazda.eu, mundoseat.seat.com, news.mgmotor.eu,
        service.tesla.com, www.byd.com, opendata.rdw.nl,
+       # T-164 (WS3, cross-lane WS1 edit): official Tesla WLTP support, Audi AG (already in manual.cited_hosts),
+       # Tesla maker certification filings hosted on dis.epa.gov, and US EPA Public Domain (17 U.S.C. 105) Test Car List on www.epa.gov
+       www.tesla.com, www.audi.com, dis.epa.gov, www.epa.gov,
        # maker documents on a hosting service: path prefix only, never the whole host (PR #80 review).
        # SEAT Import Belgium (CUPRA) Born press pack CU21/34N on Prezly
        cdn.uc.assets.prezly.com/34359316-f25e-44da-a593-c7ea94745496/]}
