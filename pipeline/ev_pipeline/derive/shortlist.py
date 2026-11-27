@@ -18,6 +18,7 @@ How rule rows map onto fields lives in shortlist_params.yaml (a bridge until T-0
 from __future__ import annotations
 
 import hashlib
+import math
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -127,7 +128,9 @@ def trim_lines(
         low = 0.0
         for r in group:
             pw = _power(r) or 0.0
-            if line and pw > low * (1 + gap):
+            limit = low * (1 + gap)
+            # IEEE-754 guard: e.g. 100.0 * (1 + 0.15) == 114.99999999999999 < 115.0 (T-166)
+            if line and pw > limit and not math.isclose(pw, limit, rel_tol=1e-9, abs_tol=1e-9):
                 lines.append(line)
                 line = []
             if not line:

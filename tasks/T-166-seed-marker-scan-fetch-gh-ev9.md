@@ -1,6 +1,6 @@
 # T-166 Tools & fixes: seed-marker scan (G-65), `ev release fetch --via-gh` (G-66), Kia EV9 GT split, `trim_lines` float fix
 Role: builder   Lane: pipeline/ (WS1)   Wave: launch
-Status: todo
+Status: doing (Antigravity: batch T-166 2026-11-26)
 
 ## Goal
 Automate the seed-marker check so new real-seed tests can't skip `data_qa.sh`, make `ev release fetch` work cleanly inside proxy-routed VMs via `gh`, split Kia EV9 GT from AWD in `tgk_split.yaml`, and fix the IEEE-754 float boundary bug in `trim_lines` splitting Stellantis 100→115 kW pairs.

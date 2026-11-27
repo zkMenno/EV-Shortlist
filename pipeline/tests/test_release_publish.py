@@ -651,3 +651,198 @@ def test_ensure_local_only_ignores_absent_optional_files(built: Path, data_dir: 
 
     only = frozenset({"catalogue.json", "not-in-this-release.json"})
     assert ensure_local(data_dir, 1, download=no_net, only=only) == built
+
+
+# --- G-66: ev release fetch --via-gh (mocked subprocess, no network) -------------------------
+
+
+def _fake_gh_download(store: Path, calls: list[list[str]]):
+    """Fake `gh release download` runner copying matching assets from `<store>/<tag>/`."""
+    import fnmatch
+
+    def run(args: list[str]) -> subprocess.CompletedProcess[str]:
+        calls.append(args)
+        assert args[:3] == ["gh", "release", "download"]
+        tag = args[3]
+        dest = Path(args[args.index("--dir") + 1])
+        patterns: list[str] = []
+        i = 0
+        while i < len(args):
+            if args[i] == "--pattern":
+                patterns.append(args[i + 1])
+                i += 2
+            else:
+                i += 1
+        src_dir = store / tag
+        if not src_dir.is_dir():
+            return subprocess.CompletedProcess(args, 1, "", f"release {tag} not found")
+        for f in sorted(src_dir.iterdir()):
+            if not f.is_file():
+                continue
+            if patterns and not any(fnmatch.fnmatchcase(f.name, pat) for pat in patterns):
+                continue
+            shutil.copyfile(f, dest / f.name)
+        return subprocess.CompletedProcess(args, 0, "", "")
+
+    return run
+
+
+def test_fetch_via_gh_restores_verifies_and_skips_when_already_ok(
+    built: Path, data_dir: Path, tmp_path: Path
+) -> None:
+    store = tmp_path / "store"
+    m = _publish_and_strip(built, store)
+    calls: list[list[str]] = []
+    cfg = load_config(data_dir)
+
+    stats = fetch(built, cfg, via_gh=True, run=_fake_gh_download(store, calls))
+    assert stats["downloaded"] == sum(1 for e in m["files"] if not e["in_git"])
+    assert verify(built, m) == []
+    assert len(calls) == 1
+    assert calls[0][:6] == ["gh", "release", "download", "data-v1", "--repo", cfg.repo]
+    assert "--pattern" not in calls[0]  # full fetch downloads all assets in one call
+
+    # Second run: every file matches manifest -> gh is not invoked at all.
+    calls.clear()
+    again = fetch(built, cfg, via_gh=True, run=_fake_gh_download(store, calls))
+    assert again["downloaded"] == 0 and calls == []
+
+
+def test_fetch_via_gh_only_passes_patterns_and_downloads_subset(
+    built: Path, data_dir: Path, tmp_path: Path
+) -> None:
+    store = tmp_path / "store"
+    _publish_and_strip(built, store)
+    calls: list[list[str]] = []
+    cfg = load_config(data_dir)
+
+    stats = fetch(
+        built,
+        cfg,
+        only=frozenset({"catalogue.json"}),
+        via_gh=True,
+        run=_fake_gh_download(store, calls),
+    )
+    assert stats["downloaded"] == 1
+    assert (built / "catalogue.json").exists()
+    assert not (built / "facts.parquet").exists()
+    assert len(calls) == 1
+    assert "--pattern" in calls[0] and "catalogue.json" in calls[0]
+
+
+def test_fetch_via_gh_handles_images_tar_bundle(tmp_path: Path) -> None:
+    """G-66 + Decision 086: `--via-gh` downloads, verifies, and unpacks `images.tar`."""
+    rel = tmp_path / "data" / "releases" / "7"
+    rel.mkdir(parents=True)
+    photos = {
+        "images/g0-abcd1234-400.webp": b"webp-400" * 20,
+        "images/g0-abcd1234-800.webp": b"webp-800" * 30,
+    }
+    cat = {
+        "release": 7,
+        "generated_at": "2026-11-26T01:00:00+00:00",
+        "sources": [],
+        "generations": [{"id": "g0"}],
+        "rows": [{"variant_id": "v0", "generation_id": "g0"}],
+    }
+    (rel / "catalogue.json").write_text(json.dumps(cat), encoding="utf-8")
+    (rel / "qa.json").write_text(json.dumps({"status": "pass"}), encoding="utf-8")
+    for p, data in photos.items():
+        (rel / p).parent.mkdir(parents=True, exist_ok=True)
+        (rel / p).write_bytes(data)
+
+    cfg = load_config(tmp_path)
+    m = package(rel, cfg, now=NOW)
+    assert any(e["path"] == "images.tar" for e in m["files"])
+
+    store = tmp_path / "store"
+    DirPublisher(store).publish(rel, m, replace=False)
+    for e in m["files"]:
+        if not e["in_git"]:
+            (rel / e["path"]).unlink()
+    shutil.rmtree(rel / "images")
+
+    calls: list[list[str]] = []
+    stats = fetch(rel, cfg, via_gh=True, run=_fake_gh_download(store, calls))
+    assert stats["unpacked"] == 1
+    assert verify(rel, m) == []
+    for p, data in photos.items():
+        assert (rel / p).read_bytes() == data
+    assert len(calls) == 1
+
+    # Missing unpacked photo re-unpacks from local images.tar without invoking gh.
+    (rel / next(iter(photos))).unlink()
+    calls.clear()
+    again = fetch(rel, cfg, via_gh=True, run=_fake_gh_download(store, calls))
+    assert again["downloaded"] == 0 and again["unpacked"] == 1 and calls == []
+    assert verify(rel, m) == []
+
+
+def test_fetch_via_gh_rejects_bad_checksum_missing_asset_and_gh_errors(
+    built: Path, data_dir: Path, tmp_path: Path
+) -> None:
+    store = tmp_path / "store"
+    _publish_and_strip(built, store)
+    cfg = load_config(data_dir)
+
+    # 1. Tampered asset -> refused before placing ANY file into release_dir
+    tampered = store / "data-v1" / "catalogue.json"
+    orig = tampered.read_bytes()
+    tampered.write_bytes(b"corrupt")
+    with pytest.raises(PublishError, match="checksum"):
+        fetch(built, cfg, via_gh=True, run=_fake_gh_download(store, []))
+    assert not (built / "catalogue.json").exists()
+    assert not (built / "facts.parquet").exists()
+    assert not any(p.name.startswith(".") and ".part-" in p.name for p in built.rglob("*"))
+    tampered.write_bytes(orig)
+
+    # 2. Missing asset in gh output -> refused
+    def partial_gh(args: list[str]) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(args, 0, "", "")
+
+    with pytest.raises(PublishError, match="not downloaded by gh"):
+        fetch(built, cfg, via_gh=True, run=partial_gh)
+
+    # 3. Non-zero gh exit -> PublishError with stderr
+    def failing_gh(args: list[str]) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(args, 1, "", "HTTP 401 unauthorized")
+
+    with pytest.raises(PublishError, match="401 unauthorized"):
+        fetch(built, cfg, via_gh=True, run=failing_gh)
+
+    # 4. Missing gh binary -> clear PublishError
+    def missing_gh(args: list[str]) -> subprocess.CompletedProcess[str]:
+        raise FileNotFoundError("gh")
+
+    with pytest.raises(PublishError, match="gh CLI not found"):
+        fetch(built, cfg, via_gh=True, run=missing_gh)
+
+
+def test_cli_release_fetch_via_gh_and_blocked_hint(
+    built: Path, data_dir: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys
+) -> None:
+    import ev_pipeline.release.publish as pub
+    from ev_pipeline.cli import main
+    from ev_pipeline.net import FetchBlocked
+
+    store = tmp_path / "store"
+    m = _publish_and_strip(built, store)
+
+    # Direct HTTPS blocked by proxy -> clean error + --via-gh hint
+    def blocked_dl(cfg: Any, transport: Any = None):
+        def dl(url: str, dest: Path, max_bytes: int) -> None:
+            raise FetchBlocked("release-assets: private address refused")
+
+        return dl
+
+    monkeypatch.setattr(pub, "http_downloader", blocked_dl)
+    assert main(["release", "fetch", "latest"]) == 1
+    out = capsys.readouterr().out
+    assert "private address refused" in out and "--via-gh" in out
+
+    # Retry with --via-gh -> succeeds via mocked subprocess
+    calls: list[list[str]] = []
+    monkeypatch.setattr(pub, "_run", _fake_gh_download(store, calls))
+    assert main(["release", "fetch", "latest", "--via-gh"]) == 0
+    out = capsys.readouterr().out
+    assert "downloaded" in out and verify(built, m) == [] and len(calls) == 1

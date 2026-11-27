@@ -598,6 +598,41 @@ def http_downloader(cfg: PublishConfig, *, transport: Any = None) -> Downloader:
     return download
 
 
+_GLOB_CHARS = frozenset("*?[]")
+
+
+def _gh_download_assets(
+    repo: str,
+    tag: str,
+    assets: list[str],
+    dest_dir: Path,
+    *,
+    all_assets_count: int,
+    only_given: bool,
+    run: Runner = _run,
+) -> None:
+    """Download release assets via `gh release download` into `dest_dir` (G-66)."""
+    if not repo or repo.startswith("-") or not tag or tag.startswith("-"):
+        raise PublishError(f"unsafe GitHub release target: repo={repo!r} tag={tag!r}")
+    for a in assets:
+        if not a or "/" in a or "\\" in a or ".." in a or a.startswith("-"):
+            raise PublishError(f"unsafe asset name: {a!r}")
+    cmd = ["gh", "release", "download", tag, "--repo", repo, "--dir", str(dest_dir)]
+    use_patterns = (only_given or (len(assets) < all_assets_count and len(assets) <= 50)) and all(
+        not (set(a) & _GLOB_CHARS) for a in assets
+    )
+    if use_patterns:
+        for a in assets:
+            cmd.extend(["--pattern", a])
+    try:
+        cp = run(cmd)
+    except FileNotFoundError as exc:
+        raise PublishError("gh CLI not found; install GitHub CLI or omit --via-gh") from exc
+    if cp.returncode != 0:
+        err = (cp.stderr or cp.stdout or f"exit {cp.returncode}").strip()
+        raise PublishError(f"gh release download {tag} failed: {err}")
+
+
 def fetch(
     release_dir: Path,
     cfg: PublishConfig,
@@ -605,19 +640,25 @@ def fetch(
     download: Downloader | None = None,
     include_in_git: bool = False,
     only: frozenset[str] | None = None,
+    via_gh: bool = False,
+    run: Runner | None = None,
 ) -> dict[str, int]:
     """Download the files git doesn't hold into release_dir, verified against the manifest.
 
     Files already present with the right sha256 are kept. A wrong download is deleted and
     raises PublishError; the release folder never ends up with an unverified file. `only`:
-    fetch just these paths (a path ending in "/" means everything under it)."""
+    fetch just these paths (a path ending in "/" means everything under it). `via_gh`: use
+    `gh release download` instead of direct HTTPS (G-66, for proxy-routed VMs)."""
+    if via_gh and download is not None:
+        raise PublishError("cannot combine via_gh with a custom download callable")
     manifest = read_manifest(release_dir)
     if manifest is None:
         raise PublishError(f"{release_dir}: no {MANIFEST}")
-    dl = download or http_downloader(cfg)
     n = int(manifest["release"])
-    base = manifest["storage"].get("download_url")
+    storage = manifest.get("storage") or {}
+    base = storage.get("download_url")
     stats = {"kept": 0, "downloaded": 0}
+    needed: list[dict[str, Any]] = []
     for e in _select(manifest["files"], only):
         if e["in_git"] and not include_in_git and (release_dir / e["path"]).exists():
             stats["kept"] += 1
@@ -631,11 +672,17 @@ def fetch(
             continue
         if e["bytes"] > cfg.max_file_bytes:
             raise PublishError(f"{e['path']}: {e['bytes']} bytes is over max_file_bytes")
-        url = base.replace("{asset}", e["asset"]) if base else cfg.asset_url(n, e["asset"])
+        needed.append(e)
+
+    if not needed:
+        return stats
+
+    def _place(e: dict[str, Any], write_to: Callable[[Path], None]) -> None:
+        dest = release_dir / e["path"]
         dest.parent.mkdir(parents=True, exist_ok=True)
         tmp = dest.with_name(f".{dest.name}.part-{os.getpid()}")
         try:
-            dl(url, tmp, e["bytes"])
+            write_to(tmp)
             size = tmp.stat().st_size
             if size != e["bytes"] or sha256_file(tmp) != e["sha256"]:
                 raise PublishError(f"{e['path']}: download does not match the manifest checksum")
@@ -646,6 +693,41 @@ def fetch(
         if e.get("bundle"):
             unpack_bundle(release_dir, e)
             stats["unpacked"] = stats.get("unpacked", 0) + 1
+
+    if via_gh:
+        repo = str(storage.get("repo") or cfg.repo)
+        tag = str(storage.get("tag") or cfg.tag(n))
+        all_assets = sum(1 for f in manifest["files"] if not f["in_git"])
+        with tempfile.TemporaryDirectory() as gh_tmp:
+            tmp_root = Path(gh_tmp)
+            _gh_download_assets(
+                repo,
+                tag,
+                [e["asset"] for e in needed],
+                tmp_root,
+                all_assets_count=all_assets,
+                only_given=only is not None,
+                run=run or _run,
+            )
+            # Verify every downloaded asset before placing any file into release_dir.
+            sources: list[tuple[dict[str, Any], Path]] = []
+            for e in needed:
+                src = tmp_root / e["asset"]
+                if src.is_symlink() or not src.is_file():
+                    raise PublishError(f"{e['path']}: asset {e['asset']!r} not downloaded by gh")
+                if src.stat().st_size != e["bytes"] or sha256_file(src) != e["sha256"]:
+                    raise PublishError(
+                        f"{e['path']}: download does not match the manifest checksum"
+                    )
+                sources.append((e, src))
+            for e, src in sources:
+                _place(e, lambda part, _src=src: shutil.copyfile(_src, part))
+        return stats
+
+    dl = download or http_downloader(cfg)
+    for e in needed:
+        url = base.replace("{asset}", e["asset"]) if base else cfg.asset_url(n, e["asset"])
+        _place(e, lambda part, _url=url, _lim=e["bytes"]: dl(_url, part, _lim))
     return stats
 
 
