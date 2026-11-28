@@ -9,6 +9,8 @@ import { useEffect, useRef, type ReactNode } from "react";
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
 /** Phone layout ends here (Tailwind `sm`). */
 export const SHEET_MAX = "(max-width: 39.98rem)";
+/** After the sheet closes, clicks are ignored this long (ms): a double tap's second tap. */
+const SHIELD_MS = 350;
 /** Swipe at least this far down (px) to close. */
 const SWIPE_CLOSE = 80;
 
@@ -76,6 +78,17 @@ export function HeroSheet({
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
+      // Click shield (review #235): the second tap of a double tap on "Show my top 10" or ✕ would land on
+      // the results underneath once the sheet is gone (and open a car page). Swallow it briefly.
+      const until = Date.now() + SHIELD_MS;
+      const shield = (e: MouseEvent) => {
+        // Only the second click of a double tap (detail ≥ 2): a fresh tap, e.g. reopening, still works.
+        if (e.detail < 2 || Date.now() > until) return;
+        e.preventDefault();
+        e.stopPropagation();
+      };
+      document.addEventListener("click", shield, true);
+      window.setTimeout(() => document.removeEventListener("click", shield, true), SHIELD_MS + 50);
       document.removeEventListener("keydown", onKey);
       phone?.removeEventListener?.("change", onWide);
       document.body.style.overflow = overflow;

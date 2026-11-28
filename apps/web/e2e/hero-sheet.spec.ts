@@ -104,6 +104,8 @@ test.describe("hero results on a phone (360 px)", () => {
     await expect(page).toHaveURL(/seats=5/);
     await page.getByTestId("hero-sheet-done").dblclick();
     await expect(page.getByRole("dialog")).toHaveCount(0);
+    // The second tap must not fall through to a car row underneath (review #235 round 2).
+    await expect(page).toHaveURL(/\/nl\/en\?/);
     await expect(page).not.toHaveURL(/q=budget/);
     await expect(page).toHaveURL(/seats=5/);
     await expect(page).toHaveURL(/budget=40000/);
