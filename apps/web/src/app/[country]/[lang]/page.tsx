@@ -98,7 +98,7 @@ export default async function ExplorePage({ params, searchParams }: Props) {
   // T-146: row thumbnails. Only what a row needs (small src + credit), for generations whose photo
   // files are on disk; the rest keep today's layout.
   const photos = Object.fromEntries(
-    Object.entries(generationPhotos(cat.generations())).map(([id, p]) => [id, { src: p.src, credit: p.credit, pageUrl: p.pageUrl }]),
+    Object.entries(generationPhotos(cat.generations())).map(([id, p]) => [id, { src: p.src, credit: p.credit, pageUrl: p.pageUrl, licence: p.licence }]),
   );
 
   return (
@@ -140,7 +140,6 @@ export default async function ExplorePage({ params, searchParams }: Props) {
         countryName={t(`country.in.${cfg.code}` as MsgKey)}
         termText={{ about: t("term.about"), learnMore: t("term.learnMore") }}
         winterTerm={tax.terms["real-winter-range"]}
-        howHref={`${siteBase(country, lang)}/cars#how-we-rank`}
       />
       {/* T-130: the full list moved to the catalogue page; the landing links there. */}
       <section aria-labelledby="all-cars-title" className="evs-allcars mt-12 rounded-lg border border-slate-300 bg-white p-6" data-testid="show-all-cars">

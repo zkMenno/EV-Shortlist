@@ -7,8 +7,16 @@ import data from "@/config/popular-used.generated.json";
 import type { ExploreRow } from "./explore-data";
 import { generationCards, type GenCard } from "./generation-cards";
 
+/** The points behind the list (shown under "How we pick these", T-169). */
+export interface PopularUsedMethod {
+  registration_top: number;
+  owner_points: { shortlist: number; consider: number; ruled_out: number };
+  favourite_bonus: number;
+}
+
 export interface PopularUsedList {
   landing_count: number;
+  method: PopularUsedMethod;
   generations: { generation_id: string; why: string }[];
 }
 
@@ -19,7 +27,7 @@ export interface PopularCard {
   why: string;
 }
 
-export function popularUsedCards(rows: readonly ExploreRow[], country: Country, list: PopularUsedList = POPULAR_USED): PopularCard[] {
+export function popularUsedCards(rows: readonly ExploreRow[], country: Country, list: Pick<PopularUsedList, "landing_count" | "generations"> = POPULAR_USED): PopularCard[] {
   const byGen = new Map<string, ExploreRow[]>();
   for (const r of rows) {
     const g = byGen.get(r.generation_id);

@@ -34,9 +34,21 @@ export function buildPopularUsed(doc) {
       if (typeof g.why !== "string" || !g.why.trim()) throw new Error(`popular_used.yaml: ${id} has no 'why' line`);
       return { generation_id: id, why: g.why.trim() };
     });
+  // T-169: the numbers behind "How we pick these", shown on the landing (never typed into copy).
+  const m = doc.method ?? {};
+  const op = m.owner_points ?? {};
+  const nums = [m.registration_top, op.shortlist, op.consider, op.ruled_out, m.favourite_bonus];
+  if (!nums.every(Number.isInteger)) {
+    throw new Error("popular_used.yaml: method needs whole numbers for registration_top, owner_points.shortlist / consider / ruled_out and favourite_bonus");
+  }
   return {
     schema: "popular-used/v1",
     landing_count: count,
+    method: {
+      registration_top: m.registration_top,
+      owner_points: { shortlist: op.shortlist, consider: op.consider, ruled_out: op.ruled_out },
+      favourite_bonus: m.favourite_bonus,
+    },
     licence: typeof doc.licence === "string" ? doc.licence : null,
     generations,
   };

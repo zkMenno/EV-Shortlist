@@ -3,6 +3,11 @@ export const OUT_FILE: string;
 export interface PopularUsedData {
   schema: "popular-used/v1";
   landing_count: number;
+  method: {
+    registration_top: number;
+    owner_points: { shortlist: number; consider: number; ruled_out: number };
+    favourite_bonus: number;
+  };
   licence: string | null;
   generations: { generation_id: string; why: string }[];
 }
