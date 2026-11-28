@@ -1,6 +1,6 @@
 # T-131 "Popular used EVs" section on the landing
 Role: builder   Lane: WS3 (list) + WS2 (section): data/editorial/ (WS3), apps/web/ (WS2)   Wave: launch (staging feedback 2026-11-17)
-Status: review (WS3 part; WS3 2nd chat, 2026-11-17). WS2 section: review (WS2 overnight batch, 2026-11-28; builds on T-146 #235 + T-135)
+Status: done (WS3 list 2026-11-17; WS2 section #237 merged 2026-11-28 as d2fab73; fresh review PASS WITH NITS on 1b593ca)
 
 ## Goal
 The landing shows the popular used EV generations, roughly Menno's own list.
@@ -10,7 +10,7 @@ The landing shows the popular used EV generations, roughly Menno's own list.
 - [x] WS2: landing section renders the list as generation cards (photo once T-135 lands, used price band for the country, winter range)
 - [x] Order and contents are data, not code (WS3 side: weights in the file's `method`, rows generated)
 - [x] Verify skill for the lane; evidence pack in the PR; `Verified:` on every commit
-- [ ] Fresh review (REVIEW.md from origin/main) passes
+- [x] Fresh review (REVIEW.md from origin/main) passes
 
 ## Inputs
 docs/spec/feedback-2026-11-17-staging.md item 2; data/seed/top40.yaml
@@ -41,3 +41,4 @@ Anything not on docs/spec/launch-scope.md.
 
 ## Review
 <!-- Reviewer: name, date, head SHA, REVIEW.md items + verdicts. -->
+COORDINATOR 2026-11-28: both parts merged. WS2 section #237 (`d2fab73`): fresh subagent review PASS WITH NITS on `1b593ca` (https://github.com/zkMenno/EV-Shortlist/pull/237#issuecomment-7236996069), which also checked the WS3 list (`data/editorial/popular_used.yaml`); vitest 527, Playwright photos/popular-used/hero/smoke 67 + a11y 46 pass, budget landing 174.6 KB. Nits → T-169. → done
