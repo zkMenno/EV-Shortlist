@@ -76,6 +76,7 @@ Find unverified work: `git log --grep="Verified: none" --oneline` (stamp lands w
 | G-68 | When citing a manufacturer-submitted filing hosted on a US government portal (e.g. `dis.epa.gov`, CARB), check the PDF's own copyright stamp before attributing `17 U.S.C. 105` public domain; EPA-compiled tables (`www.epa.gov` `tstcar`) are US Gov PD, whereas OEM application PDFs are `maker-docs` cited under Decisions 068 / 087 | T-164 retro (27 Nov): Tesla's copyrighted 2017 EPA/CARB application PDF on `dis.epa.gov` was initially labelled US Gov PD; caught by round-1 fresh reviewer | *prose* (`docs/process/rules.md`; REVIEW D2 check) | WS3 | 2026-11-27 | — |
 | G-69 | `apps/web/scripts/budget.mjs` prints an early warning when the client catalogue exceeds 85 % of its 300 KB gzip budget (`255 KB`), without changing the 300 KB failure limit | T-167 retro (27 Nov): release 3 sat at 293.8 KB (98 % of budget) with no warning until release 4's +44 rows pushed it to 337.4 KB (#227) | `apps/web/scripts/budget.mjs` (to build: T-157) | WS2 | 2026-11-27 | — |
 | G-70 | In Antigravity VMs, publish data releases via `gh workflow run data-refresh.yml` (rather than local `gh release upload`, which hits `uploads.github.com` HTTP 401 through the VM proxy) | T-167 retro (27 Nov): local `gh release upload` returned HTTP 401 from the Antigravity VM proxy; `data-refresh.yml` published `data-v4` cleanly and exercised the full CI path | *prose* (`GEMINI.md`, `workstreams/WS1/START.md`) | WS1 | 2026-11-27 | — |
+| G-71 | Every agent (builder, reviewer, merger) works in its own git worktree or clone; never switch branches in a checkout another agent may be using | WS2 overnight retro (28 Nov): the builder switched branches in the folder a fresh reviewer was reading, which slowed the batch; giving each agent its own worktree fixed it | *prose* (this row; batch briefs) | WS0 | 2026-11-28 | — |
 
 **Old P-ids** (verification chat's seed list, 17 Nov) map here: P-07→G-04/G-05 · P-08→G-09 · P-09→G-03 · P-10→G-08 · P-11→G-15/G-16 · P-12→G-10 · P-14→G-07 · P-15→G-06 · P-20→G-17 · P-21 (CI budget)→G-33; the rest became G-21–G-31.
 
@@ -166,6 +167,12 @@ Added later on 18 Nov: web batch → G-46 accepted; merge batch 4 → G-47 accep
 | Batch: T-166 | Note `ev release fetch --via-gh` in `workstreams/WS1/START.md` so VM batches don't rediscover the proxy workaround | Accepted (#223) |
 | Batch: T-167 | Warn in `apps/web/scripts/budget.mjs` above 85 % of the 300 KB client catalogue budget (`255 KB`) | Accepted → G-69 (T-157) |
 | Batch: T-167 | Document in `GEMINI.md` / `workstreams/WS1/START.md` that `gh release upload` hits `uploads.github.com` 401 in Antigravity VMs, so releases publish via `gh workflow run data-refresh.yml` | Accepted → G-70 (added in companion note-only PR) |
+
+## Retro proposals processed (28 Nov 2026)
+
+| From | Proposal | Verdict |
+|---|---|---|
+| Batch: WS2 overnight | One worktree per agent, never share a checkout | Accepted → G-71 |
 
 ## Retro questions (every session end)
 1. What slowed us down? 2. What did Menno have to do by hand? 3. Which rule would have prevented it? **4. What did a check miss, and which check would have caught it?** (answer 4 adds or sharpens a row here or a REVIEW.md item).
