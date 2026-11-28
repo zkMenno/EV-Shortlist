@@ -7,8 +7,8 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "node scripts/fetch-release.mjs && node scripts/countries.mjs && node scripts/listings.mjs && node scripts/charging-links.mjs && node scripts/sources.mjs && node scripts/finance.mjs && node scripts/shortlist-rules.mjs && node scripts/owner-picks.mjs && node scripts/popularity.mjs && node scripts/learn.mjs && node scripts/theme.mjs && next dev",
-    "build": "node scripts/check-app-url.mjs && node scripts/fetch-release.mjs && node scripts/countries.mjs && node scripts/listings.mjs && node scripts/charging-links.mjs && node scripts/sources.mjs && node scripts/finance.mjs && node scripts/shortlist-rules.mjs && node scripts/owner-picks.mjs && node scripts/popularity.mjs && node scripts/learn.mjs && node scripts/theme.mjs && next build && node scripts/csp-hashes.mjs",
+    "dev": "node scripts/fetch-release.mjs && node scripts/countries.mjs && node scripts/listings.mjs && node scripts/charging-links.mjs && node scripts/sources.mjs && node scripts/finance.mjs && node scripts/shortlist-rules.mjs && node scripts/owner-picks.mjs && node scripts/popularity.mjs && node scripts/popular-used.mjs && node scripts/learn.mjs && node scripts/theme.mjs && next dev",
+    "build": "node scripts/check-app-url.mjs && node scripts/fetch-release.mjs && node scripts/countries.mjs && node scripts/listings.mjs && node scripts/charging-links.mjs && node scripts/sources.mjs && node scripts/finance.mjs && node scripts/shortlist-rules.mjs && node scripts/owner-picks.mjs && node scripts/popularity.mjs && node scripts/popular-used.mjs && node scripts/learn.mjs && node scripts/theme.mjs && next build && node scripts/csp-hashes.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -19,6 +19,7 @@
     "finance": "node scripts/finance.mjs",
     "shortlist-rules": "node scripts/shortlist-rules.mjs",
     "popularity": "node scripts/popularity.mjs",
+    "popular-used": "node scripts/popular-used.mjs",
     "learn": "node scripts/learn.mjs",
     "sources": "node scripts/sources.mjs",
     "charging-links": "node scripts/charging-links.mjs",

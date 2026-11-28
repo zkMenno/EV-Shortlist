@@ -19,6 +19,11 @@ import { article, articleTitle } from "@/lib/learn";
 import { LISTING_SITES } from "@/lib/listings";
 import { rankHero, resolveProfile, type UsedBands } from "@/lib/shortlist";
 import { generationPhotos } from "@/lib/photos";
+import { popularUsedCards } from "@/lib/popular-used";
+import { PopularUsed } from "@/components/PopularUsed";
+import { numLabels } from "@/components/num-labels";
+import { localeFor } from "@/lib/format";
+import type { MsgKey } from "@/i18n/t";
 import { localizeTaxonomy } from "@/lib/taxonomy";
 import { pageMeta, servedRoute } from "./ev/_lib/context";
 
@@ -120,6 +125,22 @@ export default async function ExplorePage({ params, searchParams }: Props) {
         terms={heroTerms}
         learnLinks={learnLinks}
         photos={photos}
+      />
+      {/* T-131: popular used EVs (editorial list, data/editorial/popular_used.yaml), hidden on the results. */}
+      <PopularUsed
+        cards={popularUsedCards(all, cfg.code)}
+        base={siteBase(country, lang)}
+        currency={cfg.currency}
+        locale={localeFor(lang)}
+        t={t}
+        photos={photos}
+        sources={sourceNames(cat.sources())}
+        labels={numLabels(t, { base: siteBase(country, lang), terms: tax.terms })}
+        asOf={cat.generatedAt().slice(0, 10)}
+        countryName={t(`country.in.${cfg.code}` as MsgKey)}
+        termText={{ about: t("term.about"), learnMore: t("term.learnMore") }}
+        winterTerm={tax.terms["real-winter-range"]}
+        howHref={`${siteBase(country, lang)}/cars#how-we-rank`}
       />
       {/* T-130: the full list moved to the catalogue page; the landing links there. */}
       <section aria-labelledby="all-cars-title" className="evs-allcars mt-12 rounded-lg border border-slate-300 bg-white p-6" data-testid="show-all-cars">

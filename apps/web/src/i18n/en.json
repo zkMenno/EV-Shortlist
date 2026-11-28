@@ -948,5 +948,8 @@
   "hero.sheet.done": "Show my top 10",
   "hero.sheet.openN": "Answers & refine · {n}",
   "photo.caption": "Photo: {credit}",
-  "photo.none": "No photo yet"
+  "photo.none": "No photo yet",
+  "landing.popular.title": "Popular used EVs",
+  "landing.popular.intro": "The used EVs people drive most in the Netherlands and the UK, plus the owner's own picks (one person's opinion). Prices are used prices where you live.",
+  "landing.popular.how": "How we pick these"
 }
