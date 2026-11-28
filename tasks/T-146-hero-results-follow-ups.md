@@ -1,7 +1,7 @@
 # T-146 Hero results: phone Refine sheet, row photos, a feature-map flow for the results
 
 Role: builder   Lane: WS2 (apps/web)   Wave: launch
-Status: review (WS2 overnight batch, 2026-11-27; gate PR #234, feature PR below)
+Status: done (gate #234 merged 2026-11-27, feature #235 merged 2026-11-28; fresh review PASS WITH NITS on 274a455)
 
 ## Goal
 Follow-ups from T-132 (parts 1 #145 and 2 #161), decided by the coordinator 2026-11-18.

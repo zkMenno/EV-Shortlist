@@ -936,5 +936,8 @@
   "hero.sheet.done": "Toon mijn top 10",
   "hero.sheet.openN": "Antwoorden & verfijnen · {n}",
   "photo.caption": "Foto: {credit}",
-  "photo.none": "Nog geen foto"
+  "photo.none": "Nog geen foto",
+  "landing.popular.title": "Populaire tweedehands EV's",
+  "landing.popular.intro": "De tweedehands EV's die het meest rijden in Nederland en het VK, plus de eigen keuzes van de eigenaar (de mening van één persoon). Prijzen zijn tweedehandsprijzen waar jij woont.",
+  "landing.popular.how": "Hoe we deze kiezen"
 }

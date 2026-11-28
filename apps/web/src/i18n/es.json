@@ -937,5 +937,8 @@
   "hero.sheet.done": "Ver mi top 10",
   "hero.sheet.openN": "Respuestas y filtros · {n}",
   "photo.caption": "Foto: {credit}",
-  "photo.none": "Aún no hay foto"
+  "photo.none": "Aún no hay foto",
+  "landing.popular.title": "VE de segunda mano populares",
+  "landing.popular.intro": "Los VE de segunda mano más presentes en los Países Bajos y el Reino Unido, más las elecciones del propietario (la opinión de una persona). Los precios son de segunda mano donde vives.",
+  "landing.popular.how": "Cómo los elegimos"
 }

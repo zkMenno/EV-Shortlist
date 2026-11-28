@@ -937,5 +937,8 @@
   "hero.sheet.done": "Meine Top 10 zeigen",
   "hero.sheet.openN": "Antworten & verfeinern · {n}",
   "photo.caption": "Foto: {credit}",
-  "photo.none": "Noch kein Foto"
+  "photo.none": "Noch kein Foto",
+  "landing.popular.title": "Beliebte gebrauchte E-Autos",
+  "landing.popular.intro": "Die gebrauchten E-Autos, die in den Niederlanden und Großbritannien am häufigsten fahren, plus die eigene Auswahl des Betreibers (die Meinung einer Person). Preise sind Gebrauchtpreise in deinem Land.",
+  "landing.popular.how": "Wie wir sie auswählen"
 }

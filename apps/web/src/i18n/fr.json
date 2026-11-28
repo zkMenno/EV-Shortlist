@@ -937,5 +937,8 @@
   "hero.sheet.done": "Voir mon top 10",
   "hero.sheet.openN": "Réponses et filtres · {n}",
   "photo.caption": "Photo : {credit}",
-  "photo.none": "Pas encore de photo"
+  "photo.none": "Pas encore de photo",
+  "landing.popular.title": "VE d’occasion populaires",
+  "landing.popular.intro": "Les VE d’occasion les plus présents aux Pays-Bas et au Royaume-Uni, plus les choix du propriétaire du site (l’avis d’une seule personne). Les prix sont des prix d’occasion dans votre pays.",
+  "landing.popular.how": "Comment nous les choisissons"
 }

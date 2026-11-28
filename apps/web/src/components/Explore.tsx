@@ -7,6 +7,7 @@ import { loadClientCatalogue } from "@/lib/client-catalogue";
 import { onAnswers, onFilters, publishFilters } from "@/lib/filter-bus";
 import { resolveProfile, suggestedScore, type Answers } from "@/lib/shortlist";
 import { CarFigure, type PhotoRef } from "./CarPhoto";
+import { generationTitle } from "@/lib/generation-title";
 import { profileName, SuggestedSort } from "./SuggestedSort";
 import type { Country, Currency, FieldProvenance } from "@ev/schema";
 import Link from "next/link";
@@ -1727,7 +1728,7 @@ function GenerationCard({ card: g, ctx: c, countryName }: { card: GenCard; ctx: 
       {/* T-135: the generation's photo with its credit line; a same-size placeholder when there is none. */}
       <CarFigure
         photo={c.photos?.[g.generation_id]}
-        alt={`${r.make_name} ${r.model_name} ${r.generation_name}`}
+        alt={generationTitle(r)}
         text={{ caption: t("photo.caption", { credit: "{credit}" }), none: t("photo.none"), credit: t("photo.credit"), page: t("photo.page"), term: c.termText }}
         sizes="(min-width: 80rem) 22rem, (min-width: 40rem) 45vw, 100vw"
         card

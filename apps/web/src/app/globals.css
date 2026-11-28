@@ -223,3 +223,5 @@ body {
 /* On the results the hero ends with its own "Show all cars" box (with the answers): hide the
    landing's plain one below it, so there is one, also when the step changes without a reload. */
 .evs-hero[data-step="results"] ~ .evs-allcars { display: none; }
+/* T-131: the landing's "Popular used EVs" belongs to the questions, not to a shortlist. */
+.evs-hero[data-step="results"] ~ .evs-popular { display: none; }

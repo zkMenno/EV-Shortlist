@@ -1,6 +1,6 @@
 # T-135 Photos on cards and pages with a credit line
 Role: builder   Lane: WS2: apps/web/   Wave: launch (staging feedback 2026-11-17)
-Status: review (WS2 overnight batch, 2026-11-28; builds on T-146 #235)
+Status: done (PR #236 merged 2026-11-28 as c5687f8; fresh review PASS WITH NITS on a1a5044)
 
 ## Goal
 Cards and generation pages show the car's photo with its credit.
@@ -38,3 +38,4 @@ Anything not on docs/spec/launch-scope.md.
 
 ## Review
 <!-- Reviewer: name, date, head SHA, REVIEW.md items + verdicts. -->
+- Fresh reviewer (Claude subagent), 2026-11-28, a1a5044: R0–R3, D6, D8, D10, D13 pass; D7/D9 n/a; 0 must-fix. Should-fix S1 (card alt repeated the model on 36/50 cards) fixed in the T-131 PR via shared `generationTitle()`; S2 (screenshots in the PR) noted. Nits: 3:2 comment fixed; new-tab hint for screen readers on the credit link left for later. https://github.com/zkMenno/EV-Shortlist/pull/236#issuecomment-7236761129: PASS WITH NITS

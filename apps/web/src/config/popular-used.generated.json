@@ -1,0 +1,139 @@
+{
+  "schema": "popular-used/v1",
+  "landing_count": 12,
+  "licence": "CC-BY-4.0 (order and 'why' are ours; owner verdicts are Menno's opinion: label them)",
+  "generations": [
+    {
+      "generation_id": "skoda-enyaq-gen1",
+      "why": "#5 most registered EV model (NL + UK fleets); on the owner's shortlist (a favourite)."
+    },
+    {
+      "generation_id": "kia-niro-ev-sg2",
+      "why": "#3 most registered EV model (NL + UK fleets); the owner would consider it."
+    },
+    {
+      "generation_id": "hyundai-kona-electric-sx2",
+      "why": "#6 most registered EV model (NL + UK fleets); the owner would consider it."
+    },
+    {
+      "generation_id": "kia-ev6-gen1",
+      "why": "#23 most registered EV model (NL + UK fleets); on the owner's shortlist (a favourite)."
+    },
+    {
+      "generation_id": "hyundai-ioniq-5-gen1",
+      "why": "#25 most registered EV model (NL + UK fleets); on the owner's shortlist (a favourite)."
+    },
+    {
+      "generation_id": "tesla-model-3-gen1",
+      "why": "#1 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "tesla-model-y-gen1",
+      "why": "#2 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "kia-niro-ev-de",
+      "why": "#3 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "volkswagen-id3-gen1",
+      "why": "#4 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "hyundai-kona-electric-os",
+      "why": "#6 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "mg-mg4-gen1",
+      "why": "#17 most registered EV model (NL + UK fleets); the owner would consider it."
+    },
+    {
+      "generation_id": "volvo-xc40-recharge-gen1",
+      "why": "#8 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "volkswagen-id4-gen1",
+      "why": "#9 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "polestar-2-gen1",
+      "why": "#12 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "peugeot-e-208-p21",
+      "why": "#13 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "xpeng-g6-facelift",
+      "why": "On the owner's shortlist (a favourite)."
+    },
+    {
+      "generation_id": "kia-ev6-facelift",
+      "why": "#23 most registered EV model (NL + UK fleets); one of the owner's favourites."
+    },
+    {
+      "generation_id": "nissan-leaf-ze1",
+      "why": "#10 most registered EV model (NL + UK fleets); the owner ruled it out: terrible DC charging."
+    },
+    {
+      "generation_id": "cupra-born-gen1",
+      "why": "#20 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "hyundai-ioniq-5-facelift",
+      "why": "#25 most registered EV model (NL + UK fleets); one of the owner's favourites."
+    },
+    {
+      "generation_id": "opel-corsa-e-f",
+      "why": "#21 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "xpeng-p7-gen1",
+      "why": "On the owner's shortlist."
+    },
+    {
+      "generation_id": "ford-mustang-mach-e-gen1",
+      "why": "#32 most registered EV model (NL + UK fleets); the owner would consider it."
+    },
+    {
+      "generation_id": "mg-zs-ev-gen1",
+      "why": "#24 most registered EV model (NL + UK fleets)."
+    },
+    {
+      "generation_id": "renault-megane-e-tech-gen1",
+      "why": "#34 most registered EV model (NL + UK fleets); the owner would consider it."
+    },
+    {
+      "generation_id": "renault-zoe-ph2",
+      "why": "#16 most registered EV model (NL + UK fleets); the owner ruled it out: terrible DC charging."
+    },
+    {
+      "generation_id": "smart-3-gen1",
+      "why": "The owner would consider it (a favourite)."
+    },
+    {
+      "generation_id": "skoda-elroq-gen1",
+      "why": "The owner would consider it."
+    },
+    {
+      "generation_id": "kia-ev3-gen1",
+      "why": "The owner would consider it."
+    },
+    {
+      "generation_id": "peugeot-e-308-gen1",
+      "why": "The owner would consider it."
+    },
+    {
+      "generation_id": "opel-astra-electric-gen1",
+      "why": "The owner would consider it."
+    },
+    {
+      "generation_id": "volkswagen-id5-gen1",
+      "why": "The owner would consider it."
+    },
+    {
+      "generation_id": "citroen-e-c4-c41",
+      "why": "#38 most registered EV model (NL + UK fleets)."
+    }
+  ]
+}

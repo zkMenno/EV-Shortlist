@@ -937,5 +937,8 @@
   "hero.sheet.done": "Mostra la mia top 10",
   "hero.sheet.openN": "Risposte e filtri · {n}",
   "photo.caption": "Foto: {credit}",
-  "photo.none": "Ancora nessuna foto"
+  "photo.none": "Ancora nessuna foto",
+  "landing.popular.title": "VE usati popolari",
+  "landing.popular.intro": "I VE usati più diffusi nei Paesi Bassi e nel Regno Unito, più le scelte del proprietario (l’opinione di una persona). I prezzi sono prezzi dell’usato dove vivi.",
+  "landing.popular.how": "Come li scegliamo"
 }

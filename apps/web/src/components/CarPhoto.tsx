@@ -57,7 +57,7 @@ export function CarThumb({ photo, alt, text }: { photo: PhotoRef; alt: string; t
 }
 
 /**
- * A card or page photo (T-135): fixed 3:2 box so nothing shifts while it loads, the credit line
+ * A card or page photo (T-135): fixed box (3:2 on pages, 16:9 on cards) so nothing shifts while it loads, the credit line
  * right under it (author, licence, link to the file page). Without a photo: a neutral placeholder
  * of the same size that says so, so every card keeps the same shape.
  */
