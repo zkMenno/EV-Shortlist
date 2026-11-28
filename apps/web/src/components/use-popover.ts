@@ -65,6 +65,8 @@ export function usePopover() {
     },
     onKeyDown: (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        // An open tip takes this Escape: a dialog around it (the hero's phone sheet) stays open (review #235).
+        if (open) e.preventDefault();
         pinned.current = false;
         setOpen(false);
       }
