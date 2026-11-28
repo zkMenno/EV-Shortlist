@@ -19,6 +19,10 @@ test("catalogue cards: photo with srcset, lazy, alt, and a credit line under it"
   await expect(img).toHaveAttribute("srcset", /800w/);
   await expect(img).toHaveAttribute("loading", "lazy");
   await expect(img).toHaveAttribute("alt", /\S+ \S+/);
+  // T-135 review S1: alt text never repeats the model ("Tesla Model Y Model Y (2021-2024)").
+  const alts = await page.getByTestId("explore-card").locator("[data-testid=car-photo] img").evaluateAll((els) => els.map((e) => e.getAttribute("alt") ?? ""));
+  expect(alts.length).toBeGreaterThan(10);
+  expect(alts.filter((a) => /\b(\S+(?: \S+)?) \1\b/.test(a))).toEqual([]);
   const credit = fig.getByTestId("photo-caption");
   await expect(credit).toContainText(/^Photo: .+/);
   const link = credit.getByRole("link");

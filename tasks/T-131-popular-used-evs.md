@@ -36,6 +36,7 @@ Anything not on docs/spec/launch-scope.md.
   - The intro labels the owner's picks as one person's opinion (Decision 038) and links "How we pick these" to `/cars#how-we-rank`.
   - It sits between the hero and "Show all cars", and is hidden on the hero results the same way as that box (`.evs-popular`).
 - **Strings:** `landing.popular.*` in EN, plus NL/DE/FR/ES/IT so the i18n test passes. The `why` lines are English data from WS3.
+- **Also in this PR (T-135 review S1):** `generationTitle()` moved to `src/lib/generation-title.ts` (re-exported from `ev/_lib/data.ts`) and now builds the photo alt on catalogue cards, landing cards and hero row thumbnails, so "Tesla Model Y Model Y" no longer happens; `e2e/photos.spec.ts` checks no card alt repeats a word. T-146 and T-135 task files set to done.
 - **Tests:** `e2e/popular-used.spec.ts` checks the list order (a subsequence), each card's why/link/price/winter/photo, that the section hides on results, 360 px with wider letters, and axe in light and dark.
 
 ## Review

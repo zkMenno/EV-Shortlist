@@ -9,6 +9,7 @@ import { isClaimField } from "@/lib/dc";
 import type { PopularCard } from "@/lib/popular-used";
 import { generationHref } from "@/app/[country]/[lang]/ev/_lib/routes";
 import { CarFigure, type PhotoRef } from "./CarPhoto";
+import { generationTitle } from "@/lib/generation-title";
 import { Missing, Num } from "./Num";
 import type { NumLabels } from "./num-labels";
 import { TermInfo, type TermText } from "./Term";
@@ -74,7 +75,7 @@ export function PopularUsed({
           const w = g.winter;
           return (
             <li key={g.generation_id} className="flex min-w-0 flex-col gap-2 rounded-xl border border-slate-300 bg-white p-4" data-testid="popular-card" data-generation={g.generation_id}>
-              <CarFigure photo={photos[g.generation_id]} alt={`${name} ${r.generation_name}`} text={photoText} sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw" card />
+              <CarFigure photo={photos[g.generation_id]} alt={generationTitle(r)} text={photoText} sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw" card />
               <h3 className="text-lg font-bold leading-snug">
                 <Link href={generationHref(base, r)} className="text-[var(--ink)] underline-offset-2 hover:underline">
                   {name}

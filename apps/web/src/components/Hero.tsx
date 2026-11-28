@@ -66,6 +66,7 @@ import { profileName } from "./SuggestedSort";
 import { TermInfo, type TermText } from "./Term";
 import { OfficialRange } from "./OfficialRange";
 import { CarThumb, type PhotoRef } from "./CarPhoto";
+import { generationTitle } from "@/lib/generation-title";
 import { HeroSheet } from "./HeroSheet";
 import { numLabels } from "./num-labels";
 import { ParallaxScene } from "@/components/parallax/ParallaxScene";
@@ -1356,7 +1357,7 @@ function Card({ pick, r }: { pick: HeroPick; r: ResultsProps }) {
       <span style={{ gridArea: "rank" }}>{rank}</span>
       <div style={{ gridArea: "car" }} className="flex min-w-0 flex-wrap items-start gap-x-3 gap-y-2">
         {/* T-146: the generation's photo when the release has one; rows without keep the old layout. */}
-        {photo ? <CarThumb photo={photo} alt={`${row.make_name} ${row.model_name} ${row.generation_name}`} text={{ credit: t("photo.credit"), page: t("photo.page"), term: tt }} /> : null}
+        {photo ? <CarThumb photo={photo} alt={generationTitle(row)} text={{ credit: t("photo.credit"), page: t("photo.page"), term: tt }} /> : null}
         {/* Narrow rows put the photo above the name (the name keeps at least 8rem). */}
         <div className="min-w-0 grow basis-[8rem]">
           <h4 className="text-[17px] font-bold leading-snug">{link}</h4>
