@@ -22,4 +22,16 @@ docs/design/explorations/staging-r1/README.md; T-132 task file and #161 review n
 - **Production (🟡).** The web image (`apps/web/Dockerfile` `catalogue` stage) copies only `catalogue.json`, so staging shows no photos until WS4 copies `images/` too. Staging also lacks `shortlist_scores.json` / `used_prices.json` today; see the WS0 INBOX line of 2026-11-27 23:05 UTC. Nothing breaks meanwhile.
 - **Rule 5 note for WS0:** `src/lib/photos.ts` reads `<release>/images/` next to `catalogue.json`, through `latestCataloguePath()` from `catalogue.ts`. That is a second reader of release files, and `apps/web/AGENTS.md` (a gate file) should name it.
 
+- **Review fixes (#235):**
+  - Round 1: one Back per close (`sheetClosing` ref), and an open ⓘ tip takes its own Escape (`use-popover.ts`).
+  - Round 2: a click shield swallows the second tap of a double tap (`detail ≥ 2`, 350 ms) so it can't open a car row under the closed sheet.
+- **Open (should-fix before public):** check the double-tap shield once on a real iPhone. WebKit's `detail` on tap clicks is unproven; the worst case is that a double tap opens a car page, with no answers lost.
+- **Nits left:**
+  - A licence-deed link for CC BY 2.0/3.0 credits (WS3/WS0).
+  - A duplicate history entry after a reload with the sheet open.
+  - The Explore filter sheet ignores `defaultPrevented` on Escape (pre-existing).
+
 ## Review
+- Fresh reviewer (Claude), 2026-11-28, 8c5bd70: R0–R3, D6, D9, D10, D13 pass; must-fix: a double close went Back twice and dropped the answers: FAIL
+- Fresh reviewer (Claude), 2026-11-28, 7a54485: R0, R1, R2, R3, D6, D7, D9, D10, D13 pass; must-fix #1 + should-fix #2 fixed; new must-fix: hero-sheet.spec.ts:96 flaky, second tap clicks through to a car row: FAIL
+- Fresh reviewer (Claude), 2026-11-28, 274a455: R0, R1, R2, R3, D6, D7, D9, D10, D13 pass; round-1/2 must-fixes fixed; should-fix: verify the double-tap shield on iOS Safari (detail≥2 unproven on WebKit): PASS WITH NITS
