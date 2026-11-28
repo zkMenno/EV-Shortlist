@@ -12,8 +12,9 @@ One named **COORDINATOR** conversation (started with `/start-coordinator`, retir
 ## State
 - **Data release 4 (`data-v4`, `latest = 4`) is LIVE** on `main` (`49e0a59`) and `https://staging.evshortlist.com/health` (`{"status":"ok","release":4}`): `419` variants, `70,176` facts, `0` provenance/licence/impossible-value problems, `images.tar` (`29.3 MB`, `357` WebP files / `119` photos), `156` generations with `generations[].popularity` (Spearman `0.952`), `4` rows with `dc_speed_is_claim: true`, `150` `maker-docs` + `174` `manual` facts, client catalogue `170.6 KB` gzip (#227).
 - **`gate-guard` is now in `enforce` mode** and protects `GEMINI.md` + `.agents/**` (**Decision 090**, #230 + #231).
-- Decisions up to **090**; next free **091** (from spare block `091–099`). Tasks up to **T-167**; next free **T-168**. Rules up to **G-70**; next free **G-71**.
+- Decisions up to **090**; next free **091** (from spare block `091–099`). Tasks up to **T-169**; next free **T-170**. Rules up to **G-71** (#239); next free **G-72**.
 - Done: T-149–T-156, T-158–T-167 (data release 4 live: #224/#225/#226/#227), CI minutes (#207), Antigravity migration (#208), BOARD refreshes (#209, #217, #223, #229), gate rules G-65–G-70 (#216, #222, #228), coordinator docs tidy + Decision 090 (#230), gate-guard enforce + gate docs tidy (#231). Schema has `PublishedVariant.dc_speed_is_claim` (#205).
+- **2026-11-28 09:30 UTC:** WS2 overnight merged #233–#237 (T-146, T-135, T-131 done). **Staging hero shows "ranking not available"** (verified 09:13 UTC): web image ships only `catalogue.json` → **T-168** (WS4, blocker for QA). Review nits → **T-169**. Open: #238 (tasks + BOARD), #239 (gate G-71): next batch fresh-reviews and merges them first.
 - **T-157 done** (#232 → `f833b3d`, 2026-11-27 12:37 UTC). Open PRs: **none** (checked 22:15 UTC). Unhandled INBOX items: **none**. Staging health 22:16 UTC: `{"status":"ok","release":4}`. Running builder batch: **none**; next = overnight WS2 batch T-146 → T-135 → T-131 (WS2).
 
 ## Next batch conversations
