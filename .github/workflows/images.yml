@@ -73,17 +73,18 @@ jobs:
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       # Release files live only on the GitHub Release (Decision 035, T-064); git holds the manifest.
-      # The web Dockerfile's catalogue stage needs data/releases/<latest>/catalogue.json, so fetch it
-      # by manifest (size + sha256) into the build context first. Public download, no token.
+      # The web image needs every run-time file of data/releases/<latest> (T-168): fetch-release.mjs's
+      # DEFAULT_FILES (catalogue, scores, used prices, charging stats) plus the photo bundle, unpacked
+      # into images/. No CATALOGUE_FILES here: that list lives in one place, the script. Fetched by
+      # manifest (size + sha256) into the build context first. Public download, no token.
       - if: matrix.image == 'web'
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-      - name: Fetch the latest release catalogue
+      - name: Fetch the latest release (catalogue, scores, prices, charging, photos)
         if: matrix.image == 'web'
         env:
           CATALOGUE_DIR: ${{ github.workspace }}/data/releases
-          CATALOGUE_FILES: catalogue.json
         run: node apps/web/scripts/fetch-release.mjs
 
 
@@ -139,17 +140,18 @@ jobs:
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       # Release files live only on the GitHub Release (Decision 035, T-064); git holds the manifest.
-      # The web Dockerfile's catalogue stage needs data/releases/<latest>/catalogue.json, so fetch it
-      # by manifest (size + sha256) into the build context first. Public download, no token.
+      # The web image needs every run-time file of data/releases/<latest> (T-168): fetch-release.mjs's
+      # DEFAULT_FILES (catalogue, scores, used prices, charging stats) plus the photo bundle, unpacked
+      # into images/. No CATALOGUE_FILES here: that list lives in one place, the script. Fetched by
+      # manifest (size + sha256) into the build context first. Public download, no token.
       - if: matrix.image == 'web'
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-      - name: Fetch the latest release catalogue
+      - name: Fetch the latest release (catalogue, scores, prices, charging, photos)
         if: matrix.image == 'web'
         env:
           CATALOGUE_DIR: ${{ github.workspace }}/data/releases
-          CATALOGUE_FILES: catalogue.json
         run: node apps/web/scripts/fetch-release.mjs
 
 

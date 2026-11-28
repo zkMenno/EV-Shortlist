@@ -22,6 +22,9 @@ pipeline/tests
 
 # Published catalogue releases only (the web Dockerfile copies just the latest one)
 !data/releases/
+# The photo bundle is unpacked into data/releases/<n>/images/ by fetch-release.mjs; only those
+# files go into the image (T-168), so the 29 MB tar stays out of the build context.
+data/releases/*/images.tar
 
 # Never send these, even inside allowed folders
 **/node_modules

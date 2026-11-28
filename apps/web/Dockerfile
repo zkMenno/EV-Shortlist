@@ -31,17 +31,17 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
     NODE_EXTRA_CA_CERTS=$([ -f /run/secrets/extra_ca ] && echo /run/secrets/extra_ca) \
     pnpm install --frozen-lockfile --filter "@ev/web..."
 
-# ---- catalogue: copy only the latest published release (data/releases/<latest>) ----
-FROM busybox:stable AS catalogue
+# ---- catalogue: every run-time file of the latest release (data/releases/<latest>) ----
+# T-168: catalogue.json alone left staging without scores, used prices, charging stats, the
+# manifest and photos ("ranking not available", 28 Nov 2026). pack-release.mjs takes the list from
+# DEFAULT_FILES in fetch-release.mjs (+ manifest.json, README.md, the unpacked images/ folder),
+# checks every listed file's size + sha256 against the manifest and fails the build on a gap.
+# images.tar itself stays out of the image (its unpacked files are what the app serves).
+FROM node:${NODE_VERSION}-slim AS catalogue
+WORKDIR /pack
+COPY apps/web/scripts/fetch-release.mjs apps/web/scripts/pack-release.mjs ./
 COPY data/releases /src
-RUN set -eu; \
-    n="$(tr -d '[:space:]' < /src/latest)"; \
-    case "$n" in ''|*[!0-9]*) echo "data/releases/latest must hold a release number, got '$n'" >&2; exit 1;; esac; \
-    test -f "/src/$n/catalogue.json" || { echo "data/releases/$n/catalogue.json missing" >&2; exit 1; }; \
-    mkdir -p "/out/$n"; \
-    cp "/src/$n/catalogue.json" "/out/$n/"; \
-    if [ -f "/src/$n/README.md" ]; then cp "/src/$n/README.md" "/out/$n/"; fi; \
-    printf '%s\n' "$n" > /out/latest
+RUN node pack-release.mjs /src /out
 
 # ---- build: Next standalone output ----
 FROM deps AS build
