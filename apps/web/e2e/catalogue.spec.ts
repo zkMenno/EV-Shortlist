@@ -22,7 +22,7 @@ test("catalogue: Most popular first as cards, #n tags in order, How we rank expl
   await expect(page.getByTestId("explore-cards")).toBeVisible();
   const tags = await page.getByTestId("popular-tag").allInnerTexts();
   expect(tags.length).toBeGreaterThan(3);
-  expect(tags[0]).toBe("#1 popular");
+  expect(tags[0]).toBe("#1 in Most popular");
   const ranks = tags.map((t) => Number(t.match(/\d+/)![0]));
   expect(ranks, "ranks never go down the list").toEqual([...ranks].sort((a, b) => a - b));
   expect(new Set(ranks).size, "one tag per generation, not per variant").toBe(ranks.length);

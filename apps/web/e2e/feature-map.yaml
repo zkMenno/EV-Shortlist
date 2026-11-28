@@ -278,7 +278,7 @@ features:
         what: the sort menu
         why: there's no way to change the order
       - text: "(//*[@data-testid='popular-tag'])[1]"
-        contains: "#1 popular"
+        contains: "#1 in Most popular"
         what: the most popular car first
         why: the default order isn't popularity
       - visible: "@popular-why"

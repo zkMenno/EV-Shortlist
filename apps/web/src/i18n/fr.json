@@ -938,7 +938,12 @@
   "hero.sheet.openN": "Réponses et filtres · {n}",
   "photo.caption": "Photo : {credit}",
   "photo.none": "Pas encore de photo",
+  "photo.licence": "Conditions de la licence",
+  "photo.newTab": "(s'ouvre dans un nouvel onglet)",
   "landing.popular.title": "VE d’occasion populaires",
   "landing.popular.intro": "Les VE d’occasion les plus présents aux Pays-Bas et au Royaume-Uni, plus les choix du propriétaire du site (l’avis d’une seule personne). Les prix sont des prix d’occasion dans votre pays.",
-  "landing.popular.how": "Comment nous les choisissons"
+  "landing.popular.how": "Comment nous les choisissons",
+  "landing.popular.method.reg": "Immatriculations : un modèle parmi les {top} VE les plus immatriculés (parcs des Pays-Bas et du Royaume-Uni) reçoit des points selon sa place : le n° 1 en reçoit {top}, le n° {top} en reçoit 1.",
+  "landing.popular.method.owner": "L'avis du propriétaire du site (l'opinion d'une seule personne) : +{shortlist} pour une voiture de sa sélection, +{consider} pour une voiture à envisager, {ruledOut} pour une voiture écartée et +{fav} pour un coup de cœur.",
+  "landing.popular.method.order": "Le total le plus élevé d'abord. Les immatriculations comptent par modèle : deux générations d'un même modèle partagent donc une place ; l'avis les départage."
 }

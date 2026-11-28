@@ -1,6 +1,8 @@
 // Car photos with their credit (Decision 081, 083; T-146 row thumbnails). Photos come from the
 // release and are served from our own origin (/photos/…, src/lib/photos.ts); the credit is always
 // one tap away: an ⓘ next to the photo names author, licence and the file page.
+import type { T } from "@/i18n/t";
+import { licenceUrl } from "@/lib/licence-url";
 import { InfoTip, type TermText } from "./Term";
 
 /** The minimum a client component needs for one photo (keeps the page payload small). */
@@ -10,6 +12,8 @@ export interface PhotoRef {
   srcSet?: string;
   credit: string;
   pageUrl: string;
+  /** Release licence id ("CC-BY-SA-4.0"): the credit links to its deed when there is one (T-169). */
+  licence?: string;
 }
 
 export interface PhotoText {
@@ -21,7 +25,39 @@ export interface PhotoText {
   credit: string;
   /** "Photo page" (link to the file page / press page). */
   page: string;
+  /** "Licence terms" (link to the CC deed, T-169). */
+  licence?: string;
+  /** "(opens in a new tab)", for screen readers on the credit links (T-169). */
+  newTab?: string;
   term: TermText;
+}
+
+/** Every photo string a page needs, from one place. */
+export function photoText(t: T, term: TermText): PhotoText {
+  return {
+    caption: t("photo.caption", { credit: "{credit}" }),
+    none: t("photo.none"),
+    credit: t("photo.credit"),
+    page: t("photo.page"),
+    licence: t("photo.licence"),
+    newTab: t("photo.newTab"),
+    term,
+  };
+}
+
+function NewTab({ text }: { text: PhotoText }) {
+  return text.newTab ? <span className="sr-only"> {text.newTab}</span> : null;
+}
+
+function DeedLink({ photo, text, className }: { photo: PhotoRef; text: PhotoText; className: string }) {
+  const href = licenceUrl(photo.licence);
+  if (!href || !text.licence) return null;
+  return (
+    <a href={href} target="_blank" rel="noopener nofollow" className={className} data-testid="photo-licence">
+      {text.licence}
+      <NewTab text={text} />
+    </a>
+  );
 }
 
 /** The credit ⓘ: author + licence as the release gives them, and a link to where the photo lives. */
@@ -33,7 +69,9 @@ export function PhotoCredit({ photo, text }: { photo: PhotoRef; text: PhotoText 
       </span>
       <a href={photo.pageUrl} target="_blank" rel="noopener nofollow" className="mt-1 block text-blue-800 underline underline-offset-2">
         {text.page}
+        <NewTab text={text} />
       </a>
+      <DeedLink photo={photo} text={text} className="mt-1 block text-blue-800 underline underline-offset-2" />
     </InfoTip>
   );
 }
@@ -112,7 +150,10 @@ export function CarFigure({
       <figcaption className="evs-photo__credit" data-testid="photo-caption">
         <a href={photo.pageUrl} target="_blank" rel="noopener nofollow" className="underline underline-offset-2">
           {(text.caption ?? "{credit}").replace("{credit}", photo.credit)}
+          <NewTab text={text} />
         </a>
+        {licenceUrl(photo.licence) && text.licence ? " · " : null}
+        <DeedLink photo={photo} text={text} className="underline underline-offset-2" />
       </figcaption>
     </figure>
   );

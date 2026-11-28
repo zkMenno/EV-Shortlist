@@ -35,6 +35,7 @@ OUT = ROOT / "data/editorial/popular_used.yaml"
 
 METHOD: dict[str, Any] = {
     "used_eras": ["2019-2021", "2021-2022", "2022-2024", "2024-2026"],
+    "registration_top": 40,
     "registration_points": "41 - top40 rank (rank 1 = 40 points); 0 outside the top 40",
     "owner_points": {"shortlist": 20, "consider": 10, "unrated": 0, "ruled_out": -10},
     "favourite_bonus": 5,
@@ -43,11 +44,12 @@ METHOD: dict[str, Any] = {
     "landing_count": 12,
 }
 
+# T-169: "the owner" read as the car's previous owner, so the lines say "the site owner".
 VERDICT_TEXT = {
-    "shortlist": "on the owner's shortlist",
-    "consider": "the owner would consider it",
+    "shortlist": "on the site owner's shortlist",
+    "consider": "the site owner would consider it",
     "unrated": None,
-    "ruled_out": "the owner ruled it out",
+    "ruled_out": "the site owner ruled it out",
 }
 
 
@@ -111,7 +113,7 @@ def build() -> dict[str, Any]:
             "generation_id": gid,
             "model_id": g["model_id"],
             "name": display_name(g["make"], g["model_name"], g["generation"]),
-            "registrations": {"top40_rank": r, "points": (41 - r) if r else 0},
+            "registrations": {"top40_rank": r, "points": (METHOD["registration_top"] + 1 - r) if r else 0},
             "owner": {
                 "verdict": verdict,
                 "favourite": bool(e.get("favourite")) or bool(prev and prev["owner"]["favourite"]),
@@ -150,7 +152,7 @@ def build() -> dict[str, Any]:
         if vt:
             why.append(vt + (" (a favourite)" if row["owner"]["favourite"] else ""))
         elif row["owner"]["favourite"]:
-            why.append("one of the owner's favourites")
+            why.append("one of the site owner's favourites")
         if row["owner"]["verdict"] == "ruled_out" and row["owner"]["remark"]:
             rem = row["owner"]["remark"]
             why[-1] += f": {rem[0].lower()}{rem[1:]}"
