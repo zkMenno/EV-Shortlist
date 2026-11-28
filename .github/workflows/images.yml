@@ -227,6 +227,23 @@ jobs:
                   console.log(r.status, p); if (!r.ok) bad++;
                 } process.exit(bad ? 1 : 0); })()'
           }
+          # T-168: the hero ranks cars and a photo is served, so a release file the app reads can't
+          # silently go missing from the image again (staging said "ranking not available", 28 Nov).
+          hero_check() {
+            docker exec "$1" node -e '
+              (async () => {
+                const base = "http://127.0.0.1:3000";
+                const fail = (m) => { console.log("::error::" + m); process.exit(1); };
+                const html = await (await fetch(base + "/nl/en?role=main&trips=monthly&charge=home&budget=40000")).text();
+                if (html.includes("data-testid=\"hero-no-scores\"")) fail("hero says ranking not available: shortlist_scores.json is missing from the image");
+                if (!html.includes("data-testid=\"hero-shortlist\"")) fail("hero shows no shortlist rows");
+                const photo = /\/photos\/[a-z0-9-]+\.webp/.exec(html)?.[0];
+                if (!photo) fail("hero shows no photo: <release>/images/ is missing from the image");
+                const r = await fetch(base + photo);
+                if (r.status !== 200 || !(r.headers.get("content-type") || "").startsWith("image/webp")) fail(photo + " answered " + r.status);
+                console.log("OK hero: shortlist rows and", photo);
+              })()'
+          }
           wait_healthy() {
             for i in $(seq 1 60); do
               docker exec "$1" node -e 'fetch("http://127.0.0.1:3000/health").then(r=>process.exit(r.status===200?0:1)).catch(()=>process.exit(1))' && return 0
@@ -239,6 +256,7 @@ jobs:
           wait_healthy ro
           fetch_all ro
           fetch_all ro   # second pass hits the warm caches
+          hero_check ro
           docker logs ro > ro.log 2>&1; cat ro.log
           if grep -nE 'EROFS|EACCES|read-only file system' ro.log; then
             echo "::error::the web image tried to write outside /tmp and .next/cache"; exit 1
