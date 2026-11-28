@@ -64,3 +64,21 @@ for (const scheme of ["light", "dark"] as const) {
     expect(r.violations.filter((v) => v.impact === "critical" || v.impact === "serious").map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
   });
 }
+
+test("landing: 'How we pick these' explains this list's points, credits say they open a new tab and link the licence (T-169)", async ({ page }) => {
+  await page.goto("/nl/en");
+  const how = page.getByTestId("popular-how");
+  await how.getByText("How we pick these").click();
+  await expect(how).toContainText("top 40 most registered EVs");
+  await expect(how).toContainText("+20 for a car on the shortlist");
+  await expect(how).toContainText("-10 for one ruled out");
+  await expect(page.getByTestId("popular-used-intro")).toContainText("the site owner's own picks");
+  for (const why of await page.getByTestId("popular-why").allInnerTexts()) expect(why).not.toMatch(/\bthe owner\b/);
+  const caption = page.getByTestId("popular-used").getByTestId("photo-caption").first();
+  await expect(caption.getByRole("link").first()).toHaveAccessibleName(/\(opens in a new tab\)$/);
+  await expect(caption.getByTestId("photo-licence")).toHaveAttribute("href", /^https:\/\/creativecommons\.org\/(licenses|publicdomain)\//);
+  // Years once: a generation name that holds years gets no second "· 2021–2024".
+  for (const line of await page.getByTestId("popular-card").locator("h3 + p").allInnerTexts()) {
+    expect(line.match(/\b(19|20)\d{2}\b/g)?.length ?? 0, line).toBeLessThanOrEqual(2);
+  }
+});

@@ -25,7 +25,8 @@ test("catalogue cards: photo with srcset, lazy, alt, and a credit line under it"
   expect(alts.filter((a) => /\b(\S+(?: \S+)?) \1\b/.test(a))).toEqual([]);
   const credit = fig.getByTestId("photo-caption");
   await expect(credit).toContainText(/^Photo: .+/);
-  const link = credit.getByRole("link");
+  // T-169: the caption has two links now (file page first, then the licence deed).
+  const link = credit.getByRole("link").first();
   await expect(link).toHaveAttribute("target", "_blank");
   await expect(link).toHaveAttribute("rel", /noopener/);
   await expect(link).toHaveAttribute("href", /^https:\/\//);

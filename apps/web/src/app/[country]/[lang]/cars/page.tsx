@@ -82,7 +82,7 @@ export default async function CataloguePage({ params, searchParams }: Props) {
   const popAsOf = cat.popularityAsOf() ?? undefined;
   // T-135: card photos for generations whose files are on disk (src, srcset, credit, file page).
   const photos = Object.fromEntries(
-    Object.entries(generationPhotos(cat.generations())).map(([id, p]) => [id, { src: p.src, srcSet: p.srcSet, credit: p.credit, pageUrl: p.pageUrl }]),
+    Object.entries(generationPhotos(cat.generations())).map(([id, p]) => [id, { src: p.src, srcSet: p.srcSet, credit: p.credit, pageUrl: p.pageUrl, licence: p.licence }]),
   );
 
   return (

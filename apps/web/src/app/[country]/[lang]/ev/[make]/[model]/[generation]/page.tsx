@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { ChargingLinks } from "@/components/ChargingLinks";
 import { abrpLink, chargingLinks } from "@/lib/charging-links";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { CarFigure } from "@/components/CarPhoto";
+import { CarFigure, photoText } from "@/components/CarPhoto";
 import { generationPhoto } from "@/lib/photos";
 import { Missing, Num } from "@/components/Num";
 import { PriceBand } from "@/components/PriceBand";
@@ -100,7 +100,7 @@ export default async function GenerationPage({ params }: Props) {
         <CarFigure
           photo={photo}
           alt={fullName}
-          text={{ caption: t("photo.caption", { credit: "{credit}" }), none: t("photo.none"), credit: t("photo.credit"), page: t("photo.page"), term: ctx.termText }}
+          text={photoText(t, ctx.termText)}
           sizes="(min-width: 40rem) 36rem, 100vw"
           eager
           testId="gen-photo"

@@ -938,7 +938,12 @@
   "hero.sheet.openN": "Risposte e filtri · {n}",
   "photo.caption": "Foto: {credit}",
   "photo.none": "Ancora nessuna foto",
+  "photo.licence": "Termini della licenza",
+  "photo.newTab": "(si apre in una nuova scheda)",
   "landing.popular.title": "VE usati popolari",
   "landing.popular.intro": "I VE usati più diffusi nei Paesi Bassi e nel Regno Unito, più le scelte del proprietario (l’opinione di una persona). I prezzi sono prezzi dell’usato dove vivi.",
-  "landing.popular.how": "Come li scegliamo"
+  "landing.popular.how": "Come li scegliamo",
+  "landing.popular.method.reg": "Immatricolazioni: un modello tra le {top} auto elettriche più immatricolate (parco circolante di Paesi Bassi e Regno Unito) riceve punti in base alla posizione: il n. 1 ne riceve {top}, il n. {top} ne riceve 1.",
+  "landing.popular.method.owner": "Il giudizio del proprietario del sito (l'opinione di una sola persona): +{shortlist} per un'auto nella sua shortlist, +{consider} per una da considerare, {ruledOut} per una scartata e +{fav} per una preferita.",
+  "landing.popular.method.order": "Prima il totale più alto. Le immatricolazioni contano per modello, quindi due generazioni dello stesso modello condividono una posizione; il giudizio le distingue."
 }

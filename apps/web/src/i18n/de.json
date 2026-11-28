@@ -938,7 +938,12 @@
   "hero.sheet.openN": "Antworten & verfeinern · {n}",
   "photo.caption": "Foto: {credit}",
   "photo.none": "Noch kein Foto",
+  "photo.licence": "Lizenzbedingungen",
+  "photo.newTab": "(öffnet in einem neuen Tab)",
   "landing.popular.title": "Beliebte gebrauchte E-Autos",
   "landing.popular.intro": "Die gebrauchten E-Autos, die in den Niederlanden und Großbritannien am häufigsten fahren, plus die eigene Auswahl des Betreibers (die Meinung einer Person). Preise sind Gebrauchtpreise in deinem Land.",
-  "landing.popular.how": "Wie wir sie auswählen"
+  "landing.popular.how": "Wie wir sie auswählen",
+  "landing.popular.method.reg": "Zulassungen: Ein Modell unter den {top} meistzugelassenen E-Autos (Fahrzeugbestand Niederlande + Vereinigtes Königreich) bekommt Punkte für seinen Platz: #1 bekommt {top}, #{top} bekommt 1.",
+  "landing.popular.method.owner": "Das Urteil des Seitenbetreibers (die Meinung einer Person): +{shortlist} für ein Auto auf der Shortlist, +{consider} für eines, das eine Überlegung wert ist, {ruledOut} für ein aussortiertes und +{fav} für einen Favoriten.",
+  "landing.popular.method.order": "Höchste Summe zuerst. Zulassungen zählen pro Modell, daher teilen sich zwei Generationen eines Modells einen Platz; das Urteil unterscheidet sie."
 }

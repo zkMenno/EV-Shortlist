@@ -6,9 +6,9 @@ import type { Currency } from "@ev/schema";
 import type { T } from "@/i18n/t";
 import { formatMoney, formatNumber, formatYears } from "@/lib/format";
 import { isClaimField } from "@/lib/dc";
-import type { PopularCard } from "@/lib/popular-used";
+import { POPULAR_USED, type PopularCard, type PopularUsedMethod } from "@/lib/popular-used";
 import { generationHref } from "@/app/[country]/[lang]/ev/_lib/routes";
-import { CarFigure, type PhotoRef } from "./CarPhoto";
+import { CarFigure, photoText, type PhotoRef } from "./CarPhoto";
 import { generationTitle } from "@/lib/generation-title";
 import { Missing, Num } from "./Num";
 import type { NumLabels } from "./num-labels";
@@ -23,6 +23,9 @@ function moneyShort(v: number, currency: Currency, locale: string): string {
   }
 }
 
+/** A generation name that already says its years ("(2021-2024)", "2024 update"). */
+const YEAR_RE = /\b(19|20)\d{2}\b/;
+
 export function PopularUsed({
   cards,
   base,
@@ -36,7 +39,7 @@ export function PopularUsed({
   countryName,
   termText,
   winterTerm,
-  howHref,
+  method = POPULAR_USED.method,
 }: {
   cards: PopularCard[];
   base: string;
@@ -51,22 +54,35 @@ export function PopularUsed({
   countryName: string;
   termText: TermText;
   winterTerm: UiTerm | undefined;
-  /** Where "How we pick these" leads (the catalogue's How we rank). */
-  howHref: string;
+  /** The points behind the list (data/editorial/popular_used.yaml `method`), for "How we pick these". */
+  method?: PopularUsedMethod;
 }) {
   if (!cards.length) return null;
-  const photoText = { caption: t("photo.caption", { credit: "{credit}" }), none: t("photo.none"), credit: t("photo.credit"), page: t("photo.page"), term: termText };
+  const text = photoText(t, termText);
   return (
     <section aria-labelledby="popular-used-title" className="evs-popular mt-12" data-testid="popular-used">
       <h2 id="popular-used-title" className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight">
         {t("landing.popular.title")}
       </h2>
       <p className="mt-2 max-w-3xl text-[var(--ink-2)]" data-testid="popular-used-intro">
-        {t("landing.popular.intro")}{" "}
-        <Link href={howHref} className="text-blue-800 underline underline-offset-2">
-          {t("landing.popular.how")}
-        </Link>
+        {t("landing.popular.intro")}
       </p>
+      {/* T-169: this list's own points method (not the catalogue's "How we rank", a different blend). */}
+      <details className="mt-2 max-w-3xl text-sm" id="how-we-pick" data-testid="popular-how">
+        <summary className="min-h-11 cursor-pointer py-2 text-blue-800 underline underline-offset-2">{t("landing.popular.how")}</summary>
+        <ul className="mt-1 grid list-disc gap-1 pl-5 text-[var(--ink-2)]">
+          <li>{t("landing.popular.method.reg", { top: method.registration_top })}</li>
+          <li>
+            {t("landing.popular.method.owner", {
+              shortlist: method.owner_points.shortlist,
+              consider: method.owner_points.consider,
+              ruledOut: formatNumber(method.owner_points.ruled_out, locale, 0),
+              fav: method.favourite_bonus,
+            })}
+          </li>
+          <li>{t("landing.popular.method.order")}</li>
+        </ul>
+      </details>
       <ol className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map(({ card: g, why }) => {
           const r = g.lead;
@@ -75,14 +91,21 @@ export function PopularUsed({
           const w = g.winter;
           return (
             <li key={g.generation_id} className="flex min-w-0 flex-col gap-2 rounded-xl border border-slate-300 bg-white p-4" data-testid="popular-card" data-generation={g.generation_id}>
-              <CarFigure photo={photos[g.generation_id]} alt={generationTitle(r)} text={photoText} sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw" card />
+              <CarFigure photo={photos[g.generation_id]} alt={generationTitle(r)} text={text} sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw" card />
               <h3 className="text-lg font-bold leading-snug">
                 <Link href={generationHref(base, r)} className="text-[var(--ink)] underline-offset-2 hover:underline">
                   {name}
                 </Link>
               </h3>
               <p className="text-sm text-slate-700">
-                {r.generation_name} · <span className="tabular-nums">{formatYears(g.yearStart, g.yearEnd, t("years.now"))}</span>
+                {r.generation_name}
+                {/* T-169: no years twice when the generation name already holds them ("e-tron GT (2021-2024)"). */}
+                {YEAR_RE.test(r.generation_name) ? null : (
+                  <>
+                    {" · "}
+                    <span className="tabular-nums">{formatYears(g.yearStart, g.yearEnd, t("years.now"))}</span>
+                  </>
+                )}
               </p>
               <p className="text-sm" data-testid="popular-why">
                 {why}

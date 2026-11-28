@@ -938,7 +938,12 @@
   "hero.sheet.openN": "Respuestas y filtros · {n}",
   "photo.caption": "Foto: {credit}",
   "photo.none": "Aún no hay foto",
+  "photo.licence": "Condiciones de la licencia",
+  "photo.newTab": "(se abre en una pestaña nueva)",
   "landing.popular.title": "VE de segunda mano populares",
   "landing.popular.intro": "Los VE de segunda mano más presentes en los Países Bajos y el Reino Unido, más las elecciones del propietario (la opinión de una persona). Los precios son de segunda mano donde vives.",
-  "landing.popular.how": "Cómo los elegimos"
+  "landing.popular.how": "Cómo los elegimos",
+  "landing.popular.method.reg": "Matriculaciones: un modelo entre los {top} VE más matriculados (parques de Países Bajos y Reino Unido) recibe puntos según su puesto: el n.º 1 recibe {top} y el n.º {top}, 1.",
+  "landing.popular.method.owner": "La opinión del dueño del sitio (la de una sola persona): +{shortlist} por un coche de su lista corta, +{consider} por uno que vale la pena considerar, {ruledOut} por uno descartado y +{fav} por un favorito.",
+  "landing.popular.method.order": "Primero el total más alto. Las matriculaciones cuentan por modelo, así que dos generaciones de un mismo modelo comparten puesto; la opinión las distingue."
 }

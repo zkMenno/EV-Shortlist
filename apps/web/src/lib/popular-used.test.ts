@@ -8,6 +8,9 @@ import { popularUsedCards } from "./popular-used";
 const row = (generation_id: string, variant_id: string, extra: Partial<ExploreRow> = {}) =>
   ({ generation_id, variant_id, make_id: "m", make_name: "M", model_name: "X", generation_name: generation_id, year_start: 2020, year_end: 2023, provenance: {}, ...extra }) as unknown as ExploreRow;
 
+
+const METHOD = { registration_top: 40, owner_points: { shortlist: 20, consider: 10, unrated: 0, ruled_out: -10 }, favourite_bonus: 5 };
+
 describe("popularUsedCards", () => {
   const list = {
     landing_count: 2,
@@ -38,6 +41,13 @@ describe("scripts/popular-used.mjs", () => {
     expect(readFileSync(OUT_FILE, "utf8")).toBe(`${JSON.stringify(buildPopularUsed(doc), null, 2)}\n`);
   });
 
+  it("passes the method numbers through for 'How we pick these' and refuses a method without them (T-169)", () => {
+    const doc = { schema: "editorial-popular-used/v1", method: { landing_count: 1, ...METHOD }, generations: [{ order: 1, generation_id: "a", why: "x" }] };
+    expect(buildPopularUsed(doc).method).toEqual({ registration_top: 40, owner_points: { shortlist: 20, consider: 10, ruled_out: -10 }, favourite_bonus: 5 });
+    expect(() => buildPopularUsed({ ...doc, method: { landing_count: 1, ...METHOD, favourite_bonus: "5" } })).toThrow(/favourite_bonus/);
+    expect(() => buildPopularUsed({ ...doc, method: { landing_count: 1 } })).toThrow(/registration_top/);
+  });
+
   it("refuses rows without an id or a why line, duplicates and a missing landing_count", () => {
     const base = { schema: "editorial-popular-used/v1", method: { landing_count: 2 } };
     expect(() => buildPopularUsed({ ...base, generations: [{ order: 1, generation_id: "a" }] })).toThrow(/why/);
@@ -52,7 +62,7 @@ describe("scripts/popular-used.mjs", () => {
   it("orders by the file's order field, not by position", () => {
     const out = buildPopularUsed({
       schema: "editorial-popular-used/v1",
-      method: { landing_count: 1 },
+      method: { landing_count: 1, ...METHOD },
       generations: [{ order: 2, generation_id: "b", why: "two" }, { order: 1, generation_id: "a", why: "one" }],
     });
     expect(out.generations.map((g) => g.generation_id)).toEqual(["a", "b"]);
