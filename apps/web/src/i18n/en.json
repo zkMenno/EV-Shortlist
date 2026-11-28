@@ -946,5 +946,7 @@
   "hero.sheet.title": "Your answers",
   "hero.sheet.close": "Close your answers",
   "hero.sheet.done": "Show my top 10",
-  "hero.sheet.openN": "Answers & refine · {n}"
+  "hero.sheet.openN": "Answers & refine · {n}",
+  "photo.caption": "Photo: {credit}",
+  "photo.none": "No photo yet"
 }

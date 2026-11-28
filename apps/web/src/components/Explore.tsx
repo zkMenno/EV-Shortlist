@@ -6,6 +6,7 @@
 import { loadClientCatalogue } from "@/lib/client-catalogue";
 import { onAnswers, onFilters, publishFilters } from "@/lib/filter-bus";
 import { resolveProfile, suggestedScore, type Answers } from "@/lib/shortlist";
+import { CarFigure, type PhotoRef } from "./CarPhoto";
 import { profileName, SuggestedSort } from "./SuggestedSort";
 import type { Country, Currency, FieldProvenance } from "@ev/schema";
 import Link from "next/link";
@@ -102,6 +103,8 @@ export interface ExploreProps {
   initialMatchModels: number;
   /** Every brand with its number of generations, for the brand filter and the pills (T-130). */
   brands: { id: string; name: string; count: number }[];
+  /** Generation id → its release photo (T-135 cards); absent = the neutral placeholder. */
+  photos?: Record<string, PhotoRef>;
 }
 
 interface Ctx {
@@ -129,6 +132,8 @@ interface Ctx {
    * name link, heart and compare; provenance via the variant page or the Nerd "sources" button).
    */
   inTable?: boolean;
+  /** Generation photos (T-135). */
+  photos?: Record<string, PhotoRef>;
   /** Trip fit verdicts (T-036) once the user entered a trip; drives the "Your trips" column. */
   trip?: { mod: TripModule; fits: Map<string, CarFit>; ui: TripModuleNs.TripUi };
 }
@@ -181,6 +186,7 @@ export function Explore(props: ExploreProps) {
       level: state.level,
       asOf: props.asOf,
       popAsOf: props.popularityAsOf,
+      photos: props.photos,
       pay: state.pay,
       loan,
       trip: tripMod && fits ? { mod: tripMod, fits, ui: {
@@ -192,7 +198,7 @@ export function Explore(props: ExploreProps) {
               gloss: { base: siteBase(props.country, props.lang), terms: props.taxonomy.terms, text: { about: t("term.about"), learnMore: t("term.learnMore") } },
             } } : undefined,
     }),
-    [t, locale, sources, props.code, props.currency, props.country, props.lang, props.taxonomy, state.level, props.asOf, props.popularityAsOf, state.pay, loan, tripMod, fits],
+    [t, locale, sources, props.code, props.currency, props.country, props.lang, props.taxonomy, state.level, props.asOf, props.popularityAsOf, props.photos, state.pay, loan, tripMod, fits],
   );
 
   const openTrip = () => {
@@ -1718,6 +1724,14 @@ function GenerationCard({ card: g, ctx: c, countryName }: { card: GenCard; ctx: 
       data-generation={g.generation_id}
       data-trip={fit?.verdict}
     >
+      {/* T-135: the generation's photo with its credit line; a same-size placeholder when there is none. */}
+      <CarFigure
+        photo={c.photos?.[g.generation_id]}
+        alt={`${r.make_name} ${r.model_name} ${r.generation_name}`}
+        text={{ caption: t("photo.caption", { credit: "{credit}" }), none: t("photo.none"), credit: t("photo.credit"), page: t("photo.page"), term: c.termText }}
+        sizes="(min-width: 80rem) 22rem, (min-width: 40rem) 45vw, 100vw"
+        card
+      />
       {r.pop_rank ? (
         <p className="w-fit rounded-full border border-slate-500 bg-[var(--surface)] px-2 py-0.5 text-xs font-semibold" data-testid="popular-tag">
           {t("card.popular", { n: r.pop_rank })}

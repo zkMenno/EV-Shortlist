@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import { ChargingLinks } from "@/components/ChargingLinks";
 import { abrpLink, chargingLinks } from "@/lib/charging-links";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { CarFigure } from "@/components/CarPhoto";
+import { generationPhoto } from "@/lib/photos";
 import { Missing, Num } from "@/components/Num";
 import { PriceBand } from "@/components/PriceBand";
 import { PricePanel } from "@/components/PriceMode";
@@ -78,6 +80,8 @@ export default async function GenerationPage({ params }: Props) {
   const rdwTerm = ctx.tax.terms["registrations-nl"];
   const textField = (key: string) => SPEC_FIELDS.find((f) => f.key === key) as Extract<SpecField, { kind: "text" }>;
   const keyFacts = ["voltage_class_id", "chemistry_id", "charger_400v_mode", "cooling_id"].map(textField);
+  // T-135: the generation's photo from the release, with its credit line (Decision 081).
+  const photo = generationPhoto(ctx.cat.generation(first.generation_id));
 
   return (
     <>
@@ -92,6 +96,16 @@ export default async function GenerationPage({ params }: Props) {
         <YearsBadge ctx={ctx} status={g.years} yearStart={g.yearStart} yearEnd={g.yearEnd} />
         {first.segment ? <span>· {t(`segment.${first.segment}`)}</span> : first.body ? <span>· {t(`body.${first.body}`)}</span> : null}
       </p>
+      <div className="mt-4 max-w-xl">
+        <CarFigure
+          photo={photo}
+          alt={fullName}
+          text={{ caption: t("photo.caption", { credit: "{credit}" }), none: t("photo.none"), credit: t("photo.credit"), page: t("photo.page"), term: ctx.termText }}
+          sizes="(min-width: 40rem) 36rem, 100vw"
+          eager
+          testId="gen-photo"
+        />
+      </div>
 
       <section aria-labelledby="key-facts" className="mt-6">
         <h2 id="key-facts" className="text-xl font-semibold">

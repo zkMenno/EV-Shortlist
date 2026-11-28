@@ -1,5 +1,6 @@
 // Catalogue page (T-130): every car with Explore's filters, "Most popular" first.
 // The landing page links here ("Show all cars") instead of rendering the full list.
+import { generationPhotos } from "@/lib/photos";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Explore } from "@/components/Explore";
@@ -79,6 +80,10 @@ export default async function CataloguePage({ params, searchParams }: Props) {
   const initialRows = matches.filter((r, i) => i < SSR_ROWS || firstGens.has(r.generation_id));
   const pct = weightPercents(popularityInputs.weights);
   const popAsOf = cat.popularityAsOf() ?? undefined;
+  // T-135: card photos for generations whose files are on disk (src, srcset, credit, file page).
+  const photos = Object.fromEntries(
+    Object.entries(generationPhotos(cat.generations())).map(([id, p]) => [id, { src: p.src, srcSet: p.srcSet, credit: p.credit, pageUrl: p.pageUrl }]),
+  );
 
   return (
     <>
@@ -104,6 +109,7 @@ export default async function CataloguePage({ params, searchParams }: Props) {
         totalModels={generationCount(all)}
         initialMatchModels={generationCount(matches)}
         brands={brandCounts(all)}
+        photos={photos}
         dataUrl={`/data/catalogue-${clientCatalogueKey(cat)}.json`}
         sources={sourceNames(cat.sources())}
         tripFit={tripFit}
